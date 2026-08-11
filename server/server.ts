@@ -55,14 +55,18 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
   ...(allowedOrigins ? { cors: { origin: allowedOrigins } } : {}),
 })
 const games = new GameManager()
+const DISCONNECT_GRACE_MS = 25_000
+const disconnectTimers = new Map<string, NodeJS.Timeout>()
+const timerKey = (code: string, playerId: string) => `${code}:${playerId}`
 
 const cleanName = (value: unknown) => typeof value === 'string' && value.trim().length >= 1 && value.trim().length <= 24 ? value.trim() : null
 
 io.on('connection', (socket) => {
+  console.info('socket connected', { socketId: socket.id })
   const broadcast = (code: string) => {
     const room = games.rooms.get(code)
     if (!room) return
-    for (const player of room.players) io.to(player.id).emit('room:state', room.viewFor(player.id))
+    for (const player of room.players) if (player.socketId) io.to(player.socketId).emit('room:state', room.viewFor(player.id))
   }
   const action = (ack: Ack, operation: () => void) => {
     try { operation(); ack({ ok: true, data: undefined }) }
@@ -73,57 +77,81 @@ io.on('connection', (socket) => {
     const name = cleanName(payload?.name)
     const language = payload?.language as Language
     if (!name || !(language in ALPHABETS)) return ack({ ok: false, error: 'invalid-details' })
-    const room = games.create(socket.id, name, language)
+    const { room, playerId, reconnectToken } = games.create(socket.id, name, language)
     socket.join(room.code)
-    ack({ ok: true, data: room.viewFor(socket.id) })
+    ack({ ok: true, data: { view: room.viewFor(playerId), session: { roomCode: room.code, playerId, reconnectToken } } })
     socket.emit('chat:history', room.chatHistory)
+    console.info('player created room', { roomCode: room.code, playerId, socketId: socket.id })
   })
 
   socket.on('room:join', (payload, ack) => {
     const name = cleanName(payload?.name)
     if (!name || typeof payload?.code !== 'string') return ack({ ok: false, error: 'invalid-details' })
     try {
-      const room = games.join(socket.id, name, payload.code)
+      const { room, playerId, reconnectToken } = games.join(socket.id, name, payload.code)
       socket.join(room.code)
-      ack({ ok: true, data: room.viewFor(socket.id) })
+      ack({ ok: true, data: { view: room.viewFor(playerId), session: { roomCode: room.code, playerId, reconnectToken } } })
       socket.emit('chat:history', room.chatHistory)
       broadcast(room.code)
+      console.info('player joined room', { roomCode: room.code, playerId, socketId: socket.id })
     } catch (error) { ack({ ok: false, error: error instanceof Error ? error.message : 'unknown-error' }) }
   })
 
+  socket.on('room:resume', (payload, ack) => {
+    const roomCode = typeof payload?.roomCode === 'string' ? payload.roomCode.trim().toUpperCase() : ''
+    const playerId = typeof payload?.playerId === 'string' ? payload.playerId : ''
+    console.info('resume attempt', { roomCode, playerId, socketId: socket.id })
+    try {
+      const room = games.resume(socket.id, roomCode, playerId, payload?.reconnectToken)
+      const key = timerKey(room.code, playerId)
+      const timer = disconnectTimers.get(key)
+      if (timer) clearTimeout(timer)
+      disconnectTimers.delete(key)
+      socket.join(room.code)
+      ack({ ok: true, data: room.viewFor(playerId) })
+      socket.emit('chat:history', room.chatHistory)
+      broadcast(room.code)
+      console.info('resume successful', { roomCode: room.code, playerId, socketId: socket.id })
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'resume-rejected'
+      ack({ ok: false, error: message })
+      console.info('resume rejected', { roomCode, playerId, socketId: socket.id, reason: message })
+    }
+  })
+
   socket.on('round:set-word', (payload, ack) => action(ack, () => {
-    const room = games.roomFor(socket.id)
+    const identity = games.identityForSocket(socket.id), room = identity?.room
     if (!room) throw new Error('room-not-found')
-    room.setWord(socket.id, payload?.word)
+    room.setWord(identity.playerId, payload?.word)
     broadcast(room.code)
   }))
 
   socket.on('game:guess', (payload, ack) => action(ack, () => {
-    const room = games.roomFor(socket.id)
+    const identity = games.identityForSocket(socket.id), room = identity?.room
     if (!room) throw new Error('room-not-found')
-    room.guess(socket.id, payload?.letter)
+    room.guess(identity.playerId, payload?.letter)
     broadcast(room.code)
   }))
 
   socket.on('round:forgiveness', (payload, ack) => action(ack, () => {
-    const room = games.roomFor(socket.id)
+    const identity = games.identityForSocket(socket.id), room = identity?.room
     if (!room) throw new Error('room-not-found')
-    room.decideForgiveness(socket.id, payload?.forgive)
+    room.decideForgiveness(identity.playerId, payload?.forgive)
     broadcast(room.code)
   }))
 
   socket.on('round:continue', (ack) => action(ack, () => {
-    const room = games.roomFor(socket.id)
+    const identity = games.identityForSocket(socket.id), room = identity?.room
     if (!room) throw new Error('room-not-found')
-    room.continue(socket.id)
+    room.continue(identity.playerId)
     broadcast(room.code)
   }))
 
   socket.on('chat:send', (payload, ack) => {
     try {
-      const room = games.roomFor(socket.id)
+      const identity = games.identityForSocket(socket.id), room = identity?.room
       if (!room) throw new Error('not-room-member')
-      const message = room.addChatMessage(socket.id, payload?.text)
+      const message = room.addChatMessage(identity.playerId, payload?.text)
       io.to(room.code).emit('chat:message', message)
       ack({ ok: true, data: message })
     } catch (error) {
@@ -131,12 +159,34 @@ io.on('connection', (socket) => {
     }
   })
 
-  const leave = () => {
-    const room = games.leave(socket.id)
+  socket.on('room:leave', () => {
+    const identity = games.identityForSocket(socket.id)
+    if (!identity) return
+    const key = timerKey(identity.room.code, identity.playerId), timer = disconnectTimers.get(key)
+    if (timer) clearTimeout(timer)
+    disconnectTimers.delete(key)
+    const room = games.leaveSocket(socket.id)
+    socket.leave(identity.room.code)
     if (room) broadcast(room.code)
-  }
-  socket.on('room:leave', leave)
-  socket.on('disconnect', leave)
+  })
+  socket.on('disconnect', (reason) => {
+    console.info('socket disconnected', { socketId: socket.id, reason })
+    const identity = games.markReconnecting(socket.id)
+    if (!identity) return
+    const { room, playerId } = identity, key = timerKey(room.code, playerId)
+    broadcast(room.code)
+    console.info('player marked reconnecting', { roomCode: room.code, playerId })
+    const timer = setTimeout(() => {
+      disconnectTimers.delete(key)
+      const current = room.player(playerId)
+      if (!current || current.connectionState === 'connected') return
+      games.removePlayer(playerId)
+      broadcast(room.code)
+      console.info('disconnect grace period expired', { roomCode: room.code, playerId })
+      if (!games.rooms.has(room.code)) console.info('room removed', { roomCode: room.code })
+    }, DISCONNECT_GRACE_MS)
+    disconnectTimers.set(key, timer)
+  })
 })
 
 httpServer.listen(PORT, HOST, () => console.log(`Hangman server listening on http://${HOST}:${PORT}`))

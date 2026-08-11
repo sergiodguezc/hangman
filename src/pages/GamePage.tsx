@@ -54,6 +54,8 @@ export function GamePage({ state, messages, playerId, onLeave }: Props) {
     <button className="primary-action" onClick={onLeave}>{t.home}</button>
   </section></main>
 
+  const reconnectingOpponent = state.players.find((player) => player.id !== playerId && player.connectionState === 'reconnecting')
+
   return <main className="match-page" lang={state.language}>
     <header className="match-header">
       <div className="brand compact"><span className="brand-mark">H</span><h1>{t.title}</h1></div>
@@ -63,6 +65,8 @@ export function GamePage({ state, messages, playerId, onLeave }: Props) {
     <div className="match-layout">
       <Scoreboard players={state.players} setterId={state.wordSetterId} guesserId={state.guesserId} currentId={playerId} t={t} />
       <section className="multiplayer-game">
+        {reconnectingOpponent && <div className="form-error" role="status">{t.opponentReconnecting}</div>}
+        {!reconnectingOpponent && state.reconnectedPlayerName && state.reconnectedPlayerName !== playersById.get(playerId)?.name && <div className="role-line" role="status">{t.opponentReconnected}</div>}
         {state.phase === 'choosing-word' && (isSetter ? <form className="word-form" onSubmit={submitWord}>
           <span className="role-badge setter">✎ {t.chooseWord}</span>
           <input type="text" autoFocus maxLength={50} value={word} placeholder={t.secretPlaceholder}

@@ -12,12 +12,13 @@ const emit = (socket, event, payload) => new Promise((resolve) => socket.emit(ev
 const stateAfter = (socket, action) => new Promise((resolve) => { socket.once('room:state', resolve); action() })
 
 const p1 = await connect()
-const p2 = await connect()
+let p2 = await connect()
 const p3 = await connect()
 try {
   const created = await emit(p1, 'room:create', { name: 'Sergio', language: 'ca' })
   assert.equal(created.ok, true)
-  const code = created.data.code
+  const code = created.data.view.code
+  const p1Id = created.data.session.playerId
   const waitingMessage = await emit(p1, 'chat:send', { text: '  Missatge abans d’entrar  ' })
   assert.equal(waitingMessage.ok, true)
   assert.equal(waitingMessage.data.senderName, 'Sergio')
@@ -25,10 +26,11 @@ try {
   const joinedState = new Promise((resolve) => p1.once('room:state', resolve))
   const joinedHistory = new Promise((resolve) => p2.once('chat:history', resolve))
   const p2Join = await emit(p2, 'room:join', { name: 'Marta', code })
+  const p2Id = p2Join.data.session.playerId
   const roomState = await joinedState
   const history = await joinedHistory
   assert.equal(roomState.phase, 'choosing-word')
-  assert.equal(roomState.wordSetterId, p1.id)
+  assert.equal(roomState.wordSetterId, p1Id)
   assert.equal(p2Join.ok, true)
   assert.equal(history.length, 1)
   assert.equal(history[0].text, 'Missatge abans d’entrar')
@@ -63,17 +65,26 @@ try {
   assert.equal(guesserView.privateWord, undefined)
   assert.deepEqual(guesserView.displayWord, ['_', '_', '_', '_', '_'])
 
+  const resumeSession = p2Join.data.session
+  p2.disconnect()
+  p2 = await connect()
+  const resumed = await emit(p2, 'room:resume', resumeSession)
+  assert.equal(resumed.ok, true)
+  assert.equal(resumed.data.guesserId, p2Id)
+  assert.equal(resumed.data.privateWord, undefined)
+  assert.equal(resumed.data.players.find((player) => player.id === p2Id).connectionState, 'connected')
+
   for (const letter of ['C', 'A', 'N', 'O']) await new Promise((resolve) => p2.emit('game:guess', { letter }, resolve))
   const finalView = await new Promise((resolve) => { p2.emit('game:guess', { letter: 'Ç' }, () => {}); p2.once('room:state', resolve) })
   assert.equal(finalView.phase, 'round-over')
   assert.equal(finalView.privateWord, 'CANÇÓ')
-  assert.equal(finalView.players.find((p) => p.id === p2.id).score, 1)
+  assert.equal(finalView.players.find((p) => p.id === p2Id).score, 1)
 
   const next = await new Promise((resolve) => { p2.once('room:state', resolve); p2.emit('round:continue', () => {}) })
   assert.equal(next.roundNumber, 2)
-  assert.equal(next.wordSetterId, p2.id)
-  assert.equal(next.guesserId, p1.id)
-  assert.equal(next.players.find((p) => p.id === p2.id).score, 1)
+  assert.equal(next.wordSetterId, p2Id)
+  assert.equal(next.guesserId, p1Id)
+  assert.equal(next.players.find((p) => p.id === p2Id).score, 1)
 
   await emit(p2, 'round:set-word', { word: 'A' })
   for (const letter of ['B', 'C', 'D', 'E', 'F']) await emit(p1, 'game:guess', { letter })
@@ -88,13 +99,13 @@ try {
   assert.equal(forgiven.phase, 'guessing')
   assert.equal(forgiven.errors, 5)
   assert.ok(forgiven.wrongLetters.includes('G'))
-  assert.equal(forgiven.players.find((p) => p.id === p2.id).score, 1)
+  assert.equal(forgiven.players.find((p) => p.id === p2Id).score, 1)
 
   const pendingAgain = await stateAfter(p1, () => p1.emit('game:guess', { letter: 'H' }, () => {}))
   assert.equal(pendingAgain.phase, 'forgiveness-pending')
   const refused = await stateAfter(p1, () => p2.emit('round:forgiveness', { forgive: false }, () => {}))
   assert.equal(refused.phase, 'round-over')
-  assert.equal(refused.players.find((p) => p.id === p2.id).score, 2)
+  assert.equal(refused.players.find((p) => p.id === p2Id).score, 2)
   assert.equal(refused.privateWord, 'A')
 
   assert.equal(normalizeGuess('á', 'es'), 'A')
