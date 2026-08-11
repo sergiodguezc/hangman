@@ -19,6 +19,11 @@ const es = {
   chatTooLong: 'El mensaje es demasiado largo.', chatFailed: 'No se pudo enviar el mensaje.',
   opponentReconnecting: 'Tu rival ha perdido la conexión. Esperando a que vuelva…', opponentReconnected: 'Tu rival se ha reconectado.',
   resumeRejected: 'No se pudo recuperar la partida. La sala ya no está disponible.',
+  matchTarget: 'Puntos para ganar', unlimited: 'Sin límite', firstTo: 'Primero a {target}',
+  matchWon: 'Has ganado la partida', matchLost: 'Has perdido la partida', finalScore: 'Resultado final', rematch: 'Revancha',
+  waitingRematch: 'Esperando a que tu rival acepte la revancha…', opponentWantsRematch: 'Tu rival quiere una revancha',
+  youStart: 'Empiezas eligiendo la palabra.', playerStarts: '{player} empieza eligiendo la palabra.',
+  typing: '{player} está escribiendo…',
 }
 
 const ca: typeof es = {
@@ -40,6 +45,11 @@ const ca: typeof es = {
   chatTooLong: 'El missatge és massa llarg.', chatFailed: "No s'ha pogut enviar el missatge.",
   opponentReconnecting: 'El teu rival ha perdut la connexió. Esperant que torni…', opponentReconnected: "El teu rival s'ha tornat a connectar.",
   resumeRejected: "No s'ha pogut recuperar la partida. La sala ja no està disponible.",
+  matchTarget: 'Punts per guanyar', unlimited: 'Sense límit', firstTo: 'Primer a {target}',
+  matchWon: 'Has guanyat la partida', matchLost: 'Has perdut la partida', finalScore: 'Resultat final', rematch: 'Revenja',
+  waitingRematch: 'Esperant que el teu rival accepti la revenja…', opponentWantsRematch: 'El teu rival vol una revenja',
+  youStart: 'Comences triant la paraula.', playerStarts: '{player} comença triant la paraula.',
+  typing: '{player} està escrivint…',
 }
 
 export const multiplayerTranslations = { es, ca } satisfies Record<Language, typeof es>

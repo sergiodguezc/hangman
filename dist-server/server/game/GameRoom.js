@@ -6,31 +6,35 @@ const MAX_CHAT_LENGTH = 300;
 export class GameRoom {
     code;
     language;
+    matchTarget;
+    random;
     players = [];
     phase = 'waiting';
     roundNumber = 0;
     wordSetterId = null;
     guesserId = null;
     roundWinnerId = null;
+    matchWinnerId = null;
+    rematchReady = new Set();
+    firstSetterId = null;
     secretWord = null;
     guesses = new Set();
     errorCount = 0;
     chatMessages = [];
     reconnectedPlayerName;
     disconnectedPlayerName;
-    constructor(code, language) {
+    constructor(code, language, matchTarget = null, random = Math.random) {
         this.code = code;
         this.language = language;
+        this.matchTarget = matchTarget;
+        this.random = random;
     }
     addPlayer(id, socketId, reconnectToken, name) {
         if (this.players.length >= 2)
             throw new Error('room-full');
         this.players.push({ id, socketId, reconnectToken, name, score: 0, connectionState: 'connected' });
         if (this.players.length === 2) {
-            this.roundNumber = 1;
-            this.wordSetterId = this.players[0].id;
-            this.guesserId = this.players[1].id;
-            this.phase = 'choosing-word';
+            this.startMatch();
         }
     }
     player(id) { return this.players.find((player) => player.id === id); }
@@ -120,6 +124,16 @@ export class GameRoom {
         this.roundWinnerId = null;
         this.phase = 'choosing-word';
     }
+    requestRematch(playerId) {
+        this.assertPlayable();
+        if (this.phase !== 'match-over' || !this.player(playerId))
+            throw new Error('cannot-rematch');
+        if (this.rematchReady.has(playerId))
+            throw new Error('rematch-already-ready');
+        this.rematchReady.add(playerId);
+        if (this.rematchReady.size === 2)
+            this.startMatch(true);
+    }
     disconnect(playerId) {
         const leaving = this.players.find((player) => player.id === playerId);
         if (!leaving)
@@ -156,11 +170,12 @@ export class GameRoom {
         return [...this.guesses].filter((guess) => !isCorrectGuess(this.secretWord, guess, this.language));
     }
     viewFor(playerId) {
-        const reveal = this.phase === 'round-over';
+        const reveal = this.phase === 'round-over' || this.phase === 'match-over';
         const view = {
-            code: this.code, language: this.language, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
+            code: this.code, language: this.language, matchTarget: this.matchTarget, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
             roundNumber: this.roundNumber, wordSetterId: this.wordSetterId, guesserId: this.guesserId,
-            roundWinnerId: this.roundWinnerId,
+            roundWinnerId: this.roundWinnerId, matchWinnerId: this.matchWinnerId,
+            rematchReadyPlayerIds: [...this.rematchReady], firstSetterId: this.firstSetterId,
             displayWord: this.secretWord ? displayWord(this.secretWord, this.guesses, this.language, reveal) : [],
             guessedLetters: [...this.guesses], wrongLetters: this.wrongLetters, errors: this.errorCount,
             reconnectedPlayerName: this.reconnectedPlayerName,
@@ -177,6 +192,30 @@ export class GameRoom {
         if (winner)
             winner.score += 1;
         this.roundWinnerId = winnerId;
-        this.phase = 'round-over';
+        if (winner && this.matchTarget !== null && winner.score >= this.matchTarget) {
+            this.matchWinnerId = winnerId;
+            this.phase = 'match-over';
+        }
+        else
+            this.phase = 'round-over';
+    }
+    startMatch(resetScores = false) {
+        if (this.players.length !== 2)
+            return;
+        if (resetScores)
+            for (const player of this.players)
+                player.score = 0;
+        const setterIndex = this.random() < 0.5 ? 0 : 1;
+        this.wordSetterId = this.players[setterIndex].id;
+        this.guesserId = this.players[1 - setterIndex].id;
+        this.firstSetterId = this.wordSetterId;
+        this.roundNumber = 1;
+        this.secretWord = null;
+        this.guesses.clear();
+        this.errorCount = 0;
+        this.roundWinnerId = null;
+        this.matchWinnerId = null;
+        this.rematchReady.clear();
+        this.phase = 'choosing-word';
     }
 }

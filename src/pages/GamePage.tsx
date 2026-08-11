@@ -9,9 +9,9 @@ import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
 
-type Props = { state: PlayerGameView; messages: ChatMessage[]; playerId: string; onLeave: () => void }
+type Props = { state: PlayerGameView; messages: ChatMessage[]; playerId: string; typingPlayer: { playerId: string; playerName: string } | null; onLeave: () => void }
 
-export function GamePage({ state, messages, playerId, onLeave }: Props) {
+export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: Props) {
   const [word, setWord] = useState('')
   const [error, setError] = useState('')
   const t = multiplayerTranslations[state.language]
@@ -21,6 +21,9 @@ export function GamePage({ state, messages, playerId, onLeave }: Props) {
   const playersById = new Map(state.players.map((player) => [player.id, player]))
   const setter = state.wordSetterId ? playersById.get(state.wordSetterId) : undefined
   const winner = state.roundWinnerId ? playersById.get(state.roundWinnerId) : undefined
+  const matchWinner = state.matchWinnerId ? playersById.get(state.matchWinnerId) : undefined
+  const rematchRequested = state.rematchReadyPlayerIds.includes(playerId)
+  const opponentRequested = state.rematchReadyPlayerIds.some((id) => id !== playerId)
   const guessed = new Set(state.guessedLetters)
   const wrong = new Set(state.wrongLetters)
 
@@ -59,7 +62,7 @@ export function GamePage({ state, messages, playerId, onLeave }: Props) {
   return <main className="match-page" lang={state.language}>
     <header className="match-header">
       <div className="brand compact"><span className="brand-mark">H</span><h1>{t.title}</h1></div>
-      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{config.name}</span></div>
+      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{state.matchTarget === null ? t.unlimited : t.firstTo.replace('{target}', String(state.matchTarget))}</span><span>{config.name}</span></div>
       <button className="text-button" onClick={onLeave}>{t.leave}</button>
     </header>
     <div className="match-layout">
@@ -67,13 +70,13 @@ export function GamePage({ state, messages, playerId, onLeave }: Props) {
       <section className="multiplayer-game">
         {reconnectingOpponent && <div className="form-error" role="status">{t.opponentReconnecting}</div>}
         {!reconnectingOpponent && state.reconnectedPlayerName && state.reconnectedPlayerName !== playersById.get(playerId)?.name && <div className="role-line" role="status">{t.opponentReconnected}</div>}
-        {state.phase === 'choosing-word' && (isSetter ? <form className="word-form" onSubmit={submitWord}>
+        {state.phase === 'choosing-word' && <>{state.roundNumber === 1 && <div className="role-line" role="status">{isSetter ? t.youStart : t.playerStarts.replace('{player}', setter?.name ?? '')}</div>}{isSetter ? <form className="word-form" onSubmit={submitWord}>
           <span className="role-badge setter">✎ {t.chooseWord}</span>
           <input type="text" autoFocus maxLength={50} value={word} placeholder={t.secretPlaceholder}
             autoComplete="off" spellCheck={false} onChange={(e) => setWord(e.target.value)} />
           <p className="word-privacy">{t.wordPrivacy}</p>
           <button className="primary-action">{t.startRound}</button>
-        </form> : <div className="phase-message"><div className="thinking">•••</div><h2>{setter?.name} {t.rivalChoosing}</h2></div>)}
+        </form> : <div className="phase-message"><div className="thinking">•••</div><h2>{setter?.name} {t.rivalChoosing}</h2></div>}</>}
 
         {(state.phase === 'guessing' || state.phase === 'forgiveness-pending' || state.phase === 'round-over') && <>
           <div className="role-line">{state.phase === 'round-over' ? `${winner?.name} ${t.winner}` : state.phase === 'forgiveness-pending' ? (isSetter ? t.finalErrorSetter : t.finalErrorGuesser) : isGuesser ? t.yourGuess : t.youChose}</div>
@@ -98,9 +101,17 @@ export function GamePage({ state, messages, playerId, onLeave }: Props) {
               {state.phase === 'round-over' && !isGuesser && <p className="continue-note">{playersById.get(state.guesserId ?? '')?.name} · {t.next}</p>}
             </div></div>
         </>}
+        {state.phase === 'match-over' && <div className="match-result">
+          <span className="role-badge">{matchWinner?.id === playerId ? t.matchWon : t.matchLost}</span>
+          <h2>{matchWinner?.name}</h2><strong>{t.finalScore}</strong>
+          <div className="final-scores">{[...state.players].sort((a, b) => b.score - a.score).map((player) => <span key={player.id}>{player.name}<b>{player.score}</b></span>)}</div>
+          {!rematchRequested && <button className="primary-action" onClick={() => socket.emit('match:rematch', handleAck)}>{t.rematch}</button>}
+          {rematchRequested && <p>{t.waitingRematch}</p>}
+          {opponentRequested && !rematchRequested && <p>{t.opponentWantsRematch}</p>}
+        </div>}
         {error && <p className="form-error" role="alert">{error}</p>}
       </section>
-      <RoomChat messages={messages} currentPlayerId={playerId} t={t} />
+      <RoomChat messages={messages} currentPlayerId={playerId} typingPlayer={typingPlayer} t={t} />
     </div>
   </main>
 }

@@ -3,7 +3,7 @@ import { readFile, stat } from 'node:fs/promises'
 import { extname, resolve, sep } from 'node:path'
 import { Server } from 'socket.io'
 import { ALPHABETS, type Language } from '../shared/game.js'
-import type { ClientToServerEvents, ServerToClientEvents, Ack } from '../shared/protocol.js'
+import type { ClientToServerEvents, ServerToClientEvents, Ack, MatchTarget } from '../shared/protocol.js'
 import { GameManager } from './game/GameManager.js'
 
 const PORT = Number(process.env.PORT) || 3001
@@ -60,6 +60,7 @@ const disconnectTimers = new Map<string, NodeJS.Timeout>()
 const timerKey = (code: string, playerId: string) => `${code}:${playerId}`
 
 const cleanName = (value: unknown) => typeof value === 'string' && value.trim().length >= 1 && value.trim().length <= 24 ? value.trim() : null
+const cleanMatchTarget = (value: unknown): MatchTarget | undefined => value === null || value === 3 || value === 5 || value === 10 ? value : undefined
 
 io.on('connection', (socket) => {
   console.info('socket connected', { socketId: socket.id })
@@ -76,8 +77,9 @@ io.on('connection', (socket) => {
   socket.on('room:create', (payload, ack) => {
     const name = cleanName(payload?.name)
     const language = payload?.language as Language
-    if (!name || !(language in ALPHABETS)) return ack({ ok: false, error: 'invalid-details' })
-    const { room, playerId, reconnectToken } = games.create(socket.id, name, language)
+    const matchTarget = cleanMatchTarget(payload?.matchTarget)
+    if (!name || !(language in ALPHABETS) || matchTarget === undefined) return ack({ ok: false, error: 'invalid-details' })
+    const { room, playerId, reconnectToken } = games.create(socket.id, name, language, matchTarget)
     socket.join(room.code)
     ack({ ok: true, data: { view: room.viewFor(playerId), session: { roomCode: room.code, playerId, reconnectToken } } })
     socket.emit('chat:history', room.chatHistory)
@@ -147,6 +149,19 @@ io.on('connection', (socket) => {
     broadcast(room.code)
   }))
 
+  socket.on('match:rematch', (ack) => action(ack, () => {
+    const identity = games.identityForSocket(socket.id), room = identity?.room
+    if (!room) throw new Error('room-not-found')
+    room.requestRematch(identity.playerId)
+    broadcast(room.code)
+  }))
+
+  socket.on('chat:typing', (payload) => {
+    const identity = games.identityForSocket(socket.id), player = identity?.room.player(identity.playerId)
+    if (!identity || !player || typeof payload?.isTyping !== 'boolean') return
+    socket.to(identity.room.code).emit('chat:typing', { playerId: player.id, playerName: player.name, isTyping: payload.isTyping })
+  })
+
   socket.on('chat:send', (payload, ack) => {
     try {
       const identity = games.identityForSocket(socket.id), room = identity?.room
@@ -165,6 +180,7 @@ io.on('connection', (socket) => {
     const key = timerKey(identity.room.code, identity.playerId), timer = disconnectTimers.get(key)
     if (timer) clearTimeout(timer)
     disconnectTimers.delete(key)
+    socket.to(identity.room.code).emit('chat:typing', { playerId: identity.playerId, playerName: identity.room.player(identity.playerId)?.name ?? '', isTyping: false })
     const room = games.leaveSocket(socket.id)
     socket.leave(identity.room.code)
     if (room) broadcast(room.code)
@@ -174,6 +190,7 @@ io.on('connection', (socket) => {
     const identity = games.markReconnecting(socket.id)
     if (!identity) return
     const { room, playerId } = identity, key = timerKey(room.code, playerId)
+    socket.to(room.code).emit('chat:typing', { playerId, playerName: room.player(playerId)?.name ?? '', isTyping: false })
     broadcast(room.code)
     console.info('player marked reconnecting', { roomCode: room.code, playerId })
     const timer = setTimeout(() => {

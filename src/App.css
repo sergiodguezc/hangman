@@ -29,6 +29,11 @@ button { cursor: pointer; }
 .language-options { display: flex; padding: 4px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
 .language-options button { flex: 1; border: 0; border-radius: 8px; padding: 9px; color: #606860; background: transparent; font-weight: 600; }
 .language-options button.active { color: white; background: var(--green); }
+.target-selector { margin: 0; padding: 0; border: 0; }
+.target-selector legend { margin-bottom: 7px; color: #455249; font-size: 13px; font-weight: 700; }
+.target-selector div { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 4px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
+.target-selector button { border: 0; border-radius: 8px; padding: 9px 4px; color: #606860; background: transparent; font-size: 13px; font-weight: 600; }
+.target-selector button.active { color: white; background: var(--green); }
 .join-divider { height: 1px; margin: 6px 0; background: var(--line); text-align: center; }
 .join-divider span { position: relative; top: -12px; padding: 0 10px; color: #999; background: var(--cream); }
 
@@ -110,6 +115,12 @@ button { cursor: pointer; }
 .keyboard button.correct { color: #2c6847; background: #e7f1e7; }.keyboard button.incorrect { color: #9a514b; background: #f4e8e5; text-decoration: line-through; }
 .guess-area > .primary-action { width: auto; }
 .continue-note { color: var(--muted); font-size: 13px; }
+.match-result { width: min(100% - 40px, 460px); margin: auto; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+.match-result h2 { margin: 0; color: var(--green-dark); font: 700 34px Georgia, serif; }
+.match-result > p { margin: 0; color: var(--muted); }
+.match-result .primary-action { width: min(100%, 260px); }
+.final-scores { width: min(100%, 340px); display: grid; gap: 8px; }
+.final-scores span { display: flex; justify-content: space-between; padding: 12px 16px; border-radius: 10px; background: #f2f3ed; font-weight: 700; }
 .disconnect-page section { text-align: center; }
 .disconnect-icon { display: grid; place-items: center; width: 56px; height: 56px; margin: auto; border-radius: 50%; color: var(--red); background: #f9e9e6; font-size: 30px; font-weight: 700; }
 .disconnect-page h1 { color: var(--green-dark); font: 700 28px Georgia, serif; }.disconnect-page p { color: var(--muted); }
@@ -130,6 +141,7 @@ button { cursor: pointer; }
 .chat-form button { border: 0; border-radius: 9px; padding: 8px 11px; color: white; background: var(--green); font-weight: 700; }
 .chat-form button:disabled { cursor: not-allowed; opacity: .45; }
 .chat-error { margin: -6px 12px 10px; color: var(--red); font-size: 11px; }
+.typing-indicator { min-height: 18px; margin: 0; padding: 0 16px 4px; color: var(--muted); font-size: 12px; font-style: italic; }
 .lobby-layout .room-chat { height: auto; min-height: 500px; }
 
 @media (max-width: 1100px) {
