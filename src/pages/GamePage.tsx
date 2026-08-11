@@ -1,0 +1,102 @@
+import { useCallback, useEffect, useState, type FormEvent } from 'react'
+import { ALPHABETS, normalizeGuess } from '../../shared/game'
+import type { Ack, ChatMessage, PlayerGameView } from '../../shared/protocol'
+import { HangmanDrawing } from '../components/HangmanDrawing'
+import { Keyboard } from '../components/Keyboard'
+import { Scoreboard } from '../components/Scoreboard'
+import { RoomChat } from '../components/RoomChat'
+import { getLanguageConfig } from '../game/languages'
+import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
+import { socket } from '../multiplayer/socket'
+
+type Props = { state: PlayerGameView; messages: ChatMessage[]; playerId: string; onLeave: () => void }
+
+export function GamePage({ state, messages, playerId, onLeave }: Props) {
+  const [word, setWord] = useState('')
+  const [error, setError] = useState('')
+  const t = multiplayerTranslations[state.language]
+  const config = getLanguageConfig(state.language)
+  const isSetter = state.wordSetterId === playerId
+  const isGuesser = state.guesserId === playerId
+  const playersById = new Map(state.players.map((player) => [player.id, player]))
+  const setter = state.wordSetterId ? playersById.get(state.wordSetterId) : undefined
+  const winner = state.roundWinnerId ? playersById.get(state.roundWinnerId) : undefined
+  const guessed = new Set(state.guessedLetters)
+  const wrong = new Set(state.wrongLetters)
+
+  const handleAck = useCallback((response: Parameters<Ack>[0]) => {
+    if (!response.ok) setError(errorMessage(response.error, t))
+  }, [t])
+  const guess = useCallback((letter: string) => {
+    if (!isGuesser || state.phase !== 'guessing') return
+    socket.emit('game:guess', { letter }, handleAck)
+  }, [handleAck, isGuesser, state.phase])
+
+  useEffect(() => {
+    const keydown = (event: KeyboardEvent) => {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.key.length !== 1) return
+      const target = event.target
+      if (target instanceof HTMLElement && (target.matches('input, textarea, select') || target.isContentEditable)) return
+      const normalized = normalizeGuess(event.key, state.language)
+      if (normalized) guess(normalized)
+    }
+    window.addEventListener('keydown', keydown)
+    return () => window.removeEventListener('keydown', keydown)
+  }, [guess, state.language])
+
+  const submitWord = (event: FormEvent) => {
+    event.preventDefault(); setError('')
+    socket.emit('round:set-word', { word }, (response) => { handleAck(response); if (response.ok) setWord('') })
+  }
+
+  if (state.phase === 'disconnected') return <main className="disconnect-page"><section>
+    <span className="disconnect-icon">!</span><h1>{t.disconnected}</h1><p>{state.disconnectedPlayerName}</p>
+    <button className="primary-action" onClick={onLeave}>{t.home}</button>
+  </section></main>
+
+  return <main className="match-page" lang={state.language}>
+    <header className="match-header">
+      <div className="brand compact"><span className="brand-mark">H</span><h1>{t.title}</h1></div>
+      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{config.name}</span></div>
+      <button className="text-button" onClick={onLeave}>{t.leave}</button>
+    </header>
+    <div className="match-layout">
+      <Scoreboard players={state.players} setterId={state.wordSetterId} guesserId={state.guesserId} currentId={playerId} t={t} />
+      <section className="multiplayer-game">
+        {state.phase === 'choosing-word' && (isSetter ? <form className="word-form" onSubmit={submitWord}>
+          <span className="role-badge setter">✎ {t.chooseWord}</span>
+          <input type="text" autoFocus maxLength={50} value={word} placeholder={t.secretPlaceholder}
+            autoComplete="off" spellCheck={false} onChange={(e) => setWord(e.target.value)} />
+          <p className="word-privacy">{t.wordPrivacy}</p>
+          <button className="primary-action">{t.startRound}</button>
+        </form> : <div className="phase-message"><div className="thinking">•••</div><h2>{setter?.name} {t.rivalChoosing}</h2></div>)}
+
+        {(state.phase === 'guessing' || state.phase === 'forgiveness-pending' || state.phase === 'round-over') && <>
+          <div className="role-line">{state.phase === 'round-over' ? `${winner?.name} ${t.winner}` : state.phase === 'forgiveness-pending' ? (isSetter ? t.finalErrorSetter : t.finalErrorGuesser) : isGuesser ? t.yourGuess : t.youChose}</div>
+          <div className="game-columns"><div className="drawing-panel"><HangmanDrawing errors={state.errors} label={t.errors} />
+            <div className="error-copy"><span>{t.errors}</span><strong>{state.errors} / 6</strong></div></div>
+            <div className="guess-area">
+              <div className="multiplayer-word" aria-label={config.translations.progressLabel}>{state.displayWord.map((character, i) =>
+                <span key={i} className={character === '_' ? 'blank' : normalizeGuess(character, state.language) ? 'letter' : 'punctuation'}>{character === '_' ? '\u00a0' : character}</span>)}</div>
+              {isSetter && state.phase === 'guessing' && <p className="setter-secret">{t.youChose}: <strong>{state.privateWord}</strong></p>}
+              {state.phase === 'forgiveness-pending' && isSetter && <div className="forgiveness-panel" role="group" aria-label={t.forgivenessQuestion}>
+                <strong>{t.forgivenessQuestion}</strong>
+                <div><button className="forgive-action" onClick={() => socket.emit('round:forgiveness', { forgive: true }, handleAck)}>{t.forgive}</button>
+                  <button className="deny-action" onClick={() => socket.emit('round:forgiveness', { forgive: false }, handleAck)}>{t.doNotForgive}</button></div>
+              </div>}
+              {state.phase === 'forgiveness-pending' && isGuesser && <div className="forgiveness-wait" role="status">
+                <strong>{t.finalErrorGuesser}</strong><span>{t.waitingForgiveness}</span>
+              </div>}
+              {state.phase === 'round-over' && <div className="round-result"><strong>{winner?.name} {t.winner}</strong><span>{t.wordWas}: {state.privateWord}</span></div>}
+              <div className="incorrect-list"><span>{t.incorrect}</span><strong>{state.wrongLetters.length ? state.wrongLetters.join(' · ') : t.none}</strong></div>
+              <Keyboard alphabet={ALPHABETS[state.language]} guesses={guessed} incorrect={wrong} disabled={!isGuesser || state.phase !== 'guessing'} label={t.keyboard} onGuess={guess} />
+              {state.phase === 'round-over' && isGuesser && <button className="primary-action" onClick={() => socket.emit('round:continue', handleAck)}>{t.next}</button>}
+              {state.phase === 'round-over' && !isGuesser && <p className="continue-note">{playersById.get(state.guesserId ?? '')?.name} · {t.next}</p>}
+            </div></div>
+        </>}
+        {error && <p className="form-error" role="alert">{error}</p>}
+      </section>
+      <RoomChat messages={messages} currentPlayerId={playerId} t={t} />
+    </div>
+  </main>
+}

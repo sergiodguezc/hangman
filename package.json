@@ -1,0 +1,42 @@
+{
+  "name": "hangman",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n client,server -c green,blue \"npm:dev:vite-only\" \"npm:dev:server\"",
+    "dev:client": "npm run dev",
+    "dev:vite-only": "vite",
+    "dev:server": "tsx server/server.ts",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "tsc -b && vite build",
+    "build:server": "tsc -p server/tsconfig.json",
+    "start": "NODE_ENV=production node dist-server/server/server.js",
+    "start:server": "node dist-server/server/server.js",
+    "test:e2e": "node scripts/e2e.mjs",
+    "test:game": "node scripts/forgiveness-test.mjs",
+    "test:chat": "node scripts/chat-test.mjs",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "engines": {
+    "node": ">=22.12.0 <23"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "concurrently": "^10.0.4",
+    "oxlint": "^1.75.0",
+    "tsx": "^4.23.12",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0"
+  }
+}
