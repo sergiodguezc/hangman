@@ -1,0 +1,10 @@
+export const catalanWords = [
+  'ABRAÇADA', 'AIGUA', 'ALEGRIA', 'AMISTAT', 'ÀNEC', 'ARBRE', 'AVIÓ',
+  'AVENTURA', 'BIBLIOTECA', 'BICICLETA', 'BOSC', 'CAFÈ', 'CAMÍ', 'CANÇÓ',
+  'CARGOL', 'CASTELL', 'CIUTAT', 'COL·LEGI', 'COR', 'DESERT', 'ELEFANT',
+  'ESTEL', 'FAMÍLIA', 'FANTASIA', 'FUTBOL', 'GIRA-SOL', 'GUITARRA', 'HIVERN',
+  'JARDÍ', 'LÀMPADA', 'LIBÈL·LULA', 'LLIBRE', 'MÀGIA', 'MARIETA', 'MUNTANYA',
+  'MÚSICA', 'NÚVOL', 'OCELL', 'OCEÀ', 'PÀGINA', 'PAÍS', 'PAPALLONA',
+  'PINGÜÍ', 'PLUJA', 'PRIMAVERA', 'RIU', 'SOMNI', 'TELÈFON', 'UNIVERS',
+  'XOCOLATA', 'TARDOR', 'FORMATGE',
+] as const
