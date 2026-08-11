@@ -17,6 +17,8 @@ const es = {
   waitingForgiveness: 'Esperando a que tu rival decida si te perdona la vida…',
   chatTitle: 'Chat', chatPlaceholder: 'Escribe un mensaje…', chatSend: 'Enviar', chatEmpty: 'Todavía no hay mensajes.',
   chatTooLong: 'El mensaje es demasiado largo.', chatFailed: 'No se pudo enviar el mensaje.',
+  opponentReconnecting: 'Tu rival ha perdido la conexión. Esperando a que vuelva…', opponentReconnected: 'Tu rival se ha reconectado.',
+  resumeRejected: 'No se pudo recuperar la partida. La sala ya no está disponible.',
 }
 
 const ca: typeof es = {
@@ -36,6 +38,8 @@ const ca: typeof es = {
   waitingForgiveness: 'Esperant que el teu rival decideixi si et perdona la vida…',
   chatTitle: 'Xat', chatPlaceholder: 'Escriu un missatge…', chatSend: 'Envia', chatEmpty: 'Encara no hi ha missatges.',
   chatTooLong: 'El missatge és massa llarg.', chatFailed: "No s'ha pogut enviar el missatge.",
+  opponentReconnecting: 'El teu rival ha perdut la connexió. Esperant que torni…', opponentReconnected: "El teu rival s'ha tornat a connectar.",
+  resumeRejected: "No s'ha pogut recuperar la partida. La sala ja no està disponible.",
 }
 
 export const multiplayerTranslations = { es, ca } satisfies Record<Language, typeof es>
@@ -47,6 +51,7 @@ export function errorMessage(code: string, t: MultiplayerTranslations) {
     'invalid-word': t.invalidWord, 'connect_error': t.connectionError,
     'chat-message-too-long': t.chatTooLong, 'empty-chat-message': t.chatFailed,
     'invalid-chat-message': t.chatFailed, 'not-room-member': t.chatFailed,
+    'resume-rejected': t.resumeRejected, 'opponent-reconnecting': t.opponentReconnecting,
   }
   return messages[code] ?? t.connectionError
 }

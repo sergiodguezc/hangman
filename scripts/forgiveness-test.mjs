@@ -2,8 +2,8 @@ import assert from 'node:assert/strict'
 import { GameRoom } from '../dist-server/server/game/GameRoom.js'
 
 const room = new GameRoom('TEST', 'es')
-room.addPlayer('setter', 'Setter')
-room.addPlayer('guesser', 'Guesser')
+room.addPlayer('setter', 's1', 't1', 'Setter')
+room.addPlayer('guesser', 's2', 't2', 'Guesser')
 room.setWord('setter', 'A')
 
 for (const letter of ['B', 'C', 'D', 'E', 'F']) room.guess('guesser', letter)

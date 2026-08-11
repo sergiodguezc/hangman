@@ -4,11 +4,11 @@ import type { PlayerGameView } from '../../shared/protocol'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
-import { socket } from '../multiplayer/socket'
+import { saveRoomSession, socket } from '../multiplayer/socket'
 
-type Props = { language: Language; onLanguage: (language: Language) => void; onEnter: (view: PlayerGameView) => void }
+type Props = { language: Language; notice?: string; onLanguage: (language: Language) => void; onEnter: (view: PlayerGameView, playerId: string) => void }
 
-export function HomePage({ language, onLanguage, onEnter }: Props) {
+export function HomePage({ language, notice, onLanguage, onEnter }: Props) {
   const [name, setName] = useState(localStorage.getItem('hangman-name') ?? '')
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
@@ -30,7 +30,7 @@ export function HomePage({ language, onLanguage, onEnter }: Props) {
     connect(() => socket.emit('room:create', { name, language }, (response) => {
       setBusy(false)
       if (!response.ok) return setError(errorMessage(response.error, t))
-      localStorage.setItem('hangman-name', name.trim()); onEnter(response.data)
+      localStorage.setItem('hangman-name', name.trim()); saveRoomSession(response.data.session); onEnter(response.data.view, response.data.session.playerId)
     }))
   }
 
@@ -38,7 +38,7 @@ export function HomePage({ language, onLanguage, onEnter }: Props) {
     connect(() => socket.emit('room:join', { name, code }, (response) => {
       setBusy(false)
       if (!response.ok) return setError(errorMessage(response.error, t))
-      localStorage.setItem('hangman-name', name.trim()); onEnter(response.data)
+      localStorage.setItem('hangman-name', name.trim()); saveRoomSession(response.data.session); onEnter(response.data.view, response.data.session.playerId)
     }))
   }
 
@@ -53,7 +53,7 @@ export function HomePage({ language, onLanguage, onEnter }: Props) {
         <label>{t.roomCode}<input value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, ''))} /></label>
         <button type="button" className="secondary-action" disabled={busy || !name.trim() || code.length !== 5} onClick={join}>{t.join}</button>
-        {error && <p className="form-error" role="alert">{error}</p>}
+        {(error || notice) && <p className="form-error" role="alert">{error || errorMessage(notice!, t)}</p>}
       </form>
       <small>{getLanguageConfig(language).name}</small>
     </section>

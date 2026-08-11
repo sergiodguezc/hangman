@@ -16,6 +16,7 @@
     "test:e2e": "node scripts/e2e.mjs",
     "test:game": "node scripts/forgiveness-test.mjs",
     "test:chat": "node scripts/chat-test.mjs",
+    "test:lifecycle": "node scripts/lifecycle-test.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

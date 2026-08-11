@@ -16,15 +16,16 @@ export class GameRoom {
     guesses = new Set();
     errorCount = 0;
     chatMessages = [];
+    reconnectedPlayerName;
     disconnectedPlayerName;
     constructor(code, language) {
         this.code = code;
         this.language = language;
     }
-    addPlayer(id, name) {
+    addPlayer(id, socketId, reconnectToken, name) {
         if (this.players.length >= 2)
             throw new Error('room-full');
-        this.players.push({ id, name, score: 0 });
+        this.players.push({ id, socketId, reconnectToken, name, score: 0, connectionState: 'connected' });
         if (this.players.length === 2) {
             this.roundNumber = 1;
             this.wordSetterId = this.players[0].id;
@@ -32,7 +33,31 @@ export class GameRoom {
             this.phase = 'choosing-word';
         }
     }
+    player(id) { return this.players.find((player) => player.id === id); }
+    markReconnecting(playerId, socketId) {
+        const player = this.player(playerId);
+        if (!player || player.socketId !== socketId)
+            return false;
+        player.socketId = null;
+        player.connectionState = 'reconnecting';
+        this.reconnectedPlayerName = undefined;
+        return true;
+    }
+    resume(playerId, reconnectToken, socketId) {
+        const player = this.player(playerId);
+        if (!player || player.reconnectToken !== reconnectToken)
+            throw new Error('resume-rejected');
+        player.socketId = socketId;
+        player.connectionState = 'connected';
+        this.reconnectedPlayerName = player.name;
+        return player;
+    }
+    assertPlayable() {
+        if (this.players.some((player) => player.connectionState !== 'connected'))
+            throw new Error('opponent-reconnecting');
+    }
     setWord(playerId, input) {
+        this.assertPlayable();
         if (this.phase !== 'choosing-word' || playerId !== this.wordSetterId)
             throw new Error('not-word-setter');
         const word = validateSecretWord(input, this.language);
@@ -45,6 +70,7 @@ export class GameRoom {
         this.phase = 'guessing';
     }
     guess(playerId, input) {
+        this.assertPlayable();
         if (this.phase !== 'guessing' || playerId !== this.guesserId || !this.secretWord)
             throw new Error('not-guesser');
         if (typeof input !== 'string')
@@ -66,6 +92,7 @@ export class GameRoom {
         }
     }
     decideForgiveness(playerId, forgive) {
+        this.assertPlayable();
         if (this.phase !== 'forgiveness-pending' || playerId !== this.wordSetterId || this.errorCount !== MAX_ERRORS) {
             throw new Error('cannot-decide-forgiveness');
         }
@@ -80,6 +107,7 @@ export class GameRoom {
         }
     }
     continue(playerId) {
+        this.assertPlayable();
         if (this.phase !== 'round-over' || playerId !== this.guesserId)
             throw new Error('cannot-continue');
         const oldSetter = this.wordSetterId;
@@ -96,12 +124,13 @@ export class GameRoom {
         const leaving = this.players.find((player) => player.id === playerId);
         if (!leaving)
             return;
-        this.disconnectedPlayerName = leaving.name;
         this.players.splice(this.players.indexOf(leaving), 1);
+        this.disconnectedPlayerName = leaving.name;
         if (this.players.length)
             this.phase = 'disconnected';
     }
     addChatMessage(playerId, input) {
+        this.assertPlayable();
         const sender = this.players.find((player) => player.id === playerId);
         if (!sender)
             throw new Error('not-room-member');
@@ -129,11 +158,12 @@ export class GameRoom {
     viewFor(playerId) {
         const reveal = this.phase === 'round-over';
         const view = {
-            code: this.code, language: this.language, players: [...this.players], phase: this.phase,
+            code: this.code, language: this.language, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
             roundNumber: this.roundNumber, wordSetterId: this.wordSetterId, guesserId: this.guesserId,
             roundWinnerId: this.roundWinnerId,
             displayWord: this.secretWord ? displayWord(this.secretWord, this.guesses, this.language, reveal) : [],
             guessedLetters: [...this.guesses], wrongLetters: this.wrongLetters, errors: this.errorCount,
+            reconnectedPlayerName: this.reconnectedPlayerName,
             disconnectedPlayerName: this.disconnectedPlayerName,
         };
         if (this.secretWord && (playerId === this.wordSetterId || reveal))

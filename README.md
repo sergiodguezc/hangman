@@ -98,4 +98,4 @@ It checks room capacity, room isolation, authorization, chat, secret-word privac
 
 ## Important limitations
 
-Rooms, scores, words, and chat history are stored only in server memory. A server restart removes active matches. Multiple server replicas do not share state, so deploy this version as one persistent Node process. The application does not implement reconnection persistence; refreshing or losing the connection ends that player's current participation.
+Rooms, scores, words, and chat history are stored only in server memory. A server restart removes active matches. Multiple server replicas do not share state, so deploy this version as exactly one Node process/Render instance. Browser refreshes and transient disconnects can resume within the 25-second grace period, but cannot survive a server restart or a request routed to another replica.

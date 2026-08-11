@@ -1,7 +1,10 @@
 import type { Language } from './game.js'
 
 export type GamePhase = 'waiting' | 'choosing-word' | 'guessing' | 'forgiveness-pending' | 'round-over' | 'disconnected'
-export type Player = { id: string; name: string; score: number }
+export type ConnectionState = 'connected' | 'reconnecting'
+export type Player = { id: string; name: string; score: number; connectionState: ConnectionState }
+export type RoomSession = { roomCode: string; playerId: string; reconnectToken: string }
+export type RoomEntry = { view: PlayerGameView; session: RoomSession }
 export type ChatMessage = { id: string; senderId: string; senderName: string; text: string; timestamp: number }
 
 export type PlayerGameView = {
@@ -18,14 +21,16 @@ export type PlayerGameView = {
   wrongLetters: string[]
   errors: number
   privateWord?: string
+  reconnectedPlayerName?: string
   disconnectedPlayerName?: string
 }
 
 export type Ack<T = undefined> = (response: { ok: true; data: T } | { ok: false; error: string }) => void
 
 export interface ClientToServerEvents {
-  'room:create': (payload: { name: string; language: Language }, ack: Ack<PlayerGameView>) => void
-  'room:join': (payload: { name: string; code: string }, ack: Ack<PlayerGameView>) => void
+  'room:create': (payload: { name: string; language: Language }, ack: Ack<RoomEntry>) => void
+  'room:join': (payload: { name: string; code: string }, ack: Ack<RoomEntry>) => void
+  'room:resume': (payload: RoomSession, ack: Ack<PlayerGameView>) => void
   'round:set-word': (payload: { word: string }, ack: Ack) => void
   'game:guess': (payload: { letter: string }, ack: Ack) => void
   'round:forgiveness': (payload: { forgive: boolean }, ack: Ack) => void
