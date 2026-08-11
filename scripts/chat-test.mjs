@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { GameRoom } from '../dist-server/server/game/GameRoom.js'
 
-const room = new GameRoom('CHAT', 'es')
+const room = new GameRoom('CHAT', 'es', null, () => 0.1)
 room.addPlayer('p1', 's1', 't1', 'Sergio')
 
 const first = room.addChatMessage('p1', '  Hola <img src=x onerror=alert(1)>  ')

@@ -17,6 +17,7 @@
     "test:game": "node scripts/forgiveness-test.mjs",
     "test:chat": "node scripts/chat-test.mjs",
     "test:lifecycle": "node scripts/lifecycle-test.mjs",
+    "test:match": "node scripts/match-features-test.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

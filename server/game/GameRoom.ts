@@ -1,6 +1,6 @@
 import { displayWord, isCorrectGuess, isWordComplete, normalizeGuess, validateSecretWord, type Language } from '../../shared/game.js'
 import { randomUUID } from 'node:crypto'
-import type { ChatMessage, Player, PlayerGameView, GamePhase } from '../../shared/protocol.js'
+import type { ChatMessage, Player, PlayerGameView, GamePhase, MatchTarget } from '../../shared/protocol.js'
 
 export type RoomPlayer = Player & { socketId: string | null; reconnectToken: string }
 
@@ -15,6 +15,9 @@ export class GameRoom {
   wordSetterId: string | null = null
   guesserId: string | null = null
   roundWinnerId: string | null = null
+  matchWinnerId: string | null = null
+  readonly rematchReady = new Set<string>()
+  firstSetterId: string | null = null
   private secretWord: string | null = null
   private readonly guesses = new Set<string>()
   private errorCount = 0
@@ -22,16 +25,13 @@ export class GameRoom {
   reconnectedPlayerName?: string
   disconnectedPlayerName?: string
 
-  constructor(readonly code: string, readonly language: Language) {}
+  constructor(readonly code: string, readonly language: Language, readonly matchTarget: MatchTarget = null, private readonly random = Math.random) {}
 
   addPlayer(id: string, socketId: string, reconnectToken: string, name: string) {
     if (this.players.length >= 2) throw new Error('room-full')
     this.players.push({ id, socketId, reconnectToken, name, score: 0, connectionState: 'connected' })
     if (this.players.length === 2) {
-      this.roundNumber = 1
-      this.wordSetterId = this.players[0].id
-      this.guesserId = this.players[1].id
-      this.phase = 'choosing-word'
+      this.startMatch()
     }
   }
 
@@ -117,6 +117,14 @@ export class GameRoom {
     this.phase = 'choosing-word'
   }
 
+  requestRematch(playerId: string) {
+    this.assertPlayable()
+    if (this.phase !== 'match-over' || !this.player(playerId)) throw new Error('cannot-rematch')
+    if (this.rematchReady.has(playerId)) throw new Error('rematch-already-ready')
+    this.rematchReady.add(playerId)
+    if (this.rematchReady.size === 2) this.startMatch(true)
+  }
+
   disconnect(playerId: string) {
     const leaving = this.players.find((player) => player.id === playerId)
     if (!leaving) return
@@ -149,11 +157,12 @@ export class GameRoom {
   }
 
   viewFor(playerId: string): PlayerGameView {
-    const reveal = this.phase === 'round-over'
+    const reveal = this.phase === 'round-over' || this.phase === 'match-over'
     const view: PlayerGameView = {
-      code: this.code, language: this.language, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
+      code: this.code, language: this.language, matchTarget: this.matchTarget, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
       roundNumber: this.roundNumber, wordSetterId: this.wordSetterId, guesserId: this.guesserId,
-      roundWinnerId: this.roundWinnerId,
+      roundWinnerId: this.roundWinnerId, matchWinnerId: this.matchWinnerId,
+      rematchReadyPlayerIds: [...this.rematchReady], firstSetterId: this.firstSetterId,
       displayWord: this.secretWord ? displayWord(this.secretWord, this.guesses, this.language, reveal) : [],
       guessedLetters: [...this.guesses], wrongLetters: this.wrongLetters, errors: this.errorCount,
       reconnectedPlayerName: this.reconnectedPlayerName,
@@ -168,6 +177,26 @@ export class GameRoom {
     const winner = this.players.find((player) => player.id === winnerId)
     if (winner) winner.score += 1
     this.roundWinnerId = winnerId
-    this.phase = 'round-over'
+    if (winner && this.matchTarget !== null && winner.score >= this.matchTarget) {
+      this.matchWinnerId = winnerId
+      this.phase = 'match-over'
+    } else this.phase = 'round-over'
+  }
+
+  private startMatch(resetScores = false) {
+    if (this.players.length !== 2) return
+    if (resetScores) for (const player of this.players) player.score = 0
+    const setterIndex = this.random() < 0.5 ? 0 : 1
+    this.wordSetterId = this.players[setterIndex].id
+    this.guesserId = this.players[1 - setterIndex].id
+    this.firstSetterId = this.wordSetterId
+    this.roundNumber = 1
+    this.secretWord = null
+    this.guesses.clear()
+    this.errorCount = 0
+    this.roundWinnerId = null
+    this.matchWinnerId = null
+    this.rematchReady.clear()
+    this.phase = 'choosing-word'
   }
 }

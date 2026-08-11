@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { GameRoom } from '../dist-server/server/game/GameRoom.js'
 
-const room = new GameRoom('TEST', 'es')
+const room = new GameRoom('TEST', 'es', null, () => 0.1)
 room.addPlayer('setter', 's1', 't1', 'Setter')
 room.addPlayer('guesser', 's2', 't2', 'Guesser')
 room.setWord('setter', 'A')

@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import type { Language } from '../../shared/game'
-import type { PlayerGameView } from '../../shared/protocol'
+import type { MatchTarget, PlayerGameView } from '../../shared/protocol'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
@@ -13,6 +13,7 @@ export function HomePage({ language, notice, onLanguage, onEnter }: Props) {
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [matchTarget, setMatchTarget] = useState<MatchTarget>(5)
   const t = multiplayerTranslations[language]
   const otherLanguage: Language = language === 'es' ? 'ca' : 'es'
   const otherTitle = multiplayerTranslations[otherLanguage].title
@@ -27,7 +28,7 @@ export function HomePage({ language, notice, onLanguage, onEnter }: Props) {
 
   const create = (event: FormEvent) => {
     event.preventDefault()
-    connect(() => socket.emit('room:create', { name, language }, (response) => {
+    connect(() => socket.emit('room:create', { name, language, matchTarget }, (response) => {
       setBusy(false)
       if (!response.ok) return setError(errorMessage(response.error, t))
       localStorage.setItem('hangman-name', name.trim()); saveRoomSession(response.data.session); onEnter(response.data.view, response.data.session.playerId)
@@ -48,6 +49,9 @@ export function HomePage({ language, notice, onLanguage, onEnter }: Props) {
       <form onSubmit={create}>
         <label>{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
         <LanguageSelector language={language} label={t.language} onChange={onLanguage} />
+        <fieldset className="target-selector"><legend>{t.matchTarget}</legend><div>
+          {([3, 5, 10, null] as MatchTarget[]).map((target) => <button type="button" key={target ?? 'unlimited'} className={matchTarget === target ? 'active' : ''} onClick={() => setMatchTarget(target)}>{target ?? t.unlimited}</button>)}
+        </div></fieldset>
         <button className="primary-action" disabled={busy}>{t.create}</button>
         <div className="join-divider"><span>o</span></div>
         <label>{t.roomCode}<input value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"

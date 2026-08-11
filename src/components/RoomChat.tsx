@@ -4,13 +4,18 @@ import type { MultiplayerTranslations } from '../multiplayer/i18n'
 import { errorMessage } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
 
-type Props = { messages: ChatMessage[]; currentPlayerId: string; t: MultiplayerTranslations }
+type Props = { messages: ChatMessage[]; currentPlayerId: string; typingPlayer: { playerId: string; playerName: string } | null; t: MultiplayerTranslations }
 
-export function RoomChat({ messages, currentPlayerId, t }: Props) {
+export function RoomChat({ messages, currentPlayerId, typingPlayer, t }: Props) {
   const [text, setText] = useState('')
   const [error, setError] = useState('')
   const listRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const typingTimer = useRef<number | undefined>(undefined)
+  const isTyping = useRef(false)
+
+  const stopTyping = () => { window.clearTimeout(typingTimer.current); typingTimer.current = undefined; if (isTyping.current) { isTyping.current = false; socket.emit('chat:typing', { isTyping: false }) } }
+  useEffect(() => () => stopTyping(), [])
 
   useEffect(() => {
     const list = listRef.current
@@ -24,7 +29,7 @@ export function RoomChat({ messages, currentPlayerId, t }: Props) {
     setError('')
     socket.emit('chat:send', { text: message }, (response) => {
       if (!response.ok) setError(errorMessage(response.error, t))
-      else setText('')
+      else { setText(''); stopTyping() }
       inputRef.current?.focus()
     })
   }
@@ -37,9 +42,10 @@ export function RoomChat({ messages, currentPlayerId, t }: Props) {
         <strong>{message.senderName}</strong><p>{message.text}</p>
       </article>)}
     </div>
+    {typingPlayer && typingPlayer.playerId !== currentPlayerId && <p className="typing-indicator" role="status">{t.typing.replace('{player}', typingPlayer.playerName)}</p>}
     <form className="chat-form" onSubmit={send}>
       <input ref={inputRef} value={text} maxLength={300} aria-label={t.chatPlaceholder}
-        placeholder={t.chatPlaceholder} onChange={(event) => setText(event.target.value)} />
+        placeholder={t.chatPlaceholder} onChange={(event) => { const next = event.target.value; setText(next); window.clearTimeout(typingTimer.current); if (!next.trim()) stopTyping(); else { if (!isTyping.current) { isTyping.current = true; socket.emit('chat:typing', { isTyping: true }) } typingTimer.current = window.setTimeout(stopTyping, 2000) } }} />
       <button disabled={!text.trim()}>{t.chatSend}</button>
     </form>
     {error && <p className="chat-error" role="alert">{error}</p>}

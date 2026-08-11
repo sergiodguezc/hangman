@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { GameManager } from '../dist-server/server/game/GameManager.js'
 
-const games = new GameManager()
+const games = new GameManager(() => 0.1)
 const first = games.create('socket-a', 'Ana', 'es')
 const second = games.join('socket-b', 'Biel', first.room.code)
 first.room.setWord(first.playerId, 'CASA')

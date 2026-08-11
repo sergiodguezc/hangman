@@ -2,14 +2,18 @@ import { GameRoom } from './GameRoom.js';
 import { randomUUID } from 'node:crypto';
 const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 export class GameManager {
+    random;
     rooms = new Map();
     playerRooms = new Map();
     socketPlayers = new Map();
-    create(socketId, name, language) {
+    constructor(random = Math.random) {
+        this.random = random;
+    }
+    create(socketId, name, language, matchTarget = null) {
         let code = this.code();
         while (this.rooms.has(code))
             code = this.code();
-        const room = new GameRoom(code, language);
+        const room = new GameRoom(code, language, matchTarget, this.random);
         const playerId = randomUUID(), reconnectToken = randomUUID();
         room.addPlayer(playerId, socketId, reconnectToken, name);
         this.rooms.set(code, room);

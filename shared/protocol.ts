@@ -1,6 +1,7 @@
 import type { Language } from './game.js'
 
-export type GamePhase = 'waiting' | 'choosing-word' | 'guessing' | 'forgiveness-pending' | 'round-over' | 'disconnected'
+export type MatchTarget = 3 | 5 | 10 | null
+export type GamePhase = 'waiting' | 'choosing-word' | 'guessing' | 'forgiveness-pending' | 'round-over' | 'match-over' | 'disconnected'
 export type ConnectionState = 'connected' | 'reconnecting'
 export type Player = { id: string; name: string; score: number; connectionState: ConnectionState }
 export type RoomSession = { roomCode: string; playerId: string; reconnectToken: string }
@@ -10,12 +11,16 @@ export type ChatMessage = { id: string; senderId: string; senderName: string; te
 export type PlayerGameView = {
   code: string
   language: Language
+  matchTarget: MatchTarget
   players: Player[]
   phase: GamePhase
   roundNumber: number
   wordSetterId: string | null
   guesserId: string | null
   roundWinnerId: string | null
+  matchWinnerId: string | null
+  rematchReadyPlayerIds: string[]
+  firstSetterId: string | null
   displayWord: string[]
   guessedLetters: string[]
   wrongLetters: string[]
@@ -28,7 +33,7 @@ export type PlayerGameView = {
 export type Ack<T = undefined> = (response: { ok: true; data: T } | { ok: false; error: string }) => void
 
 export interface ClientToServerEvents {
-  'room:create': (payload: { name: string; language: Language }, ack: Ack<RoomEntry>) => void
+  'room:create': (payload: { name: string; language: Language; matchTarget: MatchTarget }, ack: Ack<RoomEntry>) => void
   'room:join': (payload: { name: string; code: string }, ack: Ack<RoomEntry>) => void
   'room:resume': (payload: RoomSession, ack: Ack<PlayerGameView>) => void
   'round:set-word': (payload: { word: string }, ack: Ack) => void
@@ -36,6 +41,8 @@ export interface ClientToServerEvents {
   'round:forgiveness': (payload: { forgive: boolean }, ack: Ack) => void
   'round:continue': (ack: Ack) => void
   'chat:send': (payload: { text: string }, ack: Ack<ChatMessage>) => void
+  'chat:typing': (payload: { isTyping: boolean }) => void
+  'match:rematch': (ack: Ack) => void
   'room:leave': () => void
 }
 
@@ -44,4 +51,5 @@ export interface ServerToClientEvents {
   'room:error': (error: string) => void
   'chat:message': (message: ChatMessage) => void
   'chat:history': (messages: ChatMessage[]) => void
+  'chat:typing': (payload: { playerId: string; playerName: string; isTyping: boolean }) => void
 }

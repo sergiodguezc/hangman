@@ -15,7 +15,7 @@ const p1 = await connect()
 let p2 = await connect()
 const p3 = await connect()
 try {
-  const created = await emit(p1, 'room:create', { name: 'Sergio', language: 'ca' })
+  const created = await emit(p1, 'room:create', { name: 'Sergio', language: 'ca', matchTarget: null })
   assert.equal(created.ok, true)
   const code = created.data.view.code
   const p1Id = created.data.session.playerId
@@ -50,7 +50,7 @@ try {
 
   const full = await emit(p3, 'room:join', { name: 'Third', code })
   assert.deepEqual(full, { ok: false, error: 'room-full' })
-  const otherRoom = await emit(p3, 'room:create', { name: 'Other', language: 'es' })
+  const otherRoom = await emit(p3, 'room:create', { name: 'Other', language: 'es', matchTarget: 3 })
   assert.equal(otherRoom.ok, true)
   const foreignMessages = []
   p3.on('chat:message', (message) => foreignMessages.push(message))
