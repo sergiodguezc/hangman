@@ -11,9 +11,9 @@ type Props = {
 }
 
 function ExampleSentence({ entry }: { entry: VocabularyEntry }) {
-  const index = entry.exampleCa.toLocaleLowerCase('ca').indexOf(entry.word.toLocaleLowerCase('ca'))
+  const index = entry.exampleCa.toLocaleLowerCase('ca').indexOf(entry.answerCa.toLocaleLowerCase('ca'))
   if (index < 0) return <>{entry.exampleCa}</>
-  const end = index + entry.word.length
+  const end = index + entry.answerCa.length
   return <>{entry.exampleCa.slice(0, index)}<strong>{entry.exampleCa.slice(index, end)}</strong>{entry.exampleCa.slice(end)}</>
 }
 
@@ -22,7 +22,7 @@ export function LearningResultCard({ entry, result, language, onNext, onChangeDi
   const alternatives = entry.translationsEs?.filter((translation) => translation !== entry.hintEs) ?? []
   return <section className={`learning-result ${result}`} aria-live="polite">
     <p className="learning-result-message">{result === 'win' ? t.won : t.lost}</p>
-    <h2 lang="ca">{entry.word}</h2>
+    <h2 lang="ca">{entry.answerCa}</h2>
     <dl>
       <div><dt>{t.spanish}</dt><dd lang="es">{entry.hintEs}{alternatives.length > 0 && <> · {t.also}: {alternatives.join(' · ')}</>}</dd></div>
       <div><dt>{t.example}</dt><dd lang="ca"><ExampleSentence entry={entry} /></dd></div>

@@ -77,7 +77,7 @@ export function LearningPage({ language, onHome }: Props) {
           <div className="error-copy"><span>{t.errors}</span><strong>{round.errors} / 6</strong></div></div>
         <div className="guess-area">
           <div className="learning-word-scroll" tabIndex={0}>
-            <HangmanWord word={round.entry.word} guesses={round.guesses} language="ca" reveal={phase === 'round-over'} label={t.progress} />
+            <HangmanWord word={round.entry.answerCa} guesses={round.guesses} language="ca" reveal={phase === 'round-over'} label={t.progress} />
           </div>
           {phase === 'playing' && <>
             <div className="incorrect-list"><span>{t.incorrect}</span><strong>{round.incorrect.size ? [...round.incorrect].join(' · ') : t.none}</strong></div>
@@ -85,7 +85,7 @@ export function LearningPage({ language, onHome }: Props) {
           </>}
           {phase === 'round-over' && round.result && <LearningResultCard entry={round.entry} result={round.result} language={language}
             onNext={() => startRound(difficulty)} onChangeDifficulty={changeDifficulty} />}
-          <span className="sr-only" aria-live="polite">{displayWord(round.entry.word, round.guesses, 'ca', phase === 'round-over').join(' ')}</span>
+          <span className="sr-only" aria-live="polite">{displayWord(round.entry.answerCa, round.guesses, 'ca', phase === 'round-over').join(' ')}</span>
         </div>
       </div>
     </section>}

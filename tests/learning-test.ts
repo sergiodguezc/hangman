@@ -7,7 +7,7 @@ import { applyLearningGuess, createLearningRound, entriesForDifficulty, selectNe
 import type { VocabularyEntry } from '../src/learning/types.ts'
 
 const entry = (id: string, word: string, difficulty: VocabularyEntry['difficulty'] = 'easy'): VocabularyEntry => ({
-  id, word, difficulty, hintEs: `traducción-${id}`, translationsEs: [`traducción-${id}`], exampleCa: `Una frase amb ${word}.`, corpusCount: 1,
+  id, word, answerCa: word, difficulty, hintEs: `traducción-${id}`, translationsEs: [`traducción-${id}`], exampleCa: `Una frase amb ${word}.`, corpusCount: 1,
   sources: { word: 'test', example: 'test' },
 })
 
@@ -34,6 +34,17 @@ const resultMarkup = renderToStaticMarkup(createElement(LearningResultCard, {
 assert.match(resultMarkup, />casa</)
 assert.match(resultMarkup, /traducción-loss/)
 assert.match(resultMarkup, /Una frase amb <strong>casa<\/strong>\./)
+
+const phrase = { ...entry('mica', 'mica'), answerCa: 'una mica', targetExpression: 'una mica', hintEs: 'un poco', translationsEs: ['un poco'], exampleCa: 'Estic una mica cansat.' }
+let phraseRound = createLearningRound(phrase)
+for (const letter of ['u', 'n', 'a', 'm', 'i', 'c']) phraseRound = applyLearningGuess(phraseRound, letter)
+assert.equal(phraseRound.result, 'win')
+assert.equal(displayWord(phrase.answerCa, new Set(), 'ca').join(''), '___ ____')
+const phraseMarkup = renderToStaticMarkup(createElement(LearningResultCard, {
+  entry: phrase, result: 'win', language: 'es', onNext: () => {}, onChangeDifficulty: () => {},
+}))
+assert.match(phraseMarkup, />una mica</)
+assert.match(phraseMarkup, /<strong>una mica<\/strong>/)
 
 for (const [word, guesses] of [['cançó', ['c', 'a', 'n', 'ç', 'o']], ['pingüí', ['p', 'i', 'n', 'g', 'u']], ['col·legi', ['c', 'o', 'l', 'e', 'g', 'i']]] as const) {
   let round = createLearningRound(entry(word, word))

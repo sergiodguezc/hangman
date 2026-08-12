@@ -32,11 +32,11 @@ Selection requires a one-word Apertium lexical mapping, excludes proper-noun-tag
 
 ## Context-aware translation review
 
-`npm run vocab:clean` is a separate offline curation stage. It combines each Catalan word, its unchanged example, word class, and raw Spanish candidates in `intermediate/translation-review-input.json`. Strict `accept`/`reject` records are written to `translation-review-output.json`; each accepted record has exactly one `hintEs`, one to three cleaned `translationsEs`, and a content hash that prevents stale reviews from being accepted. The current implementation is deterministic and uses no LLM or online API. Its structured artifacts can later be replaced by an offline LLM-assisted review if they pass the same validator.
+`npm run vocab:clean` is a separate offline, context-first curation stage. It reads the complete Catalan example before considering the target's word class and raw Spanish candidates. It identifies supported expressions and contextual senses, chooses the Catalan teaching unit (`answerCa`), emits one natural `hintEs`, or rejects the occurrence when its sense remains ambiguous. Candidate translations are secondary evidence and may be wrong; the final hint need not occur in them. Strict `accept`/`reject` records are written to `translation-review-output.json`, including `answerCa`, optional `targetExpression`, `contextualSense`, a reason, and a content hash that prevents stale reviews from being accepted. The deterministic implementation uses no runtime LLM or online API. An offline semantic reviewer may replace or extend its decisions only if it emits the same validated structure.
 
 Human decisions take precedence. Put accepted corrections in `config/translation-overrides.json`, and put one normalized Catalan word per line in `config/rejected-vocabulary.txt`. Rejected records are omitted from the production dataset. `review/summary.json` and the deterministic 50-record `review/sample.json` support inspection without editing generated files.
 
-Difficulty is an approximate, deterministic game label—not CEFR. Entries in the top 35% of the selection rank and at most 9 letters are `easy`; entries in the bottom 25% or at least 12 letters are `hard`; the rest are `medium`.
+Difficulty is an approximate, deterministic game label—not CEFR. It uses selection rank, total letters, and expression word count; spaces do not inflate the letter count, though expressions of four words are hard.
 
 ## Regeneration
 

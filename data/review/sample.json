@@ -8,13 +8,16 @@
       "amor"
     ],
     "status": "accept",
+    "answerCa": "amor",
+    "targetExpression": null,
     "hintEs": "amor",
     "translationsEs": [
       "amor"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "04049ada9eac37e0",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "superfície",
@@ -25,13 +28,16 @@
       "superficie"
     ],
     "status": "accept",
+    "answerCa": "superfície",
+    "targetExpression": null,
     "hintEs": "superficie",
     "translationsEs": [
       "superficie"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "bb49cc8d1d654026",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "regió",
@@ -42,13 +48,16 @@
       "región"
     ],
     "status": "accept",
+    "answerCa": "regió",
+    "targetExpression": null,
     "hintEs": "región",
     "translationsEs": [
       "región"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "b3bd8180dae64865",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "teatre",
@@ -59,13 +68,16 @@
       "teatro"
     ],
     "status": "accept",
+    "answerCa": "teatre",
+    "targetExpression": null,
     "hintEs": "teatro",
     "translationsEs": [
       "teatro"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "ba80928e6b650c2d",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "escoltar",
@@ -76,13 +88,16 @@
       "escuchar"
     ],
     "status": "accept",
+    "answerCa": "escoltar",
+    "targetExpression": null,
     "hintEs": "escuchar",
     "translationsEs": [
       "escuchar"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "154e346ef1a43d26",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "curiositat",
@@ -93,13 +108,16 @@
       "curiosidad"
     ],
     "status": "accept",
+    "answerCa": "curiositat",
+    "targetExpression": null,
     "hintEs": "curiosidad",
     "translationsEs": [
       "curiosidad"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "c44cff04f1854fcb",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "costum",
@@ -110,13 +128,16 @@
       "costumbre"
     ],
     "status": "accept",
+    "answerCa": "costum",
+    "targetExpression": null,
     "hintEs": "costumbre",
     "translationsEs": [
       "costumbre"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "295b00673b8c9659",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "allí",
@@ -127,13 +148,16 @@
       "allí"
     ],
     "status": "accept",
+    "answerCa": "allí",
+    "targetExpression": null,
     "hintEs": "allí",
     "translationsEs": [
       "allí"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "36e4aee05afef293",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "castell",
@@ -144,13 +168,16 @@
       "castillo"
     ],
     "status": "accept",
+    "answerCa": "castell",
+    "targetExpression": null,
     "hintEs": "castillo",
     "translationsEs": [
       "castillo"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "9d2b132d825f0e04",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "damunt",
@@ -161,13 +188,16 @@
       "encima"
     ],
     "status": "accept",
+    "answerCa": "damunt",
+    "targetExpression": null,
     "hintEs": "encima",
     "translationsEs": [
       "encima"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "cf10f5a51058a821",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "millor",
@@ -178,13 +208,16 @@
       "mejor"
     ],
     "status": "accept",
+    "answerCa": "millor",
+    "targetExpression": null,
     "hintEs": "mejor",
     "translationsEs": [
       "mejor"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "5417f34f48cc9d37",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "espera",
@@ -195,13 +228,16 @@
       "espera"
     ],
     "status": "accept",
+    "answerCa": "espera",
+    "targetExpression": null,
     "hintEs": "espera",
     "translationsEs": [
       "espera"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "d183b39fea2d055c",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "buscar",
@@ -212,13 +248,16 @@
       "buscar"
     ],
     "status": "accept",
+    "answerCa": "buscar",
+    "targetExpression": null,
     "hintEs": "buscar",
     "translationsEs": [
       "buscar"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "7253b91711a1f3f3",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "breu",
@@ -229,13 +268,16 @@
       "breve"
     ],
     "status": "accept",
+    "answerCa": "breu",
+    "targetExpression": null,
     "hintEs": "breve",
     "translationsEs": [
       "breve"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "8bf7aba6b9088762",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "període",
@@ -246,13 +288,16 @@
       "periodo"
     ],
     "status": "accept",
+    "answerCa": "període",
+    "targetExpression": null,
     "hintEs": "periodo",
     "translationsEs": [
       "periodo"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "a7f28972b822aea1",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "corrent",
@@ -263,15 +308,10 @@
       "corriente",
       "tanto"
     ],
-    "status": "accept",
-    "hintEs": "corriente",
-    "translationsEs": [
-      "corriente",
-      "tanto"
-    ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "status": "reject",
+    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
     "contentHash": "1118d3a34044e5c7",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "pintor",
@@ -282,13 +322,16 @@
       "pintor"
     ],
     "status": "accept",
+    "answerCa": "pintor",
+    "targetExpression": null,
     "hintEs": "pintor",
     "translationsEs": [
       "pintor"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "e280ca8c12c0658d",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "recollir",
@@ -299,13 +342,16 @@
       "recoger"
     ],
     "status": "accept",
+    "answerCa": "recollir",
+    "targetExpression": null,
     "hintEs": "recoger",
     "translationsEs": [
       "recoger"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "667be0ff0ae627c6",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "participació",
@@ -316,13 +362,16 @@
       "participación"
     ],
     "status": "accept",
+    "answerCa": "participació",
+    "targetExpression": null,
     "hintEs": "participación",
     "translationsEs": [
       "participación"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "120edfce26141e33",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "solució",
@@ -333,13 +382,16 @@
       "solución"
     ],
     "status": "accept",
+    "answerCa": "solució",
+    "targetExpression": null,
     "hintEs": "solución",
     "translationsEs": [
       "solución"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "1c6666c20e508d9a",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "frase",
@@ -350,13 +402,16 @@
       "frase"
     ],
     "status": "accept",
+    "answerCa": "frase",
+    "targetExpression": null,
     "hintEs": "frase",
     "translationsEs": [
       "frase"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "fb7a5a2df2c16115",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "societat",
@@ -367,13 +422,16 @@
       "sociedad"
     ],
     "status": "accept",
+    "answerCa": "societat",
+    "targetExpression": null,
     "hintEs": "sociedad",
     "translationsEs": [
       "sociedad"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "9e534601c1c1304d",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "lentament",
@@ -384,13 +442,16 @@
       "lentamente"
     ],
     "status": "accept",
+    "answerCa": "lentament",
+    "targetExpression": null,
     "hintEs": "lentamente",
     "translationsEs": [
       "lentamente"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "a85620572e401159",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "primer",
@@ -402,16 +463,10 @@
       "primero",
       "primo"
     ],
-    "status": "accept",
-    "hintEs": "primer",
-    "translationsEs": [
-      "primer",
-      "primero",
-      "primo"
-    ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "status": "reject",
+    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
     "contentHash": "f14cca1534835f88",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "contacte",
@@ -422,13 +477,16 @@
       "contacto"
     ],
     "status": "accept",
+    "answerCa": "contacte",
+    "targetExpression": null,
     "hintEs": "contacto",
     "translationsEs": [
       "contacto"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "0587ae9b2d78b8f1",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "gener",
@@ -439,13 +497,16 @@
       "enero"
     ],
     "status": "accept",
+    "answerCa": "gener",
+    "targetExpression": null,
     "hintEs": "enero",
     "translationsEs": [
       "enero"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "50479f770b387ef6",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "cert",
@@ -456,13 +517,16 @@
       "cierto"
     ],
     "status": "accept",
+    "answerCa": "cert",
+    "targetExpression": null,
     "hintEs": "cierto",
     "translationsEs": [
       "cierto"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "fbcbf702c0d8c097",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "petó",
@@ -473,13 +537,16 @@
       "beso"
     ],
     "status": "accept",
+    "answerCa": "petó",
+    "targetExpression": null,
     "hintEs": "beso",
     "translationsEs": [
       "beso"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "be9d14cea1996b7d",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "original",
@@ -490,13 +557,16 @@
       "original"
     ],
     "status": "accept",
+    "answerCa": "original",
+    "targetExpression": null,
     "hintEs": "original",
     "translationsEs": [
       "original"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "7744d9b62fe1950d",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "festa",
@@ -508,13 +578,16 @@
       "fiesta"
     ],
     "status": "accept",
+    "answerCa": "festa",
+    "targetExpression": null,
     "hintEs": "fiesta",
     "translationsEs": [
       "fiesta"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "4dd2f43e70e407e6",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "mare",
@@ -525,13 +598,16 @@
       "madre"
     ],
     "status": "accept",
+    "answerCa": "mare",
+    "targetExpression": null,
     "hintEs": "madre",
     "translationsEs": [
       "madre"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "c36aba7fd80a1e7c",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "apartar",
@@ -542,13 +618,16 @@
       "apartar"
     ],
     "status": "accept",
+    "answerCa": "apartar",
+    "targetExpression": null,
     "hintEs": "apartar",
     "translationsEs": [
       "apartar"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "b8db9696361bbaff",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "cafè",
@@ -559,13 +638,16 @@
       "café"
     ],
     "status": "accept",
+    "answerCa": "cafè",
+    "targetExpression": null,
     "hintEs": "café",
     "translationsEs": [
       "café"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "5c865d2e4551f985",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "travessar",
@@ -576,15 +658,10 @@
       "atravesar",
       "cruzar"
     ],
-    "status": "accept",
-    "hintEs": "atravesar",
-    "translationsEs": [
-      "atravesar",
-      "cruzar"
-    ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "status": "reject",
+    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
     "contentHash": "a0993ae35db695d8",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "segle",
@@ -595,13 +672,16 @@
       "siglo"
     ],
     "status": "accept",
+    "answerCa": "segle",
+    "targetExpression": null,
     "hintEs": "siglo",
     "translationsEs": [
       "siglo"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "2bd3748774eb1794",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "llista",
@@ -612,13 +692,16 @@
       "lista"
     ],
     "status": "accept",
+    "answerCa": "llista",
+    "targetExpression": null,
     "hintEs": "lista",
     "translationsEs": [
       "lista"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "57ddb17b0f557861",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "demanar",
@@ -629,15 +712,10 @@
       "pedir",
       "preguntar"
     ],
-    "status": "accept",
-    "hintEs": "pedir",
-    "translationsEs": [
-      "pedir",
-      "preguntar"
-    ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "status": "reject",
+    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
     "contentHash": "82ff4971bfe33c8b",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "braç",
@@ -648,13 +726,16 @@
       "brazo"
     ],
     "status": "accept",
+    "answerCa": "braç",
+    "targetExpression": null,
     "hintEs": "brazo",
     "translationsEs": [
       "brazo"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "085d1610d40d503e",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "govern",
@@ -665,13 +746,16 @@
       "gobierno"
     ],
     "status": "accept",
+    "answerCa": "govern",
+    "targetExpression": null,
     "hintEs": "gobierno",
     "translationsEs": [
       "gobierno"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "931e61ebc244ed2e",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "temps",
@@ -682,13 +766,16 @@
       "tiempo"
     ],
     "status": "accept",
+    "answerCa": "temps",
+    "targetExpression": null,
     "hintEs": "tiempo",
     "translationsEs": [
       "tiempo"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "05022ca86a038202",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "fora",
@@ -700,14 +787,17 @@
       "fuera"
     ],
     "status": "accept",
+    "answerCa": "fora",
+    "targetExpression": null,
     "hintEs": "fuera",
     "translationsEs": [
       "fuera",
       "afuera"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "1676397a0c7c8b1a",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "territori",
@@ -718,13 +808,16 @@
       "territorio"
     ],
     "status": "accept",
+    "answerCa": "territori",
+    "targetExpression": null,
     "hintEs": "territorio",
     "translationsEs": [
       "territorio"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "ba1940109666d72b",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "solament",
@@ -735,13 +828,16 @@
       "solamente"
     ],
     "status": "accept",
+    "answerCa": "solament",
+    "targetExpression": null,
     "hintEs": "solamente",
     "translationsEs": [
       "solamente"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "4c0a505cb516111e",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "espatlla",
@@ -752,15 +848,10 @@
       "hombro",
       "paletilla"
     ],
-    "status": "accept",
-    "hintEs": "hombro",
-    "translationsEs": [
-      "hombro",
-      "paletilla"
-    ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "status": "reject",
+    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
     "contentHash": "e1c924d0fd645c1d",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "nombre",
@@ -771,13 +862,16 @@
       "número"
     ],
     "status": "accept",
+    "answerCa": "nombre",
+    "targetExpression": null,
     "hintEs": "número",
     "translationsEs": [
       "número"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "46d55af7c4de1a4c",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "vuit",
@@ -788,13 +882,16 @@
       "ocho"
     ],
     "status": "accept",
+    "answerCa": "vuit",
+    "targetExpression": null,
     "hintEs": "ocho",
     "translationsEs": [
       "ocho"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "06b8b335e38591e1",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "absolutament",
@@ -805,13 +902,16 @@
       "absolutamente"
     ],
     "status": "accept",
+    "answerCa": "absolutament",
+    "targetExpression": null,
     "hintEs": "absolutamente",
     "translationsEs": [
       "absolutamente"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "d0352d405e9dcb96",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "qualitat",
@@ -822,15 +922,10 @@
       "calidad",
       "cualidad"
     ],
-    "status": "accept",
-    "hintEs": "calidad",
-    "translationsEs": [
-      "calidad",
-      "cualidad"
-    ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "status": "reject",
+    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
     "contentHash": "7a8132ff8c05d8e8",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "enorme",
@@ -841,13 +936,16 @@
       "enorme"
     ],
     "status": "accept",
+    "answerCa": "enorme",
+    "targetExpression": null,
     "hintEs": "enorme",
     "translationsEs": [
       "enorme"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "085df9c780f14539",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   },
   {
     "id": "pressió",
@@ -858,12 +956,15 @@
       "presión"
     ],
     "status": "accept",
+    "answerCa": "pressió",
+    "targetExpression": null,
     "hintEs": "presión",
     "translationsEs": [
       "presión"
     ],
-    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contextualSense": "unambiguous contextual lexical meaning",
+    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
     "contentHash": "79848df506758dec",
-    "reviewSource": "rules"
+    "reviewSource": "context-rules"
   }
 ]

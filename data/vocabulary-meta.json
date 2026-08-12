@@ -1,10 +1,10 @@
 {
-  "schemaVersion": 2,
-  "entries": 999,
+  "schemaVersion": 3,
+  "entries": 823,
   "difficulty": {
-    "easy": 346,
-    "medium": 390,
-    "hard": 263
+    "easy": 278,
+    "medium": 316,
+    "hard": 229
   },
   "sourceVersions": {
     "ca-text-corpus": "5b87343960f72c0a61e5d86651302f0acd42a5a7",
