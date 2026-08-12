@@ -4,6 +4,7 @@ import type { ChatMessage, PlayerGameView } from '../shared/protocol'
 import { GamePage } from './pages/GamePage'
 import { HomePage } from './pages/HomePage'
 import { LobbyPage } from './pages/LobbyPage'
+import { LearningPage } from './pages/LearningPage'
 import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import './App.css'
 
@@ -14,6 +15,7 @@ function App() {
   const [playerId, setPlayerId] = useState(() => loadRoomSession()?.playerId ?? '')
   const [notice, setNotice] = useState('')
   const [typingPlayer, setTypingPlayer] = useState<{ playerId: string; playerName: string } | null>(null)
+  const [view, setView] = useState<'home' | 'learning'>('home')
 
   useEffect(() => {
     const update = (state: PlayerGameView) => { setRoom(state); setLanguage(state.language) }
@@ -43,7 +45,8 @@ function App() {
   const leave = () => { socket.emit('chat:typing', { isTyping: false }); socket.emit('room:leave'); clearRoomSession(); setPlayerId(''); setRoom(null); setMessages([]); setTypingPlayer(null) }
   const enterRoom = (view: PlayerGameView, id: string) => { setMessages([]); setPlayerId(id); setNotice(''); setRoom(view) }
 
-  if (!room) return <HomePage language={language} notice={notice} onLanguage={changeLanguage} onEnter={enterRoom} />
+  if (!room && view === 'learning') return <LearningPage language={language} onHome={() => setView('home')} />
+  if (!room) return <HomePage language={language} notice={notice} onLanguage={changeLanguage} onEnter={enterRoom} onLearn={() => setView('learning')} />
   if (room.phase === 'waiting') return <LobbyPage state={room} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
   return <GamePage state={room} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
 }

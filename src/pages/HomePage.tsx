@@ -6,9 +6,10 @@ import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { saveRoomSession, socket } from '../multiplayer/socket'
 
-type Props = { language: Language; notice?: string; onLanguage: (language: Language) => void; onEnter: (view: PlayerGameView, playerId: string) => void }
+type Props = { language: Language; notice?: string; onLanguage: (language: Language) => void; onEnter: (view: PlayerGameView, playerId: string) => void; onLearn: () => void }
 
-export function HomePage({ language, notice, onLanguage, onEnter }: Props) {
+export function HomePage({ language, notice, onLanguage, onEnter, onLearn }: Props) {
+  const [mode, setMode] = useState<'menu' | 'multiplayer'>('menu')
   const [name, setName] = useState(localStorage.getItem('hangman-name') ?? '')
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
@@ -46,7 +47,13 @@ export function HomePage({ language, notice, onLanguage, onEnter }: Props) {
   return <main className="home-page">
     <section className="home-card">
       <div className="home-intro"><span className="brand-mark">H</span><h1>{t.title} <em>/ {otherTitle}</em></h1><p>{t.subtitle}</p></div>
-      <form onSubmit={create}>
+      {mode === 'menu' ? <div className="mode-menu">
+        <LanguageSelector language={language} label={t.language} onChange={onLanguage} />
+        <p>{t.chooseMode}</p>
+        <button className="primary-action" onClick={() => setMode('multiplayer')}>{t.multiplayer}</button>
+        <button className="secondary-action" onClick={onLearn}>{t.learnCatalan}</button>
+        {notice && <p className="form-error" role="alert">{errorMessage(notice, t)}</p>}
+      </div> : <form onSubmit={create}>
         <label>{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
         <LanguageSelector language={language} label={t.language} onChange={onLanguage} />
         <fieldset className="target-selector"><legend>{t.matchTarget}</legend><div>
@@ -58,7 +65,8 @@ export function HomePage({ language, notice, onLanguage, onEnter }: Props) {
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, ''))} /></label>
         <button type="button" className="secondary-action" disabled={busy || !name.trim() || code.length !== 5} onClick={join}>{t.join}</button>
         {(error || notice) && <p className="form-error" role="alert">{error || errorMessage(notice!, t)}</p>}
-      </form>
+        <button type="button" className="text-button" onClick={() => setMode('menu')}>{t.back}</button>
+      </form>}
       <small>{getLanguageConfig(language).name}</small>
     </section>
   </main>

@@ -19,6 +19,7 @@
     "test:lifecycle": "node scripts/lifecycle-test.mjs",
     "test:match": "node scripts/match-features-test.mjs",
     "test:vocab": "python3 -m unittest discover -s tests -p 'test_vocab_pipeline.py'",
+    "test:learning": "tsx --tsconfig tsconfig.app.json tests/learning-test.ts",
     "vocab:fetch": "python3 scripts/fetch-catalan-corpus.py",
     "vocab:extract": "python3 scripts/extract-catalan-vocabulary.py",
     "vocab:enrich": "python3 scripts/enrich-translations.py",

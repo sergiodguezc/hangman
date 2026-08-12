@@ -30,6 +30,7 @@ const es = {
   waitingRematch: 'Esperando a que tu rival acepte la revancha…', opponentWantsRematch: 'Tu rival quiere una revancha',
   youStart: 'Empiezas eligiendo la palabra.', playerStarts: '{player} empieza eligiendo la palabra.',
   typing: '{player} está escribiendo…',
+  multiplayer: 'Multijugador', learnCatalan: 'Aprèn català', chooseMode: 'Elige un modo de juego', back: 'Volver',
 }
 
 const ca: typeof es = {
@@ -62,6 +63,7 @@ const ca: typeof es = {
   waitingRematch: 'Esperant que el teu rival accepti la revenja…', opponentWantsRematch: 'El teu rival vol una revenja',
   youStart: 'Comences triant la paraula.', playerStarts: '{player} comença triant la paraula.',
   typing: '{player} està escrivint…',
+  multiplayer: 'Multijugador', learnCatalan: 'Aprèn català', chooseMode: 'Tria un mode de joc', back: 'Torna',
 }
 
 export const multiplayerTranslations = { es, ca } satisfies Record<Language, typeof es>
