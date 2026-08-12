@@ -30,10 +30,11 @@ button { cursor: pointer; }
 .language-options button { flex: 1; border: 0; border-radius: 8px; padding: 9px; color: #606860; background: transparent; font-weight: 600; }
 .language-options button.active { color: white; background: var(--green); }
 .target-selector { margin: 0; padding: 0; border: 0; }
-.target-selector legend { margin-bottom: 7px; color: #455249; font-size: 13px; font-weight: 700; }
-.target-selector div { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 4px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
-.target-selector button { border: 0; border-radius: 8px; padding: 9px 4px; color: #606860; background: transparent; font-size: 13px; font-weight: 600; }
+.target-selector legend { margin-bottom: 9px; color: #455249; font-size: 13px; font-weight: 700; }
+.target-selector div { display: grid; grid-template-columns: repeat(3, minmax(52px, 1fr)) minmax(92px, auto); gap: 8px; padding: 5px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
+.target-selector button { border: 0; border-radius: 8px; padding: 9px 7px; color: #606860; background: transparent; font-size: 13px; font-weight: 600; white-space: nowrap; }
 .target-selector button.active { color: white; background: var(--green); }
+.target-help { max-width: 44ch; margin: 15px 2px 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .join-divider { height: 1px; margin: 6px 0; background: var(--line); text-align: center; }
 .join-divider span { position: relative; top: -12px; padding: 0 10px; color: #999; background: var(--cream); }
 
@@ -186,5 +187,9 @@ button { cursor: pointer; }
   .multiplayer-game { min-height: 0; }.scoreboard li { padding: 9px 7px; }
   .lobby-layout { grid-template-columns: 1fr; }.lobby-layout .room-chat { min-height: 380px; height: 380px; }
   .room-chat { height: 380px; }.chat-form { padding: 9px; }.chat-form button { padding-inline: 9px; }
+}
+@media (max-width: 390px) {
+  .target-selector div { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .target-selector button:last-child { grid-column: 1 / -1; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
