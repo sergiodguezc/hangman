@@ -34,6 +34,13 @@ Selection requires a one-word Apertium lexical mapping, excludes proper-noun-tag
 
 Known expressions are declared in `config/expressions.json` and detected while candidate examples are selected, before lexical resolution. `npm run vocab:clean` then resolves the complete Catalan example using its target, word class, expression match, curated contextual rules, preferences, translation-quality penalties, and Apertium candidates as evidence. Linguistic data lives under `config/`; the Python resolver applies it generically.
 
+For ambiguous or incomplete meanings that need contextual enrichment, the pipeline can generate an additional offline LLM input/output pair:
+
+- `data/intermediate/meaning-enrichment-input.json`
+- `data/intermediate/meaning-enrichment-output.json`
+
+Run `npm run vocab:enrich-llm` with `OPENAI_API_KEY` set to produce those files. The command paces requests, retries request-rate limits, checkpoints each result, and resumes valid cached results. `npm run vocab:build` will use cached enrichment output if it is present, but it never calls the API itself.
+
 Every result has `accept`, `review`, or `reject` status, a deterministic heuristic confidence, reason, source, evidence, and a content hash that invalidates stale decisions. Acceptance requires one contextual `translationEs` and a learner-facing `definitionCa`; entries without a trustworthy definition go to review rather than receiving an invented one. Accepted production records expose `answerCa`, `type`, `definitionCa`, and `translationEs`. `hintEs`, `translationsEs: [translationEs]`, and `targetExpression` remain compatibility aliases.
 
 Human decisions take precedence. Put accepted corrections (including `translationEs` and `definitionCa`) in `config/translation-overrides.json`, and put one normalized Catalan word per line in `config/rejected-vocabulary.txt`. Review and rejected records are omitted from production. `review/summary.json` and the deterministic 50-record `review/sample.json` support an offline human or future LLM-assisted review step; the runtime has no API dependency.
@@ -49,6 +56,7 @@ npm run vocab:fetch
 npm run vocab:extract
 npm run vocab:enrich
 npm run vocab:clean
+npm run vocab:enrich-llm
 npm run vocab:build
 npm run vocab:validate
 ```

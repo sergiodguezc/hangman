@@ -48,6 +48,30 @@ No environment variables are required for a normal same-origin deployment.
 
 See [.env.example](.env.example). Do not set the split-origin variables for the recommended single-service deployment.
 
+## Vocabulary pipeline
+
+The Catalan vocabulary dataset is generated offline. The normal build does not call any LLM or external API at runtime.
+
+Pipeline commands:
+
+```bash
+npm run vocab:fetch
+npm run vocab:extract
+npm run vocab:enrich
+npm run vocab:clean
+npm run vocab:enrich-llm
+npm run vocab:build
+npm run vocab:validate
+```
+
+The new `npm run vocab:enrich-llm` step is optional unless you want LLM-assisted enrichment for unresolved meanings. It requires:
+
+- `OPENAI_API_KEY`
+- optionally `VOCAB_LLM_MODEL` if you want to override the default `gpt-5.4-mini`
+- optionally `VOCAB_LLM_REQUEST_INTERVAL` to override the default 6.5 seconds between requests
+
+The enrichment command retries request-rate limits, saves each completed result, and resumes matching cached results after an interruption. `npm run vocab:build` consumes cached enrichment output when it exists. It does not make API calls itself.
+
 ## Deploy to Render
 
 The included `render.yaml` supports a Render Blueprint:

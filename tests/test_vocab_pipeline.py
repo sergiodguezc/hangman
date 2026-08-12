@@ -106,6 +106,30 @@ class VocabularyPipelineTests(unittest.TestCase):
         generated = json.loads((pipeline.DATA / "vocabulary.json").read_text(encoding="utf-8"))
         self.assertNotIn("mena", {entry["word"] for entry in generated})
 
+    def test_llm_enrichment_schema_matches_responses_api_format(self):
+        response_format = pipeline.enrichment_schema()
+        self.assertEqual(response_format["type"], "json_schema")
+        self.assertEqual(response_format["name"], "meaning_enrichment_result")
+        self.assertEqual(
+            set(response_format["schema"]["required"]),
+            set(response_format["schema"]["properties"]),
+        )
+
+    def test_llm_enrichment_serializes_api_field_names(self):
+        result = pipeline.EnrichmentResult(
+            status="resolved",
+            translation_es="banco",
+            definition_ca="Seient llarg per a diverses persones.",
+            sense_gloss="seient",
+            confidence="high",
+            needs_human_review=False,
+            notes="El context indica el sentit de seient.",
+        )
+        serialized = pipeline.serialize_enrichment_result(result)
+        self.assertEqual(serialized["translationEs"], "banco")
+        self.assertFalse(serialized["needsHumanReview"])
+        self.assertEqual(pipeline.validate_enrichment_result(serialized), [])
+
 
 if __name__ == "__main__":
     unittest.main()
