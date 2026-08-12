@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 RAW = DATA / "raw"
 INTERMEDIATE = DATA / "intermediate"
+CONFIG = DATA / "config"
+REVIEW = DATA / "review"
 CORPUS = RAW / "ca-text-corpus"
 DICT = RAW / "catalan-dict-tools"
 APERTIUM = RAW / "apertium-spa-cat"
@@ -42,6 +44,25 @@ POS_MAP = {"n": "noun", "vblex": "verb", "vbser": "verb", "vbhaver": "verb", "vb
 VALID_POS = set(POS_MAP.values()) | {"other"}
 VALID_DIFFICULTY = {"easy", "medium", "hard"}
 POS_PRIORITY = {"noun": 0, "verb": 1, "adjective": 2, "adverb": 3, "other": 4}
+MAX_TRANSLATIONS = 3
+
+# Clearly unsuitable everyday learning hints. This is deliberately conservative:
+# ambiguous senses are handled by contextual rules, overrides, or rejection.
+POOR_SPANISH = {
+    "abogador", "abarrajar", "amigacho", "asueto", "asaz", "bajel", "bajío",
+    "bastantemente", "cabalmente", "catadura", "chirona", "compaña", "concomitar",
+    "consabido", "cuasi", "dechado", "derredor", "donosidad", "fémina", "fulcral",
+    "gollete", "grao", "hacerlasveces", "lecha", "lechaza", "llevanza", "maese",
+    "mensura", "necesariedad", "odds", "obscuridad", "obscuro", "pitorrear",
+    "polizonte", "postreramente", "postrimero", "prez", "securización", "suso",
+    "universitat", "victimar",
+}
+PREFERRED_HINTS = {
+    "anar": "ir", "arribar": "llegar", "dona": "mujer", "feina": "trabajo",
+    "festa": "fiesta", "fora": "fuera", "llit": "cama", "mena": "tipo",
+    "presó": "prisión", "prou": "suficientemente",
+    "tornar": "volver", "vaixell": "barco", "vermell": "rojo",
+}
 
 
 def write_json(path: Path, value: object) -> None:
@@ -210,6 +231,114 @@ def enrich() -> None:
     print(f"Translated {len(translations)} words; missing {len(missing)}")
 
 
+def review_hash(item: dict) -> str:
+    payload = {key: item.get(key) for key in ("id", "word", "exampleCa", "partOfSpeech", "candidateTranslationsEs")}
+    return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:16]
+
+
+def clean_strings(values: object) -> list[str]:
+    if not isinstance(values, list):
+        return []
+    result, seen = [], set()
+    for value in values:
+        if not isinstance(value, str):
+            continue
+        value = " ".join(value.strip().split())
+        key = normalize(value)
+        if value and key not in seen:
+            seen.add(key)
+            result.append(value)
+    return result
+
+
+def validate_review_result(result: object, expected_hash: str | None = None) -> list[str]:
+    errors = []
+    if not isinstance(result, dict):
+        return ["review result must be an object"]
+    status = result.get("status")
+    if status not in {"accept", "reject"}:
+        errors.append("status must be accept or reject")
+    if expected_hash is not None and result.get("contentHash") != expected_hash:
+        errors.append("contentHash does not match review input")
+    if status == "accept":
+        hint = result.get("hintEs")
+        translations = result.get("translationsEs")
+        if not isinstance(hint, str) or not hint.strip(): errors.append("accepted result needs one hintEs string")
+        if clean_strings(translations) != translations: errors.append("translationsEs must contain unique, non-empty strings")
+        if not isinstance(translations, list) or not translations: errors.append("accepted result needs translationsEs")
+        elif len(translations) > MAX_TRANSLATIONS: errors.append(f"translationsEs exceeds {MAX_TRANSLATIONS} items")
+        elif hint not in translations: errors.append("hintEs must be the first-class cleaned meaning")
+    elif not isinstance(result.get("reason"), str) or not result["reason"].strip():
+        errors.append("rejected result needs a reason")
+    return errors
+
+
+def clean_review_item(item: dict, overrides: dict | None = None, rejected: set[str] | None = None) -> dict:
+    """Produce a narrow, structured pedagogical review from lexical candidates."""
+    overrides, rejected = overrides or {}, rejected or set()
+    word, candidates = item["word"], clean_strings(item.get("candidateTranslationsEs", []))
+    content_hash = review_hash(item)
+    if word in rejected:
+        return {"id": item["id"], "word": word, "status": "reject", "reason": "Explicitly rejected by human review.", "contentHash": content_hash, "reviewSource": "manual-rejection"}
+    if word in overrides:
+        override = overrides[word]
+        translations = clean_strings(override.get("translationsEs", []))
+        hint = override.get("hintEs", "")
+        if hint and hint not in translations: translations.insert(0, hint)
+        result = {"id": item["id"], "word": word, "status": "accept", "hintEs": hint, "translationsEs": translations[:MAX_TRANSLATIONS], "reason": override.get("reason", "Human-approved pedagogical override."), "contentHash": content_hash, "reviewSource": "manual-override"}
+        errors = validate_review_result(result, content_hash)
+        if errors: raise ValueError(f"Invalid override for {word}: {'; '.join(errors)}")
+        return result
+    usable = [value for value in candidates if normalize(value) not in POOR_SPANISH]
+    usable = [value for value in usable if value.isalpha() or "-" in value or " " in value]
+    # Infinitives are the only safe standalone clue form for verbs.
+    if item.get("partOfSpeech") == "verb":
+        infinitives = [value for value in usable if normalize(value).endswith(("ar", "er", "ir", "ír"))]
+        if infinitives: usable = infinitives
+    preferred = PREFERRED_HINTS.get(word)
+    # "mena de" is a contextual kind/class construction; other uses are not
+    # forced into that sense merely because Apertium lists it.
+    if word == "mena" and "mena de" in normalize(item.get("exampleCa", "")):
+        usable = ["tipo", "clase"]
+        preferred = "tipo"
+    elif word == "mena":
+        usable = []
+    if preferred in usable:
+        usable = [preferred] + [value for value in usable if value != preferred]
+    usable = clean_strings(usable)[:MAX_TRANSLATIONS]
+    if not usable:
+        return {"id": item["id"], "word": word, "status": "reject", "reason": "No candidate is reliably suitable for this word class and example.", "contentHash": content_hash, "reviewSource": "rules"}
+    return {"id": item["id"], "word": word, "status": "accept", "hintEs": usable[0], "translationsEs": usable, "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.", "contentHash": content_hash, "reviewSource": "rules"}
+
+
+def load_rejected() -> set[str]:
+    path = CONFIG / "rejected-vocabulary.txt"
+    if not path.exists(): return set()
+    return {normalize(line.strip()) for line in path.read_text(encoding="utf-8").splitlines() if line.strip() and not line.lstrip().startswith("#")}
+
+
+def clean() -> None:
+    selected = load_json(INTERMEDIATE / "selected.json")
+    translations = load_json(INTERMEDIATE / "translations-es.json")
+    overrides = load_json(CONFIG / "translation-overrides.json") if (CONFIG / "translation-overrides.json").exists() else {}
+    rejected = load_rejected()
+    review_input = [{"id": normalize(item["word"]).replace("·", "-"), "word": item["word"], "exampleCa": item["exampleCa"], "partOfSpeech": item.get("partOfSpeech", "other"), "candidateTranslationsEs": translations.get(item["word"], [])} for item in selected]
+    results = [clean_review_item(item, overrides, rejected) for item in review_input]
+    for item, result in zip(review_input, results):
+        errors = validate_review_result(result, review_hash(item))
+        if errors: raise SystemExit(f"Invalid review for {item['word']}: {'; '.join(errors)}")
+    write_json(INTERMEDIATE / "translation-review-input.json", review_input)
+    write_json(INTERMEDIATE / "translation-review-output.json", results)
+    accepted = sum(item["status"] == "accept" for item in results)
+    manual = sum(item.get("reviewSource") == "manual-override" for item in results)
+    report = {"totalCandidates": len(results), "accepted": accepted, "rejected": len(results) - accepted, "manualOverrides": manual,
+              "averageTranslationsPerEntry": round(sum(len(item.get("translationsEs", [])) for item in results) / max(accepted, 1), 2)}
+    write_json(REVIEW / "summary.json", report)
+    sample = sorted(({**source, **result} for source, result in zip(review_input, results)), key=lambda item: hashlib.sha256(item["id"].encode()).hexdigest())[:50]
+    write_json(REVIEW / "sample.json", sample)
+    print(f"Cleaned {len(results)} entries: {accepted} accepted, {len(results) - accepted} rejected")
+
+
 def difficulty(index: int, total: int, word: str) -> str:
     percentile = index / max(total, 1)
     length = len(word.replace("·", "").replace("-", ""))
@@ -231,17 +360,28 @@ def stable_id(word: str, used: set[str]) -> str:
 
 def build(allow_incomplete: bool = False) -> None:
     selected = load_json(INTERMEDIATE / "selected.json")
-    translations = load_json(INTERMEDIATE / "translations-es.json")
-    missing = [item["word"] for item in selected if not translations.get(item["word"])]
+    raw_translations = load_json(INTERMEDIATE / "translations-es.json")
+    review_path = INTERMEDIATE / "translation-review-output.json"
+    if not review_path.exists():
+        raise SystemExit("Missing cleaned translation review. Run npm run vocab:clean.")
+    review = {item["word"]: item for item in load_json(review_path)}
+    missing = [item["word"] for item in selected if item["word"] not in review]
     if missing and not allow_incomplete:
-        raise SystemExit(f"Missing Spanish translations for {len(missing)} entries (first: {', '.join(missing[:10])})")
+        raise SystemExit(f"Missing translation reviews for {len(missing)} entries (first: {', '.join(missing[:10])})")
     used = set()
     entries = []
     for index, item in enumerate(selected):
         word = item["word"]
+        cleaned = review.get(word)
+        if not cleaned or cleaned.get("status") == "reject":
+            continue
+        review_input = {"id": normalize(word).replace("·", "-"), "word": word, "exampleCa": item["exampleCa"],
+                        "partOfSpeech": item.get("partOfSpeech", "other"), "candidateTranslationsEs": raw_translations.get(word, [])}
+        errors = validate_review_result(cleaned, review_hash(review_input))
+        if errors: raise SystemExit(f"Invalid structured review for {word}: {'; '.join(errors)}")
         entry = {
             "id": stable_id(word, used), "word": word,
-            "translationEs": translations.get(word, []), "exampleCa": item["exampleCa"],
+            "hintEs": cleaned["hintEs"], "translationsEs": cleaned["translationsEs"], "exampleCa": item["exampleCa"],
             "partOfSpeech": item["partOfSpeech"], "difficulty": difficulty(index, len(selected), word),
             "corpusCount": item["corpusCount"],
         }
@@ -258,7 +398,7 @@ def build(allow_incomplete: bool = False) -> None:
     write_json(DATA / "vocabulary.json", entries)
     distribution = collections.Counter(entry["difficulty"] for entry in entries)
     meta = {
-        "schemaVersion": 1, "entries": len(entries),
+        "schemaVersion": 2, "entries": len(entries),
         "difficulty": {key: distribution[key] for key in ("easy", "medium", "hard")},
         "sourceVersions": {name: commit for name, (_, commit) in REPOS.items()},
         "corpusFiles": list(SOURCES),
@@ -282,8 +422,13 @@ def validate(entries=None, require_translations: bool = True) -> None:
         if entry.get("id") in ids: errors.append(f"{label}: duplicate id")
         if word in words: errors.append(f"{label}: duplicate word")
         ids.add(entry.get("id")); words.add(word)
-        if require_translations and not entry.get("translationEs"): errors.append(f"{label}: missing translation")
-        if not all(isinstance(value, str) and value.strip() for value in entry.get("translationEs", [])): errors.append(f"{label}: invalid translation")
+        hint = entry.get("hintEs")
+        translations = entry.get("translationsEs")
+        if require_translations and (not isinstance(hint, str) or not hint.strip()): errors.append(f"{label}: missing hintEs")
+        if not isinstance(translations, list) or not translations: errors.append(f"{label}: missing translationsEs")
+        elif clean_strings(translations) != translations: errors.append(f"{label}: invalid or duplicate translationsEs")
+        elif len(translations) > MAX_TRANSLATIONS: errors.append(f"{label}: too many translationsEs")
+        elif hint not in translations: errors.append(f"{label}: hintEs is not a cleaned translation")
         example = entry.get("exampleCa", "")
         if not example or URL_RE.search(example): errors.append(f"{label}: invalid example")
         elif not contains_word(example, word): errors.append(f"{label}: example does not contain target token")
@@ -297,16 +442,17 @@ def validate(entries=None, require_translations: bool = True) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=("fetch", "extract", "select", "enrich", "build", "validate", "all"))
+    parser.add_argument("command", choices=("fetch", "extract", "select", "enrich", "clean", "build", "validate", "all"))
     parser.add_argument("--limit", type=int, default=1000)
     parser.add_argument("--allow-incomplete", action="store_true")
     args = parser.parse_args()
-    commands = ("fetch", "extract", "select", "enrich", "build") if args.command == "all" else (args.command,)
+    commands = ("fetch", "extract", "select", "enrich", "clean", "build") if args.command == "all" else (args.command,)
     for command in commands:
         if command == "fetch": fetch()
         elif command == "extract": extract()
         elif command == "select": select(args.limit)
         elif command == "enrich": enrich()
+        elif command == "clean": clean()
         elif command == "build": build(args.allow_incomplete)
         elif command == "validate": validate()
 

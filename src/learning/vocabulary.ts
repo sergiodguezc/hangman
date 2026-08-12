@@ -6,10 +6,15 @@ const difficulties = new Set<VocabularyDifficulty>(['easy', 'medium', 'hard'])
 function isVocabularyEntry(value: unknown): value is VocabularyEntry {
   if (!value || typeof value !== 'object') return false
   const entry = value as Partial<VocabularyEntry>
+  const translations = entry.translationsEs
   return typeof entry.id === 'string' && entry.id.length > 0
     && typeof entry.word === 'string' && entry.word.length > 0
-    && Array.isArray(entry.translationEs) && entry.translationEs.length > 0
-    && entry.translationEs.every((translation) => typeof translation === 'string' && translation.length > 0)
+    && typeof entry.hintEs === 'string' && entry.hintEs.length > 0
+    && (translations === undefined || (Array.isArray(translations)
+      && translations.length > 0 && translations.length <= 3
+      && translations.includes(entry.hintEs)
+      && new Set(translations).size === translations.length
+      && translations.every((translation) => typeof translation === 'string' && translation.length > 0)))
     && typeof entry.exampleCa === 'string' && entry.exampleCa.length > 0
     && difficulties.has(entry.difficulty as VocabularyDifficulty)
 }

@@ -7,7 +7,7 @@ import { applyLearningGuess, createLearningRound, entriesForDifficulty, selectNe
 import type { VocabularyEntry } from '../src/learning/types.ts'
 
 const entry = (id: string, word: string, difficulty: VocabularyEntry['difficulty'] = 'easy'): VocabularyEntry => ({
-  id, word, difficulty, translationEs: [`traducción-${id}`], exampleCa: `Una frase amb ${word}.`, corpusCount: 1,
+  id, word, difficulty, hintEs: `traducción-${id}`, translationsEs: [`traducción-${id}`], exampleCa: `Una frase amb ${word}.`, corpusCount: 1,
   sources: { word: 'test', example: 'test' },
 })
 
@@ -26,7 +26,7 @@ let losing = createLearningRound(entry('loss', 'casa'))
 for (const letter of ['b', 'd', 'f', 'g', 'h', 'j']) losing = applyLearningGuess(losing, letter)
 assert.equal(losing.errors, 6)
 assert.equal(losing.result, 'loss')
-assert.deepEqual(losing.entry.translationEs, ['traducción-loss'])
+assert.equal(losing.entry.hintEs, 'traducción-loss')
 assert.match(losing.entry.exampleCa, /casa/)
 const resultMarkup = renderToStaticMarkup(createElement(LearningResultCard, {
   entry: losing.entry, result: 'loss', language: 'es', onNext: () => {}, onChangeDifficulty: () => {},

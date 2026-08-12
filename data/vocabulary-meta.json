@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
-  "entries": 1000,
+  "schemaVersion": 2,
+  "entries": 999,
   "difficulty": {
-    "easy": 347,
+    "easy": 346,
     "medium": 390,
     "hard": 263
   },

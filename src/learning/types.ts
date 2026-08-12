@@ -3,7 +3,8 @@ export type VocabularyDifficulty = 'easy' | 'medium' | 'hard'
 export type VocabularyEntry = {
   id: string
   word: string
-  translationEs: string[]
+  hintEs: string
+  translationsEs?: string[]
   exampleCa: string
   partOfSpeech?: 'noun' | 'verb' | 'adjective' | 'adverb' | 'other'
   difficulty: VocabularyDifficulty
