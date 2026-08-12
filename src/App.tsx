@@ -22,6 +22,8 @@ function App() {
     const message = (chatMessage: ChatMessage) => setMessages((current) => [...current, chatMessage].slice(-50))
     socket.on('chat:history', history)
     socket.on('chat:message', message)
+    const reaction = ({ messageId, reactions }: { messageId: string; reactions: ChatMessage['reactions'] }) => setMessages((current) => current.map((item) => item.id === messageId ? { ...item, reactions } : item))
+    socket.on('chat:reaction-updated', reaction)
     const typing = (payload: { playerId: string; playerName: string; isTyping: boolean }) => setTypingPlayer(payload.isTyping ? payload : null)
     socket.on('chat:typing', typing)
     const resume = () => {
@@ -34,7 +36,7 @@ function App() {
     }
     socket.on('connect', resume)
     if (!socket.connected) socket.connect(); else resume()
-    return () => { socket.off('room:state', update); socket.off('chat:history', history); socket.off('chat:message', message); socket.off('chat:typing', typing); socket.off('connect', resume) }
+    return () => { socket.off('room:state', update); socket.off('chat:history', history); socket.off('chat:message', message); socket.off('chat:reaction-updated', reaction); socket.off('chat:typing', typing); socket.off('connect', resume) }
   }, [])
 
   const changeLanguage = (next: Language) => { setLanguage(next); localStorage.setItem('hangman-language', next) }

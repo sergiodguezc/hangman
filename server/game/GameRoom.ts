@@ -1,6 +1,6 @@
 import { displayWord, isCorrectGuess, isWordComplete, normalizeGuess, validateSecretWord, type Language } from '../../shared/game.js'
 import { randomUUID } from 'node:crypto'
-import type { ChatMessage, Player, PlayerGameView, GamePhase, MatchTarget } from '../../shared/protocol.js'
+import { REACTION_TYPES, type ChatMessage, type MessageReactions, type Player, type PlayerGameView, type GamePhase, type MatchResult, type MatchTarget, type ReactionType } from '../../shared/protocol.js'
 
 export type RoomPlayer = Player & { socketId: string | null; reconnectToken: string }
 
@@ -16,6 +16,8 @@ export class GameRoom {
   guesserId: string | null = null
   roundWinnerId: string | null = null
   matchWinnerId: string | null = null
+  matchResult: MatchResult = null
+  targetReachedPlayerId: string | null = null
   readonly rematchReady = new Set<string>()
   firstSetterId: string | null = null
   private secretWord: string | null = null
@@ -141,10 +143,25 @@ export class GameRoom {
     const text = input.trim()
     if (!text) throw new Error('empty-chat-message')
     if (text.length > MAX_CHAT_LENGTH) throw new Error('chat-message-too-long')
-    const message = { id: randomUUID(), senderId: sender.id, senderName: sender.name, text, timestamp: Date.now() }
+    const reactions: MessageReactions = { '❤️': [], '😂': [], '💀': [] }
+    const message = { id: randomUUID(), senderId: sender.id, senderName: sender.name, text, timestamp: Date.now(), reactions }
     this.chatMessages.push(message)
     if (this.chatMessages.length > MAX_CHAT_MESSAGES) this.chatMessages.splice(0, this.chatMessages.length - MAX_CHAT_MESSAGES)
     return message
+  }
+
+  toggleChatReaction(playerId: string, messageId: unknown, reaction: unknown): { messageId: string; reactions: MessageReactions } {
+    this.assertPlayable()
+    if (!this.player(playerId)) throw new Error('not-room-member')
+    if (typeof messageId !== 'string') throw new Error('invalid-chat-message')
+    if (typeof reaction !== 'string' || !REACTION_TYPES.includes(reaction as ReactionType)) throw new Error('invalid-reaction')
+    const message = this.chatMessages.find((candidate) => candidate.id === messageId)
+    if (!message) throw new Error('chat-message-not-found')
+    const members = message.reactions[reaction as ReactionType]
+    const index = members.indexOf(playerId)
+    if (index === -1) members.push(playerId)
+    else members.splice(index, 1)
+    return { messageId, reactions: message.reactions }
   }
 
   get chatHistory(): ChatMessage[] {
@@ -162,6 +179,8 @@ export class GameRoom {
       code: this.code, language: this.language, matchTarget: this.matchTarget, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
       roundNumber: this.roundNumber, wordSetterId: this.wordSetterId, guesserId: this.guesserId,
       roundWinnerId: this.roundWinnerId, matchWinnerId: this.matchWinnerId,
+      matchResult: this.matchResult, matchEndingPending: this.targetReachedPlayerId !== null,
+      targetReachedPlayerId: this.targetReachedPlayerId,
       rematchReadyPlayerIds: [...this.rematchReady], firstSetterId: this.firstSetterId,
       displayWord: this.secretWord ? displayWord(this.secretWord, this.guesses, this.language, reveal) : [],
       guessedLetters: [...this.guesses], wrongLetters: this.wrongLetters, errors: this.errorCount,
@@ -177,10 +196,31 @@ export class GameRoom {
     const winner = this.players.find((player) => player.id === winnerId)
     if (winner) winner.score += 1
     this.roundWinnerId = winnerId
-    if (winner && this.matchTarget !== null && winner.score >= this.matchTarget) {
-      this.matchWinnerId = winnerId
-      this.phase = 'match-over'
-    } else this.phase = 'round-over'
+    if (this.matchTarget === null) {
+      this.phase = 'round-over'
+      return
+    }
+
+    if (!this.targetReachedPlayerId && this.players.some((player) => player.score >= this.matchTarget!)) {
+      this.targetReachedPlayerId = winnerId
+    }
+    if (this.targetReachedPlayerId && this.roundNumber % 2 === 0) this.resolveMatchResult()
+    else this.phase = 'round-over'
+  }
+
+  private resolveMatchResult() {
+    const [first, second] = this.players
+    if (!first || !second) return
+    if (first.score === second.score) {
+      this.matchResult = { kind: 'draw' }
+      this.matchWinnerId = null
+    } else {
+      const winner = first.score > second.score ? first : second
+      this.matchResult = { kind: 'win', winnerId: winner.id }
+      this.matchWinnerId = winner.id
+    }
+    this.targetReachedPlayerId = null
+    this.phase = 'match-over'
   }
 
   private startMatch(resetScores = false) {
@@ -196,6 +236,8 @@ export class GameRoom {
     this.errorCount = 0
     this.roundWinnerId = null
     this.matchWinnerId = null
+    this.matchResult = null
+    this.targetReachedPlayerId = null
     this.rematchReady.clear()
     this.phase = 'choosing-word'
   }

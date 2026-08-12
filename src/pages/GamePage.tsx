@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useState, type CSSProperties, type FormEvent } from 'react'
 import { ALPHABETS, normalizeGuess } from '../../shared/game'
 import type { Ack, ChatMessage, PlayerGameView } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
@@ -11,6 +11,24 @@ import { socket } from '../multiplayer/socket'
 
 type Props = { state: PlayerGameView; messages: ChatMessage[]; playerId: string; typingPlayer: { playerId: string; playerName: string } | null; onLeave: () => void }
 
+function groupDisplayWord(characters: string[]) {
+  const words: { start: number; characters: string[] }[] = []
+  let start = 0
+  let current: string[] = []
+  characters.forEach((character, index) => {
+    if (character === ' ') {
+      if (current.length) words.push({ start, characters: current })
+      current = []
+      start = index + 1
+    } else {
+      if (!current.length) start = index
+      current.push(character)
+    }
+  })
+  if (current.length) words.push({ start, characters: current })
+  return words
+}
+
 export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: Props) {
   const [word, setWord] = useState('')
   const [error, setError] = useState('')
@@ -22,10 +40,13 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
   const setter = state.wordSetterId ? playersById.get(state.wordSetterId) : undefined
   const winner = state.roundWinnerId ? playersById.get(state.roundWinnerId) : undefined
   const matchWinner = state.matchWinnerId ? playersById.get(state.matchWinnerId) : undefined
+  const targetReachedPlayer = state.targetReachedPlayerId ? playersById.get(state.targetReachedPlayerId) : undefined
   const rematchRequested = state.rematchReadyPlayerIds.includes(playerId)
   const opponentRequested = state.rematchReadyPlayerIds.some((id) => id !== playerId)
   const guessed = new Set(state.guessedLetters)
   const wrong = new Set(state.wrongLetters)
+  const displayWords = groupDisplayWord(state.displayWord)
+  const wordSizing = { '--longest-word': Math.max(1, ...displayWords.map(({ characters }) => characters.length)) } as CSSProperties
 
   const handleAck = useCallback((response: Parameters<Ack>[0]) => {
     if (!response.ok) setError(errorMessage(response.error, t))
@@ -62,7 +83,7 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
   return <main className="match-page" lang={state.language}>
     <header className="match-header">
       <div className="brand compact"><span className="brand-mark">H</span><h1>{t.title}</h1></div>
-      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{state.matchTarget === null ? t.unlimited : t.firstTo.replace('{target}', String(state.matchTarget))}</span><span>{config.name}</span></div>
+      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{t.matchObjective.replace('{target}', state.matchTarget === null ? t.unlimited.toLocaleLowerCase(state.language) : t.points.replace('{target}', String(state.matchTarget)))}</span><span>{config.name}</span></div>
       <button className="text-button" onClick={onLeave}>{t.leave}</button>
     </header>
     <div className="match-layout">
@@ -70,6 +91,7 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
       <section className="multiplayer-game">
         {reconnectingOpponent && <div className="form-error" role="status">{t.opponentReconnecting}</div>}
         {!reconnectingOpponent && state.reconnectedPlayerName && state.reconnectedPlayerName !== playersById.get(playerId)?.name && <div className="role-line" role="status">{t.opponentReconnected}</div>}
+        {state.matchEndingPending && <div className="role-line" role="status">{targetReachedPlayer?.id === playerId ? t.targetReached.replace('{player}', targetReachedPlayer.name) : t.opponentReachedFinalRound}</div>}
         {state.phase === 'choosing-word' && <>{state.roundNumber === 1 && <div className="role-line" role="status">{isSetter ? t.youStart : t.playerStarts.replace('{player}', setter?.name ?? '')}</div>}{isSetter ? <form className="word-form" onSubmit={submitWord}>
           <span className="role-badge setter">✎ {t.chooseWord}</span>
           <input type="text" autoFocus maxLength={50} value={word} placeholder={t.secretPlaceholder}
@@ -83,8 +105,11 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
           <div className="game-columns"><div className="drawing-panel"><HangmanDrawing errors={state.errors} label={t.errors} />
             <div className="error-copy"><span>{t.errors}</span><strong>{state.errors} / 6</strong></div></div>
             <div className="guess-area">
-              <div className="multiplayer-word" aria-label={config.translations.progressLabel}>{state.displayWord.map((character, i) =>
-                <span key={i} className={character === '_' ? 'blank' : normalizeGuess(character, state.language) ? 'letter' : 'punctuation'}>{character === '_' ? '\u00a0' : character}</span>)}</div>
+              <div className="multiplayer-word-scroll" tabIndex={0} style={wordSizing} aria-label={config.translations.progressLabel}>
+                <div className="multiplayer-word">{displayWords.map(({ start, characters }) =>
+                  <span className="multiplayer-word-group" key={start}>{characters.map((character, offset) =>
+                    <span key={start + offset} className={character === '_' ? 'blank' : normalizeGuess(character, state.language) ? 'letter' : 'punctuation'}>{character === '_' ? '\u00a0' : character}</span>)}</span>)}</div>
+              </div>
               {isSetter && state.phase === 'guessing' && <p className="setter-secret">{t.youChose}: <strong>{state.privateWord}</strong></p>}
               {state.phase === 'forgiveness-pending' && isSetter && <div className="forgiveness-panel" role="group" aria-label={t.forgivenessQuestion}>
                 <strong>{t.forgivenessQuestion}</strong>
@@ -102,8 +127,8 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
             </div></div>
         </>}
         {state.phase === 'match-over' && <div className="match-result">
-          <span className="role-badge">{matchWinner?.id === playerId ? t.matchWon : t.matchLost}</span>
-          <h2>{matchWinner?.name}</h2><strong>{t.finalScore}</strong>
+          <span className="role-badge">{state.matchResult?.kind === 'draw' ? t.draw : matchWinner?.id === playerId ? t.matchWon : t.matchLost}</span>
+          <h2>{state.matchResult?.kind === 'draw' ? t.matchDraw : matchWinner?.name}</h2><strong>{t.finalScore}</strong>
           <div className="final-scores">{[...state.players].sort((a, b) => b.score - a.score).map((player) => <span key={player.id}>{player.name}<b>{player.score}</b></span>)}</div>
           {!rematchRequested && <button className="primary-action" onClick={() => socket.emit('match:rematch', handleAck)}>{t.rematch}</button>}
           {rematchRequested && <p>{t.waitingRematch}</p>}

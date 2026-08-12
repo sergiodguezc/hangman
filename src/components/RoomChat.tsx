@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import type { ChatMessage } from '../../shared/protocol'
+import { REACTION_TYPES, type ChatMessage, type ReactionType } from '../../shared/protocol'
 import type { MultiplayerTranslations } from '../multiplayer/i18n'
 import { errorMessage } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
@@ -9,6 +9,7 @@ type Props = { messages: ChatMessage[]; currentPlayerId: string; typingPlayer: {
 export function RoomChat({ messages, currentPlayerId, typingPlayer, t }: Props) {
   const [text, setText] = useState('')
   const [error, setError] = useState('')
+  const [openMessageId, setOpenMessageId] = useState<string | null>(null)
   const listRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const typingTimer = useRef<number | undefined>(undefined)
@@ -34,12 +35,24 @@ export function RoomChat({ messages, currentPlayerId, typingPlayer, t }: Props) 
     })
   }
 
+  const reactionLabels: Record<ReactionType, string> = { '❤️': t.reactionHeart, '😂': t.reactionLaugh, '💀': t.reactionSkull }
+  const react = (messageId: string, reaction: ReactionType) => socket.emit('chat:react', { messageId, reaction }, (response) => {
+    if (!response.ok) setError(errorMessage(response.error, t))
+  })
+
   return <section className="room-chat" aria-label={t.chatTitle}>
     <h2>{t.chatTitle}</h2>
     <div className="chat-messages" ref={listRef} aria-live="polite">
       {!messages.length && <p className="chat-empty">{t.chatEmpty}</p>}
-      {messages.map((message) => <article key={message.id} className={message.senderId === currentPlayerId ? 'own' : ''}>
-        <strong>{message.senderName}</strong><p>{message.text}</p>
+      {messages.map((message) => <article key={message.id} className={`${message.senderId === currentPlayerId ? 'own ' : ''}${openMessageId === message.id ? 'reactions-open' : ''}`.trim()}>
+        <strong>{message.senderName}</strong>
+        <div className="chat-message-body" onClick={() => setOpenMessageId((current) => current === message.id ? null : message.id)}>
+          <div className="reaction-picker" role="group">{REACTION_TYPES.map((reaction) => <button type="button" key={reaction} aria-label={reactionLabels[reaction]}
+            aria-pressed={message.reactions[reaction].includes(currentPlayerId)} onClick={(event) => { event.stopPropagation(); react(message.id, reaction) }}>{reaction}</button>)}</div>
+          <p>{message.text}</p>
+          <div className="active-reactions">{REACTION_TYPES.filter((reaction) => message.reactions[reaction].length > 0).map((reaction) => <button type="button" key={reaction}
+            aria-label={reactionLabels[reaction]} aria-pressed={message.reactions[reaction].includes(currentPlayerId)} onClick={(event) => { event.stopPropagation(); react(message.id, reaction) }}>{reaction}</button>)}</div>
+        </div>
       </article>)}
     </div>
     {typingPlayer && typingPlayer.playerId !== currentPlayerId && <p className="typing-indicator" role="status">{t.typing.replace('{player}', typingPlayer.playerName)}</p>}

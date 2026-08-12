@@ -50,8 +50,8 @@ export function HomePage({ language, notice, onLanguage, onEnter }: Props) {
         <label>{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
         <LanguageSelector language={language} label={t.language} onChange={onLanguage} />
         <fieldset className="target-selector"><legend>{t.matchTarget}</legend><div>
-          {([3, 5, 10, null] as MatchTarget[]).map((target) => <button type="button" key={target ?? 'unlimited'} className={matchTarget === target ? 'active' : ''} onClick={() => setMatchTarget(target)}>{target ?? t.unlimited}</button>)}
-        </div></fieldset>
+          {([3, 5, 10, null] as MatchTarget[]).map((target) => <button type="button" key={target ?? 'unlimited'} className={matchTarget === target ? 'active' : ''} onClick={() => setMatchTarget(target)}>{target === null ? t.unlimited : t.points.replace('{target}', String(target))}</button>)}
+        </div><p className="word-privacy">{t.matchTargetExplanation}</p></fieldset>
         <button className="primary-action" disabled={busy}>{t.create}</button>
         <div className="join-divider"><span>o</span></div>
         <label>{t.roomCode}<input value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"
