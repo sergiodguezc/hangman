@@ -71,7 +71,7 @@ export function LearningPage({ language, onHome }: Props) {
 
     {round && phase !== 'setup' && <section className="learning-game">
       <div className="learning-round-meta"><span>{t.currentDifficulty}: <strong>{difficultyLabel}</strong></span><button className="text-button" onClick={changeDifficulty}>{t.changeDifficulty}</button></div>
-      <div className="learning-hint"><span>{t.hint}</span><strong lang="es">{round.entry.hintEs}</strong></div>
+      <div className="learning-hint"><span>{t.hint}</span><strong lang="es">{round.entry.translationEs}</strong></div>
       <div className="learning-columns">
         <div className="drawing-panel"><HangmanDrawing errors={round.errors} label={t.errors} />
           <div className="error-copy"><span>{t.errors}</span><strong>{round.errors} / 6</strong></div></div>

@@ -1,0 +1,7 @@
+{
+  "fémina": {"penalty": 2, "reason": "Formal and less suitable for a beginner hint."},
+  "calaña": {"penalty": 3, "reason": "Usually unsuitable for the neutral kind/type sense."},
+  "granito": {"penalty": 2, "reason": "Mineral sense; unsuitable for the quantity expression una mica."},
+  "asaz": {"penalty": 2, "reason": "Archaic or unusually formal."},
+  "obscuro": {"penalty": 1, "reason": "Less common spelling than oscuro."}
+}

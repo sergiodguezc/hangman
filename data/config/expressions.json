@@ -1,0 +1,9 @@
+{
+  "una mica": {"translationEs": "un poco", "definitionCa": "Una quantitat o un grau petit.", "confidence": 0.99},
+  "de seguida": {"translationEs": "enseguida", "definitionCa": "Immediatament, sense esperar.", "confidence": 0.99},
+  "a poc a poc": {"translationEs": "poco a poco", "definitionCa": "De manera gradual, sense pressa.", "confidence": 0.99},
+  "de tant en tant": {"translationEs": "de vez en cuando", "definitionCa": "Algunes vegades, amb intervals de temps.", "confidence": 0.99},
+  "si us plau": {"translationEs": "por favor", "definitionCa": "Expressió usada per demanar una cosa educadament.", "confidence": 0.99},
+  "d'altra banda": {"translationEs": "por otra parte", "definitionCa": "Expressió que introdueix un altre aspecte d'un tema.", "confidence": 0.99},
+  "mena de": {"translationEs": "tipo de", "definitionCa": "Classe o tipus d'una cosa.", "confidence": 0.98}
+}

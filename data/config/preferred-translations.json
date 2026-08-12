@@ -1,0 +1,14 @@
+{
+  "anar": {"translationEs": "ir"},
+  "arribar": {"translationEs": "llegar"},
+  "dona": {"translationEs": "mujer"},
+  "feina": {"translationEs": "trabajo"},
+  "festa": {"translationEs": "fiesta"},
+  "fora": {"translationEs": "fuera"},
+  "llit": {"translationEs": "cama"},
+  "presó": {"translationEs": "prisión"},
+  "prou": {"translationEs": "suficientemente"},
+  "tornar": {"translationEs": "volver"},
+  "vaixell": {"translationEs": "barco"},
+  "vermell": {"translationEs": "rojo", "definitionCa": "Que té el color de la sang.", "confidence": 0.92}
+}

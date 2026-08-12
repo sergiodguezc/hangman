@@ -19,12 +19,12 @@ function ExampleSentence({ entry }: { entry: VocabularyEntry }) {
 
 export function LearningResultCard({ entry, result, language, onNext, onChangeDifficulty }: Props) {
   const t = learningTranslations[language]
-  const alternatives = entry.translationsEs?.filter((translation) => translation !== entry.hintEs) ?? []
   return <section className={`learning-result ${result}`} aria-live="polite">
     <p className="learning-result-message">{result === 'win' ? t.won : t.lost}</p>
     <h2 lang="ca">{entry.answerCa}</h2>
     <dl>
-      <div><dt>{t.spanish}</dt><dd lang="es">{entry.hintEs}{alternatives.length > 0 && <> · {t.also}: {alternatives.join(' · ')}</>}</dd></div>
+      <div><dt>{t.spanish}</dt><dd lang="es">{entry.translationEs}</dd></div>
+      <div><dt>Definició</dt><dd lang="ca">{entry.definitionCa}</dd></div>
       <div><dt>{t.example}</dt><dd lang="ca"><ExampleSentence entry={entry} /></dd></div>
     </dl>
     <div className="learning-result-actions">

@@ -36,12 +36,13 @@ class VocabularyPipelineTests(unittest.TestCase):
         self.assertEqual(pipeline.difficulty(10, 100, "extraordinària"), "hard")
 
     def test_validation(self):
-        valid = [{"id": "canco", "word": "cançó", "answerCa": "cançó", "hintEs": "canción", "translationsEs": ["canción"],
+        valid = [{"id": "canco", "word": "cançó", "answerCa": "cançó", "type": "word", "definitionCa": "Peça musical cantada.",
+                  "translationEs": "canción", "hintEs": "canción", "translationsEs": ["canción"],
                   "exampleCa": "Aquesta cançó és bonica.", "partOfSpeech": "noun",
                   "difficulty": "easy", "corpusCount": 2}]
         pipeline.validate(valid)
         with self.assertRaises(SystemExit):
-            pipeline.validate([{**valid[0], "hintEs": "", "translationsEs": []}])
+            pipeline.validate([{**valid[0], "definitionCa": ""}])
 
     def review_item(self, **changes):
         item = {"id": "mena", "word": "mena", "exampleCa": "No m'agrada aquesta mena de música.",
@@ -52,31 +53,32 @@ class VocabularyPipelineTests(unittest.TestCase):
     def test_contextual_mena_regression_and_deduplication(self):
         result = pipeline.clean_review_item(self.review_item(candidateTranslationsEs=["tipo", "tipo", "clase"]))
         self.assertEqual(result["status"], "accept")
-        self.assertEqual(result["hintEs"], "tipo")
-        self.assertEqual(result["translationsEs"], ["tipo", "clase"])
-        self.assertNotEqual(result["hintEs"], "calaña")
+        self.assertEqual((result["answerCa"], result["type"], result["translationEs"]), ("mena de", "expression", "tipo de"))
+        self.assertNotEqual(result["translationEs"], "calaña")
 
     def test_mica_expression_is_contextual_not_mineral(self):
         item = self.review_item(id="mica", word="mica", exampleCa="Estic una mica cansat.",
                                 candidateTranslationsEs=["granito", "mica", "mineral"])
         result = pipeline.clean_review_item(item)
-        self.assertEqual((result["answerCa"], result["targetExpression"], result["hintEs"]),
-                         ("una mica", "una mica", "un poco"))
-        self.assertNotIn(result["hintEs"], item["candidateTranslationsEs"])
+        self.assertEqual((result["answerCa"], result["type"], result["translationEs"]),
+                         ("una mica", "expression", "un poco"))
+        self.assertNotIn(result["translationEs"], item["candidateTranslationsEs"])
 
     def test_fort_distinct_contexts_and_ambiguous_rejection(self):
         physical = self.review_item(id="fort", word="fort", exampleCa="És un home molt fort.",
                                     partOfSpeech="adjective", candidateTranslationsEs=["duro", "fuerte"])
-        self.assertEqual(pipeline.clean_review_item(physical)["hintEs"], "fuerte")
+        physical_result = pipeline.clean_review_item(physical)
+        self.assertEqual((physical_result["translationEs"], physical_result["definitionCa"]), ("fuerte", "Que té molta força física."))
         sound = self.review_item(id="fort", word="fort", exampleCa="La música sona molt fort.",
                                  partOfSpeech="adverb", candidateTranslationsEs=["duro", "fuerte", "recio"])
-        self.assertEqual(pipeline.clean_review_item(sound)["hintEs"], "alto")
+        sound_result = pipeline.clean_review_item(sound)
+        self.assertEqual(sound_result["translationEs"], "alto")
+        self.assertIn("volum", sound_result["definitionCa"])
 
     def test_override_wins_and_alternatives_are_limited(self):
-        override = {"mena": {"hintEs": "clase", "translationsEs": ["clase", "tipo", "género", "especie"]}}
+        override = {"mena": {"translationEs": "clase", "definitionCa": "Tipus o classe d'una cosa."}}
         result = pipeline.clean_review_item(self.review_item(), override)
-        self.assertEqual(result["hintEs"], "clase")
-        self.assertEqual(len(result["translationsEs"]), pipeline.MAX_TRANSLATIONS)
+        self.assertEqual(result["translationEs"], "clase")
         self.assertEqual(result["reviewSource"], "manual-override")
 
     def test_rejection_and_pos_consistency(self):
@@ -85,7 +87,16 @@ class VocabularyPipelineTests(unittest.TestCase):
         verb = self.review_item(id="menjar", word="menjar", exampleCa="Vull menjar pa.",
                                 partOfSpeech="verb", candidateTranslationsEs=["comida", "comer"])
         cleaned = pipeline.clean_review_item(verb)
-        self.assertEqual(cleaned["hintEs"], "comer")
+        self.assertEqual(cleaned["status"], "review")
+        self.assertEqual(cleaned["translationEs"], "comer")
+
+    def test_ambiguous_context_goes_to_review_and_vermell_is_automatic(self):
+        ambiguous = self.review_item(id="banc", word="banc", exampleCa="Vaig al banc.", candidateTranslationsEs=["banco", "banca"])
+        self.assertEqual(pipeline.clean_review_item(ambiguous)["status"], "review")
+        vermell = self.review_item(id="vermell", word="vermell", exampleCa="Porta un jersei vermell.",
+                                   partOfSpeech="adjective", candidateTranslationsEs=["rojo"])
+        result = pipeline.clean_review_item(vermell)
+        self.assertEqual((result["status"], result["translationEs"]), ("accept", "rojo"))
 
     def test_review_preserves_example_and_generated_data_excludes_rejected(self):
         example = "No m'agrada aquesta mena de música."

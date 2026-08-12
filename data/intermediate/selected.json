@@ -134,9 +134,10 @@
       "riuraueditors.txt": 153,
       "softcatala.txt": 42
     },
+    "detectedExpression": "de tant en tant",
     "frequencyRank": 103,
     "partOfSpeech": "noun",
-    "exampleCa": "Creus que cal que faci tant de soroll?"
+    "exampleCa": "Cal ensenyar-los el bastó de tant en tant."
   },
   {
     "word": "manera",
@@ -431,6 +432,7 @@
       "riuraueditors.txt": 78,
       "softcatala.txt": 6
     },
+    "detectedExpression": "una mica",
     "frequencyRank": 162,
     "partOfSpeech": "noun",
     "exampleCa": "Ets una mica sòmines, però em fas riure."
@@ -873,6 +875,7 @@
       "riuraueditors.txt": 39,
       "softcatala.txt": 12
     },
+    "detectedExpression": "d'altra banda",
     "frequencyRank": 229,
     "partOfSpeech": "noun",
     "exampleCa": "D'altra banda, la xarxa era un autèntic caos."
@@ -1115,9 +1118,10 @@
       "riuraueditors.txt": 8,
       "softcatala.txt": 2
     },
+    "detectedExpression": "mena de",
     "frequencyRank": 258,
     "partOfSpeech": "noun",
-    "exampleCa": "Nadal en dijous, cada gallina mena cent polls."
+    "exampleCa": "El seu contingut no té cap mena de drets."
   },
   {
     "word": "clar",

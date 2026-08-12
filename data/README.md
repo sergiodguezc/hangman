@@ -30,11 +30,13 @@ Candidates are 4–15 letters, contain only supported characters, and exclude UR
 
 Selection requires a one-word Apertium lexical mapping, excludes proper-noun-tagged entries, then ranks by Softcatalà form-frequency rank, weighted corpus-source evidence, corpus count, length, and spelling. `intermediate/translations-es.json` contains raw candidate senses only.
 
-## Context-aware translation review
+## Contextual meaning review
 
-`npm run vocab:clean` is a separate offline, context-first curation stage. It reads the complete Catalan example before considering the target's word class and raw Spanish candidates. It identifies supported expressions and contextual senses, chooses the Catalan teaching unit (`answerCa`), emits one natural `hintEs`, or rejects the occurrence when its sense remains ambiguous. Candidate translations are secondary evidence and may be wrong; the final hint need not occur in them. Strict `accept`/`reject` records are written to `translation-review-output.json`, including `answerCa`, optional `targetExpression`, `contextualSense`, a reason, and a content hash that prevents stale reviews from being accepted. The deterministic implementation uses no runtime LLM or online API. An offline semantic reviewer may replace or extend its decisions only if it emits the same validated structure.
+Known expressions are declared in `config/expressions.json` and detected while candidate examples are selected, before lexical resolution. `npm run vocab:clean` then resolves the complete Catalan example using its target, word class, expression match, curated contextual rules, preferences, translation-quality penalties, and Apertium candidates as evidence. Linguistic data lives under `config/`; the Python resolver applies it generically.
 
-Human decisions take precedence. Put accepted corrections in `config/translation-overrides.json`, and put one normalized Catalan word per line in `config/rejected-vocabulary.txt`. Rejected records are omitted from the production dataset. `review/summary.json` and the deterministic 50-record `review/sample.json` support inspection without editing generated files.
+Every result has `accept`, `review`, or `reject` status, a deterministic heuristic confidence, reason, source, evidence, and a content hash that invalidates stale decisions. Acceptance requires one contextual `translationEs` and a learner-facing `definitionCa`; entries without a trustworthy definition go to review rather than receiving an invented one. Accepted production records expose `answerCa`, `type`, `definitionCa`, and `translationEs`. `hintEs`, `translationsEs: [translationEs]`, and `targetExpression` remain compatibility aliases.
+
+Human decisions take precedence. Put accepted corrections (including `translationEs` and `definitionCa`) in `config/translation-overrides.json`, and put one normalized Catalan word per line in `config/rejected-vocabulary.txt`. Review and rejected records are omitted from production. `review/summary.json` and the deterministic 50-record `review/sample.json` support an offline human or future LLM-assisted review step; the runtime has no API dependency.
 
 Difficulty is an approximate, deterministic game label—not CEFR. It uses selection rank, total letters, and expression word count; spaces do not inflate the letter count, though expressions of four words are hard.
 

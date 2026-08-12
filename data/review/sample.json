@@ -7,17 +7,23 @@
     "candidateTranslationsEs": [
       "amor"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "amor",
-    "targetExpression": null,
-    "hintEs": "amor",
-    "translationsEs": [
-      "amor"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "04049ada9eac37e0",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "amor",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "2fe2c25654a519e2",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "La convocatòria electoral els va sorprendre fent l'amor.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "amor"
+      ]
+    }
   },
   {
     "id": "superfície",
@@ -27,17 +33,23 @@
     "candidateTranslationsEs": [
       "superficie"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "superfície",
-    "targetExpression": null,
-    "hintEs": "superficie",
-    "translationsEs": [
-      "superficie"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "bb49cc8d1d654026",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "superficie",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "3fca52d2a6d00320",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "L'aigua discorria en abundància a només tres metres de la superfície.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "superficie"
+      ]
+    }
   },
   {
     "id": "regió",
@@ -47,17 +59,23 @@
     "candidateTranslationsEs": [
       "región"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "regió",
-    "targetExpression": null,
-    "hintEs": "región",
-    "translationsEs": [
-      "región"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "b3bd8180dae64865",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "región",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "151db11282cbaba4",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "La regió espanyola d'Extremadura està decidida a no perdre el tren de la revolució tecnològica.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "región"
+      ]
+    }
   },
   {
     "id": "teatre",
@@ -67,17 +85,23 @@
     "candidateTranslationsEs": [
       "teatro"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "teatre",
-    "targetExpression": null,
-    "hintEs": "teatro",
-    "translationsEs": [
-      "teatro"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "ba80928e6b650c2d",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "teatro",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "5c7662066758d4f8",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Fa massa temps que no anem al teatre.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "teatro"
+      ]
+    }
   },
   {
     "id": "escoltar",
@@ -87,17 +111,23 @@
     "candidateTranslationsEs": [
       "escuchar"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "escoltar",
-    "targetExpression": null,
-    "hintEs": "escuchar",
-    "translationsEs": [
-      "escuchar"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "154e346ef1a43d26",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "escuchar",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "b631d126426b7889",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Cal escoltar el concert d'elogis que sempre l'envolta!",
+      "partOfSpeech": "verb",
+      "candidateTranslationsEs": [
+        "escuchar"
+      ]
+    }
   },
   {
     "id": "curiositat",
@@ -107,17 +137,23 @@
     "candidateTranslationsEs": [
       "curiosidad"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "curiositat",
-    "targetExpression": null,
-    "hintEs": "curiosidad",
-    "translationsEs": [
-      "curiosidad"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "c44cff04f1854fcb",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "curiosidad",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "4a530d013adb7935",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "La curiositat de ton fill és inconvenient.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "curiosidad"
+      ]
+    }
   },
   {
     "id": "costum",
@@ -127,17 +163,23 @@
     "candidateTranslationsEs": [
       "costumbre"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "costum",
-    "targetExpression": null,
-    "hintEs": "costumbre",
-    "translationsEs": [
-      "costumbre"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "295b00673b8c9659",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "costumbre",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "ca137932d350e573",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Abans perdre un amo que un bon costum.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "costumbre"
+      ]
+    }
   },
   {
     "id": "allí",
@@ -147,17 +189,23 @@
     "candidateTranslationsEs": [
       "allí"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "allí",
-    "targetExpression": null,
-    "hintEs": "allí",
-    "translationsEs": [
-      "allí"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "36e4aee05afef293",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "allí",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "d3c0ae673229b20b",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Anar-se'n d'allí era renunciar a la seua venjança.",
+      "partOfSpeech": "adverb",
+      "candidateTranslationsEs": [
+        "allí"
+      ]
+    }
   },
   {
     "id": "castell",
@@ -167,17 +215,23 @@
     "candidateTranslationsEs": [
       "castillo"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "castell",
-    "targetExpression": null,
-    "hintEs": "castillo",
-    "translationsEs": [
-      "castillo"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "9d2b132d825f0e04",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "castillo",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "6658195704f0510e",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Boira al castell, pica espart i fes cordell.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "castillo"
+      ]
+    }
   },
   {
     "id": "damunt",
@@ -187,17 +241,23 @@
     "candidateTranslationsEs": [
       "encima"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "damunt",
-    "targetExpression": null,
-    "hintEs": "encima",
-    "translationsEs": [
-      "encima"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "cf10f5a51058a821",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "encima",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "0a8b8794b18153b1",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Sempre cau la taca damunt la roba bona.",
+      "partOfSpeech": "adverb",
+      "candidateTranslationsEs": [
+        "encima"
+      ]
+    }
   },
   {
     "id": "millor",
@@ -207,17 +267,23 @@
     "candidateTranslationsEs": [
       "mejor"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "millor",
-    "targetExpression": null,
-    "hintEs": "mejor",
-    "translationsEs": [
-      "mejor"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "5417f34f48cc9d37",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "mejor",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "d6cf8e7b11f3522e",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "El juny és el millor mes de l'any.",
+      "partOfSpeech": "adjective",
+      "candidateTranslationsEs": [
+        "mejor"
+      ]
+    }
   },
   {
     "id": "espera",
@@ -227,17 +293,23 @@
     "candidateTranslationsEs": [
       "espera"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "espera",
-    "targetExpression": null,
-    "hintEs": "espera",
-    "translationsEs": [
-      "espera"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "d183b39fea2d055c",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "espera",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "84868e1636c1fea1",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "A l'abril, el pare no espera el fill.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "espera"
+      ]
+    }
   },
   {
     "id": "buscar",
@@ -247,17 +319,23 @@
     "candidateTranslationsEs": [
       "buscar"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "buscar",
-    "targetExpression": null,
-    "hintEs": "buscar",
-    "translationsEs": [
-      "buscar"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "7253b91711a1f3f3",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "buscar",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "2fcc199f02a15edd",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "No; era una bogeria buscar la mort.",
+      "partOfSpeech": "verb",
+      "candidateTranslationsEs": [
+        "buscar"
+      ]
+    }
   },
   {
     "id": "breu",
@@ -267,17 +345,23 @@
     "candidateTranslationsEs": [
       "breve"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "breu",
-    "targetExpression": null,
-    "hintEs": "breve",
-    "translationsEs": [
-      "breve"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "8bf7aba6b9088762",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "breve",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "2d2140115a939f8b",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Es va fer un breu silenci.",
+      "partOfSpeech": "adjective",
+      "candidateTranslationsEs": [
+        "breve"
+      ]
+    }
   },
   {
     "id": "període",
@@ -287,17 +371,23 @@
     "candidateTranslationsEs": [
       "periodo"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "període",
-    "targetExpression": null,
-    "hintEs": "periodo",
-    "translationsEs": [
-      "periodo"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "a7f28972b822aea1",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "periodo",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "2fbcdc7d6f679fab",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Pot passar que l'edificació d'equilibri baixe durant algun període.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "periodo"
+      ]
+    }
   },
   {
     "id": "corrent",
@@ -308,10 +398,24 @@
       "corriente",
       "tanto"
     ],
-    "status": "reject",
-    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
-    "contentHash": "1118d3a34044e5c7",
-    "reviewSource": "context-rules"
+    "detectedExpression": null,
+    "status": "review",
+    "answerCa": "corrent",
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": null,
+    "confidence": 0.35,
+    "reason": "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review.",
+    "contentHash": "83d8d767b2b7464f",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Tanca la porta que hi ha corrent d'aire.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "corriente",
+        "tanto"
+      ]
+    }
   },
   {
     "id": "pintor",
@@ -321,17 +425,23 @@
     "candidateTranslationsEs": [
       "pintor"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "pintor",
-    "targetExpression": null,
-    "hintEs": "pintor",
-    "translationsEs": [
-      "pintor"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "e280ca8c12c0658d",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "pintor",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "88d08b8b64b8c7c5",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "El pintor fa servir les fruites de temporada.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "pintor"
+      ]
+    }
   },
   {
     "id": "recollir",
@@ -341,17 +451,23 @@
     "candidateTranslationsEs": [
       "recoger"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "recollir",
-    "targetExpression": null,
-    "hintEs": "recoger",
-    "translationsEs": [
-      "recoger"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "667be0ff0ae627c6",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "recoger",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "3164ea12074831a8",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Mercè, fes el favor de recollir les nines!",
+      "partOfSpeech": "verb",
+      "candidateTranslationsEs": [
+        "recoger"
+      ]
+    }
   },
   {
     "id": "participació",
@@ -361,17 +477,23 @@
     "candidateTranslationsEs": [
       "participación"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "participació",
-    "targetExpression": null,
-    "hintEs": "participación",
-    "translationsEs": [
-      "participación"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "120edfce26141e33",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "participación",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "005a94c5069c01f4",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Així arribem al segon dels pilars del govern obert: la participació.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "participación"
+      ]
+    }
   },
   {
     "id": "solució",
@@ -381,17 +503,23 @@
     "candidateTranslationsEs": [
       "solución"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "solució",
-    "targetExpression": null,
-    "hintEs": "solución",
-    "translationsEs": [
-      "solución"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "1c6666c20e508d9a",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "solución",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "db14f085c8c294b4",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "La retenció de dades no és la solució!",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "solución"
+      ]
+    }
   },
   {
     "id": "frase",
@@ -401,17 +529,23 @@
     "candidateTranslationsEs": [
       "frase"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "frase",
-    "targetExpression": null,
-    "hintEs": "frase",
-    "translationsEs": [
-      "frase"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "fb7a5a2df2c16115",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "frase",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "2509a2faaf7c3043",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "No va acabar la frase.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "frase"
+      ]
+    }
   },
   {
     "id": "societat",
@@ -421,17 +555,23 @@
     "candidateTranslationsEs": [
       "sociedad"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "societat",
-    "targetExpression": null,
-    "hintEs": "sociedad",
-    "translationsEs": [
-      "sociedad"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "9e534601c1c1304d",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "sociedad",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "d5068227bef0fcd1",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Abans d'iniciar l'elaboració de Societat de la informació.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "sociedad"
+      ]
+    }
   },
   {
     "id": "lentament",
@@ -441,17 +581,23 @@
     "candidateTranslationsEs": [
       "lentamente"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "lentament",
-    "targetExpression": null,
-    "hintEs": "lentamente",
-    "translationsEs": [
-      "lentamente"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "a85620572e401159",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "lentamente",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "0f051f851f4d8d7b",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Cau lentament la barba sobre el pit i les parpelles abaixen la persiana.",
+      "partOfSpeech": "adverb",
+      "candidateTranslationsEs": [
+        "lentamente"
+      ]
+    }
   },
   {
     "id": "primer",
@@ -463,10 +609,25 @@
       "primero",
       "primo"
     ],
-    "status": "reject",
-    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
-    "contentHash": "f14cca1534835f88",
-    "reviewSource": "context-rules"
+    "detectedExpression": null,
+    "status": "review",
+    "answerCa": "primer",
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": null,
+    "confidence": 0.35,
+    "reason": "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review.",
+    "contentHash": "e6c18b9cb8ea7bfa",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Avui és el primer dia i n'hem d'aprendre.",
+      "partOfSpeech": "adjective",
+      "candidateTranslationsEs": [
+        "primer",
+        "primero",
+        "primo"
+      ]
+    }
   },
   {
     "id": "contacte",
@@ -476,17 +637,23 @@
     "candidateTranslationsEs": [
       "contacto"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "contacte",
-    "targetExpression": null,
-    "hintEs": "contacto",
-    "translationsEs": [
-      "contacto"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "0587ae9b2d78b8f1",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "contacto",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "480bb13f3832af07",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Ens posarem en contacte amb els guanyadors via mail.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "contacto"
+      ]
+    }
   },
   {
     "id": "gener",
@@ -496,17 +663,23 @@
     "candidateTranslationsEs": [
       "enero"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "gener",
-    "targetExpression": null,
-    "hintEs": "enero",
-    "translationsEs": [
-      "enero"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "50479f770b387ef6",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "enero",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "9007f104899a0e4d",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Aigua de gener, millor que la de febrer.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "enero"
+      ]
+    }
   },
   {
     "id": "cert",
@@ -516,17 +689,23 @@
     "candidateTranslationsEs": [
       "cierto"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "cert",
-    "targetExpression": null,
-    "hintEs": "cierto",
-    "translationsEs": [
-      "cierto"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "fbcbf702c0d8c097",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "cierto",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "5d064ed5920a9eb4",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Açò és cert, però ha de ser matisat.",
+      "partOfSpeech": "adjective",
+      "candidateTranslationsEs": [
+        "cierto"
+      ]
+    }
   },
   {
     "id": "petó",
@@ -536,17 +715,23 @@
     "candidateTranslationsEs": [
       "beso"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "petó",
-    "targetExpression": null,
-    "hintEs": "beso",
-    "translationsEs": [
-      "beso"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "be9d14cea1996b7d",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "beso",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "a6059e7b096587f4",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Té —emoticona d'un petó—, perquè et curis.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "beso"
+      ]
+    }
   },
   {
     "id": "original",
@@ -556,17 +741,23 @@
     "candidateTranslationsEs": [
       "original"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "original",
-    "targetExpression": null,
-    "hintEs": "original",
-    "translationsEs": [
-      "original"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "7744d9b62fe1950d",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "original",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "91350fd5abecfda8",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "És més, el grup original està deixant d'existir.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "original"
+      ]
+    }
   },
   {
     "id": "festa",
@@ -577,17 +768,24 @@
       "asueto",
       "fiesta"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "festa",
-    "targetExpression": null,
-    "hintEs": "fiesta",
-    "translationsEs": [
-      "fiesta"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "4dd2f43e70e407e6",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "fiesta",
+    "confidence": 0.35,
+    "reason": "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review.",
+    "contentHash": "8dac20bfa1d14571",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Fins allí arribaven els preparatius de la festa.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "asueto",
+        "fiesta"
+      ]
+    }
   },
   {
     "id": "mare",
@@ -597,17 +795,23 @@
     "candidateTranslationsEs": [
       "madre"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "mare",
-    "targetExpression": null,
-    "hintEs": "madre",
-    "translationsEs": [
-      "madre"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "c36aba7fd80a1e7c",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "madre",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "ce30598e26574376",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "No podia tindre una mare com les altres?",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "madre"
+      ]
+    }
   },
   {
     "id": "apartar",
@@ -617,17 +821,23 @@
     "candidateTranslationsEs": [
       "apartar"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "apartar",
-    "targetExpression": null,
-    "hintEs": "apartar",
-    "translationsEs": [
-      "apartar"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "b8db9696361bbaff",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "apartar",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "e341086295979d7c",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "El seu delicte era l'egoisme, la voluntat feble, que l'havia fet apartar de la lluita per la vida.",
+      "partOfSpeech": "verb",
+      "candidateTranslationsEs": [
+        "apartar"
+      ]
+    }
   },
   {
     "id": "cafè",
@@ -637,17 +847,23 @@
     "candidateTranslationsEs": [
       "café"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "cafè",
-    "targetExpression": null,
-    "hintEs": "café",
-    "translationsEs": [
-      "café"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "5c865d2e4551f985",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "café",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "806376fa06a2a00a",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "El cafè ja estava a punt.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "café"
+      ]
+    }
   },
   {
     "id": "travessar",
@@ -658,10 +874,24 @@
       "atravesar",
       "cruzar"
     ],
-    "status": "reject",
-    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
-    "contentHash": "a0993ae35db695d8",
-    "reviewSource": "context-rules"
+    "detectedExpression": null,
+    "status": "review",
+    "answerCa": "travessar",
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": null,
+    "confidence": 0.35,
+    "reason": "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review.",
+    "contentHash": "de631b2bdfe7e7ce",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Acabo de veure un porc senglar travessar pel pas de zebra.",
+      "partOfSpeech": "verb",
+      "candidateTranslationsEs": [
+        "atravesar",
+        "cruzar"
+      ]
+    }
   },
   {
     "id": "segle",
@@ -671,17 +901,23 @@
     "candidateTranslationsEs": [
       "siglo"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "segle",
-    "targetExpression": null,
-    "hintEs": "siglo",
-    "translationsEs": [
-      "siglo"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "2bd3748774eb1794",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "siglo",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "cad308299e6088b7",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "El segle vint és el més tràgic de la història.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "siglo"
+      ]
+    }
   },
   {
     "id": "llista",
@@ -691,17 +927,23 @@
     "candidateTranslationsEs": [
       "lista"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "llista",
-    "targetExpression": null,
-    "hintEs": "lista",
-    "translationsEs": [
-      "lista"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "57ddb17b0f557861",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "lista",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "8128297e562ccd79",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Que fort, l'Ernest va de cap de llista.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "lista"
+      ]
+    }
   },
   {
     "id": "demanar",
@@ -712,10 +954,24 @@
       "pedir",
       "preguntar"
     ],
-    "status": "reject",
-    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
-    "contentHash": "82ff4971bfe33c8b",
-    "reviewSource": "context-rules"
+    "detectedExpression": null,
+    "status": "review",
+    "answerCa": "demanar",
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": null,
+    "confidence": 0.35,
+    "reason": "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review.",
+    "contentHash": "f3eea4b9a3238308",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Sense demanar res a canvi, ni cap subvenció.",
+      "partOfSpeech": "verb",
+      "candidateTranslationsEs": [
+        "pedir",
+        "preguntar"
+      ]
+    }
   },
   {
     "id": "braç",
@@ -725,17 +981,23 @@
     "candidateTranslationsEs": [
       "brazo"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "braç",
-    "targetExpression": null,
-    "hintEs": "brazo",
-    "translationsEs": [
-      "brazo"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "085d1610d40d503e",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "brazo",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "62d3a2736cb478b2",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "La cama al llit i el braç al pit.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "brazo"
+      ]
+    }
   },
   {
     "id": "govern",
@@ -745,17 +1007,23 @@
     "candidateTranslationsEs": [
       "gobierno"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "govern",
-    "targetExpression": null,
-    "hintEs": "gobierno",
-    "translationsEs": [
-      "gobierno"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "931e61ebc244ed2e",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "gobierno",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "266c76c4c5eeb48b",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Un govern propi és el nostre dret natural.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "gobierno"
+      ]
+    }
   },
   {
     "id": "temps",
@@ -765,17 +1033,23 @@
     "candidateTranslationsEs": [
       "tiempo"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "temps",
-    "targetExpression": null,
-    "hintEs": "tiempo",
-    "translationsEs": [
-      "tiempo"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "05022ca86a038202",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "tiempo",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "b08f001f51432347",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Fa massa temps que no anem al teatre.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "tiempo"
+      ]
+    }
   },
   {
     "id": "fora",
@@ -786,18 +1060,24 @@
       "afuera",
       "fuera"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "fora",
-    "targetExpression": null,
-    "hintEs": "fuera",
-    "translationsEs": [
-      "fuera",
-      "afuera"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "1676397a0c7c8b1a",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "fuera",
+    "confidence": 0.35,
+    "reason": "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review.",
+    "contentHash": "d6aeb2a009943c6a",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Les plantes de fora casa solen ser feréstegues.",
+      "partOfSpeech": "adverb",
+      "candidateTranslationsEs": [
+        "afuera",
+        "fuera"
+      ]
+    }
   },
   {
     "id": "territori",
@@ -807,17 +1087,23 @@
     "candidateTranslationsEs": [
       "territorio"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "territori",
-    "targetExpression": null,
-    "hintEs": "territorio",
-    "translationsEs": [
-      "territorio"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "ba1940109666d72b",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "territorio",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "ac4f71fae35e0b2d",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "L'habitatge edificat però no venut ocupa una part del territori.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "territorio"
+      ]
+    }
   },
   {
     "id": "solament",
@@ -827,17 +1113,23 @@
     "candidateTranslationsEs": [
       "solamente"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "solament",
-    "targetExpression": null,
-    "hintEs": "solamente",
-    "translationsEs": [
-      "solamente"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "4c0a505cb516111e",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "solamente",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "52b9cb7aeeb8d88d",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Molts estudis segueixen solament les regions exitoses.",
+      "partOfSpeech": "adverb",
+      "candidateTranslationsEs": [
+        "solamente"
+      ]
+    }
   },
   {
     "id": "espatlla",
@@ -848,10 +1140,24 @@
       "hombro",
       "paletilla"
     ],
-    "status": "reject",
-    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
-    "contentHash": "e1c924d0fd645c1d",
-    "reviewSource": "context-rules"
+    "detectedExpression": null,
+    "status": "review",
+    "answerCa": "espatlla",
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": null,
+    "confidence": 0.35,
+    "reason": "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review.",
+    "contentHash": "6548bf2919dca425",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Les bones peces per a rostir són la llata grossa, el jarret, el peixet de la culata i el tall rodó de l'espatlla.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "hombro",
+        "paletilla"
+      ]
+    }
   },
   {
     "id": "nombre",
@@ -861,17 +1167,23 @@
     "candidateTranslationsEs": [
       "número"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "nombre",
-    "targetExpression": null,
-    "hintEs": "número",
-    "translationsEs": [
-      "número"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "46d55af7c4de1a4c",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "número",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "3ab642bac117a497",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "A la dreta indiquem el nombre de l'estrofa.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "número"
+      ]
+    }
   },
   {
     "id": "vuit",
@@ -881,17 +1193,23 @@
     "candidateTranslationsEs": [
       "ocho"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "vuit",
-    "targetExpression": null,
-    "hintEs": "ocho",
-    "translationsEs": [
-      "ocho"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "06b8b335e38591e1",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "ocho",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "099d8f6261840a06",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "El ball de tarda comença a les vuit.",
+      "partOfSpeech": "other",
+      "candidateTranslationsEs": [
+        "ocho"
+      ]
+    }
   },
   {
     "id": "absolutament",
@@ -901,17 +1219,23 @@
     "candidateTranslationsEs": [
       "absolutamente"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "absolutament",
-    "targetExpression": null,
-    "hintEs": "absolutamente",
-    "translationsEs": [
-      "absolutamente"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "d0352d405e9dcb96",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "absolutamente",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "b54676c5818b5940",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Ningú no podia instal·lar absolutament res.",
+      "partOfSpeech": "adverb",
+      "candidateTranslationsEs": [
+        "absolutamente"
+      ]
+    }
   },
   {
     "id": "qualitat",
@@ -922,10 +1246,24 @@
       "calidad",
       "cualidad"
     ],
-    "status": "reject",
-    "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.",
-    "contentHash": "7a8132ff8c05d8e8",
-    "reviewSource": "context-rules"
+    "detectedExpression": null,
+    "status": "review",
+    "answerCa": "qualitat",
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": null,
+    "confidence": 0.35,
+    "reason": "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review.",
+    "contentHash": "61019c9afff35c28",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "La responsabilitat és una qualitat que no tens.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "calidad",
+        "cualidad"
+      ]
+    }
   },
   {
     "id": "enorme",
@@ -935,17 +1273,23 @@
     "candidateTranslationsEs": [
       "enorme"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "enorme",
-    "targetExpression": null,
-    "hintEs": "enorme",
-    "translationsEs": [
-      "enorme"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "085df9c780f14539",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "enorme",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "ac7fb5c39b50d8c2",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "L'enorme mos li ocupava la boca i li inflava els queixos.",
+      "partOfSpeech": "adjective",
+      "candidateTranslationsEs": [
+        "enorme"
+      ]
+    }
   },
   {
     "id": "pressió",
@@ -955,16 +1299,22 @@
     "candidateTranslationsEs": [
       "presión"
     ],
-    "status": "accept",
+    "detectedExpression": null,
+    "status": "review",
     "answerCa": "pressió",
-    "targetExpression": null,
-    "hintEs": "presión",
-    "translationsEs": [
-      "presión"
-    ],
-    "contextualSense": "unambiguous contextual lexical meaning",
-    "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.",
-    "contentHash": "79848df506758dec",
-    "reviewSource": "context-rules"
+    "type": "word",
+    "definitionCa": null,
+    "translationEs": "presión",
+    "confidence": 0.55,
+    "reason": "A Catalan definition is required before acceptance.",
+    "contentHash": "1553304123f03bdc",
+    "reviewSource": "context-resolver",
+    "evidence": {
+      "exampleCa": "Al cap d'una estona va demanar d'anar al llit perquè tenia una pressió al pit.",
+      "partOfSpeech": "noun",
+      "candidateTranslationsEs": [
+        "presión"
+      ]
+    }
   }
 ]
