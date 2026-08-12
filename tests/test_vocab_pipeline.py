@@ -36,7 +36,7 @@ class VocabularyPipelineTests(unittest.TestCase):
         self.assertEqual(pipeline.difficulty(10, 100, "extraordinària"), "hard")
 
     def test_validation(self):
-        valid = [{"id": "canco", "word": "cançó", "hintEs": "canción", "translationsEs": ["canción"],
+        valid = [{"id": "canco", "word": "cançó", "answerCa": "cançó", "hintEs": "canción", "translationsEs": ["canción"],
                   "exampleCa": "Aquesta cançó és bonica.", "partOfSpeech": "noun",
                   "difficulty": "easy", "corpusCount": 2}]
         pipeline.validate(valid)
@@ -55,6 +55,22 @@ class VocabularyPipelineTests(unittest.TestCase):
         self.assertEqual(result["hintEs"], "tipo")
         self.assertEqual(result["translationsEs"], ["tipo", "clase"])
         self.assertNotEqual(result["hintEs"], "calaña")
+
+    def test_mica_expression_is_contextual_not_mineral(self):
+        item = self.review_item(id="mica", word="mica", exampleCa="Estic una mica cansat.",
+                                candidateTranslationsEs=["granito", "mica", "mineral"])
+        result = pipeline.clean_review_item(item)
+        self.assertEqual((result["answerCa"], result["targetExpression"], result["hintEs"]),
+                         ("una mica", "una mica", "un poco"))
+        self.assertNotIn(result["hintEs"], item["candidateTranslationsEs"])
+
+    def test_fort_distinct_contexts_and_ambiguous_rejection(self):
+        physical = self.review_item(id="fort", word="fort", exampleCa="És un home molt fort.",
+                                    partOfSpeech="adjective", candidateTranslationsEs=["duro", "fuerte"])
+        self.assertEqual(pipeline.clean_review_item(physical)["hintEs"], "fuerte")
+        sound = self.review_item(id="fort", word="fort", exampleCa="La música sona molt fort.",
+                                 partOfSpeech="adverb", candidateTranslationsEs=["duro", "fuerte", "recio"])
+        self.assertEqual(pipeline.clean_review_item(sound)["hintEs"], "alto")
 
     def test_override_wins_and_alternatives_are_limited(self):
         override = {"mena": {"hintEs": "clase", "translationsEs": ["clase", "tipo", "género", "especie"]}}

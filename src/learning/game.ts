@@ -31,8 +31,8 @@ export function applyLearningGuess(round: LearningRound, input: string): Learnin
   const guess = normalizeGuess(input, 'ca')
   if (!guess || round.guesses.has(guess)) return round
   const guesses = new Set(round.guesses).add(guess)
-  if (isCorrectGuess(round.entry.word, guess, 'ca')) {
-    return { ...round, guesses, result: isWordComplete(round.entry.word, guesses, 'ca') ? 'win' : null }
+  if (isCorrectGuess(round.entry.answerCa, guess, 'ca')) {
+    return { ...round, guesses, result: isWordComplete(round.entry.answerCa, guesses, 'ca') ? 'win' : null }
   }
   const incorrect = new Set(round.incorrect).add(guess)
   const errors = round.errors + 1

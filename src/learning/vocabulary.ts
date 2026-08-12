@@ -9,6 +9,7 @@ function isVocabularyEntry(value: unknown): value is VocabularyEntry {
   const translations = entry.translationsEs
   return typeof entry.id === 'string' && entry.id.length > 0
     && typeof entry.word === 'string' && entry.word.length > 0
+    && typeof entry.answerCa === 'string' && entry.answerCa.length > 0
     && typeof entry.hintEs === 'string' && entry.hintEs.length > 0
     && (translations === undefined || (Array.isArray(translations)
       && translations.length > 0 && translations.length <= 3
