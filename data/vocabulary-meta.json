@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "entries": 1000,
+  "difficulty": {
+    "easy": 347,
+    "medium": 390,
+    "hard": 263
+  },
+  "sourceVersions": {
+    "ca-text-corpus": "5b87343960f72c0a61e5d86651302f0acd42a5a7",
+    "catalan-dict-tools": "7a076098331b5ad1af3983eae22b952d3b5c54fe",
+    "apertium-spa-cat": "7635fe703b25455efc38e3c22a35b0f9af2a8790"
+  },
+  "corpusFiles": [
+    "common-voice-sentences.txt",
+    "common-short-sentences.txt",
+    "riuraueditors.txt",
+    "softcatala.txt",
+    "proverbs.txt"
+  ]
+}

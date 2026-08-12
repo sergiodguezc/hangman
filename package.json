@@ -18,6 +18,13 @@
     "test:chat": "node scripts/chat-test.mjs",
     "test:lifecycle": "node scripts/lifecycle-test.mjs",
     "test:match": "node scripts/match-features-test.mjs",
+    "test:vocab": "python3 -m unittest discover -s tests -p 'test_vocab_pipeline.py'",
+    "vocab:fetch": "python3 scripts/fetch-catalan-corpus.py",
+    "vocab:extract": "python3 scripts/extract-catalan-vocabulary.py",
+    "vocab:enrich": "python3 scripts/enrich-translations.py",
+    "vocab:build": "python3 scripts/build-vocabulary.py",
+    "vocab:validate": "python3 scripts/validate-vocabulary.py",
+    "vocab": "python3 scripts/vocab_pipeline.py all",
     "lint": "oxlint",
     "preview": "vite preview"
   },
