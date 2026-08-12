@@ -1,10 +1,11 @@
 {
   "totalCandidates": 1000,
-  "accepted": 823,
-  "ordinarySingleWordEntries": 821,
-  "multiWordExpressionEntries": 2,
-  "rejected": 177,
+  "accepted": 5,
+  "ordinarySingleWordEntries": 2,
+  "multiWordExpressionEntries": 3,
+  "review": 994,
+  "rejected": 1,
   "manualOverrides": 1,
-  "hintsAbsentFromRawCandidates": 2,
-  "averageTranslationsPerEntry": 1.02
+  "translationsAbsentFromRawCandidates": 3,
+  "averageTranslationsPerEntry": 1.0
 }

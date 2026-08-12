@@ -4,6 +4,10 @@ export type VocabularyEntry = {
   id: string
   word: string
   answerCa: string
+  type: 'word' | 'expression'
+  definitionCa: string
+  translationEs: string
+  /** Backward-compatible aliases for older data consumers. */
   targetExpression?: string
   hintEs: string
   translationsEs?: string[]

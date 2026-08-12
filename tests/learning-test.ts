@@ -7,7 +7,8 @@ import { applyLearningGuess, createLearningRound, entriesForDifficulty, selectNe
 import type { VocabularyEntry } from '../src/learning/types.ts'
 
 const entry = (id: string, word: string, difficulty: VocabularyEntry['difficulty'] = 'easy'): VocabularyEntry => ({
-  id, word, answerCa: word, difficulty, hintEs: `traducción-${id}`, translationsEs: [`traducción-${id}`], exampleCa: `Una frase amb ${word}.`, corpusCount: 1,
+  id, word, answerCa: word, type: 'word', definitionCa: `Definició de ${word}.`, translationEs: `traducción-${id}`,
+  difficulty, hintEs: `traducción-${id}`, translationsEs: [`traducción-${id}`], exampleCa: `Una frase amb ${word}.`, corpusCount: 1,
   sources: { word: 'test', example: 'test' },
 })
 
@@ -35,7 +36,7 @@ assert.match(resultMarkup, />casa</)
 assert.match(resultMarkup, /traducción-loss/)
 assert.match(resultMarkup, /Una frase amb <strong>casa<\/strong>\./)
 
-const phrase = { ...entry('mica', 'mica'), answerCa: 'una mica', targetExpression: 'una mica', hintEs: 'un poco', translationsEs: ['un poco'], exampleCa: 'Estic una mica cansat.' }
+const phrase = { ...entry('mica', 'mica'), answerCa: 'una mica', type: 'expression' as const, targetExpression: 'una mica', translationEs: 'un poco', hintEs: 'un poco', translationsEs: ['un poco'], exampleCa: 'Estic una mica cansat.' }
 let phraseRound = createLearningRound(phrase)
 for (const letter of ['u', 'n', 'a', 'm', 'i', 'c']) phraseRound = applyLearningGuess(phraseRound, letter)
 assert.equal(phraseRound.result, 'win')

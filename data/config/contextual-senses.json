@@ -1,0 +1,4 @@
+[
+  {"word": "fort", "partOfSpeech": "adjective", "patterns": ["\\b(home|dona|noi|noia|persona)\\b", "\\bfort\\b"], "translationEs": "fuerte", "definitionCa": "Que té molta força física.", "confidence": 0.93, "reason": "The adjective attributes physical strength to a person."},
+  {"word": "fort", "patterns": ["\\b(sona|música|volum|soroll)\\b", "\\bfort\\b"], "translationEs": "alto", "definitionCa": "Amb un volum o una intensitat de so elevada.", "confidence": 0.94, "reason": "Sound vocabulary identifies the high-volume sense."}
+]

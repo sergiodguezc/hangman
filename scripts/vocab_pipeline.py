@@ -12,6 +12,8 @@ import subprocess
 import sys
 import unicodedata
 import xml.etree.ElementTree as ET
+from dataclasses import asdict, dataclass
+from typing import Literal
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,33 +46,44 @@ POS_MAP = {"n": "noun", "vblex": "verb", "vbser": "verb", "vbhaver": "verb", "vb
 VALID_POS = set(POS_MAP.values()) | {"other"}
 VALID_DIFFICULTY = {"easy", "medium", "hard"}
 POS_PRIORITY = {"noun": 0, "verb": 1, "adjective": 2, "adverb": 3, "other": 4}
-MAX_TRANSLATIONS = 3
+MAX_TRANSLATIONS = 1
 
-# Clearly unsuitable everyday learning hints. This is deliberately conservative:
-# ambiguous senses are handled by contextual rules, overrides, or rejection.
-POOR_SPANISH = {
-    "abogador", "abarrajar", "amigacho", "asueto", "asaz", "bajel", "bajío",
-    "bastantemente", "cabalmente", "catadura", "chirona", "compaña", "concomitar",
-    "consabido", "cuasi", "dechado", "derredor", "donosidad", "fémina", "fulcral",
-    "gollete", "grao", "hacerlasveces", "lecha", "lechaza", "llevanza", "maese",
-    "mensura", "necesariedad", "odds", "obscuridad", "obscuro", "pitorrear",
-    "polizonte", "postreramente", "postrimero", "prez", "securización", "suso",
-    "universitat", "victimar",
-}
-PREFERRED_HINTS = {
-    "anar": "ir", "arribar": "llegar", "dona": "mujer", "feina": "trabajo",
-    "festa": "fiesta", "fora": "fuera", "llit": "cama", "mena": "tipo",
-    "presó": "prisión", "prou": "suficientemente",
-    "tornar": "volver", "vaixell": "barco", "vermell": "rojo",
-}
-EXPRESSION_PATTERNS = (
-    (re.compile(r"\buna mica\b", re.I), "una mica", "un poco", "small quantity or degree"),
-    (re.compile(r"\bde seguida\b", re.I), "de seguida", "enseguida", "immediately"),
-    (re.compile(r"\ba poc a poc\b", re.I), "a poc a poc", "poco a poco", "gradually"),
-    (re.compile(r"\bde tant en tant\b", re.I), "de tant en tant", "de vez en cuando", "occasionally"),
-    (re.compile(r"\bsi us plau\b", re.I), "si us plau", "por favor", "polite request"),
-    (re.compile(r"\bd['’]altra banda\b", re.I), "d'altra banda", "por otra parte", "discourse transition"),
-)
+@dataclass(frozen=True)
+class Resolution:
+    status: Literal["accept", "review", "reject"]
+    answer_ca: str | None
+    item_type: Literal["word", "expression"] | None
+    definition_ca: str | None
+    translation_es: str | None
+    confidence: float
+    reason: str
+    source: str
+
+
+def load_rules() -> dict:
+    """Load curated linguistic knowledge; code only supplies generic mechanics."""
+    def optional(name: str, default):
+        path = CONFIG / name
+        return load_json(path) if path.exists() else default
+    return {
+        "expressions": optional("expressions.json", {}),
+        "preferences": optional("preferred-translations.json", {}),
+        "quality": optional("translation-quality.json", {}),
+        "contexts": optional("contextual-senses.json", []),
+        "thresholds": optional("resolution-thresholds.json", {"accept": 0.85, "reject": 0.25}),
+    }
+
+
+def phrase_occurs(phrase: str, sentence: str) -> bool:
+    phrase_tokens, sentence_tokens = tokenize(phrase), tokenize(sentence)
+    size = len(phrase_tokens)
+    return bool(size and any(sentence_tokens[i:i + size] == phrase_tokens for i in range(len(sentence_tokens) - size + 1)))
+
+
+def detect_expression(word: str, sentence: str, expressions: dict) -> tuple[str, dict] | None:
+    matches = [(phrase, metadata) for phrase, metadata in expressions.items()
+               if word in tokenize(phrase) and phrase_occurs(phrase, sentence)]
+    return max(matches, key=lambda value: len(tokenize(value[0])), default=None)
 
 
 def write_json(path: Path, value: object) -> None:
@@ -119,7 +132,10 @@ def fetch() -> None:
         destination = RAW / name
         if not destination.exists():
             subprocess.run(["git", "clone", "--filter=blob:none", "--no-checkout", url, str(destination)], check=True)
-        subprocess.run(["git", "-C", str(destination), "fetch", "--depth", "1", "origin", commit], check=True)
+        present = subprocess.run(["git", "-C", str(destination), "cat-file", "-e", f"{commit}^{{commit}}"],
+                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+        if not present:
+            subprocess.run(["git", "-C", str(destination), "fetch", "--depth", "1", "origin", commit], check=True)
         subprocess.run(["git", "-C", str(destination), "checkout", "--detach", commit], check=True)
 
 
@@ -205,6 +221,7 @@ def select(limit: int = 1000) -> None:
     _, ranks = frequency_data()
     lexical = parse_apertium()
     selected = []
+    expressions = load_rules()["expressions"]
     for item in candidates:
         word = item["word"]
         entries = lexical.get(word, [])
@@ -215,6 +232,11 @@ def select(limit: int = 1000) -> None:
         rank_key = (frequency_rank if frequency_rank is not None else 10_000_000, -source_score, -item["corpusCount"], len(word), word)
         pos_counts = collections.Counter(pos for _, pos in entries if pos != "other")
         pos = sorted(pos_counts, key=lambda value: (-pos_counts[value], POS_PRIORITY[value]))[0] if pos_counts else "other"
+        expression_examples = [(example, detect_expression(word, example, expressions)) for example in item["exampleCandidates"]]
+        expression_example = next(((example, match) for example, match in expression_examples if match), None)
+        if expression_example:
+            item = {**item, "exampleCandidates": [expression_example[0], *[x for x in item["exampleCandidates"] if x != expression_example[0]]],
+                    "detectedExpression": expression_example[1][0]}
         selected.append({**item, "frequencyRank": frequency_rank, "partOfSpeech": pos, "_rankKey": rank_key})
     selected.sort(key=lambda item: item["_rankKey"])
     selected = selected[:limit]
@@ -240,7 +262,7 @@ def enrich() -> None:
 
 
 def review_hash(item: dict) -> str:
-    payload = {key: item.get(key) for key in ("id", "word", "exampleCa", "partOfSpeech", "candidateTranslationsEs")}
+    payload = {key: item.get(key) for key in ("id", "word", "exampleCa", "partOfSpeech", "candidateTranslationsEs", "detectedExpression")}
     return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:16]
 
 
@@ -264,76 +286,92 @@ def validate_review_result(result: object, expected_hash: str | None = None) -> 
     if not isinstance(result, dict):
         return ["review result must be an object"]
     status = result.get("status")
-    if status not in {"accept", "reject"}:
-        errors.append("status must be accept or reject")
+    if status not in {"accept", "review", "reject"}:
+        errors.append("status must be accept, review, or reject")
     if expected_hash is not None and result.get("contentHash") != expected_hash:
         errors.append("contentHash does not match review input")
     if status == "accept":
         answer = result.get("answerCa")
-        expression = result.get("targetExpression")
         if not isinstance(answer, str) or not answer.strip(): errors.append("accepted result needs answerCa")
-        if expression is not None and (not isinstance(expression, str) or not expression.strip()): errors.append("targetExpression must be null or a non-empty string")
-        if expression is not None and normalize(expression) != normalize(answer): errors.append("targetExpression must match answerCa")
-        hint = result.get("hintEs")
-        translations = result.get("translationsEs")
-        if not isinstance(hint, str) or not hint.strip(): errors.append("accepted result needs one hintEs string")
-        if clean_strings(translations) != translations: errors.append("translationsEs must contain unique, non-empty strings")
-        if not isinstance(translations, list) or not translations: errors.append("accepted result needs translationsEs")
-        elif len(translations) > MAX_TRANSLATIONS: errors.append(f"translationsEs exceeds {MAX_TRANSLATIONS} items")
-        elif hint not in translations: errors.append("hintEs must be the first-class cleaned meaning")
-    elif not isinstance(result.get("reason"), str) or not result["reason"].strip():
-        errors.append("rejected result needs a reason")
+        if result.get("type") not in {"word", "expression"}: errors.append("accepted result needs a valid type")
+        if not isinstance(result.get("definitionCa"), str) or not result["definitionCa"].strip(): errors.append("accepted result needs definitionCa")
+        if not isinstance(result.get("translationEs"), str) or not result["translationEs"].strip(): errors.append("accepted result needs translationEs")
+    if not isinstance(result.get("confidence"), (int, float)) or not 0 <= result["confidence"] <= 1: errors.append("confidence must be between zero and one")
+    if not isinstance(result.get("reason"), str) or not result["reason"].strip(): errors.append("result needs a reason")
     return errors
 
 
-def clean_review_item(item: dict, overrides: dict | None = None, rejected: set[str] | None = None) -> dict:
-    """Produce a narrow, structured pedagogical review from lexical candidates."""
+def resolve_candidate(item: dict, lexical_data: list[str], rules: dict, overrides: dict | None = None,
+                      rejected: set[str] | None = None) -> Resolution:
+    """Resolve one contextual learning meaning from lexical evidence and declarative rules."""
     overrides, rejected = overrides or {}, rejected or set()
-    word, candidates = item["word"], clean_strings(item.get("candidateTranslationsEs", []))
+    word, sentence = item["word"], item.get("exampleCa", "")
     content_hash = review_hash(item)
     if word in rejected:
-        return {"id": item["id"], "word": word, "status": "reject", "reason": "Explicitly rejected by human review.", "contentHash": content_hash, "reviewSource": "manual-rejection"}
+        return Resolution("reject", None, None, None, None, 0.0, "Explicitly rejected by human review.", "manual-rejection")
     if word in overrides:
         override = overrides[word]
-        translations = clean_strings(override.get("translationsEs", []))
-        hint = override.get("hintEs", "")
-        if hint and hint not in translations: translations.insert(0, hint)
-        answer = override.get("answerCa", word)
-        expression = override.get("targetExpression")
-        result = {"id": item["id"], "word": word, "status": "accept", "answerCa": answer, "targetExpression": expression, "hintEs": hint, "translationsEs": translations[:MAX_TRANSLATIONS], "contextualSense": override.get("contextualSense", "human-reviewed contextual meaning"), "reason": override.get("reason", "Human-approved pedagogical override."), "contentHash": content_hash, "reviewSource": "manual-override"}
-        errors = validate_review_result(result, content_hash)
-        if errors: raise ValueError(f"Invalid override for {word}: {'; '.join(errors)}")
-        return result
-    sentence = normalize(item.get("exampleCa", ""))
-    for pattern, expression, hint, sense in EXPRESSION_PATTERNS:
-        if word in tokenize(expression) and pattern.search(sentence):
-            return {"id": item["id"], "word": word, "status": "accept", "answerCa": expression, "targetExpression": expression, "hintEs": hint, "translationsEs": [hint], "contextualSense": sense, "reason": f"The target occurs in the expression '{expression}'.", "contentHash": content_hash, "reviewSource": "context-rules"}
-    if word == "fort" and re.search(r"\b(home|dona|noi|noia|persona)\b.*\bfort\b", sentence):
-        return {"id": item["id"], "word": word, "status": "accept", "answerCa": word, "targetExpression": None, "hintEs": "fuerte", "translationsEs": ["fuerte"], "contextualSense": "physical strength", "reason": "The sentence attributes physical strength to a person.", "contentHash": content_hash, "reviewSource": "context-rules"}
-    if word == "fort" and re.search(r"\b(sona|música|volum|soroll)\b", sentence):
-        return {"id": item["id"], "word": word, "status": "accept", "answerCa": word, "targetExpression": None, "hintEs": "alto", "translationsEs": ["alto"], "contextualSense": "high sound volume", "reason": "The target describes sound volume in this sentence.", "contentHash": content_hash, "reviewSource": "context-rules"}
-    usable = [value for value in candidates if normalize(value) not in POOR_SPANISH]
-    usable = [value for value in usable if value.isalpha() or "-" in value or " " in value]
-    # Infinitives are the only safe standalone clue form for verbs.
+        translation = override.get("translationEs", override.get("hintEs"))
+        definition = override.get("definitionCa")
+        if translation and definition:
+            answer = override.get("answerCa", word)
+            return Resolution("accept", answer, override.get("type", "expression" if " " in answer else "word"), definition,
+                              translation, 1.0, override.get("reason", "Human-approved contextual meaning."), "manual-override")
+        return Resolution("review", override.get("answerCa", word), override.get("type", "word"), definition, translation,
+                          0.7, "Manual override is missing definitionCa or translationEs.", "manual-override")
+    expression_match = detect_expression(word, sentence, rules["expressions"])
+    if expression_match:
+        expression, metadata = expression_match
+        confidence = float(metadata.get("confidence", 0.98))
+        status = "accept" if confidence >= rules["thresholds"]["accept"] else "review"
+        return Resolution(status, expression, "expression", metadata["definitionCa"], metadata["translationEs"],
+                          confidence, f"Known expression '{expression}' occurs in the example.", "expression-config")
+    normalized_sentence = normalize(sentence)
+    for sense in rules["contexts"]:
+        if word != normalize(sense.get("word", "")): continue
+        required = sense.get("partOfSpeech")
+        if required and required != item.get("partOfSpeech"): continue
+        if all(re.search(pattern, normalized_sentence, re.I) for pattern in sense.get("patterns", [])):
+            confidence = float(sense.get("confidence", 0.9))
+            status = "accept" if confidence >= rules["thresholds"]["accept"] else "review"
+            return Resolution(status, word, "word", sense["definitionCa"], sense["translationEs"],
+                              confidence, sense["reason"], "context-config")
+    candidates = [value for value in clean_strings(lexical_data) if value.isalpha() or "-" in value or " " in value]
+    quality = rules["quality"]
+    candidates.sort(key=lambda value: (quality.get(normalize(value), {}).get("penalty", 0), normalize(value)))
     if item.get("partOfSpeech") == "verb":
-        infinitives = [value for value in usable if normalize(value).endswith(("ar", "er", "ir", "ír"))]
-        if infinitives: usable = infinitives
-    preferred = PREFERRED_HINTS.get(word)
-    # "mena de" is a contextual kind/class construction; other uses are not
-    # forced into that sense merely because Apertium lists it.
-    if word == "mena" and "mena de" in normalize(item.get("exampleCa", "")):
-        usable = ["tipo", "clase"]
-        preferred = "tipo"
-    elif word == "mena":
-        usable = []
-    if preferred in usable:
-        usable = [preferred] + [value for value in usable if value != preferred]
-    usable = clean_strings(usable)[:MAX_TRANSLATIONS]
-    if not usable:
-        return {"id": item["id"], "word": word, "status": "reject", "reason": "No candidate is reliably suitable for this word class and example.", "contentHash": content_hash, "reviewSource": "rules"}
-    if len(usable) > 1 and preferred not in usable:
-        return {"id": item["id"], "word": word, "status": "reject", "reason": "The sentence was not sufficient to choose reliably among distinct dictionary senses.", "contentHash": content_hash, "reviewSource": "context-rules"}
-    return {"id": item["id"], "word": word, "status": "accept", "answerCa": word, "targetExpression": None, "hintEs": usable[0], "translationsEs": usable, "contextualSense": "unambiguous contextual lexical meaning", "reason": "The sentence supports the single reliable learner-facing sense; dictionary candidates were secondary evidence.", "contentHash": content_hash, "reviewSource": "context-rules"}
+        infinitives = [value for value in candidates if normalize(value).endswith(("ar", "er", "ir", "ír"))]
+        if infinitives: candidates = infinitives
+    preference = rules["preferences"].get(word, {})
+    preferred = preference.get("translationEs")
+    if preferred in candidates and preference.get("definitionCa"):
+        confidence = float(preference.get("confidence", 0.9))
+        status = "accept" if confidence >= rules["thresholds"]["accept"] else "review"
+        return Resolution(status, word, "word", preference["definitionCa"], preferred,
+                          confidence, "Curated learner translation and definition match lexical evidence.", "preference-config")
+    if not candidates:
+        return Resolution("reject", None, None, None, None, 0.1, "No usable lexical translation evidence.", "context-resolver")
+    reason = "A Catalan definition is required before acceptance."
+    if len(candidates) > 1: reason = "Context is insufficient to choose among incompatible lexical meanings; definition and translation require review."
+    return Resolution("review", word, "word", None, preferred if preferred in candidates else (candidates[0] if len(candidates) == 1 else None),
+                      0.55 if len(candidates) == 1 else 0.35, reason, "context-resolver")
+
+
+def clean_review_item(item: dict, overrides: dict | None = None, rejected: set[str] | None = None,
+                      rules: dict | None = None) -> dict:
+    resolution = resolve_candidate(item, item.get("candidateTranslationsEs", []), rules or load_rules(), overrides, rejected)
+    result = {"id": item["id"], "word": item["word"], "status": resolution.status,
+              "answerCa": resolution.answer_ca, "type": resolution.item_type,
+              "definitionCa": resolution.definition_ca, "translationEs": resolution.translation_es,
+              "confidence": resolution.confidence, "reason": resolution.reason,
+              "contentHash": review_hash(item), "reviewSource": resolution.source,
+              "evidence": {"exampleCa": item.get("exampleCa"), "partOfSpeech": item.get("partOfSpeech"),
+                           "candidateTranslationsEs": clean_strings(item.get("candidateTranslationsEs", []))}}
+    if resolution.status == "accept":
+        result["hintEs"] = resolution.translation_es
+        result["translationsEs"] = [resolution.translation_es]
+        if resolution.item_type == "expression": result["targetExpression"] = resolution.answer_ca
+    return result
 
 
 def load_rejected() -> set[str]:
@@ -347,24 +385,26 @@ def clean() -> None:
     translations = load_json(INTERMEDIATE / "translations-es.json")
     overrides = load_json(CONFIG / "translation-overrides.json") if (CONFIG / "translation-overrides.json").exists() else {}
     rejected = load_rejected()
-    review_input = [{"id": normalize(item["word"]).replace("·", "-"), "word": item["word"], "exampleCa": item["exampleCa"], "partOfSpeech": item.get("partOfSpeech", "other"), "candidateTranslationsEs": translations.get(item["word"], [])} for item in selected]
-    results = [clean_review_item(item, overrides, rejected) for item in review_input]
+    rules = load_rules()
+    review_input = [{"id": normalize(item["word"]).replace("·", "-"), "word": item["word"], "exampleCa": item["exampleCa"], "partOfSpeech": item.get("partOfSpeech", "other"), "candidateTranslationsEs": translations.get(item["word"], []), "detectedExpression": item.get("detectedExpression")} for item in selected]
+    results = [clean_review_item(item, overrides, rejected, rules) for item in review_input]
     for item, result in zip(review_input, results):
         errors = validate_review_result(result, review_hash(item))
         if errors: raise SystemExit(f"Invalid review for {item['word']}: {'; '.join(errors)}")
     write_json(INTERMEDIATE / "translation-review-input.json", review_input)
     write_json(INTERMEDIATE / "translation-review-output.json", results)
-    accepted = sum(item["status"] == "accept" for item in results)
+    statuses = collections.Counter(item["status"] for item in results)
+    accepted = statuses["accept"]
     manual = sum(item.get("reviewSource") == "manual-override" for item in results)
     raw_by_word = {item["word"]: {normalize(x) for x in item["candidateTranslationsEs"]} for item in review_input}
-    expressions = sum(bool(item.get("targetExpression")) for item in results if item["status"] == "accept")
-    novel = sum(normalize(item["hintEs"]) not in raw_by_word[item["word"]] for item in results if item["status"] == "accept")
-    report = {"totalCandidates": len(results), "accepted": accepted, "ordinarySingleWordEntries": accepted - expressions, "multiWordExpressionEntries": expressions, "rejected": len(results) - accepted, "manualOverrides": manual, "hintsAbsentFromRawCandidates": novel,
+    expressions = sum(item.get("type") == "expression" for item in results if item["status"] == "accept")
+    novel = sum(normalize(item["translationEs"]) not in raw_by_word[item["word"]] for item in results if item["status"] == "accept")
+    report = {"totalCandidates": len(results), "accepted": accepted, "ordinarySingleWordEntries": accepted - expressions, "multiWordExpressionEntries": expressions, "review": statuses["review"], "rejected": statuses["reject"], "manualOverrides": manual, "translationsAbsentFromRawCandidates": novel,
               "averageTranslationsPerEntry": round(sum(len(item.get("translationsEs", [])) for item in results) / max(accepted, 1), 2)}
     write_json(REVIEW / "summary.json", report)
     sample = sorted(({**source, **result} for source, result in zip(review_input, results)), key=lambda item: hashlib.sha256(item["id"].encode()).hexdigest())[:50]
     write_json(REVIEW / "sample.json", sample)
-    print(f"Cleaned {len(results)} entries: {accepted} accepted, {len(results) - accepted} rejected")
+    print(f"Cleaned {len(results)} entries: {accepted} accepted, {statuses['review']} review, {statuses['reject']} rejected")
 
 
 def difficulty(index: int, total: int, word: str) -> str:
@@ -379,7 +419,7 @@ def difficulty(index: int, total: int, word: str) -> str:
 
 
 def stable_id(word: str, used: set[str]) -> str:
-    base = normalize(word).replace("·", "-")
+    base = re.sub(r"[^a-zàèéíïòóúüç0-9]+", "-", normalize(word).replace("·", "-")).strip("-")
     candidate = base
     if candidate in used:
         candidate = f"{base}-{hashlib.sha1(word.encode()).hexdigest()[:8]}"
@@ -402,15 +442,17 @@ def build(allow_incomplete: bool = False) -> None:
     for index, item in enumerate(selected):
         word = item["word"]
         cleaned = review.get(word)
-        if not cleaned or cleaned.get("status") == "reject":
+        if not cleaned or cleaned.get("status") != "accept":
             continue
         review_input = {"id": normalize(word).replace("·", "-"), "word": word, "exampleCa": item["exampleCa"],
-                        "partOfSpeech": item.get("partOfSpeech", "other"), "candidateTranslationsEs": raw_translations.get(word, [])}
+                        "partOfSpeech": item.get("partOfSpeech", "other"), "candidateTranslationsEs": raw_translations.get(word, []),
+                        "detectedExpression": item.get("detectedExpression")}
         errors = validate_review_result(cleaned, review_hash(review_input))
         if errors: raise SystemExit(f"Invalid structured review for {word}: {'; '.join(errors)}")
         entry = {
-            "id": stable_id(word, used), "word": word, "answerCa": cleaned["answerCa"],
-            "hintEs": cleaned["hintEs"], "translationsEs": cleaned["translationsEs"], "exampleCa": item["exampleCa"],
+            "id": stable_id(cleaned["answerCa"], used), "word": word, "answerCa": cleaned["answerCa"], "type": cleaned["type"],
+            "definitionCa": cleaned["definitionCa"], "translationEs": cleaned["translationEs"],
+            "hintEs": cleaned["translationEs"], "translationsEs": [cleaned["translationEs"]], "exampleCa": item["exampleCa"],
             "partOfSpeech": item["partOfSpeech"], "difficulty": difficulty(index, len(selected), cleaned["answerCa"]),
             "corpusCount": item["corpusCount"],
         }
@@ -429,7 +471,7 @@ def build(allow_incomplete: bool = False) -> None:
     write_json(DATA / "vocabulary.json", entries)
     distribution = collections.Counter(entry["difficulty"] for entry in entries)
     meta = {
-        "schemaVersion": 3, "entries": len(entries),
+        "schemaVersion": 4, "entries": len(entries),
         "difficulty": {key: distribution[key] for key in ("easy", "medium", "hard")},
         "sourceVersions": {name: commit for name, (_, commit) in REPOS.items()},
         "corpusFiles": list(SOURCES),
@@ -456,6 +498,10 @@ def validate(entries=None, require_translations: bool = True) -> None:
         if word in words: errors.append(f"{label}: duplicate word")
         ids.add(entry.get("id")); words.add(word)
         if not isinstance(answer, str) or not answer.strip(): errors.append(f"{label}: missing answerCa")
+        if entry.get("type") not in {"word", "expression"}: errors.append(f"{label}: invalid type")
+        if not isinstance(entry.get("definitionCa"), str) or not entry["definitionCa"].strip(): errors.append(f"{label}: missing definitionCa")
+        translation = entry.get("translationEs")
+        if require_translations and (not isinstance(translation, str) or not translation.strip()): errors.append(f"{label}: missing translationEs")
         if expression is not None:
             if normalize(expression) != normalize(answer): errors.append(f"{label}: targetExpression must match answerCa")
             if normalize(expression) not in normalize(entry.get("exampleCa", "")): errors.append(f"{label}: targetExpression is absent from example")
@@ -466,9 +512,12 @@ def validate(entries=None, require_translations: bool = True) -> None:
         elif clean_strings(translations) != translations: errors.append(f"{label}: invalid or duplicate translationsEs")
         elif len(translations) > MAX_TRANSLATIONS: errors.append(f"{label}: too many translationsEs")
         elif hint not in translations: errors.append(f"{label}: hintEs is not a cleaned translation")
+        elif translations != [translation] or hint != translation: errors.append(f"{label}: compatibility translations disagree with translationEs")
         example = entry.get("exampleCa", "")
         if not example or URL_RE.search(example): errors.append(f"{label}: invalid example")
         elif not contains_word(example, word): errors.append(f"{label}: example does not contain target token")
+        if entry.get("type") == "expression" and not phrase_occurs(answer, example): errors.append(f"{label}: expression answer is absent from example")
+        if entry.get("type") == "word" and normalize(answer) != normalize(word): errors.append(f"{label}: word answer must match source word")
         if entry.get("difficulty") not in VALID_DIFFICULTY: errors.append(f"{label}: invalid difficulty")
         if entry.get("partOfSpeech") not in VALID_POS: errors.append(f"{label}: invalid part of speech")
         if not isinstance(entry.get("corpusCount"), int) or entry["corpusCount"] < 1: errors.append(f"{label}: invalid corpus count")

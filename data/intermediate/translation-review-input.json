@@ -6,7 +6,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "estado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "veure",
@@ -15,7 +16,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "ver"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cosa",
@@ -24,7 +26,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cosa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "casa",
@@ -33,7 +36,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "casa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gran",
@@ -43,7 +47,8 @@
     "candidateTranslationsEs": [
       "gran",
       "grande"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "anar",
@@ -53,7 +58,8 @@
     "candidateTranslationsEs": [
       "andar",
       "ir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "temps",
@@ -62,7 +68,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tiempo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "home",
@@ -72,7 +79,8 @@
     "candidateTranslationsEs": [
       "hombre",
       "varón"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "així",
@@ -81,16 +89,18 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "así"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tant",
     "word": "tant",
-    "exampleCa": "Creus que cal que faci tant de soroll?",
+    "exampleCa": "Cal ensenyar-los el bastó de tant en tant.",
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tanto"
-    ]
+    ],
+    "detectedExpression": "de tant en tant"
   },
   {
     "id": "manera",
@@ -101,7 +111,8 @@
       "forma",
       "manera",
       "modo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sempre",
@@ -110,7 +121,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "siempre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "abans",
@@ -119,7 +131,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "antes"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vida",
@@ -128,7 +141,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "vida"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "part",
@@ -138,7 +152,8 @@
     "candidateTranslationsEs": [
       "parte",
       "parto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "davant",
@@ -149,7 +164,8 @@
       "ante",
       "delante",
       "enfrente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aquí",
@@ -160,7 +176,8 @@
       "acá",
       "ahí",
       "aquí"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "senyor",
@@ -169,7 +186,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "señor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "potser",
@@ -180,7 +198,8 @@
       "acaso",
       "quizá",
       "quizás"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "moment",
@@ -189,7 +208,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "momento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tres",
@@ -198,7 +218,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "tres"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "porta",
@@ -207,7 +228,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "puerta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tornar",
@@ -218,7 +240,8 @@
       "regresar",
       "tornar",
       "volver"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "lloc",
@@ -230,7 +253,8 @@
       "lugar",
       "puesto",
       "sitio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pare",
@@ -239,7 +263,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "padre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "primer",
@@ -250,7 +275,8 @@
       "primer",
       "primero",
       "primo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dues",
@@ -259,7 +285,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "dos"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dona",
@@ -269,7 +296,8 @@
     "candidateTranslationsEs": [
       "fémina",
       "mujer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "terra",
@@ -278,7 +306,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tierra"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vegada",
@@ -287,7 +316,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "vez"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "deixar",
@@ -296,7 +326,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "dejar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mica",
@@ -307,7 +338,8 @@
       "granito",
       "mica",
       "triza"
-    ]
+    ],
+    "detectedExpression": "una mica"
   },
   {
     "id": "mare",
@@ -316,7 +348,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "madre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dins",
@@ -325,7 +358,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "dentro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "posar",
@@ -335,7 +369,8 @@
     "candidateTranslationsEs": [
       "poner",
       "posar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mort",
@@ -345,7 +380,8 @@
     "candidateTranslationsEs": [
       "muerte",
       "muerto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gent",
@@ -354,7 +390,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "gente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "passar",
@@ -363,7 +400,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "pasar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sentir",
@@ -374,7 +412,8 @@
       "escuchar",
       "oír",
       "sentir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cara",
@@ -383,7 +422,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cara"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sota",
@@ -395,7 +435,8 @@
       "debajo",
       "so",
       "sota"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mirar",
@@ -404,7 +445,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "mirar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "punt",
@@ -415,7 +457,8 @@
       "puntillo",
       "punto",
       "tanto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "poder",
@@ -425,7 +468,8 @@
     "candidateTranslationsEs": [
       "poder",
       "poderío"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "costat",
@@ -434,7 +478,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "lado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "algú",
@@ -443,7 +488,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "alguien"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "arribar",
@@ -454,7 +500,8 @@
       "alcanzar",
       "arribar",
       "llegar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pensar",
@@ -463,7 +510,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "pensar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ningú",
@@ -472,7 +520,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "nadie"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "donar",
@@ -482,7 +531,8 @@
     "candidateTranslationsEs": [
       "dar",
       "donar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "trobar",
@@ -492,7 +542,8 @@
     "candidateTranslationsEs": [
       "encontrar",
       "hallar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "prou",
@@ -503,7 +554,8 @@
       "asaz",
       "basta",
       "suficientemente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "parlar",
@@ -512,7 +564,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "hablar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "saber",
@@ -521,7 +574,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "saber"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "passat",
@@ -531,7 +585,8 @@
     "candidateTranslationsEs": [
       "pasado",
       "remetido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "doncs",
@@ -540,7 +595,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "pues"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ciutat",
@@ -549,7 +605,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ciudad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estar",
@@ -559,7 +616,8 @@
     "candidateTranslationsEs": [
       "encontrar",
       "estar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "segons",
@@ -568,7 +626,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "según"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sant",
@@ -578,7 +637,8 @@
     "candidateTranslationsEs": [
       "san",
       "santo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "massa",
@@ -588,7 +648,8 @@
     "candidateTranslationsEs": [
       "demasiado",
       "masa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mans",
@@ -597,7 +658,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "manso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "preguntar",
@@ -606,7 +668,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "preguntar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "allò",
@@ -615,7 +678,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "aquello"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "banda",
@@ -624,7 +688,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "banda"
-    ]
+    ],
+    "detectedExpression": "d'altra banda"
   },
   {
     "id": "hora",
@@ -633,7 +698,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "hora"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sinó",
@@ -642,7 +708,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "sino"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "damunt",
@@ -651,7 +718,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "encima"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sortir",
@@ -660,7 +728,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "salir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fill",
@@ -669,7 +738,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "hijo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aigua",
@@ -678,7 +748,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "agua"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "allà",
@@ -687,7 +758,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "allá"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llavors",
@@ -696,7 +768,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "entonces"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "força",
@@ -705,7 +778,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "fuerza"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "millor",
@@ -714,7 +788,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "mejor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gairebé",
@@ -723,7 +798,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "casi"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quatre",
@@ -732,7 +808,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "cuatro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sentit",
@@ -741,7 +818,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sentido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quedar",
@@ -750,7 +828,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "quedar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nosaltres",
@@ -759,7 +838,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "nosotros"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "començar",
@@ -769,7 +849,8 @@
     "candidateTranslationsEs": [
       "comenzar",
       "empezar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "qualsevol",
@@ -780,18 +861,20 @@
       "cualquier",
       "cualquiera",
       "quienquiera"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mena",
     "word": "mena",
-    "exampleCa": "Nadal en dijous, cada gallina mena cent polls.",
+    "exampleCa": "El seu contingut no té cap mena de drets.",
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "calaña",
       "mena",
       "tipo"
-    ]
+    ],
+    "detectedExpression": "mena de"
   },
   {
     "id": "clar",
@@ -800,7 +883,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "claro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nova",
@@ -809,7 +893,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "nova"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "poble",
@@ -818,7 +903,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pueblo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "avui",
@@ -827,7 +913,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "hoy"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "forma",
@@ -837,7 +924,8 @@
     "candidateTranslationsEs": [
       "forma",
       "horma"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "general",
@@ -846,7 +934,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "general"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fora",
@@ -856,7 +945,8 @@
     "candidateTranslationsEs": [
       "afuera",
       "fuera"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "camí",
@@ -865,7 +955,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "camino"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "guerra",
@@ -874,7 +965,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "guerra"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "país",
@@ -883,7 +975,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "país"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "història",
@@ -892,7 +985,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "historia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "menys",
@@ -901,7 +995,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "menos"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "darrere",
@@ -911,7 +1006,8 @@
     "candidateTranslationsEs": [
       "detrás",
       "trasero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "entrar",
@@ -920,7 +1016,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "entrar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cinc",
@@ -929,7 +1026,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "cinco"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llum",
@@ -939,7 +1037,8 @@
     "candidateTranslationsEs": [
       "luz",
       "lámpara"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "agafar",
@@ -949,7 +1048,8 @@
     "candidateTranslationsEs": [
       "asir",
       "coger"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "taula",
@@ -959,7 +1059,8 @@
     "candidateTranslationsEs": [
       "mesa",
       "tabla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "molts",
@@ -968,7 +1069,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "muchos"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "jove",
@@ -977,7 +1079,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "joven"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "persona",
@@ -986,7 +1089,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "persona"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ahir",
@@ -995,7 +1099,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "ayer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "prop",
@@ -1004,7 +1109,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "cerca"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "treure",
@@ -1014,7 +1120,8 @@
     "candidateTranslationsEs": [
       "entresacar",
       "sacar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "explicar",
@@ -1024,7 +1131,8 @@
     "candidateTranslationsEs": [
       "contar",
       "explicar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estic",
@@ -1033,7 +1141,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "stick"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aviat",
@@ -1042,7 +1151,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "pronto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dret",
@@ -1051,7 +1161,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "derecho"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "veritat",
@@ -1060,7 +1171,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "verdad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "carrer",
@@ -1069,7 +1181,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "calle"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "somriure",
@@ -1079,7 +1192,8 @@
     "candidateTranslationsEs": [
       "sonreír",
       "sonrisa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "feina",
@@ -1090,7 +1204,8 @@
       "curro",
       "faena",
       "trabajo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "govern",
@@ -1099,7 +1214,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "gobierno"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "família",
@@ -1108,7 +1224,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "familia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nostre",
@@ -1117,7 +1234,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "nuestro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ésser",
@@ -1126,7 +1244,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ser"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "final",
@@ -1135,7 +1254,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "final"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "canvi",
@@ -1145,7 +1265,8 @@
     "candidateTranslationsEs": [
       "cambiazo",
       "cambio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "petit",
@@ -1154,7 +1275,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "pequeño"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "important",
@@ -1163,7 +1285,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "importante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "segur",
@@ -1172,7 +1295,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "seguro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "obrir",
@@ -1181,7 +1305,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "abrir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "matí",
@@ -1190,7 +1315,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mañana"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aire",
@@ -1199,7 +1325,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "aire"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "demanar",
@@ -1209,7 +1336,8 @@
     "candidateTranslationsEs": [
       "pedir",
       "preguntar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "acord",
@@ -1218,7 +1346,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "acuerdo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llit",
@@ -1229,7 +1358,8 @@
       "cama",
       "cauce",
       "lecho"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "grup",
@@ -1238,7 +1368,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "grupo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mirada",
@@ -1247,7 +1378,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mirada"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nord",
@@ -1256,7 +1388,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "norte"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tard",
@@ -1265,7 +1398,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "tarde"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tampoc",
@@ -1274,7 +1408,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "tampoco"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "silenci",
@@ -1283,7 +1418,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "silencio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estona",
@@ -1292,7 +1428,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "rato"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "idea",
@@ -1301,7 +1438,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "idea"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "obra",
@@ -1310,7 +1448,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "obra"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "amor",
@@ -1319,7 +1458,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "amor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sala",
@@ -1328,7 +1468,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sala"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sobretot",
@@ -1337,7 +1478,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sobretodo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "terme",
@@ -1346,7 +1488,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "término"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cotxe",
@@ -1355,7 +1498,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "coche"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "respondre",
@@ -1364,7 +1508,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "responder"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "boca",
@@ -1373,7 +1518,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "boca"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llibre",
@@ -1382,7 +1528,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "libro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llarg",
@@ -1391,7 +1538,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "largo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quin",
@@ -1403,7 +1551,8 @@
       "menudo",
       "qué",
       "vaya"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "església",
@@ -1412,7 +1561,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "iglesia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "caure",
@@ -1421,7 +1571,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "caer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vell",
@@ -1430,7 +1581,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "viejo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "situació",
@@ -1439,7 +1591,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "situación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vista",
@@ -1448,7 +1601,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "vista"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "possible",
@@ -1457,7 +1611,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "posible"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fons",
@@ -1466,7 +1621,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "fondo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cent",
@@ -1476,7 +1632,8 @@
     "candidateTranslationsEs": [
       "cien",
       "ciento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "municipi",
@@ -1485,7 +1642,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "municipio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "habitació",
@@ -1494,7 +1652,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "habitación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "president",
@@ -1503,7 +1662,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "presidente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "partit",
@@ -1513,7 +1673,8 @@
     "candidateTranslationsEs": [
       "encuentro",
       "partido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "segle",
@@ -1522,7 +1683,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "siglo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sovint",
@@ -1531,7 +1693,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "frecuentemente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "policia",
@@ -1541,7 +1704,8 @@
     "candidateTranslationsEs": [
       "policía",
       "polizonte"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "centre",
@@ -1550,7 +1714,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "centro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sang",
@@ -1559,7 +1724,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sangre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "acabar",
@@ -1569,7 +1735,8 @@
     "candidateTranslationsEs": [
       "acabar",
       "terminar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "política",
@@ -1578,7 +1745,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "política"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "maria",
@@ -1587,7 +1755,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "maría"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "finalment",
@@ -1597,7 +1766,8 @@
     "candidateTranslationsEs": [
       "finalmente",
       "postreramente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "venir",
@@ -1606,7 +1776,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "venir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "camp",
@@ -1615,7 +1786,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "campo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "voltant",
@@ -1624,7 +1796,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "alrededor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "través",
@@ -1633,7 +1806,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "través"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "partir",
@@ -1642,7 +1816,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "partir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "amic",
@@ -1651,7 +1826,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "amigo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "causa",
@@ -1660,7 +1836,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "causa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "català",
@@ -1669,7 +1846,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "catalán"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "segon",
@@ -1678,7 +1856,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "segundo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cert",
@@ -1687,7 +1866,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "cierto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "continuar",
@@ -1697,7 +1877,8 @@
     "candidateTranslationsEs": [
       "continuar",
       "seguir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "resta",
@@ -1706,7 +1887,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "resto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tipus",
@@ -1715,7 +1897,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tipo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "germà",
@@ -1724,7 +1907,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "hermano"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "just",
@@ -1733,7 +1917,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "justo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vint",
@@ -1742,7 +1927,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "veinte"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "servir",
@@ -1752,7 +1938,8 @@
     "candidateTranslationsEs": [
       "hacerlasveces",
       "servir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "compte",
@@ -1762,7 +1949,8 @@
     "candidateTranslationsEs": [
       "cuenta",
       "cuidado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "lluny",
@@ -1771,7 +1959,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "lejos"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "paraula",
@@ -1780,7 +1969,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "palabra"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aixecar",
@@ -1789,7 +1979,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "levantar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "exemple",
@@ -1798,7 +1989,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ejemplo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "color",
@@ -1807,7 +1999,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "color"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "paper",
@@ -1816,7 +2009,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "papel"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dreta",
@@ -1825,7 +2019,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "derecha"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "prendre",
@@ -1835,7 +2030,8 @@
     "candidateTranslationsEs": [
       "prender",
       "tomar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "endavant",
@@ -1844,7 +2040,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "adelante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llengua",
@@ -1853,7 +2050,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "lengua"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "realitat",
@@ -1862,7 +2060,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "realidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "treball",
@@ -1871,7 +2070,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "trabajo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "portar",
@@ -1882,7 +2082,8 @@
       "llevar",
       "portar",
       "traer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "buscar",
@@ -1891,7 +2092,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "buscar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "viure",
@@ -1900,7 +2102,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "vivir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "únic",
@@ -1909,7 +2112,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "único"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "menjar",
@@ -1919,7 +2123,8 @@
     "candidateTranslationsEs": [
       "comer",
       "comida"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llei",
@@ -1928,7 +2133,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ley"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "baix",
@@ -1939,7 +2145,8 @@
       "abajo",
       "bajo",
       "bajío"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "coll",
@@ -1949,7 +2156,8 @@
     "candidateTranslationsEs": [
       "cuello",
       "gollete"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mira",
@@ -1958,7 +2166,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mira"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cridar",
@@ -1968,7 +2177,8 @@
     "candidateTranslationsEs": [
       "gritar",
       "llamar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "relació",
@@ -1977,7 +2187,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "relación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aconseguir",
@@ -1988,7 +2199,8 @@
       "alcanzar",
       "conseguir",
       "lograr"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gens",
@@ -1997,7 +2209,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "nada"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "acabat",
@@ -2006,7 +2219,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "acabado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "baixa",
@@ -2015,7 +2229,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "baja"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "perdre",
@@ -2024,7 +2239,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "perder"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "setmana",
@@ -2033,7 +2249,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "semana"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "girar",
@@ -2044,7 +2261,8 @@
       "girar",
       "rotar",
       "volver"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pregunta",
@@ -2053,7 +2271,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pregunta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "població",
@@ -2062,7 +2281,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "población"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "seguir",
@@ -2071,7 +2291,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "seguir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "morir",
@@ -2081,7 +2302,8 @@
     "candidateTranslationsEs": [
       "fallecer",
       "morir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "direcció",
@@ -2091,7 +2313,8 @@
     "candidateTranslationsEs": [
       "dirección",
       "jefatura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escola",
@@ -2100,7 +2323,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "escuela"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "interior",
@@ -2109,7 +2333,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "interior"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pell",
@@ -2120,7 +2345,8 @@
       "corteza",
       "pellejo",
       "piel"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "entendre",
@@ -2129,7 +2355,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "entender"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "posat",
@@ -2138,7 +2365,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ademán"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sistema",
@@ -2147,7 +2375,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sistema"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fort",
@@ -2158,7 +2387,8 @@
       "duro",
       "fuerte",
       "recio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "enrere",
@@ -2167,7 +2397,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "atrás"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "seguit",
@@ -2177,7 +2408,8 @@
     "candidateTranslationsEs": [
       "seguido",
       "serie"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "esperar",
@@ -2187,7 +2419,8 @@
     "candidateTranslationsEs": [
       "aguardar",
       "esperar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "roba",
@@ -2196,7 +2429,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ropa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "informació",
@@ -2205,7 +2439,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "información"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "major",
@@ -2214,7 +2449,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "mayor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "adonar",
@@ -2224,7 +2460,8 @@
     "candidateTranslationsEs": [
       "darcuenta",
       "percatar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "problema",
@@ -2233,7 +2470,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "problema"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "recordar",
@@ -2243,7 +2481,8 @@
     "candidateTranslationsEs": [
       "acordar",
       "recordar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "finestra",
@@ -2252,7 +2491,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ventana"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sola",
@@ -2261,7 +2501,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "suela"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "curs",
@@ -2270,7 +2511,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "curso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dalt",
@@ -2280,7 +2522,8 @@
     "candidateTranslationsEs": [
       "arriba",
       "suso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "entrada",
@@ -2289,7 +2532,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "entrada"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tarda",
@@ -2298,7 +2542,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tarde"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "província",
@@ -2307,7 +2552,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "provincia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "majoria",
@@ -2316,7 +2562,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mayoría"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "riure",
@@ -2327,7 +2574,8 @@
       "pitorrear",
       "reír",
       "risa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "braç",
@@ -2336,7 +2584,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "brazo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "igual",
@@ -2345,7 +2594,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "igual"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "blanc",
@@ -2354,7 +2604,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "blanco"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "edifici",
@@ -2363,7 +2614,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "edificio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vora",
@@ -2374,7 +2626,8 @@
       "borde",
       "orilla",
       "vera"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pedra",
@@ -2384,7 +2637,8 @@
     "candidateTranslationsEs": [
       "pedrisco",
       "piedra"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "atenció",
@@ -2393,7 +2647,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "atención"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "difícil",
@@ -2402,7 +2657,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "difícil"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "època",
@@ -2411,7 +2667,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "época"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "negre",
@@ -2421,7 +2678,8 @@
     "candidateTranslationsEs": [
       "negro",
       "tinto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "esquerra",
@@ -2430,7 +2688,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "izquierda"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "societat",
@@ -2439,7 +2698,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sociedad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "resposta",
@@ -2448,7 +2708,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "respuesta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tancar",
@@ -2458,7 +2719,8 @@
     "candidateTranslationsEs": [
       "cerrar",
       "encerrar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "marit",
@@ -2467,7 +2729,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "marido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "social",
@@ -2476,7 +2739,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "social"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sort",
@@ -2485,7 +2749,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "suerte"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "carta",
@@ -2494,7 +2759,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "carta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "expressió",
@@ -2503,7 +2769,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "expresión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ordre",
@@ -2512,7 +2779,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "orden"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tocar",
@@ -2521,7 +2789,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "tocar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "públic",
@@ -2530,7 +2799,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "público"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "efecte",
@@ -2539,7 +2809,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "efecto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "edat",
@@ -2548,7 +2819,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "edad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dubte",
@@ -2557,7 +2829,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "duda"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "decidir",
@@ -2566,7 +2839,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "decidir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "parell",
@@ -2576,7 +2850,8 @@
     "candidateTranslationsEs": [
       "par",
       "parejo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llegir",
@@ -2585,7 +2860,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "leer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cambra",
@@ -2594,7 +2870,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cámara"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escriure",
@@ -2603,7 +2880,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "escribir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "castell",
@@ -2612,7 +2890,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "castillo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "director",
@@ -2621,7 +2900,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "director"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "conèixer",
@@ -2630,7 +2910,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "conocer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vestit",
@@ -2641,7 +2922,8 @@
       "traje",
       "trajeado",
       "vestido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "antic",
@@ -2650,7 +2932,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "antiguo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "música",
@@ -2659,7 +2942,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "música"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "córrer",
@@ -2668,7 +2952,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "correr"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "servei",
@@ -2678,7 +2963,8 @@
     "candidateTranslationsEs": [
       "saque",
       "servicio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "respecte",
@@ -2688,7 +2974,8 @@
     "candidateTranslationsEs": [
       "respecto",
       "respeto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vent",
@@ -2697,7 +2984,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "viento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "doctor",
@@ -2706,7 +2994,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "doctor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "esquena",
@@ -2715,7 +3004,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "espalda"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "presència",
@@ -2724,7 +3014,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "presencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mestre",
@@ -2734,7 +3025,8 @@
     "candidateTranslationsEs": [
       "maese",
       "maestro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "evitar",
@@ -2743,7 +3035,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "evitar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "semblar",
@@ -2752,7 +3045,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "parecer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gest",
@@ -2761,7 +3055,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "gesto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "afegir",
@@ -2770,7 +3065,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "añadir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "avall",
@@ -2779,7 +3075,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "abajo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "especialment",
@@ -2788,7 +3085,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "especialmente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "interès",
@@ -2797,7 +3095,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "interés"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "procés",
@@ -2806,7 +3105,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "proceso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "últim",
@@ -2815,7 +3115,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "último"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cuina",
@@ -2824,7 +3125,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cocina"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "viatge",
@@ -2833,7 +3135,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "viaje"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "amunt",
@@ -2842,7 +3145,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "arriba"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mantenir",
@@ -2851,7 +3155,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "mantener"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "greu",
@@ -2860,7 +3165,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "grave"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fred",
@@ -2869,7 +3175,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "frío"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "moviment",
@@ -2878,7 +3185,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "movimiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "espai",
@@ -2887,7 +3195,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "espacio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "front",
@@ -2896,7 +3205,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "frente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "empresa",
@@ -2905,7 +3215,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "empresa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "qüestió",
@@ -2914,7 +3225,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cuestión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "voler",
@@ -2923,7 +3235,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "querer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "illa",
@@ -2932,7 +3245,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "isla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "consell",
@@ -2942,7 +3256,8 @@
     "candidateTranslationsEs": [
       "concejo",
       "consejo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "creure",
@@ -2951,7 +3266,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "creer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pujar",
@@ -2960,7 +3276,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "subir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "paret",
@@ -2969,7 +3286,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pared"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "capital",
@@ -2978,7 +3296,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "capital"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tret",
@@ -2990,7 +3309,8 @@
       "disparo",
       "pistoletazo",
       "rasgo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "principi",
@@ -2999,7 +3319,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "principio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vespre",
@@ -3008,7 +3329,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "anochecer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "creu",
@@ -3017,7 +3339,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cruz"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fusta",
@@ -3026,7 +3349,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "madera"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "zona",
@@ -3035,7 +3359,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "zona"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "costa",
@@ -3045,7 +3370,8 @@
     "candidateTranslationsEs": [
       "costa",
       "cuesta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tema",
@@ -3054,7 +3380,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tema"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "rebre",
@@ -3063,7 +3390,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "recibir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "matar",
@@ -3073,7 +3401,8 @@
     "candidateTranslationsEs": [
       "matar",
       "victimar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aspecte",
@@ -3083,7 +3412,8 @@
     "candidateTranslationsEs": [
       "aspecto",
       "catadura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "enllà",
@@ -3092,7 +3422,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "acullá"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "diferent",
@@ -3102,7 +3433,8 @@
     "candidateTranslationsEs": [
       "diferente",
       "distinto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nacional",
@@ -3111,7 +3443,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "nacional"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "intentar",
@@ -3120,7 +3453,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "intentar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ajudar",
@@ -3130,7 +3464,8 @@
     "candidateTranslationsEs": [
       "ayudar",
       "concomitar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "rostre",
@@ -3140,7 +3475,8 @@
     "candidateTranslationsEs": [
       "rostro",
       "tez"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sector",
@@ -3149,7 +3485,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sector"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "corrent",
@@ -3159,7 +3496,8 @@
     "candidateTranslationsEs": [
       "corriente",
       "tanto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pressa",
@@ -3168,7 +3506,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "prisa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "valor",
@@ -3177,7 +3516,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "valor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "principal",
@@ -3186,7 +3526,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "principal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "parar",
@@ -3195,7 +3536,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "parar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "demà",
@@ -3204,7 +3546,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mañana"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "seguretat",
@@ -3213,7 +3556,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "seguridad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nombre",
@@ -3222,7 +3566,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "número"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fàcil",
@@ -3231,7 +3576,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "fácil"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "capaç",
@@ -3240,7 +3586,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "capaz"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "volta",
@@ -3250,7 +3597,8 @@
     "candidateTranslationsEs": [
       "bóveda",
       "vuelta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estrany",
@@ -3259,7 +3607,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "extraño"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "allí",
@@ -3268,7 +3617,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "allí"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vuit",
@@ -3277,7 +3627,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "ocho"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "imatge",
@@ -3286,7 +3637,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "imagen"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "favor",
@@ -3295,7 +3647,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "favor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "contestar",
@@ -3304,7 +3657,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "contestar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "central",
@@ -3313,7 +3667,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "central"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "telèfon",
@@ -3322,7 +3677,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "teléfono"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "conegut",
@@ -3332,7 +3688,8 @@
     "candidateTranslationsEs": [
       "conocido",
       "consabido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pocs",
@@ -3341,7 +3698,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "pocos"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "caràcter",
@@ -3350,7 +3708,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "carácter"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mercat",
@@ -3359,7 +3718,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mercado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "natural",
@@ -3368,7 +3728,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "natural"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "equip",
@@ -3377,7 +3738,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "equipo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "professor",
@@ -3386,7 +3748,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "profesor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sensació",
@@ -3395,7 +3758,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sensación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "realment",
@@ -3404,7 +3768,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "realmente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dormir",
@@ -3413,7 +3778,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "dormir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "importància",
@@ -3422,7 +3788,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "importancia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "treballar",
@@ -3431,7 +3798,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "trabajar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "personal",
@@ -3440,7 +3808,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "personal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mesura",
@@ -3451,7 +3820,8 @@
       "comedimiento",
       "medida",
       "mensura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "motiu",
@@ -3460,7 +3830,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "motivo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vall",
@@ -3469,7 +3840,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "valle"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "blanca",
@@ -3478,7 +3850,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "urraca"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "lliure",
@@ -3487,7 +3860,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "libre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "metge",
@@ -3496,7 +3870,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "médico"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "total",
@@ -3506,7 +3881,8 @@
     "candidateTranslationsEs": [
       "cabal",
       "total"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "base",
@@ -3515,7 +3891,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "base"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "espanyol",
@@ -3524,7 +3901,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "español"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "festa",
@@ -3534,7 +3912,8 @@
     "candidateTranslationsEs": [
       "asueto",
       "fiesta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "conversa",
@@ -3543,7 +3922,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "conversación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "baixar",
@@ -3553,7 +3933,8 @@
     "candidateTranslationsEs": [
       "apear",
       "bajar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dolor",
@@ -3562,7 +3943,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "dolor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cafè",
@@ -3571,7 +3953,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "café"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "futur",
@@ -3580,7 +3963,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "futuro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "universitat",
@@ -3590,7 +3974,8 @@
     "candidateTranslationsEs": [
       "universidad",
       "universitat"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "acció",
@@ -3599,7 +3984,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "acción"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "especial",
@@ -3608,7 +3994,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "especial"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gust",
@@ -3617,7 +4004,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "gusto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "diari",
@@ -3626,7 +4014,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "diario"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "bosc",
@@ -3635,7 +4024,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "bosque"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "companyia",
@@ -3645,7 +4035,8 @@
     "candidateTranslationsEs": [
       "compaña",
       "compañía"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "autor",
@@ -3654,7 +4045,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "autor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "marxar",
@@ -3663,7 +4055,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "marchar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "línia",
@@ -3673,7 +4066,8 @@
     "candidateTranslationsEs": [
       "línea",
       "renglón"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estiu",
@@ -3683,7 +4077,8 @@
     "candidateTranslationsEs": [
       "estío",
       "verano"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vila",
@@ -3692,7 +4087,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "villa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "soroll",
@@ -3701,7 +4097,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ruido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "espera",
@@ -3710,7 +4107,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "espera"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escala",
@@ -3721,7 +4119,8 @@
       "escala",
       "escalera",
       "trasquilón"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "canviar",
@@ -3731,7 +4130,8 @@
     "candidateTranslationsEs": [
       "cambiar",
       "canjear"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "superior",
@@ -3740,7 +4140,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "superior"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nivell",
@@ -3749,7 +4150,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "nivel"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cavall",
@@ -3758,7 +4160,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "caballo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "generalitat",
@@ -3767,7 +4170,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "generalidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "carretera",
@@ -3776,7 +4180,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "carretera"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "esperit",
@@ -3785,7 +4190,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "espíritu"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sopar",
@@ -3795,7 +4201,8 @@
     "candidateTranslationsEs": [
       "cena",
       "cenar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "càrrec",
@@ -3804,7 +4211,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cargo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "classe",
@@ -3813,7 +4221,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "clase"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "presentar",
@@ -3822,7 +4231,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "presentar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "conjunt",
@@ -3831,7 +4241,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "conjunto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "anterior",
@@ -3840,7 +4251,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "anterior"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cadira",
@@ -3849,7 +4261,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "silla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "parla",
@@ -3858,7 +4271,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "habla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "necessitat",
@@ -3868,7 +4282,8 @@
     "candidateTranslationsEs": [
       "necesariedad",
       "necesidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vostre",
@@ -3877,7 +4292,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "vuestro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "actual",
@@ -3886,7 +4302,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "actual"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "instant",
@@ -3895,7 +4312,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "instante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "plaça",
@@ -3904,7 +4322,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "plaza"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "següent",
@@ -3913,7 +4332,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "siguiente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "valència",
@@ -3922,7 +4342,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "valencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vosaltres",
@@ -3931,7 +4352,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "vosotros"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "figura",
@@ -3940,7 +4362,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "figura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "possibilitat",
@@ -3949,7 +4372,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "posibilidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estudi",
@@ -3958,7 +4382,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "estudio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "acostar",
@@ -3968,7 +4393,8 @@
     "candidateTranslationsEs": [
       "acercar",
       "arrimar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sorpresa",
@@ -3978,7 +4404,8 @@
     "candidateTranslationsEs": [
       "asombro",
       "sorpresa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "activitat",
@@ -3987,7 +4414,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "actividad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "despatx",
@@ -3996,7 +4424,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "despacho"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "francès",
@@ -4005,7 +4434,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "francés"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comprar",
@@ -4015,7 +4445,8 @@
     "candidateTranslationsEs": [
       "comprar",
       "mercar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "enmig",
@@ -4024,7 +4455,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "enmedio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escrit",
@@ -4034,7 +4466,8 @@
     "candidateTranslationsEs": [
       "escrito",
       "presente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "clau",
@@ -4046,7 +4479,8 @@
       "clavo",
       "fulcral",
       "llave"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "malament",
@@ -4056,7 +4490,8 @@
     "candidateTranslationsEs": [
       "mal",
       "malamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "trenta",
@@ -4065,7 +4500,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "treinta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comunitat",
@@ -4075,7 +4511,8 @@
     "candidateTranslationsEs": [
       "comunidad",
       "comunitat"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "lluna",
@@ -4084,7 +4521,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "luna"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "impossible",
@@ -4093,7 +4531,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "imposible"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llibertat",
@@ -4102,7 +4541,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "libertad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "moure",
@@ -4111,7 +4551,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "mover"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "exèrcit",
@@ -4120,7 +4561,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ejército"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "número",
@@ -4129,7 +4571,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "número"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "segurament",
@@ -4138,7 +4581,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "seguramente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "muntanya",
@@ -4148,7 +4592,8 @@
     "candidateTranslationsEs": [
       "montaña",
       "monte"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "memòria",
@@ -4157,7 +4602,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "memoria"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "polític",
@@ -4166,7 +4612,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "político"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "economia",
@@ -4175,7 +4622,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "economía"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "article",
@@ -4184,7 +4632,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "artículo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "projecte",
@@ -4193,7 +4642,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "proyecto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "precisament",
@@ -4203,7 +4653,8 @@
     "candidateTranslationsEs": [
       "certeramente",
       "precisamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "meitat",
@@ -4212,7 +4663,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mitad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "producció",
@@ -4221,7 +4673,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "producción"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "posició",
@@ -4230,7 +4683,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "posición"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "posa",
@@ -4239,7 +4693,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pose"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ànima",
@@ -4249,7 +4704,8 @@
     "candidateTranslationsEs": [
       "alma",
       "ánima"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "palau",
@@ -4258,7 +4714,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "palacio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "propi",
@@ -4267,7 +4724,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "propio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "civil",
@@ -4276,7 +4734,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "civil"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "control",
@@ -4285,7 +4744,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "control"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "programa",
@@ -4294,7 +4754,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "programa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "probablement",
@@ -4303,7 +4764,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "probablemente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "resultat",
@@ -4312,7 +4774,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "resultado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "carn",
@@ -4321,7 +4784,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "carne"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "reconèixer",
@@ -4330,7 +4794,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "reconocer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "serra",
@@ -4339,7 +4804,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sierra"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cultura",
@@ -4348,7 +4814,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cultura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "descobrir",
@@ -4357,7 +4824,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "descubrir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "falta",
@@ -4366,7 +4834,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "falta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "decisió",
@@ -4376,7 +4845,8 @@
     "candidateTranslationsEs": [
       "decisión",
       "fallo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quant",
@@ -4387,7 +4857,8 @@
       "cuan",
       "cuanto",
       "cuánto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "punta",
@@ -4398,7 +4869,8 @@
       "encaje",
       "punta",
       "puntilla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "banc",
@@ -4407,7 +4879,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "banco"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "títol",
@@ -4416,7 +4889,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "título"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "suport",
@@ -4427,7 +4901,8 @@
       "apoyo",
       "respaldo",
       "soporte"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "prova",
@@ -4436,7 +4911,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "prueba"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pena",
@@ -4445,7 +4921,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pena"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ministre",
@@ -4454,7 +4931,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ministro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "regió",
@@ -4463,7 +4941,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "región"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "faig",
@@ -4472,7 +4951,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "haya"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "preu",
@@ -4481,7 +4961,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "precio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "objectiu",
@@ -4490,7 +4971,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "objetivo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "teatre",
@@ -4499,7 +4981,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "teatro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quasi",
@@ -4509,7 +4992,8 @@
     "candidateTranslationsEs": [
       "casi",
       "cuasi"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "alçar",
@@ -4520,7 +5004,8 @@
       "alzar",
       "erguir",
       "levantar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "origen",
@@ -4529,7 +5014,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "origen"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "font",
@@ -4539,7 +5025,8 @@
     "candidateTranslationsEs": [
       "fuente",
       "sementera"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "assegurar",
@@ -4548,7 +5035,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "asegurar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "exactament",
@@ -4557,7 +5045,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "exactamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "observar",
@@ -4566,7 +5055,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "observar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "perill",
@@ -4575,7 +5065,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "peligro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ajuda",
@@ -4584,7 +5075,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ayuda"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "desenvolupament",
@@ -4594,7 +5086,8 @@
     "candidateTranslationsEs": [
       "desarrollo",
       "desenvolvimiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ficar",
@@ -4603,7 +5096,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "meter"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "internacional",
@@ -4612,7 +5106,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "internacional"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "guàrdia",
@@ -4621,7 +5116,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "guardia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pagar",
@@ -4630,7 +5126,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "pagar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sèrie",
@@ -4639,7 +5136,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "serie"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tercer",
@@ -4649,7 +5147,8 @@
     "candidateTranslationsEs": [
       "tercer",
       "tercero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "lluís",
@@ -4658,7 +5157,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "luis"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "immediatament",
@@ -4667,7 +5167,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "inmediatamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "contacte",
@@ -4676,7 +5177,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "contacto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "acte",
@@ -4686,7 +5188,8 @@
     "candidateTranslationsEs": [
       "acto",
       "auto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "culpa",
@@ -4695,7 +5198,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "culpa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "evident",
@@ -4704,7 +5208,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "evidente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "port",
@@ -4714,7 +5219,8 @@
     "candidateTranslationsEs": [
       "porte",
       "puerto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "premi",
@@ -4723,7 +5229,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "premio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "olor",
@@ -4732,7 +5239,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "olor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "completament",
@@ -4741,7 +5249,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "completamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "esperança",
@@ -4750,7 +5259,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "esperanza"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "intenció",
@@ -4759,7 +5269,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "intención"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "decidit",
@@ -4768,7 +5279,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "decidido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "període",
@@ -4777,7 +5289,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "periodo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escoltar",
@@ -4786,7 +5299,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "escuchar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pitjor",
@@ -4795,7 +5309,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "peor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "present",
@@ -4804,7 +5319,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "presente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "oficial",
@@ -4813,7 +5329,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "oficial"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pensament",
@@ -4822,7 +5339,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pensamiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "seure",
@@ -4831,7 +5349,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "tomarasiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ombra",
@@ -4840,7 +5359,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sombra"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "construcció",
@@ -4850,7 +5370,8 @@
     "candidateTranslationsEs": [
       "albañilería",
       "construcción"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quantitat",
@@ -4859,7 +5380,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cantidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "directament",
@@ -4868,7 +5390,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "directamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tros",
@@ -4879,7 +5402,8 @@
       "pedazo",
       "trecho",
       "trozo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ràpidament",
@@ -4888,7 +5412,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "rápidamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "guanyar",
@@ -4898,7 +5423,8 @@
     "candidateTranslationsEs": [
       "ganar",
       "granjear"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "defensa",
@@ -4907,7 +5433,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "defensa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "visita",
@@ -4916,7 +5443,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "visita"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "militar",
@@ -4925,7 +5453,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "militar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "distància",
@@ -4934,7 +5463,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "distancia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "imaginar",
@@ -4943,7 +5473,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "imaginar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "voluntat",
@@ -4952,7 +5483,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "voluntad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "esforç",
@@ -4961,7 +5493,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "esfuerzo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "parlant",
@@ -4971,7 +5504,8 @@
     "candidateTranslationsEs": [
       "hablante",
       "parlante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "departament",
@@ -4980,7 +5514,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "departamento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fosc",
@@ -4990,7 +5525,8 @@
     "candidateTranslationsEs": [
       "obscuro",
       "oscuro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "convertir",
@@ -4999,7 +5535,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "convertir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "unió",
@@ -5008,7 +5545,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "unión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "desig",
@@ -5017,7 +5555,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "deseo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "blau",
@@ -5027,7 +5566,8 @@
     "candidateTranslationsEs": [
       "azul",
       "moratón"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "èxit",
@@ -5036,7 +5576,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "éxito"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "energia",
@@ -5045,7 +5586,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "energía"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "hospital",
@@ -5054,7 +5596,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "hospital"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "objecte",
@@ -5063,7 +5606,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "objeto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comarca",
@@ -5072,7 +5616,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "comarca"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "experiència",
@@ -5082,7 +5627,8 @@
     "candidateTranslationsEs": [
       "experiencia",
       "veteranía"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "senyal",
@@ -5092,7 +5638,8 @@
     "candidateTranslationsEs": [
       "seña",
       "señal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "entorn",
@@ -5102,7 +5649,8 @@
     "candidateTranslationsEs": [
       "derredor",
       "entorno"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "existència",
@@ -5111,7 +5659,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "existencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "secret",
@@ -5121,7 +5670,8 @@
     "candidateTranslationsEs": [
       "entresijo",
       "secreto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pobre",
@@ -5130,7 +5680,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "pobre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "jardí",
@@ -5139,7 +5690,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "jardín"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "trucar",
@@ -5149,7 +5701,8 @@
     "candidateTranslationsEs": [
       "llamar",
       "trucar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "contrari",
@@ -5158,7 +5711,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "contrario"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "real",
@@ -5167,7 +5721,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "real"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "butxaca",
@@ -5176,7 +5731,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "bolsillo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "territori",
@@ -5185,7 +5741,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "territorio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "televisió",
@@ -5194,7 +5751,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "televisión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "lentament",
@@ -5203,7 +5761,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "lentamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "capacitat",
@@ -5212,7 +5771,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "capacidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "reial",
@@ -5221,7 +5781,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "real"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cinquanta",
@@ -5230,7 +5791,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "cincuenta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "feliç",
@@ -5240,7 +5802,8 @@
     "candidateTranslationsEs": [
       "dichoso",
       "feliz"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "hotel",
@@ -5249,7 +5812,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "hotel"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "redacció",
@@ -5258,7 +5822,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "redacción"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dirigir",
@@ -5267,7 +5832,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "dirigir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "justícia",
@@ -5276,7 +5842,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "justicia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "normal",
@@ -5285,7 +5852,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "normal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "enviar",
@@ -5295,7 +5863,8 @@
     "candidateTranslationsEs": [
       "enviar",
       "mandar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "local",
@@ -5304,7 +5873,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "local"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "marxa",
@@ -5314,7 +5884,8 @@
     "candidateTranslationsEs": [
       "andadura",
       "marcha"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "torre",
@@ -5323,7 +5894,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "torre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "perfectament",
@@ -5332,7 +5904,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "perfectamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "consciència",
@@ -5342,7 +5915,8 @@
     "candidateTranslationsEs": [
       "conciencia",
       "consciencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "obert",
@@ -5351,7 +5925,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "abierto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aparèixer",
@@ -5360,7 +5935,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "aparecer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mostrar",
@@ -5369,7 +5945,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "mostrar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estil",
@@ -5378,7 +5955,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "estilo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "darrer",
@@ -5388,7 +5966,8 @@
     "candidateTranslationsEs": [
       "postrero",
       "postrimero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "marc",
@@ -5398,7 +5977,8 @@
     "candidateTranslationsEs": [
       "marco",
       "portarretrato"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "popular",
@@ -5407,7 +5987,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "popular"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "república",
@@ -5416,7 +5997,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "república"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "barri",
@@ -5425,7 +6007,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "barrio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "caminar",
@@ -5435,7 +6018,8 @@
     "candidateTranslationsEs": [
       "andar",
       "caminar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "presó",
@@ -5446,7 +6030,8 @@
       "chirona",
       "cárcel",
       "prisión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tren",
@@ -5455,7 +6040,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tren"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "totalment",
@@ -5465,7 +6051,8 @@
     "candidateTranslationsEs": [
       "cabalmente",
       "totalmente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "membre",
@@ -5474,7 +6061,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "miembro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vers",
@@ -5483,7 +6071,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "verso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "lluita",
@@ -5492,7 +6081,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "lucha"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sortida",
@@ -5501,7 +6091,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "salida"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "oncle",
@@ -5510,7 +6101,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tío"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "semblant",
@@ -5521,7 +6113,8 @@
       "parecido",
       "semblante",
       "semejante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gràcia",
@@ -5533,7 +6126,8 @@
       "garbo",
       "gracejo",
       "gracia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "funció",
@@ -5542,7 +6136,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "función"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "salut",
@@ -5551,7 +6146,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "salud"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "malaltia",
@@ -5561,7 +6157,8 @@
     "candidateTranslationsEs": [
       "dolencia",
       "enfermedad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "jugar",
@@ -5570,7 +6167,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "jugar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "formació",
@@ -5579,7 +6177,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "formación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mitjana",
@@ -5590,7 +6189,8 @@
       "media",
       "mediana",
       "promedio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "indústria",
@@ -5599,7 +6199,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "industria"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "asseure",
@@ -5608,7 +6209,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "sentar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dotze",
@@ -5617,7 +6219,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "doce"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "organització",
@@ -5626,7 +6229,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "organización"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "orella",
@@ -5635,7 +6239,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "oreja"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mitjà",
@@ -5646,7 +6251,8 @@
       "mediano",
       "medio",
       "promedio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "situat",
@@ -5655,7 +6261,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "sito"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "notar",
@@ -5664,7 +6271,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "notar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "qualitat",
@@ -5674,7 +6282,8 @@
     "candidateTranslationsEs": [
       "calidad",
       "cualidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escriptor",
@@ -5683,7 +6292,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "escritor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "administració",
@@ -5692,7 +6302,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "administración"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mitjançant",
@@ -5701,7 +6312,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "mediante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "extrem",
@@ -5710,7 +6322,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "extremo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "acceptar",
@@ -5719,7 +6332,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "aceptar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mínim",
@@ -5728,7 +6342,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "mínimo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "superfície",
@@ -5737,7 +6352,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "superficie"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "considerar",
@@ -5747,7 +6363,8 @@
     "candidateTranslationsEs": [
       "barajar",
       "considerar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comprendre",
@@ -5756,7 +6373,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "comprender"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llançar",
@@ -5767,7 +6385,8 @@
       "abarrajar",
       "arrojar",
       "lanzar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pluja",
@@ -5776,7 +6395,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "lluvia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "novel-la",
@@ -5785,7 +6405,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "novela"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nota",
@@ -5794,7 +6415,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "nota"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pensant",
@@ -5803,7 +6425,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "pensante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ocasió",
@@ -5812,7 +6435,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ocasión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ferro",
@@ -5821,7 +6445,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "hierro"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estació",
@@ -5830,7 +6455,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "estación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "oferir",
@@ -5841,7 +6467,8 @@
       "deparar",
       "ofertar",
       "ofrecer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "rebut",
@@ -5850,7 +6477,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "recibo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "confiança",
@@ -5859,7 +6487,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "confianza"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vermell",
@@ -5869,7 +6498,8 @@
     "candidateTranslationsEs": [
       "bermejo",
       "rojo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cura",
@@ -5880,7 +6510,8 @@
       "cuidado",
       "cura",
       "esmero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "actitud",
@@ -5889,7 +6520,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "actitud"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "criatura",
@@ -5899,7 +6531,8 @@
     "candidateTranslationsEs": [
       "criatura",
       "crío"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pres",
@@ -5908,7 +6541,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "preso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "anglès",
@@ -5917,7 +6551,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "inglés"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "rosa",
@@ -5928,7 +6563,8 @@
       "palomita",
       "palomitademaíz",
       "rosa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "copa",
@@ -5937,7 +6573,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "copa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "institut",
@@ -5946,7 +6583,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "instituto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "diferència",
@@ -5955,7 +6593,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "diferencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "investigació",
@@ -5964,7 +6603,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "investigación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "grau",
@@ -5974,7 +6614,8 @@
     "candidateTranslationsEs": [
       "grado",
       "grao"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quinze",
@@ -5983,7 +6624,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "quince"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dinar",
@@ -5993,7 +6635,8 @@
     "candidateTranslationsEs": [
       "comida",
       "dinar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "crisi",
@@ -6002,7 +6645,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "crisis"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ambient",
@@ -6011,7 +6655,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ambiente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mostra",
@@ -6020,7 +6665,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "muestra"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "repetir",
@@ -6029,7 +6675,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "repetir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "diumenge",
@@ -6038,7 +6685,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "domingo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pols",
@@ -6048,7 +6696,8 @@
     "candidateTranslationsEs": [
       "polvo",
       "pulso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "reunió",
@@ -6057,7 +6706,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "reunión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fugir",
@@ -6066,7 +6716,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "huir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "opinió",
@@ -6075,7 +6726,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "opinión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "jutge",
@@ -6084,7 +6736,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "juez"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "visió",
@@ -6093,7 +6746,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "visión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "beure",
@@ -6102,7 +6756,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "beber"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "espatlla",
@@ -6112,7 +6767,8 @@
     "candidateTranslationsEs": [
       "hombro",
       "paletilla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tirar",
@@ -6122,7 +6778,8 @@
     "candidateTranslationsEs": [
       "echar",
       "tirar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "naturalment",
@@ -6131,7 +6788,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "naturalmente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "hivern",
@@ -6140,7 +6798,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "invierno"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "foscor",
@@ -6150,7 +6809,8 @@
     "candidateTranslationsEs": [
       "obscuridad",
       "oscuridad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vidre",
@@ -6160,7 +6820,8 @@
     "candidateTranslationsEs": [
       "cristal",
       "vidrio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "desaparèixer",
@@ -6169,7 +6830,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "desaparecer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quaranta",
@@ -6178,7 +6840,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "cuarenta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "planta",
@@ -6187,7 +6850,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "planta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "obtenir",
@@ -6196,7 +6860,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "obtener"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "enorme",
@@ -6205,7 +6870,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "enorme"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "capítol",
@@ -6215,7 +6881,8 @@
     "candidateTranslationsEs": [
       "cabildo",
       "capítulo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "bossa",
@@ -6225,7 +6892,8 @@
     "candidateTranslationsEs": [
       "bolsa",
       "bolso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "simplement",
@@ -6234,7 +6902,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "simplemente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "plorar",
@@ -6243,7 +6912,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "llorar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "batalla",
@@ -6252,7 +6922,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "batalla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mundial",
@@ -6261,7 +6932,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "mundial"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "alegria",
@@ -6271,7 +6943,8 @@
     "candidateTranslationsEs": [
       "alborozo",
       "alegría"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vaixell",
@@ -6282,7 +6955,8 @@
       "bajel",
       "barco",
       "buque"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "actualment",
@@ -6291,7 +6965,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "actualmente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "record",
@@ -6300,7 +6975,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "recuerdo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "juny",
@@ -6309,7 +6985,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "junio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "model",
@@ -6319,7 +6996,8 @@
     "candidateTranslationsEs": [
       "dechado",
       "modelo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "caixa",
@@ -6328,7 +7006,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "caja"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comunicació",
@@ -6337,7 +7016,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "comunicación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "maig",
@@ -6346,7 +7026,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mayo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "amagar",
@@ -6356,7 +7037,8 @@
     "candidateTranslationsEs": [
       "esconder",
       "recatar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "exterior",
@@ -6365,7 +7047,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "exterior"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "roca",
@@ -6374,7 +7057,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "roca"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "buit",
@@ -6385,7 +7069,8 @@
       "hueco",
       "oquedad",
       "vacío"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "permetre",
@@ -6394,7 +7079,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "permitir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "simple",
@@ -6403,7 +7089,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "simple"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "animal",
@@ -6412,7 +7099,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "animal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "arbre",
@@ -6421,7 +7109,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "árbol"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "creació",
@@ -6430,7 +7119,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "creación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "conseqüència",
@@ -6439,7 +7129,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "consecuencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "passant",
@@ -6448,7 +7139,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pasante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "passadís",
@@ -6458,7 +7150,8 @@
     "candidateTranslationsEs": [
       "pasadizo",
       "pasillo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "deixant",
@@ -6467,7 +7160,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "estela"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "industrial",
@@ -6476,7 +7170,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "industrial"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cavaller",
@@ -6485,7 +7180,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "caballero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "règim",
@@ -6494,7 +7190,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "régimen"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pont",
@@ -6503,7 +7200,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "puente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "notícia",
@@ -6512,7 +7210,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "noticia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "començament",
@@ -6521,7 +7220,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "comienzo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "assentir",
@@ -6530,7 +7230,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "asentir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "platja",
@@ -6539,7 +7240,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "playa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "missatge",
@@ -6548,7 +7250,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mensaje"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "anomenat",
@@ -6557,7 +7260,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "llamado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gener",
@@ -6566,7 +7270,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "enero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "terrible",
@@ -6575,7 +7280,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "terrible"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "text",
@@ -6584,7 +7290,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "texto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "recerca",
@@ -6593,7 +7300,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "investigación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "despertar",
@@ -6602,7 +7310,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "despertar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "resulta",
@@ -6611,7 +7320,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "resulta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "príncep",
@@ -6620,7 +7330,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "príncipe"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "bisbe",
@@ -6629,7 +7340,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "obispo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "literatura",
@@ -6638,7 +7350,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "literatura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estructura",
@@ -6647,7 +7360,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "estructura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ajuntament",
@@ -6656,7 +7370,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ayuntamiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ment",
@@ -6665,7 +7380,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "solament",
@@ -6674,7 +7390,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "solamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llac",
@@ -6683,7 +7400,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "lago"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "racó",
@@ -6693,7 +7411,8 @@
     "candidateTranslationsEs": [
       "recoveco",
       "rincón"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estimat",
@@ -6703,7 +7422,8 @@
     "candidateTranslationsEs": [
       "estimado",
       "querido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sostre",
@@ -6712,7 +7432,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "techo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "casar",
@@ -6722,7 +7443,8 @@
     "candidateTranslationsEs": [
       "casar",
       "desposar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "honor",
@@ -6731,7 +7453,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "honor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "alemany",
@@ -6740,7 +7463,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "alemán"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "somni",
@@ -6750,7 +7474,8 @@
     "candidateTranslationsEs": [
       "ensueño",
       "sueño"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "parlament",
@@ -6759,7 +7484,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "parlamento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "company",
@@ -6770,7 +7496,8 @@
       "amigacho",
       "amigote",
       "compañero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pràctica",
@@ -6779,7 +7506,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "práctica"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "terreny",
@@ -6788,7 +7516,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "terreno"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ensenyar",
@@ -6797,7 +7526,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "enseñar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "juntament",
@@ -6806,7 +7536,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "juntamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "oportunitat",
@@ -6816,7 +7547,8 @@
     "candidateTranslationsEs": [
       "odds",
       "oportunidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "camisa",
@@ -6825,7 +7557,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "camisa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "creixement",
@@ -6834,7 +7567,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "crecimiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "matrimoni",
@@ -6843,7 +7577,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "matrimonio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "abandonar",
@@ -6852,7 +7587,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "abandonar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escena",
@@ -6861,7 +7597,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "escena"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comprovar",
@@ -6870,7 +7607,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "comprobar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llista",
@@ -6879,7 +7617,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "lista"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tribunal",
@@ -6888,7 +7627,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tribunal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pati",
@@ -6897,7 +7637,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "patio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tancat",
@@ -6908,7 +7649,8 @@
       "cercado",
       "cerrado",
       "vallado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tasca",
@@ -6917,7 +7659,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tarea"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "regne",
@@ -6926,7 +7669,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "reino"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "premsa",
@@ -6935,7 +7679,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "prensa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "setembre",
@@ -6945,7 +7690,8 @@
     "candidateTranslationsEs": [
       "septiembre",
       "setiembre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "poeta",
@@ -6954,7 +7700,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "poeta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "solució",
@@ -6963,7 +7710,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "solución"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cervell",
@@ -6973,7 +7721,8 @@
     "candidateTranslationsEs": [
       "cerebro",
       "seso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "crear",
@@ -6982,7 +7731,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "crear"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "referència",
@@ -6991,7 +7741,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "referencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "trencar",
@@ -7002,7 +7753,8 @@
       "cascar",
       "quebrantar",
       "romper"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "familiar",
@@ -7011,7 +7763,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "familiar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "quart",
@@ -7020,7 +7773,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cuarto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "teoria",
@@ -7029,7 +7783,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "teoría"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "plana",
@@ -7038,7 +7793,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "llanura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "atac",
@@ -7047,7 +7803,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ataque"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "abril",
@@ -7056,7 +7813,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "abril"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "impressió",
@@ -7065,7 +7823,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "impresión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "format",
@@ -7074,7 +7833,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "formato"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estirar",
@@ -7083,7 +7843,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "estirar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gana",
@@ -7093,7 +7854,8 @@
     "candidateTranslationsEs": [
       "gana",
       "hambre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "travessar",
@@ -7103,7 +7865,8 @@
     "candidateTranslationsEs": [
       "atravesar",
       "cruzar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "humà",
@@ -7112,7 +7875,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "humano"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "museu",
@@ -7121,7 +7885,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "museo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "saltar",
@@ -7131,7 +7896,8 @@
     "candidateTranslationsEs": [
       "saltar",
       "saltear"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "juliol",
@@ -7140,7 +7906,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "julio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comissió",
@@ -7149,7 +7916,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "comisión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "coneixement",
@@ -7158,7 +7926,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "conocimiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pràcticament",
@@ -7167,7 +7936,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "prácticamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "rellotge",
@@ -7176,7 +7946,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "reloj"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mentrestant",
@@ -7185,7 +7956,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "mientras"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "material",
@@ -7194,7 +7966,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "material"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "arribada",
@@ -7204,7 +7977,8 @@
     "candidateTranslationsEs": [
       "arribada",
       "llegada"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "salvar",
@@ -7213,7 +7987,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "salvar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "educació",
@@ -7222,7 +7997,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "educación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cinema",
@@ -7231,7 +8007,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cine"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "passada",
@@ -7241,7 +8018,8 @@
     "candidateTranslationsEs": [
       "pasada",
       "pase"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "data",
@@ -7250,7 +8028,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "fecha"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "màxim",
@@ -7259,7 +8038,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "máximo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "descobert",
@@ -7268,7 +8048,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "descubierto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "oblidar",
@@ -7277,7 +8058,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "olvidar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "matèria",
@@ -7286,7 +8068,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "materia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "produir",
@@ -7295,7 +8078,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "producir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "verd",
@@ -7304,7 +8088,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "verde"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ràpid",
@@ -7314,7 +8099,8 @@
     "candidateTranslationsEs": [
       "pronto",
       "rápido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "recuperar",
@@ -7323,7 +8109,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "recuperar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "frase",
@@ -7332,7 +8119,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "frase"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comú",
@@ -7341,7 +8129,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "común"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "club",
@@ -7350,7 +8139,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "club"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "març",
@@ -7359,7 +8149,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "marzo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "capa",
@@ -7368,7 +8159,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "capa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "costum",
@@ -7377,7 +8169,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "costumbre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comerç",
@@ -7386,7 +8179,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "comercio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "conscient",
@@ -7395,7 +8189,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "consciente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llevat",
@@ -7404,7 +8199,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "levadura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "habitual",
@@ -7413,7 +8209,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "habitual"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "assenyalar",
@@ -7422,7 +8219,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "señalar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "calor",
@@ -7431,7 +8229,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "calor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "plaer",
@@ -7440,7 +8239,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "placer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "foto",
@@ -7449,7 +8249,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "foto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "victòria",
@@ -7458,7 +8259,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "victoria"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "revista",
@@ -7467,7 +8269,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "revista"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escolta",
@@ -7476,7 +8279,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "escucha"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aprendre",
@@ -7485,7 +8289,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "aprender"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "castellà",
@@ -7494,7 +8299,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "castellano"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "papa",
@@ -7503,7 +8309,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "papa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pantalons",
@@ -7512,7 +8319,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pantalón"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "parella",
@@ -7521,7 +8329,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pareja"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "desembre",
@@ -7530,7 +8339,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "diciembre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "informe",
@@ -7539,7 +8349,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "informe"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "recollir",
@@ -7548,7 +8359,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "recoger"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "límit",
@@ -7558,7 +8370,8 @@
     "candidateTranslationsEs": [
       "linde",
       "límite"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nucli",
@@ -7567,7 +8380,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "núcleo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "bellesa",
@@ -7577,7 +8391,8 @@
     "candidateTranslationsEs": [
       "belleza",
       "hermosura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "demostrar",
@@ -7586,7 +8401,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "demostrar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tranquil",
@@ -7596,7 +8412,8 @@
     "candidateTranslationsEs": [
       "quedo",
       "tranquilo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "apartar",
@@ -7605,7 +8422,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "apartar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "posteriorment",
@@ -7614,7 +8432,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "posteriormente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "doble",
@@ -7623,7 +8442,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "doble"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "bell",
@@ -7633,7 +8453,8 @@
     "candidateTranslationsEs": [
       "bello",
       "hermoso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "evidentment",
@@ -7642,7 +8463,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "evidentemente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "econòmic",
@@ -7651,7 +8473,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "económico"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "negar",
@@ -7661,7 +8484,8 @@
     "candidateTranslationsEs": [
       "anegar",
       "negar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pausa",
@@ -7670,7 +8494,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pausa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "destí",
@@ -7679,7 +8504,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "destino"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "octubre",
@@ -7688,7 +8514,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "octubre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "crit",
@@ -7697,7 +8524,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "grito"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "calma",
@@ -7706,7 +8534,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "calma"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tractar",
@@ -7716,7 +8545,8 @@
     "candidateTranslationsEs": [
       "codear",
       "tratar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "morta",
@@ -7725,7 +8555,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "muerta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "propietat",
@@ -7734,7 +8565,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "propiedad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "violència",
@@ -7743,7 +8575,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "violencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llenguatge",
@@ -7752,7 +8585,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "lenguaje"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "manca",
@@ -7761,7 +8595,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "carencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "volum",
@@ -7770,7 +8605,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "volumen"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "municipal",
@@ -7779,7 +8615,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "municipal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "original",
@@ -7788,7 +8625,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "original"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "estudiar",
@@ -7797,7 +8635,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "estudiar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pel-lícula",
@@ -7806,7 +8645,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "película"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "malalt",
@@ -7816,7 +8656,8 @@
     "candidateTranslationsEs": [
       "doliente",
       "enfermo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "termes",
@@ -7825,7 +8666,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "termas"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cultural",
@@ -7834,7 +8676,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "cultural"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "contingut",
@@ -7843,7 +8686,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "contenido"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "particular",
@@ -7852,7 +8696,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "particular"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "fiscal",
@@ -7861,7 +8706,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "fiscal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "interessant",
@@ -7870,7 +8716,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "interesante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "influència",
@@ -7879,7 +8726,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "influencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tallar",
@@ -7889,7 +8737,8 @@
     "candidateTranslationsEs": [
       "cortar",
       "tallar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "forat",
@@ -7899,7 +8748,8 @@
     "candidateTranslationsEs": [
       "agujero",
       "boquete"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sentiment",
@@ -7908,7 +8758,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sentimiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "veritable",
@@ -7917,7 +8768,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "verdadero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "botiga",
@@ -7926,7 +8778,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tienda"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "bastant",
@@ -7936,7 +8789,8 @@
     "candidateTranslationsEs": [
       "bastante",
       "bastantemente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "natura",
@@ -7945,7 +8799,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "natura"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "humor",
@@ -7954,7 +8809,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "humor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tractament",
@@ -7963,7 +8819,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tratamiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llar",
@@ -7972,7 +8829,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "hogar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ràdio",
@@ -7981,7 +8839,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "radio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "necessari",
@@ -7991,7 +8850,8 @@
     "candidateTranslationsEs": [
       "necesario",
       "preciso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ràbia",
@@ -8000,7 +8860,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "rabia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vendre",
@@ -8009,7 +8870,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "vender"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sabeu",
@@ -8018,7 +8880,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "sabeo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "velocitat",
@@ -8027,7 +8890,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "velocidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "risc",
@@ -8036,7 +8900,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "riesgo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "avançar",
@@ -8046,7 +8911,8 @@
     "candidateTranslationsEs": [
       "adelantar",
       "avanzar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "error",
@@ -8055,7 +8921,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "error"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "naturalesa",
@@ -8064,7 +8931,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "naturaleza"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ritme",
@@ -8073,7 +8941,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ritmo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "agradable",
@@ -8082,7 +8951,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "agradable"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "assumpte",
@@ -8091,7 +8961,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "asunto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "igualment",
@@ -8100,7 +8971,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "igualmente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "omplir",
@@ -8109,7 +8981,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "llenar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "agost",
@@ -8118,7 +8991,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "agosto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "clarament",
@@ -8127,7 +9001,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "claramente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "migdia",
@@ -8136,7 +9011,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mediodía"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "insistir",
@@ -8145,7 +9021,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "insistir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "màquina",
@@ -8154,7 +9031,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "máquina"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "donant",
@@ -8163,7 +9041,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "donante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "advocat",
@@ -8173,7 +9052,8 @@
     "candidateTranslationsEs": [
       "abogado",
       "abogador"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "arma",
@@ -8182,7 +9062,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "arma"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "protecció",
@@ -8192,7 +9073,8 @@
     "candidateTranslationsEs": [
       "protección",
       "securización"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "construir",
@@ -8201,7 +9083,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "construir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "augment",
@@ -8210,7 +9093,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "aumento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "unitat",
@@ -8219,7 +9103,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "unidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "novembre",
@@ -8228,7 +9113,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "noviembre"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "accident",
@@ -8237,7 +9123,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "accidente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "canal",
@@ -8246,7 +9133,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "canal"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "peça",
@@ -8256,7 +9144,8 @@
     "candidateTranslationsEs": [
       "pieza",
       "prenda"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "biblioteca",
@@ -8265,7 +9154,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "biblioteca"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "néixer",
@@ -8274,7 +9164,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "nacer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "carrera",
@@ -8283,7 +9174,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "carrera"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "establir",
@@ -8294,7 +9186,8 @@
       "afincar",
       "establecer",
       "sentar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "coberta",
@@ -8303,7 +9196,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cubierta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "oposició",
@@ -8312,7 +9206,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "oposición"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ciència",
@@ -8321,7 +9216,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ciencia"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "suau",
@@ -8330,7 +9226,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "suave"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cançó",
@@ -8339,7 +9236,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "canción"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "colla",
@@ -8349,7 +9247,8 @@
     "candidateTranslationsEs": [
       "panda",
       "pandilla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "glòria",
@@ -8359,7 +9258,8 @@
     "candidateTranslationsEs": [
       "gloria",
       "prez"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "normalment",
@@ -8368,7 +9268,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "normalmente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "provar",
@@ -8377,7 +9278,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "probar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gestió",
@@ -8387,7 +9289,8 @@
     "candidateTranslationsEs": [
       "gestión",
       "llevanza"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "marge",
@@ -8396,7 +9299,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "margen"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "acompanyar",
@@ -8405,7 +9309,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "acompañar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "formar",
@@ -8414,7 +9319,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "formar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "preparar",
@@ -8424,7 +9330,8 @@
     "candidateTranslationsEs": [
       "aderezar",
       "preparar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "temporada",
@@ -8433,7 +9340,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "temporada"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "proposta",
@@ -8442,7 +9350,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "propuesta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "americana",
@@ -8451,7 +9360,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "americana"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "edició",
@@ -8460,7 +9370,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "edición"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "professional",
@@ -8469,7 +9380,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "profesional"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "febrer",
@@ -8478,7 +9390,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "febrero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "xarxa",
@@ -8487,7 +9400,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "red"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "campanya",
@@ -8497,7 +9411,8 @@
     "candidateTranslationsEs": [
       "campaña",
       "campiña"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "enemic",
@@ -8506,7 +9421,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "enemigo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "anunciar",
@@ -8515,7 +9431,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "anunciar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "judici",
@@ -8524,7 +9441,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "juicio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "mirall",
@@ -8533,7 +9451,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "espejo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dissabte",
@@ -8542,7 +9461,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sábado"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "continuació",
@@ -8551,7 +9471,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "continuación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "crida",
@@ -8561,7 +9482,8 @@
     "candidateTranslationsEs": [
       "llamada",
       "llamamiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "respirar",
@@ -8570,7 +9492,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "respirar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tradició",
@@ -8579,7 +9502,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "tradición"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "llet",
@@ -8590,7 +9514,8 @@
       "lecha",
       "lechaza",
       "leche"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "congrés",
@@ -8599,7 +9524,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "congreso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "condició",
@@ -8608,7 +9534,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "condición"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "defensar",
@@ -8617,7 +9544,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "defender"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "nadal",
@@ -8626,7 +9554,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "navidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "dedicar",
@@ -8635,7 +9564,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "dedicar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "tanca",
@@ -8645,7 +9575,8 @@
     "candidateTranslationsEs": [
       "seto",
       "valla"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "àmbit",
@@ -8654,7 +9585,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "ámbito"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "content",
@@ -8663,7 +9595,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "contento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "rere",
@@ -8672,7 +9605,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "tras"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "valencià",
@@ -8681,7 +9615,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "valenciano"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "encendre",
@@ -8690,7 +9625,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "encender"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "accés",
@@ -8699,7 +9635,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "acceso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pressió",
@@ -8708,7 +9645,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "presión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "espectacle",
@@ -8717,7 +9655,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "espectáculo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "boig",
@@ -8726,7 +9665,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "loco"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "responsable",
@@ -8735,7 +9675,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "responsable"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "temple",
@@ -8744,7 +9685,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "templo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "breu",
@@ -8753,7 +9695,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "breve"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "termini",
@@ -8762,7 +9705,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "plazo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "operació",
@@ -8771,7 +9715,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "operación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "remei",
@@ -8780,7 +9725,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "remedio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "visitar",
@@ -8789,7 +9735,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "visitar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "merda",
@@ -8798,7 +9745,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "mierda"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "àrea",
@@ -8807,7 +9755,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "área"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comercial",
@@ -8816,7 +9765,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "comercial"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "broma",
@@ -8828,7 +9778,8 @@
       "chanza",
       "choteo",
       "guasa"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "minut",
@@ -8837,7 +9788,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "minuto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "constitució",
@@ -8846,7 +9798,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "constitución"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "gros",
@@ -8855,7 +9808,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "gordo"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "afirmar",
@@ -8864,7 +9818,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "afirmar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "vergonya",
@@ -8873,7 +9828,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "vergüenza"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "seient",
@@ -8882,7 +9838,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "asiento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "infant",
@@ -8891,7 +9848,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "infante"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "escapar",
@@ -8900,7 +9858,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "escapar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pista",
@@ -8910,7 +9869,8 @@
     "candidateTranslationsEs": [
       "cancha",
       "pista"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "petó",
@@ -8919,7 +9879,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "beso"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "callar",
@@ -8928,7 +9889,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "callar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "utilitzar",
@@ -8937,7 +9899,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "utilizar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "concepte",
@@ -8946,7 +9909,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "concepto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "lliga",
@@ -8955,7 +9919,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "liga"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "peix",
@@ -8965,7 +9930,8 @@
     "candidateTranslationsEs": [
       "pescado",
       "pez"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "parc",
@@ -8975,7 +9941,8 @@
     "candidateTranslationsEs": [
       "parco",
       "parque"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ampolla",
@@ -8984,7 +9951,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "botella"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "participació",
@@ -8993,7 +9961,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "participación"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "comptar",
@@ -9002,7 +9971,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "contar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "reacció",
@@ -9011,7 +9981,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "reacción"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "recórrer",
@@ -9021,7 +9992,8 @@
     "candidateTranslationsEs": [
       "recorrer",
       "recurrir"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "onze",
@@ -9030,7 +10002,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "once"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "curiositat",
@@ -9039,7 +10012,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "curiosidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "convèncer",
@@ -9048,7 +10022,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "convencer"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "socialista",
@@ -9057,7 +10032,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "socialista"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "barret",
@@ -9066,7 +10042,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "sombrero"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "conseller",
@@ -9077,7 +10054,8 @@
       "conceller",
       "consejero",
       "conseller"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "felicitat",
@@ -9087,7 +10065,8 @@
     "candidateTranslationsEs": [
       "dicha",
       "felicidad"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "absolutament",
@@ -9096,7 +10075,8 @@
     "partOfSpeech": "adverb",
     "candidateTranslationsEs": [
       "absolutamente"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "imperi",
@@ -9105,7 +10085,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "imperio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "negoci",
@@ -9114,7 +10095,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "negocio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aprofitar",
@@ -9123,7 +10105,8 @@
     "partOfSpeech": "verb",
     "candidateTranslationsEs": [
       "aprovechar"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "sorra",
@@ -9132,7 +10115,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "arena"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "ulleres",
@@ -9142,7 +10126,8 @@
     "candidateTranslationsEs": [
       "anteojos",
       "gafas"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "exposició",
@@ -9151,7 +10136,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "exposición"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "aplicació",
@@ -9161,7 +10147,8 @@
     "candidateTranslationsEs": [
       "aplicación",
       "aplique"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "menjador",
@@ -9170,7 +10157,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "comedor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "personatge",
@@ -9179,7 +10167,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "personaje"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pintor",
@@ -9188,7 +10177,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "pintor"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "seixanta",
@@ -9197,7 +10187,8 @@
     "partOfSpeech": "other",
     "candidateTranslationsEs": [
       "sesenta"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "versió",
@@ -9206,7 +10197,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "versión"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "poesia",
@@ -9215,7 +10207,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "poesía"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "evolució",
@@ -9224,7 +10217,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "evolución"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "domini",
@@ -9233,7 +10227,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "dominio"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "inferior",
@@ -9242,7 +10237,8 @@
     "partOfSpeech": "adjective",
     "candidateTranslationsEs": [
       "inferior"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "alcalde",
@@ -9251,7 +10247,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "alcalde"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "intent",
@@ -9260,7 +10257,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "intento"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "cobert",
@@ -9269,7 +10267,8 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "cubierto"
-    ]
+    ],
+    "detectedExpression": null
   },
   {
     "id": "pujol",
@@ -9278,6 +10277,7 @@
     "partOfSpeech": "noun",
     "candidateTranslationsEs": [
       "colina"
-    ]
+    ],
+    "detectedExpression": null
   }
 ]

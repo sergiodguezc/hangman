@@ -10,10 +10,14 @@ function isVocabularyEntry(value: unknown): value is VocabularyEntry {
   return typeof entry.id === 'string' && entry.id.length > 0
     && typeof entry.word === 'string' && entry.word.length > 0
     && typeof entry.answerCa === 'string' && entry.answerCa.length > 0
+    && (entry.type === 'word' || entry.type === 'expression')
+    && typeof entry.definitionCa === 'string' && entry.definitionCa.length > 0
+    && typeof entry.translationEs === 'string' && entry.translationEs.length > 0
     && typeof entry.hintEs === 'string' && entry.hintEs.length > 0
     && (translations === undefined || (Array.isArray(translations)
       && translations.length > 0 && translations.length <= 3
       && translations.includes(entry.hintEs)
+      && translations.length === 1 && translations[0] === entry.translationEs
       && new Set(translations).size === translations.length
       && translations.every((translation) => typeof translation === 'string' && translation.length > 0)))
     && typeof entry.exampleCa === 'string' && entry.exampleCa.length > 0
