@@ -1,14 +1,14 @@
-import { isGuessableCharacter, normalizeGuess } from '../game/game'
-import type { LanguageConfig } from '../game/languages'
+import { displayWord, normalizeGuess, type Language } from '../../shared/game'
 
-type Props = { word: string; guesses: ReadonlySet<string>; config: LanguageConfig; reveal: boolean }
+type Props = { word: string; guesses: ReadonlySet<string>; language: Language; reveal: boolean; label: string }
 
-export function HangmanWord({ word, guesses, config, reveal }: Props) {
+export function HangmanWord({ word, guesses, language, reveal, label }: Props) {
+  const visibleCharacters = displayWord(word, guesses, language, reveal)
   return (
-    <div className="word" aria-label={config.translations.progressLabel}>
+    <div className="word" aria-label={label}>
       {[...word].map((character, index) => {
-        const guessable = isGuessableCharacter(character, config)
-        const visible = !guessable || reveal || guesses.has(normalizeGuess(character, config) ?? '')
+        const guessable = normalizeGuess(character, language) !== null
+        const visible = visibleCharacters[index] !== '_'
         return <span key={`${character}-${index}`} className={guessable ? 'letter' : 'punctuation'}>
           {visible ? character : <span aria-hidden="true">&nbsp;</span>}
           {!visible && <span className="sr-only">_</span>}
