@@ -13,7 +13,7 @@ export function LobbyPage({ state, messages, playerId, typingPlayer, onLeave }: 
       <span className="eyebrow">{t.share}</span><div className="room-code">{state.code}</div>
       <button className="copy-button" onClick={copy}>{copied ? t.copied : t.copy}</button>
       <div className="waiting-pulse"><i /><span>{t.waiting}</span></div>
-      <div className="lobby-meta"><span>{getLanguageConfig(state.language).name}</span><span>{state.matchTarget === null ? t.unlimited : t.firstTo.replace('{target}', String(state.matchTarget))}</span><span>{state.players.length} / 2 {t.players}</span></div>
+      <div className="lobby-meta"><span>{getLanguageConfig(state.language).name}</span><span>{t.matchObjective.replace('{target}', state.matchTarget === null ? t.unlimited.toLocaleLowerCase(state.language) : t.points.replace('{target}', String(state.matchTarget)))}</span><span>{state.players.length} / 2 {t.players}</span></div>
       <ul className="player-list">{state.players.map((player) => <li key={player.id}><span>{player.name.charAt(0)}</span>{player.name}</li>)}</ul>
       <button className="text-button" onClick={onLeave}>{t.leave}</button>
     </section><RoomChat messages={messages} currentPlayerId={playerId} typingPlayer={typingPlayer} t={t} /></div>

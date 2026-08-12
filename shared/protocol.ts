@@ -6,7 +6,11 @@ export type ConnectionState = 'connected' | 'reconnecting'
 export type Player = { id: string; name: string; score: number; connectionState: ConnectionState }
 export type RoomSession = { roomCode: string; playerId: string; reconnectToken: string }
 export type RoomEntry = { view: PlayerGameView; session: RoomSession }
-export type ChatMessage = { id: string; senderId: string; senderName: string; text: string; timestamp: number }
+export const REACTION_TYPES = ['❤️', '😂', '💀'] as const
+export type ReactionType = typeof REACTION_TYPES[number]
+export type MessageReactions = Record<ReactionType, string[]>
+export type ChatMessage = { id: string; senderId: string; senderName: string; text: string; timestamp: number; reactions: MessageReactions }
+export type MatchResult = { kind: 'win'; winnerId: string } | { kind: 'draw' } | null
 
 export type PlayerGameView = {
   code: string
@@ -19,6 +23,9 @@ export type PlayerGameView = {
   guesserId: string | null
   roundWinnerId: string | null
   matchWinnerId: string | null
+  matchResult: MatchResult
+  matchEndingPending: boolean
+  targetReachedPlayerId: string | null
   rematchReadyPlayerIds: string[]
   firstSetterId: string | null
   displayWord: string[]
@@ -41,6 +48,7 @@ export interface ClientToServerEvents {
   'round:forgiveness': (payload: { forgive: boolean }, ack: Ack) => void
   'round:continue': (ack: Ack) => void
   'chat:send': (payload: { text: string }, ack: Ack<ChatMessage>) => void
+  'chat:react': (payload: { messageId: string; reaction: ReactionType }, ack: Ack<MessageReactions>) => void
   'chat:typing': (payload: { isTyping: boolean }) => void
   'match:rematch': (ack: Ack) => void
   'room:leave': () => void
@@ -51,5 +59,6 @@ export interface ServerToClientEvents {
   'room:error': (error: string) => void
   'chat:message': (message: ChatMessage) => void
   'chat:history': (messages: ChatMessage[]) => void
+  'chat:reaction-updated': (payload: { messageId: string; reactions: MessageReactions }) => void
   'chat:typing': (payload: { playerId: string; playerName: string; isTyping: boolean }) => void
 }

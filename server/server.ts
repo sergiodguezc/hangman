@@ -174,6 +174,18 @@ io.on('connection', (socket) => {
     }
   })
 
+  socket.on('chat:react', (payload, ack) => {
+    try {
+      const identity = games.identityForSocket(socket.id), room = identity?.room
+      if (!room) throw new Error('not-room-member')
+      const update = room.toggleChatReaction(identity.playerId, payload?.messageId, payload?.reaction)
+      io.to(room.code).emit('chat:reaction-updated', update)
+      ack({ ok: true, data: update.reactions })
+    } catch (error) {
+      ack({ ok: false, error: error instanceof Error ? error.message : 'invalid-reaction' })
+    }
+  })
+
   socket.on('room:leave', () => {
     const identity = games.identityForSocket(socket.id)
     if (!identity) return
