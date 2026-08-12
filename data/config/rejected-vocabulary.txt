@@ -1,0 +1,4 @@
+# One normalized Catalan word per line. These entries never reach vocabulary.json.
+# The current corpus sentence uses mena as a verb while lexical selection labels it
+# as a noun, so tipo/clase would be contextually wrong.
+mena

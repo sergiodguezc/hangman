@@ -1,0 +1,10 @@
+{
+  "feina": {
+    "hintEs": "trabajo",
+    "translationsEs": [
+      "trabajo",
+      "faena"
+    ],
+    "reason": "Trabajo is the most neutral, generally understood clue."
+  }
+}

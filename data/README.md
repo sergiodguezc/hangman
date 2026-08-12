@@ -1,6 +1,6 @@
 # Catalan vocabulary data
 
-This directory contains a reproducible prototype dataset for a future Catalan-learning Hangman mode. It is data infrastructure only; the game does not load it yet.
+This directory contains the reproducible dataset loaded by the Catalan-learning Hangman mode.
 
 ## Sources and licenses
 
@@ -28,7 +28,13 @@ Extraction reads line by line, normalizes to NFC and lowercase, and preserves Ca
 
 Candidates are 4–15 letters, contain only supported characters, and exclude URLs, email-like text, numbers, and malformed fragments. Up to eight examples are retained. A deterministic score prefers 4–14-token sentences near eight tokens, higher-priority sources, and fewer numbers, proper names, or punctuation marks.
 
-Selection requires a one-word Apertium lexical mapping, excludes proper-noun-tagged entries, then ranks by Softcatalà form-frequency rank, weighted corpus-source evidence, corpus count, length, and spelling. `intermediate/translations-es.json` remains a replaceable enrichment layer and supports multiple Spanish senses.
+Selection requires a one-word Apertium lexical mapping, excludes proper-noun-tagged entries, then ranks by Softcatalà form-frequency rank, weighted corpus-source evidence, corpus count, length, and spelling. `intermediate/translations-es.json` contains raw candidate senses only.
+
+## Context-aware translation review
+
+`npm run vocab:clean` is a separate offline curation stage. It combines each Catalan word, its unchanged example, word class, and raw Spanish candidates in `intermediate/translation-review-input.json`. Strict `accept`/`reject` records are written to `translation-review-output.json`; each accepted record has exactly one `hintEs`, one to three cleaned `translationsEs`, and a content hash that prevents stale reviews from being accepted. The current implementation is deterministic and uses no LLM or online API. Its structured artifacts can later be replaced by an offline LLM-assisted review if they pass the same validator.
+
+Human decisions take precedence. Put accepted corrections in `config/translation-overrides.json`, and put one normalized Catalan word per line in `config/rejected-vocabulary.txt`. Rejected records are omitted from the production dataset. `review/summary.json` and the deterministic 50-record `review/sample.json` support inspection without editing generated files.
 
 Difficulty is an approximate, deterministic game label—not CEFR. Entries in the top 35% of the selection rank and at most 9 letters are `easy`; entries in the bottom 25% or at least 12 letters are `hard`; the rest are `medium`.
 
@@ -40,6 +46,7 @@ Requires Python 3, Git, and the project's existing npm installation; there are n
 npm run vocab:fetch
 npm run vocab:extract
 npm run vocab:enrich
+npm run vocab:clean
 npm run vocab:build
 npm run vocab:validate
 ```

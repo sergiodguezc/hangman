@@ -23,6 +23,7 @@
     "vocab:fetch": "python3 scripts/fetch-catalan-corpus.py",
     "vocab:extract": "python3 scripts/extract-catalan-vocabulary.py",
     "vocab:enrich": "python3 scripts/enrich-translations.py",
+    "vocab:clean": "python3 scripts/clean-translations.py",
     "vocab:build": "python3 scripts/build-vocabulary.py",
     "vocab:validate": "python3 scripts/validate-vocabulary.py",
     "vocab": "python3 scripts/vocab_pipeline.py all",

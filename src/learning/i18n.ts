@@ -6,6 +6,7 @@ const es = {
   start: 'Empezar', hint: 'Pista en español', errors: 'Errores', incorrect: 'Letras incorrectas', none: 'Ninguna todavía',
   keyboard: 'Teclado de letras catalanas', progress: 'Progreso de la palabra catalana', won: '¡Has acertado la palabra!',
   lost: 'La palabra era…', spanish: 'Español', example: 'Ejemplo', next: 'Siguiente palabra',
+  also: 'También',
   changeDifficulty: 'Cambiar dificultad', home: 'Volver al inicio', currentDifficulty: 'Dificultad',
 }
 
@@ -15,6 +16,7 @@ const ca: typeof es = {
   start: 'Comença', hint: 'Pista en castellà', errors: 'Errors', incorrect: 'Lletres incorrectes', none: 'Cap encara',
   keyboard: 'Teclat de lletres catalanes', progress: 'Progrés de la paraula catalana', won: 'Has encertat la paraula!',
   lost: 'La paraula era…', spanish: 'Castellà', example: 'Exemple', next: 'Paraula següent',
+  also: 'També',
   changeDifficulty: 'Canviar la dificultat', home: "Torna a l'inici", currentDifficulty: 'Dificultat',
 }
 

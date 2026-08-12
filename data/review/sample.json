@@ -1,0 +1,869 @@
+[
+  {
+    "id": "amor",
+    "word": "amor",
+    "exampleCa": "La convocatòria electoral els va sorprendre fent l'amor.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "amor"
+    ],
+    "status": "accept",
+    "hintEs": "amor",
+    "translationsEs": [
+      "amor"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "04049ada9eac37e0",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "superfície",
+    "word": "superfície",
+    "exampleCa": "L'aigua discorria en abundància a només tres metres de la superfície.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "superficie"
+    ],
+    "status": "accept",
+    "hintEs": "superficie",
+    "translationsEs": [
+      "superficie"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "bb49cc8d1d654026",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "regió",
+    "word": "regió",
+    "exampleCa": "La regió espanyola d'Extremadura està decidida a no perdre el tren de la revolució tecnològica.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "región"
+    ],
+    "status": "accept",
+    "hintEs": "región",
+    "translationsEs": [
+      "región"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "b3bd8180dae64865",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "teatre",
+    "word": "teatre",
+    "exampleCa": "Fa massa temps que no anem al teatre.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "teatro"
+    ],
+    "status": "accept",
+    "hintEs": "teatro",
+    "translationsEs": [
+      "teatro"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "ba80928e6b650c2d",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "escoltar",
+    "word": "escoltar",
+    "exampleCa": "Cal escoltar el concert d'elogis que sempre l'envolta!",
+    "partOfSpeech": "verb",
+    "candidateTranslationsEs": [
+      "escuchar"
+    ],
+    "status": "accept",
+    "hintEs": "escuchar",
+    "translationsEs": [
+      "escuchar"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "154e346ef1a43d26",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "curiositat",
+    "word": "curiositat",
+    "exampleCa": "La curiositat de ton fill és inconvenient.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "curiosidad"
+    ],
+    "status": "accept",
+    "hintEs": "curiosidad",
+    "translationsEs": [
+      "curiosidad"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "c44cff04f1854fcb",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "costum",
+    "word": "costum",
+    "exampleCa": "Abans perdre un amo que un bon costum.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "costumbre"
+    ],
+    "status": "accept",
+    "hintEs": "costumbre",
+    "translationsEs": [
+      "costumbre"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "295b00673b8c9659",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "allí",
+    "word": "allí",
+    "exampleCa": "Anar-se'n d'allí era renunciar a la seua venjança.",
+    "partOfSpeech": "adverb",
+    "candidateTranslationsEs": [
+      "allí"
+    ],
+    "status": "accept",
+    "hintEs": "allí",
+    "translationsEs": [
+      "allí"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "36e4aee05afef293",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "castell",
+    "word": "castell",
+    "exampleCa": "Boira al castell, pica espart i fes cordell.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "castillo"
+    ],
+    "status": "accept",
+    "hintEs": "castillo",
+    "translationsEs": [
+      "castillo"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "9d2b132d825f0e04",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "damunt",
+    "word": "damunt",
+    "exampleCa": "Sempre cau la taca damunt la roba bona.",
+    "partOfSpeech": "adverb",
+    "candidateTranslationsEs": [
+      "encima"
+    ],
+    "status": "accept",
+    "hintEs": "encima",
+    "translationsEs": [
+      "encima"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "cf10f5a51058a821",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "millor",
+    "word": "millor",
+    "exampleCa": "El juny és el millor mes de l'any.",
+    "partOfSpeech": "adjective",
+    "candidateTranslationsEs": [
+      "mejor"
+    ],
+    "status": "accept",
+    "hintEs": "mejor",
+    "translationsEs": [
+      "mejor"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "5417f34f48cc9d37",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "espera",
+    "word": "espera",
+    "exampleCa": "A l'abril, el pare no espera el fill.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "espera"
+    ],
+    "status": "accept",
+    "hintEs": "espera",
+    "translationsEs": [
+      "espera"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "d183b39fea2d055c",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "buscar",
+    "word": "buscar",
+    "exampleCa": "No; era una bogeria buscar la mort.",
+    "partOfSpeech": "verb",
+    "candidateTranslationsEs": [
+      "buscar"
+    ],
+    "status": "accept",
+    "hintEs": "buscar",
+    "translationsEs": [
+      "buscar"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "7253b91711a1f3f3",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "breu",
+    "word": "breu",
+    "exampleCa": "Es va fer un breu silenci.",
+    "partOfSpeech": "adjective",
+    "candidateTranslationsEs": [
+      "breve"
+    ],
+    "status": "accept",
+    "hintEs": "breve",
+    "translationsEs": [
+      "breve"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "8bf7aba6b9088762",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "període",
+    "word": "període",
+    "exampleCa": "Pot passar que l'edificació d'equilibri baixe durant algun període.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "periodo"
+    ],
+    "status": "accept",
+    "hintEs": "periodo",
+    "translationsEs": [
+      "periodo"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "a7f28972b822aea1",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "corrent",
+    "word": "corrent",
+    "exampleCa": "Tanca la porta que hi ha corrent d'aire.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "corriente",
+      "tanto"
+    ],
+    "status": "accept",
+    "hintEs": "corriente",
+    "translationsEs": [
+      "corriente",
+      "tanto"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "1118d3a34044e5c7",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "pintor",
+    "word": "pintor",
+    "exampleCa": "El pintor fa servir les fruites de temporada.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "pintor"
+    ],
+    "status": "accept",
+    "hintEs": "pintor",
+    "translationsEs": [
+      "pintor"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "e280ca8c12c0658d",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "recollir",
+    "word": "recollir",
+    "exampleCa": "Mercè, fes el favor de recollir les nines!",
+    "partOfSpeech": "verb",
+    "candidateTranslationsEs": [
+      "recoger"
+    ],
+    "status": "accept",
+    "hintEs": "recoger",
+    "translationsEs": [
+      "recoger"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "667be0ff0ae627c6",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "participació",
+    "word": "participació",
+    "exampleCa": "Així arribem al segon dels pilars del govern obert: la participació.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "participación"
+    ],
+    "status": "accept",
+    "hintEs": "participación",
+    "translationsEs": [
+      "participación"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "120edfce26141e33",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "solució",
+    "word": "solució",
+    "exampleCa": "La retenció de dades no és la solució!",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "solución"
+    ],
+    "status": "accept",
+    "hintEs": "solución",
+    "translationsEs": [
+      "solución"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "1c6666c20e508d9a",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "frase",
+    "word": "frase",
+    "exampleCa": "No va acabar la frase.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "frase"
+    ],
+    "status": "accept",
+    "hintEs": "frase",
+    "translationsEs": [
+      "frase"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "fb7a5a2df2c16115",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "societat",
+    "word": "societat",
+    "exampleCa": "Abans d'iniciar l'elaboració de Societat de la informació.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "sociedad"
+    ],
+    "status": "accept",
+    "hintEs": "sociedad",
+    "translationsEs": [
+      "sociedad"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "9e534601c1c1304d",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "lentament",
+    "word": "lentament",
+    "exampleCa": "Cau lentament la barba sobre el pit i les parpelles abaixen la persiana.",
+    "partOfSpeech": "adverb",
+    "candidateTranslationsEs": [
+      "lentamente"
+    ],
+    "status": "accept",
+    "hintEs": "lentamente",
+    "translationsEs": [
+      "lentamente"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "a85620572e401159",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "primer",
+    "word": "primer",
+    "exampleCa": "Avui és el primer dia i n'hem d'aprendre.",
+    "partOfSpeech": "adjective",
+    "candidateTranslationsEs": [
+      "primer",
+      "primero",
+      "primo"
+    ],
+    "status": "accept",
+    "hintEs": "primer",
+    "translationsEs": [
+      "primer",
+      "primero",
+      "primo"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "f14cca1534835f88",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "contacte",
+    "word": "contacte",
+    "exampleCa": "Ens posarem en contacte amb els guanyadors via mail.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "contacto"
+    ],
+    "status": "accept",
+    "hintEs": "contacto",
+    "translationsEs": [
+      "contacto"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "0587ae9b2d78b8f1",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "gener",
+    "word": "gener",
+    "exampleCa": "Aigua de gener, millor que la de febrer.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "enero"
+    ],
+    "status": "accept",
+    "hintEs": "enero",
+    "translationsEs": [
+      "enero"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "50479f770b387ef6",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "cert",
+    "word": "cert",
+    "exampleCa": "Açò és cert, però ha de ser matisat.",
+    "partOfSpeech": "adjective",
+    "candidateTranslationsEs": [
+      "cierto"
+    ],
+    "status": "accept",
+    "hintEs": "cierto",
+    "translationsEs": [
+      "cierto"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "fbcbf702c0d8c097",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "petó",
+    "word": "petó",
+    "exampleCa": "Té —emoticona d'un petó—, perquè et curis.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "beso"
+    ],
+    "status": "accept",
+    "hintEs": "beso",
+    "translationsEs": [
+      "beso"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "be9d14cea1996b7d",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "original",
+    "word": "original",
+    "exampleCa": "És més, el grup original està deixant d'existir.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "original"
+    ],
+    "status": "accept",
+    "hintEs": "original",
+    "translationsEs": [
+      "original"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "7744d9b62fe1950d",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "festa",
+    "word": "festa",
+    "exampleCa": "Fins allí arribaven els preparatius de la festa.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "asueto",
+      "fiesta"
+    ],
+    "status": "accept",
+    "hintEs": "fiesta",
+    "translationsEs": [
+      "fiesta"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "4dd2f43e70e407e6",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "mare",
+    "word": "mare",
+    "exampleCa": "No podia tindre una mare com les altres?",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "madre"
+    ],
+    "status": "accept",
+    "hintEs": "madre",
+    "translationsEs": [
+      "madre"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "c36aba7fd80a1e7c",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "apartar",
+    "word": "apartar",
+    "exampleCa": "El seu delicte era l'egoisme, la voluntat feble, que l'havia fet apartar de la lluita per la vida.",
+    "partOfSpeech": "verb",
+    "candidateTranslationsEs": [
+      "apartar"
+    ],
+    "status": "accept",
+    "hintEs": "apartar",
+    "translationsEs": [
+      "apartar"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "b8db9696361bbaff",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "cafè",
+    "word": "cafè",
+    "exampleCa": "El cafè ja estava a punt.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "café"
+    ],
+    "status": "accept",
+    "hintEs": "café",
+    "translationsEs": [
+      "café"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "5c865d2e4551f985",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "travessar",
+    "word": "travessar",
+    "exampleCa": "Acabo de veure un porc senglar travessar pel pas de zebra.",
+    "partOfSpeech": "verb",
+    "candidateTranslationsEs": [
+      "atravesar",
+      "cruzar"
+    ],
+    "status": "accept",
+    "hintEs": "atravesar",
+    "translationsEs": [
+      "atravesar",
+      "cruzar"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "a0993ae35db695d8",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "segle",
+    "word": "segle",
+    "exampleCa": "El segle vint és el més tràgic de la història.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "siglo"
+    ],
+    "status": "accept",
+    "hintEs": "siglo",
+    "translationsEs": [
+      "siglo"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "2bd3748774eb1794",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "llista",
+    "word": "llista",
+    "exampleCa": "Que fort, l'Ernest va de cap de llista.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "lista"
+    ],
+    "status": "accept",
+    "hintEs": "lista",
+    "translationsEs": [
+      "lista"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "57ddb17b0f557861",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "demanar",
+    "word": "demanar",
+    "exampleCa": "Sense demanar res a canvi, ni cap subvenció.",
+    "partOfSpeech": "verb",
+    "candidateTranslationsEs": [
+      "pedir",
+      "preguntar"
+    ],
+    "status": "accept",
+    "hintEs": "pedir",
+    "translationsEs": [
+      "pedir",
+      "preguntar"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "82ff4971bfe33c8b",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "braç",
+    "word": "braç",
+    "exampleCa": "La cama al llit i el braç al pit.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "brazo"
+    ],
+    "status": "accept",
+    "hintEs": "brazo",
+    "translationsEs": [
+      "brazo"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "085d1610d40d503e",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "govern",
+    "word": "govern",
+    "exampleCa": "Un govern propi és el nostre dret natural.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "gobierno"
+    ],
+    "status": "accept",
+    "hintEs": "gobierno",
+    "translationsEs": [
+      "gobierno"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "931e61ebc244ed2e",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "temps",
+    "word": "temps",
+    "exampleCa": "Fa massa temps que no anem al teatre.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "tiempo"
+    ],
+    "status": "accept",
+    "hintEs": "tiempo",
+    "translationsEs": [
+      "tiempo"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "05022ca86a038202",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "fora",
+    "word": "fora",
+    "exampleCa": "Les plantes de fora casa solen ser feréstegues.",
+    "partOfSpeech": "adverb",
+    "candidateTranslationsEs": [
+      "afuera",
+      "fuera"
+    ],
+    "status": "accept",
+    "hintEs": "fuera",
+    "translationsEs": [
+      "fuera",
+      "afuera"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "1676397a0c7c8b1a",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "territori",
+    "word": "territori",
+    "exampleCa": "L'habitatge edificat però no venut ocupa una part del territori.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "territorio"
+    ],
+    "status": "accept",
+    "hintEs": "territorio",
+    "translationsEs": [
+      "territorio"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "ba1940109666d72b",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "solament",
+    "word": "solament",
+    "exampleCa": "Molts estudis segueixen solament les regions exitoses.",
+    "partOfSpeech": "adverb",
+    "candidateTranslationsEs": [
+      "solamente"
+    ],
+    "status": "accept",
+    "hintEs": "solamente",
+    "translationsEs": [
+      "solamente"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "4c0a505cb516111e",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "espatlla",
+    "word": "espatlla",
+    "exampleCa": "Les bones peces per a rostir són la llata grossa, el jarret, el peixet de la culata i el tall rodó de l'espatlla.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "hombro",
+      "paletilla"
+    ],
+    "status": "accept",
+    "hintEs": "hombro",
+    "translationsEs": [
+      "hombro",
+      "paletilla"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "e1c924d0fd645c1d",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "nombre",
+    "word": "nombre",
+    "exampleCa": "A la dreta indiquem el nombre de l'estrofa.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "número"
+    ],
+    "status": "accept",
+    "hintEs": "número",
+    "translationsEs": [
+      "número"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "46d55af7c4de1a4c",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "vuit",
+    "word": "vuit",
+    "exampleCa": "El ball de tarda comença a les vuit.",
+    "partOfSpeech": "other",
+    "candidateTranslationsEs": [
+      "ocho"
+    ],
+    "status": "accept",
+    "hintEs": "ocho",
+    "translationsEs": [
+      "ocho"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "06b8b335e38591e1",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "absolutament",
+    "word": "absolutament",
+    "exampleCa": "Ningú no podia instal·lar absolutament res.",
+    "partOfSpeech": "adverb",
+    "candidateTranslationsEs": [
+      "absolutamente"
+    ],
+    "status": "accept",
+    "hintEs": "absolutamente",
+    "translationsEs": [
+      "absolutamente"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "d0352d405e9dcb96",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "qualitat",
+    "word": "qualitat",
+    "exampleCa": "La responsabilitat és una qualitat que no tens.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "calidad",
+      "cualidad"
+    ],
+    "status": "accept",
+    "hintEs": "calidad",
+    "translationsEs": [
+      "calidad",
+      "cualidad"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "7a8132ff8c05d8e8",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "enorme",
+    "word": "enorme",
+    "exampleCa": "L'enorme mos li ocupava la boca i li inflava els queixos.",
+    "partOfSpeech": "adjective",
+    "candidateTranslationsEs": [
+      "enorme"
+    ],
+    "status": "accept",
+    "hintEs": "enorme",
+    "translationsEs": [
+      "enorme"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "085df9c780f14539",
+    "reviewSource": "rules"
+  },
+  {
+    "id": "pressió",
+    "word": "pressió",
+    "exampleCa": "Al cap d'una estona va demanar d'anar al llit perquè tenia una pressió al pit.",
+    "partOfSpeech": "noun",
+    "candidateTranslationsEs": [
+      "presión"
+    ],
+    "status": "accept",
+    "hintEs": "presión",
+    "translationsEs": [
+      "presión"
+    ],
+    "reason": "Selected from lexical candidates using context, word class, and pedagogical filters.",
+    "contentHash": "79848df506758dec",
+    "reviewSource": "rules"
+  }
+]
