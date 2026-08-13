@@ -82,7 +82,7 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
 
   return <main className="match-page" lang={state.language}>
     <header className="match-header">
-      <div className="brand compact"><span className="brand-mark">H</span><h1>{t.title}</h1></div>
+      <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
       <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{t.matchObjective.replace('{target}', state.matchTarget === null ? t.unlimited.toLocaleLowerCase(state.language) : t.points.replace('{target}', String(state.matchTarget)))}</span><span>{config.name}</span></div>
       <button className="text-button" onClick={onLeave}>{t.leave}</button>
     </header>

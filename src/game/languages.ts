@@ -32,20 +32,6 @@ const endLetters = 'OPQRSTUVWXYZ'.split('')
 const catalanLetters = 'ABCÇDEFGHIJKLMNOPQRSTUVXYZ'.split('')
 
 export const languages: Record<Language, LanguageConfig> = {
-  es: {
-    name: 'Español',
-    locale: 'es',
-    alphabet: [...commonLetters, 'Ñ', ...endLetters],
-    words: spanishWords,
-    translations: {
-      title: 'Ahorcado', subtitle: 'Adivina la palabra letra a letra',
-      chooseLanguage: 'Idioma', newGame: 'Nueva partida', errors: 'Errores',
-      incorrectLetters: 'Letras incorrectas', noIncorrectLetters: 'Ninguna todavía',
-      win: '¡Has ganado!', lose: 'Has perdido', wordWas: 'La palabra era',
-      playAgain: 'Jugar de nuevo', keyboardLabel: 'Teclado de letras',
-      progressLabel: 'Progreso de la palabra',
-    },
-  },
   ca: {
     name: 'Català',
     locale: 'ca',
@@ -58,6 +44,20 @@ export const languages: Record<Language, LanguageConfig> = {
       win: 'Has guanyat!', lose: 'Has perdut!', wordWas: 'La paraula era',
       playAgain: 'Torna a jugar', keyboardLabel: 'Teclat de lletres',
       progressLabel: 'Progrés de la paraula',
+    },
+  },
+  es: {
+    name: 'Español',
+    locale: 'es',
+    alphabet: [...commonLetters, 'Ñ', ...endLetters],
+    words: spanishWords,
+    translations: {
+      title: 'Penjat', subtitle: 'Adivina la palabra letra a letra',
+      chooseLanguage: 'Idioma', newGame: 'Nueva partida', errors: 'Errores',
+      incorrectLetters: 'Letras incorrectas', noIncorrectLetters: 'Ninguna todavía',
+      win: '¡Has ganado!', lose: 'Has perdido', wordWas: 'La palabra era',
+      playAgain: 'Jugar de nuevo', keyboardLabel: 'Teclado de letras',
+      progressLabel: 'Progreso de la palabra',
     },
   },
 }

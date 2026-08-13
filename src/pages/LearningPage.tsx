@@ -53,7 +53,7 @@ export function LearningPage({ language, onHome }: Props) {
 
   return <main className="learning-page" lang={language}>
     <header className="learning-header">
-      <div className="brand compact"><span className="brand-mark">H</span><h1>{t.title}</h1></div>
+      <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
       <button className="text-button" onClick={onHome}>{t.home}</button>
     </header>
 

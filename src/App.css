@@ -17,7 +17,6 @@ button { cursor: pointer; }
 .home-intro { margin-bottom: 32px; text-align: center; }
 .home-intro .brand-mark { margin: 0 auto 14px; }
 .home-intro h1 { margin: 0; color: var(--green-dark); font: 700 36px/1 Georgia, serif; }
-.home-intro h1 em { color: #819087; font-size: 22px; font-style: normal; }
 .home-intro p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
 .home-card form { display: grid; gap: 18px; }
 .home-card label, .word-form label { color: #455249; font-size: 13px; font-weight: 700; }
@@ -26,9 +25,11 @@ button { cursor: pointer; }
 .home-card > small { display: block; margin-top: 18px; color: #9a9f9b; text-align: center; }
 .language-selector { margin: 0; padding: 0; border: 0; }
 .language-selector legend { margin-bottom: 7px; color: #455249; font-size: 13px; font-weight: 700; }
-.language-options { display: flex; padding: 4px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
+.language-options { display: flex; gap: 4px; padding: 4px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
 .language-options button { flex: 1; border: 0; border-radius: 8px; padding: 9px; color: #606860; background: transparent; font-weight: 600; }
+.language-options button.secondary { flex: .82; font-size: 13px; opacity: .92; }
 .language-options button.active { color: white; background: var(--green); }
+.language-options button.active.secondary { flex: .86; }
 .target-selector { margin: 0; padding: 0; border: 0; }
 .target-selector legend { margin-bottom: 9px; color: #455249; font-size: 13px; font-weight: 700; }
 .target-selector div { display: grid; grid-template-columns: repeat(3, minmax(52px, 1fr)) minmax(92px, auto); gap: 8px; padding: 5px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }

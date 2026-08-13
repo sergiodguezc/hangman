@@ -7,8 +7,8 @@ export function LanguageSelector({ language, label, onChange }: Props) {
     <fieldset className="language-selector">
       <legend>{label}</legend>
       <div className="language-options">
-        {(Object.keys(languages) as Language[]).map((code) => (
-          <button key={code} type="button" className={language === code ? 'active' : ''}
+        {(['ca', 'es'] as Language[]).map((code) => (
+          <button key={code} type="button" className={`${language === code ? 'active' : ''}${code === 'es' ? ' secondary' : ''}`}
             aria-pressed={language === code} lang={code} onClick={() => onChange(code)}>
             {languages[code].name}
           </button>

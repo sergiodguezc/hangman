@@ -1,4 +1,4 @@
-# Ahorcado · Penjat
+# Penjat
 
 Two-player real-time Hangman in Spanish and Catalan. Players create private rooms, alternate between choosing and guessing words, chat, keep score across rounds, and can use the playful “Perdonar la vida” mechanic.
 
