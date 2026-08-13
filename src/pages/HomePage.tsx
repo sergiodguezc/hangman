@@ -3,7 +3,6 @@ import type { Language } from '../../shared/game'
 import type { MatchTarget, PlayerGameView } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
 import { LanguageSelector } from '../components/LanguageSelector'
-import { HangmanWord } from '../components/HangmanWord'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { saveRoomSession, socket } from '../multiplayer/socket'
@@ -28,6 +27,7 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
   const [matchTarget, setMatchTarget] = useState<MatchTarget>(5)
   const t = multiplayerTranslations[language]
   const isCatalan = language === 'ca'
+  const previewSlots = ['', 'E', '', 'J', '', 'T']
 
   useEffect(() => { setPanel(mode === 'multiplayer' ? 'multiplayer' : 'menu') }, [mode])
 
@@ -88,7 +88,7 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
         <div className="brand home-brand"><span className="brand-mark">P</span><span className="brand-word">PENJAT</span></div>
         <div className="home-topbar-actions">
           <button className="text-button home-help-link" onClick={onHelp}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</button>
-          <LanguageSelector language={language} label={t.language} onChange={onLanguage} />
+          <LanguageSelector language={language} label={t.language} onChange={onLanguage} variant="codes" />
         </div>
       </header>
 
@@ -107,8 +107,8 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
             <div className="preview-drawing">
               <HangmanDrawing errors={5} label={isCatalan ? 'Penjat' : 'Ahorcado'} />
             </div>
-            <div className="preview-word">
-              <HangmanWord word="PENJAT" guesses={new Set(['E', 'J', 'T'])} language={language} reveal={false} label={isCatalan ? 'Progrés de la paraula' : 'Progreso de la palabra'} />
+            <div className="preview-word" aria-label={isCatalan ? 'Progrés de la paraula' : 'Progreso de la palabra'}>
+              {previewSlots.map((letter, index) => <span key={`${letter || 'blank'}-${index}`} className="preview-letter">{letter}</span>)}
             </div>
           </div>
         </aside>
