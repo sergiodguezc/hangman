@@ -5,11 +5,12 @@ import { GamePage } from './pages/GamePage'
 import { HomePage } from './pages/HomePage'
 import { LobbyPage } from './pages/LobbyPage'
 import { LearningPage } from './pages/LearningPage'
+import { HowToPlayPage } from './pages/HowToPlayPage'
 import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import './App.css'
 
-type Route = '/' | '/es/' | '/multijugador/' | '/aprendre/'
-type Mode = 'home' | 'multiplayer' | 'learning'
+type Route = '/' | '/es/' | '/multijugador/' | '/aprendre/' | '/com-es-juga/' | '/es/como-jugar/'
+type Mode = 'home' | 'multiplayer' | 'learning' | 'help'
 
 const routeDescriptions: Record<Route, { title: string; description: string; canonical: Route; language: Language; mode: Mode }> = {
   '/': {
@@ -40,6 +41,20 @@ const routeDescriptions: Record<Route, { title: string; description: string; can
     language: 'ca',
     mode: 'learning',
   },
+  '/com-es-juga/': {
+    title: 'Com es juga a Penjat? | Penjat',
+    description: 'Descobreix com es juga a Penjat, tant en multijugador com en mode d’aprenentatge de català.',
+    canonical: '/com-es-juga/',
+    language: 'ca',
+    mode: 'help',
+  },
+  '/es/como-jugar/': {
+    title: '¿Cómo se juega a Penjat? | Penjat',
+    description: 'Descubre cómo jugar a Penjat, tanto en multijugador como en el modo de aprendizaje de catalán.',
+    canonical: '/es/como-jugar/',
+    language: 'es',
+    mode: 'help',
+  },
 }
 
 function normalizeRoute(pathname: string): Route {
@@ -47,6 +62,8 @@ function normalizeRoute(pathname: string): Route {
   if (trimmed === '/es') return '/es/'
   if (trimmed === '/multijugador') return '/multijugador/'
   if (trimmed === '/aprendre') return '/aprendre/'
+  if (trimmed === '/com-es-juga') return '/com-es-juga/'
+  if (trimmed === '/es/como-jugar') return '/es/como-jugar/'
   return trimmed === '/' ? '/' : '/'
 }
 
@@ -125,7 +142,7 @@ function App() {
     setMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description })
     setMeta('link[rel="canonical"]', { rel: 'canonical', href: canonical })
     removeIfPresent('link[rel="alternate"][hreflang]')
-    if (route === '/' || route === '/es/') {
+    if (route === '/' || route === '/es/' || route === '/com-es-juga/' || route === '/es/como-jugar/') {
       const alternates = [
         { hreflang: 'ca', href: 'https://penjat.cat/' },
         { hreflang: 'es', href: 'https://penjat.cat/es/' },
@@ -169,11 +186,13 @@ function App() {
 
   const startMultiplayer = () => goTo('/multijugador/')
   const startLearning = () => goTo('/aprendre/')
+  const startHelp = () => goTo(language === 'es' ? '/es/como-jugar/' : '/com-es-juga/')
   const returnHome = () => goTo('/')
 
   if (!room && view === 'learning') return <LearningPage language={language} onHome={returnHome} />
-  if (!room && view === 'multiplayer') return <HomePage language={language} notice={notice} onLanguage={changeLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} mode="multiplayer" />
-  if (!room) return <HomePage language={language} notice={notice} onLanguage={changeLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} mode="home" />
+  if (!room && view === 'multiplayer') return <HomePage language={language} notice={notice} onLanguage={changeLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />
+  if (!room && view === 'help') return <HowToPlayPage language={language} onLanguage={changeLanguage} onBack={returnHome} onMultiplayer={startMultiplayer} onLearn={startLearning} />
+  if (!room) return <HomePage language={language} notice={notice} onLanguage={changeLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />
   if (room.phase === 'waiting') return <LobbyPage state={room} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
   return <GamePage state={room} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
 }
