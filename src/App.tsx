@@ -176,7 +176,7 @@ function App() {
   const changeInterfaceLanguage = (next: Language) => {
     setInterfaceLanguage(next)
     localStorage.setItem('hangman-interface-language', next)
-    if (room) return
+    if (room || route === '/multijugador/') return
     const target = route === '/com-es-juga/' || route === '/es/como-jugar/'
       ? (next === 'es' ? '/es/como-jugar/' : '/com-es-juga/')
       : (next === 'es' ? '/es/' : '/')
@@ -196,6 +196,7 @@ function App() {
 
   useEffect(() => {
     if (room) return
+    if (route === '/multijugador/') return
     if (page.interfaceLanguage !== interfaceLanguage) setInterfaceLanguage(page.interfaceLanguage)
   }, [interfaceLanguage, page.interfaceLanguage, room])
 

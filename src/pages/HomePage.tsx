@@ -109,7 +109,7 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGame
         <aside className="home-preview" aria-hidden="true">
           <div className="preview-board">
             <div className="preview-drawing">
-              <HangmanDrawing errors={5} label={isCatalan ? 'Penjat' : 'Ahorcado'} />
+              <HangmanDrawing errors={6} label={isCatalan ? 'Penjat' : 'Ahorcado'} />
             </div>
             <div className="preview-word" aria-label={isCatalan ? 'Progrés de la paraula' : 'Progreso de la palabra'}>
               {previewSlots.map((letter, index) => <span key={`${letter || 'blank'}-${index}`} className="preview-letter">{letter}</span>)}
