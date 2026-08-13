@@ -1,6 +1,6 @@
 # Penjat
 
-Two-player real-time Hangman in Spanish and Catalan. Players create private rooms, alternate between choosing and guessing words, chat, keep score across rounds, and can use the playful “Perdonar la vida” mechanic.
+Two-player real-time Penjat in Spanish and Catalan. Players create private rooms, alternate between choosing and guessing words, chat, keep score across rounds, and can use the playful “Perdonar la vida” mechanic.
 
 The production application is a single Node.js service: it serves the built React application and hosts Socket.IO on the same HTTP server and public origin.
 
