@@ -32,6 +32,18 @@ const httpServer = createServer(async (request, response) => {
     response.writeHead(405, { Allow: 'GET, HEAD' }); response.end(); return
   }
 
+  if (url.pathname === '/es' || url.pathname.startsWith('/es/')) {
+    const trimmedPath = url.pathname.replace(/\/+$/, '')
+    const canonicalPath = trimmedPath === '/es'
+      ? '/'
+      : trimmedPath === '/es/como-jugar'
+        ? '/com-es-juga/'
+        : `${trimmedPath.slice(3)}/`
+    response.writeHead(308, { Location: `${canonicalPath}${url.search}` })
+    response.end()
+    return
+  }
+
   try {
     const requestedPath = decodeURIComponent(url.pathname)
     let filePath = resolve(frontendDist, `.${requestedPath === '/' ? '/index.html' : requestedPath}`)
