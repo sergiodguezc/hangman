@@ -1,7 +1,9 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import type { Language } from '../../shared/game'
 import type { MatchTarget, PlayerGameView } from '../../shared/protocol'
+import { HangmanDrawing } from '../components/HangmanDrawing'
 import { LanguageSelector } from '../components/LanguageSelector'
+import { HangmanWord } from '../components/HangmanWord'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { saveRoomSession, socket } from '../multiplayer/socket'
@@ -102,22 +104,11 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
         </section>
         <aside className="home-preview" aria-hidden="true">
           <div className="preview-board">
-            <div className="preview-gallows">
-              <span className="preview-post" />
-              <span className="preview-beam" />
-              <span className="preview-rope" />
-              <span className="preview-base" />
+            <div className="preview-drawing">
+              <HangmanDrawing errors={5} label={isCatalan ? 'Penjat' : 'Ahorcado'} />
             </div>
-            <div className="preview-figure">
-              <span className="preview-head" />
-              <span className="preview-body" />
-              <span className="preview-arm preview-arm-left" />
-              <span className="preview-arm preview-arm-right" />
-              <span className="preview-leg preview-leg-left" />
-              <span className="preview-leg preview-leg-right" />
-            </div>
-            <div className="preview-word" aria-hidden="true">
-              {['_', isCatalan ? 'E' : 'A', '_', isCatalan ? 'J' : 'J', '_', isCatalan ? 'T' : 'T'].map((letter, index) => <span key={index} className={letter === '_' ? 'blank' : 'letter'}>{letter}</span>)}
+            <div className="preview-word">
+              <HangmanWord word="PENJAT" guesses={new Set(['E', 'J', 'T'])} language={language} reveal={false} label={isCatalan ? 'Progrés de la paraula' : 'Progreso de la palabra'} />
             </div>
           </div>
         </aside>
@@ -135,10 +126,6 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
       </div>
 
       <footer className="home-footer">
-        <button className="text-button home-help-link home-help-link--footer" onClick={onHelp}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</button>
-        <div className="home-footer-row">
-          <LanguageSelector language={language} label={t.language} onChange={onLanguage} />
-        </div>
         <span className="home-domain">penjat.cat</span>
       </footer>
       {notice && <p className="form-error home-notice" role="alert">{errorMessage(notice, t)}</p>}
