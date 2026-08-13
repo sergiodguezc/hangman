@@ -9,7 +9,7 @@ import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import './App.css'
 
 function App() {
-  const [language, setLanguage] = useState<Language>(() => localStorage.getItem('hangman-language') === 'ca' ? 'ca' : 'es')
+  const [language, setLanguage] = useState<Language>(() => localStorage.getItem('hangman-language') === 'es' ? 'es' : 'ca')
   const [room, setRoom] = useState<PlayerGameView | null>(null)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [playerId, setPlayerId] = useState(() => loadRoomSession()?.playerId ?? '')

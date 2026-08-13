@@ -16,8 +16,6 @@ export function HomePage({ language, notice, onLanguage, onEnter, onLearn }: Pro
   const [busy, setBusy] = useState(false)
   const [matchTarget, setMatchTarget] = useState<MatchTarget>(5)
   const t = multiplayerTranslations[language]
-  const otherLanguage: Language = language === 'es' ? 'ca' : 'es'
-  const otherTitle = multiplayerTranslations[otherLanguage].title
 
   const connect = (done: () => void) => {
     setBusy(true); setError('')
@@ -46,7 +44,7 @@ export function HomePage({ language, notice, onLanguage, onEnter, onLearn }: Pro
 
   return <main className="home-page">
     <section className="home-card">
-      <div className="home-intro"><span className="brand-mark">H</span><h1>{t.title} <em>/ {otherTitle}</em></h1><p>{t.subtitle}</p></div>
+      <div className="home-intro"><span className="brand-mark">P</span><h1>{t.title}</h1><p>{t.subtitle}</p></div>
       {mode === 'menu' ? <div className="mode-menu">
         <LanguageSelector language={language} label={t.language} onChange={onLanguage} />
         <p>{t.chooseMode}</p>

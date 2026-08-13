@@ -1,7 +1,7 @@
 import type { Language } from '../../shared/game'
 
 const es = {
-  title: 'Ahorcado', subtitle: 'El clásico juego de palabras, ahora para dos', name: 'Tu nombre',
+  title: 'Penjat', subtitle: 'El clásico juego de palabras, ahora para dos', name: 'Tu nombre',
   namePlaceholder: 'Escribe tu nombre', language: 'Idioma', create: 'Crear partida', join: 'Unirse a partida',
   roomCode: 'Código de sala', codePlaceholder: 'ABCDE', waiting: 'Esperando al otro jugador…', copy: 'Copiar código', copied: 'Copiado',
   players: 'Jugadores', round: 'Ronda', ranking: 'Clasificación', choosing: 'elige la palabra', guessing: 'adivina',
