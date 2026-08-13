@@ -59,6 +59,14 @@ button { cursor: pointer; }
 .language-selector--codes .language-options button.secondary { flex: 0 0 auto; font-size: 13px; opacity: 1; }
 .language-selector--codes .language-options button.active.secondary { flex: 0 0 auto; }
 .language-separator { color: #9a9f9b; font-size: 12px; line-height: 1; }
+.interface-language-toggle { position: fixed; top: 18px; right: 18px; z-index: 30; }
+.interface-language-toggle .language-selector { box-shadow: 0 10px 24px rgba(49,58,48,.12); border-radius: 999px; background: rgba(245,243,237,.96); backdrop-filter: blur(8px); }
+.interface-language-toggle .language-selector--codes .language-options { padding: 2px 4px; }
+.interface-language-toggle .language-selector--codes .language-options button { min-width: 44px; }
+@media (max-width: 640px) {
+  .interface-language-toggle { top: 12px; right: 12px; }
+  .interface-language-toggle .language-selector--codes .language-options button { min-width: 38px; padding-inline: 3px; }
+}
 .target-selector { margin: 0; padding: 0; border: 0; }
 .target-selector legend { margin-bottom: 9px; color: #455249; font-size: 13px; font-weight: 700; }
 .target-selector div { display: grid; grid-template-columns: repeat(3, minmax(52px, 1fr)) minmax(92px, auto); gap: 8px; padding: 5px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
