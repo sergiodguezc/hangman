@@ -9,7 +9,7 @@ import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
 
-type Props = { state: PlayerGameView; messages: ChatMessage[]; playerId: string; typingPlayer: { playerId: string; playerName: string } | null; onLeave: () => void }
+type Props = { state: PlayerGameView; interfaceLanguage: 'ca' | 'es'; messages: ChatMessage[]; playerId: string; typingPlayer: { playerId: string; playerName: string } | null; onLeave: () => void }
 
 function groupDisplayWord(characters: string[]) {
   const words: { start: number; characters: string[] }[] = []
@@ -29,11 +29,11 @@ function groupDisplayWord(characters: string[]) {
   return words
 }
 
-export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: Props) {
+export function GamePage({ state, interfaceLanguage, messages, playerId, typingPlayer, onLeave }: Props) {
   const [word, setWord] = useState('')
   const [error, setError] = useState('')
-  const t = multiplayerTranslations[state.language]
-  const config = getLanguageConfig(state.language)
+  const t = multiplayerTranslations[interfaceLanguage]
+  const config = getLanguageConfig(state.gameLanguage)
   const isSetter = state.wordSetterId === playerId
   const isGuesser = state.guesserId === playerId
   const playersById = new Map(state.players.map((player) => [player.id, player]))
@@ -61,12 +61,12 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
       if (event.ctrlKey || event.metaKey || event.altKey || event.key.length !== 1) return
       const target = event.target
       if (target instanceof HTMLElement && (target.matches('input, textarea, select') || target.isContentEditable)) return
-      const normalized = normalizeGuess(event.key, state.language)
+      const normalized = normalizeGuess(event.key, state.gameLanguage)
       if (normalized) guess(normalized)
     }
     window.addEventListener('keydown', keydown)
     return () => window.removeEventListener('keydown', keydown)
-  }, [guess, state.language])
+  }, [guess, state.gameLanguage])
 
   const submitWord = (event: FormEvent) => {
     event.preventDefault(); setError('')
@@ -80,10 +80,10 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
 
   const reconnectingOpponent = state.players.find((player) => player.id !== playerId && player.connectionState === 'reconnecting')
 
-  return <main className="match-page" lang={state.language}>
+  return <main className="match-page" lang={interfaceLanguage}>
     <header className="match-header">
       <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
-      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{t.matchObjective.replace('{target}', state.matchTarget === null ? t.unlimited.toLocaleLowerCase(state.language) : t.points.replace('{target}', String(state.matchTarget)))}</span><span>{config.name}</span></div>
+      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{t.matchObjective.replace('{target}', state.matchTarget === null ? t.unlimited.toLocaleLowerCase(interfaceLanguage) : t.points.replace('{target}', String(state.matchTarget)))}</span><span>{config.name}</span></div>
       <button className="text-button" onClick={onLeave}>{t.leave}</button>
     </header>
     <div className="match-layout">
@@ -108,7 +108,7 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
               <div className="multiplayer-word-scroll" tabIndex={0} style={wordSizing} aria-label={config.translations.progressLabel}>
                 <div className="multiplayer-word">{displayWords.map(({ start, characters }) =>
                   <span className="multiplayer-word-group" key={start}>{characters.map((character, offset) =>
-                    <span key={start + offset} className={character === '_' ? 'blank' : normalizeGuess(character, state.language) ? 'letter' : 'punctuation'}>{character === '_' ? '\u00a0' : character}</span>)}</span>)}</div>
+                    <span key={start + offset} className={character === '_' ? 'blank' : normalizeGuess(character, state.gameLanguage) ? 'letter' : 'punctuation'}>{character === '_' ? '\u00a0' : character}</span>)}</span>)}</div>
               </div>
               {isSetter && state.phase === 'guessing' && <p className="setter-secret">{t.youChose}: <strong>{state.privateWord}</strong></p>}
               {state.phase === 'forgiveness-pending' && isSetter && <div className="forgiveness-panel" role="group" aria-label={t.forgivenessQuestion}>
@@ -121,7 +121,7 @@ export function GamePage({ state, messages, playerId, typingPlayer, onLeave }: P
               </div>}
               {state.phase === 'round-over' && <div className="round-result"><strong>{winner?.name} {t.winner}</strong><span>{t.wordWas}: {state.privateWord}</span></div>}
               <div className="incorrect-list"><span>{t.incorrect}</span><strong>{state.wrongLetters.length ? state.wrongLetters.join(' · ') : t.none}</strong></div>
-              <Keyboard alphabet={ALPHABETS[state.language]} guesses={guessed} incorrect={wrong} disabled={!isGuesser || state.phase !== 'guessing'} label={t.keyboard} onGuess={guess} />
+              <Keyboard alphabet={ALPHABETS[state.gameLanguage]} guesses={guessed} incorrect={wrong} disabled={!isGuesser || state.phase !== 'guessing'} label={t.keyboard} onGuess={guess} />
               {state.phase === 'round-over' && isGuesser && <button className="primary-action" onClick={() => socket.emit('round:continue', handleAck)}>{t.next}</button>}
               {state.phase === 'round-over' && !isGuesser && <p className="continue-note">{playersById.get(state.guesserId ?? '')?.name} · {t.next}</p>}
             </div></div>

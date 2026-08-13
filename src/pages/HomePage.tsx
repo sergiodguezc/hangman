@@ -8,25 +8,27 @@ import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { saveRoomSession, socket } from '../multiplayer/socket'
 
 type Props = {
-  language: Language
+  interfaceLanguage: Language
+  gameLanguage: Language
   notice?: string
   mode: 'home' | 'multiplayer'
-  onLanguage: (language: Language) => void
+  onInterfaceLanguage: (language: Language) => void
+  onGameLanguage: (language: Language) => void
   onEnter: (view: PlayerGameView, playerId: string) => void
   onLearn: () => void
   onMultiplayer: () => void
   onHelp: () => void
 }
 
-export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn, onMultiplayer, onHelp }: Props) {
+export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onInterfaceLanguage, onGameLanguage, onEnter, onLearn, onMultiplayer, onHelp }: Props) {
   const [panel, setPanel] = useState<'menu' | 'multiplayer'>(mode === 'multiplayer' ? 'multiplayer' : 'menu')
   const [name, setName] = useState(localStorage.getItem('hangman-name') ?? '')
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [matchTarget, setMatchTarget] = useState<MatchTarget>(5)
-  const t = multiplayerTranslations[language]
-  const isCatalan = language === 'ca'
+  const t = multiplayerTranslations[interfaceLanguage]
+  const isCatalan = interfaceLanguage === 'ca'
   const previewSlots = ['', 'E', '', 'J', '', 'T']
 
   useEffect(() => { setPanel(mode === 'multiplayer' ? 'multiplayer' : 'menu') }, [mode])
@@ -41,7 +43,7 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
 
   const create = (event: FormEvent) => {
     event.preventDefault()
-    connect(() => socket.emit('room:create', { name, language, matchTarget }, (response) => {
+    connect(() => socket.emit('room:create', { name, gameLanguage, matchTarget }, (response) => {
       setBusy(false)
       if (!response.ok) return setError(errorMessage(response.error, t))
       localStorage.setItem('hangman-name', name.trim()); saveRoomSession(response.data.session); onEnter(response.data.view, response.data.session.playerId)
@@ -66,7 +68,11 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
         </div>
         <form onSubmit={create}>
           <label>{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
-          <LanguageSelector language={language} label={t.language} onChange={onLanguage} />
+          <label className="language-field">
+            <span>{t.gameLanguage}</span>
+            <LanguageSelector language={gameLanguage} label={t.gameLanguage} onChange={onGameLanguage} />
+          </label>
+          <p className="target-help">{t.gameLanguageHint}</p>
           <fieldset className="target-selector"><legend>{t.matchTarget}</legend><div>
             {([3, 5, 10, null] as MatchTarget[]).map((target) => <button type="button" key={target ?? 'unlimited'} className={matchTarget === target ? 'active' : ''} onClick={() => setMatchTarget(target)}>{target === null ? t.unlimited : t.points.replace('{target}', String(target))}</button>)}
           </div><p className="target-help">{t.matchTargetExplanation}</p></fieldset>
@@ -88,7 +94,7 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
         <div className="brand home-brand"><span className="brand-mark">P</span><span className="brand-word">PENJAT</span></div>
         <div className="home-topbar-actions">
           <button className="text-button home-help-link" onClick={onHelp}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</button>
-          <LanguageSelector language={language} label={t.language} onChange={onLanguage} variant="codes" />
+          <LanguageSelector language={interfaceLanguage} label={t.language} onChange={onInterfaceLanguage} variant="codes" />
         </div>
       </header>
 
@@ -119,7 +125,7 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
         <span className="home-domain">penjat.cat</span>
       </footer>
       {notice && <p className="form-error home-notice" role="alert">{errorMessage(notice, t)}</p>}
-      <small className="sr-only">{getLanguageConfig(language).name}</small>
+      <small className="sr-only">{getLanguageConfig(interfaceLanguage).name}</small>
     </section>
   </main>
 }
