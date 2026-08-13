@@ -67,7 +67,7 @@ export function HowToPlayPage({ language, onLanguage, onBack, onMultiplayer, onL
       <header className="howto-header">
         <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
         <div className="howto-header-actions">
-          <LanguageSelector language={language} label={language === 'ca' ? 'Llengua' : 'Idioma'} onChange={onLanguage} />
+          <LanguageSelector language={language} label="Language selector" onChange={onLanguage} variant="codes" />
           <button className="text-button" onClick={onBack}>{t.back}</button>
         </div>
       </header>

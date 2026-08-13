@@ -143,10 +143,13 @@ function App() {
     setMeta('link[rel="canonical"]', { rel: 'canonical', href: canonical })
     removeIfPresent('link[rel="alternate"][hreflang]')
     if (route === '/' || route === '/es/' || route === '/com-es-juga/' || route === '/es/como-jugar/') {
+      const base = route === '/com-es-juga/' || route === '/es/como-jugar/'
+        ? { ca: 'https://penjat.cat/com-es-juga/', es: 'https://penjat.cat/es/como-jugar/', default: 'https://penjat.cat/com-es-juga/' }
+        : { ca: 'https://penjat.cat/', es: 'https://penjat.cat/es/', default: 'https://penjat.cat/' }
       const alternates = [
-        { hreflang: 'ca', href: 'https://penjat.cat/' },
-        { hreflang: 'es', href: 'https://penjat.cat/es/' },
-        { hreflang: 'x-default', href: 'https://penjat.cat/' },
+        { hreflang: 'ca', href: base.ca },
+        { hreflang: 'es', href: base.es },
+        { hreflang: 'x-default', href: base.default },
       ]
       for (const alt of alternates) {
         const link = document.createElement('link')
@@ -166,7 +169,9 @@ function App() {
   }
 
   const changeLanguage = (next: Language) => {
-    const target = next === 'es' ? '/es/' : '/'
+    const target = route === '/com-es-juga/' || route === '/es/como-jugar/'
+      ? (next === 'es' ? '/es/como-jugar/' : '/com-es-juga/')
+      : (next === 'es' ? '/es/' : '/')
     setLanguage(next)
     localStorage.setItem('hangman-language', next)
     goTo(target)
