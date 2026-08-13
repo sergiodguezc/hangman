@@ -27,12 +27,12 @@ button { cursor: pointer; }
 .home-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .home-cta { width: auto; min-width: 220px; }
 .home-preview { align-self: stretch; display: grid; place-items: center; min-height: 0; aspect-ratio: 1.2 / 1; max-width: 520px; justify-self: end; width: 100%; padding: 22px; border: 1px solid var(--line); border-radius: 30px; background: linear-gradient(180deg, #faf7ef 0%, #f5f0e4 100%); box-shadow: 0 24px 70px rgba(49,58,48,.11); }
-.preview-board { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(18px, 2.4vw, 30px); }
+.preview-board { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(14px, 2vw, 22px); padding-block: 8px; }
 .preview-drawing { width: min(100%, 340px); display: grid; place-items: center; }
 .preview-drawing .hangman { width: 100%; max-width: 320px; }
-.preview-word { width: 100%; display: flex; justify-content: center; }
-.preview-word .word { gap: clamp(4px, 1vw, 9px); }
-.preview-word .word > span { width: clamp(22px, 3.2vw, 34px); height: clamp(34px, 4vw, 44px); font: 700 clamp(20px, 2.5vw, 28px)/1 Georgia, serif; }
+.preview-word { width: 100%; display: flex; justify-content: center; padding-bottom: 6px; }
+.preview-word .word { gap: clamp(5px, 1vw, 10px); align-items: end; }
+.preview-word .word > span { width: clamp(24px, 3.4vw, 36px); height: clamp(36px, 4.2vw, 46px); font: 700 clamp(20px, 2.5vw, 28px)/1 Georgia, serif; }
 .preview-word .word > .letter { border-bottom: 3px solid #728277; }
 .home-card, .lobby-card, .disconnect-page section, .howto-card { width: min(100%, 480px); padding: clamp(28px, 6vw, 48px); border: 1px solid var(--line); border-radius: 26px; background: var(--cream); box-shadow: 0 24px 70px rgba(49,58,48,.11); }
 .home-page--multiplayer .home-card--join { width: min(100%, 620px); }
@@ -71,6 +71,7 @@ button { cursor: pointer; }
 .home-footer { padding-top: 2px; border-top: 1px solid #ddd8ca; }
 .home-domain { color: #9a9f9b; font-size: 13px; letter-spacing: .08em; text-transform: lowercase; }
 .home-notice { margin-top: -4px; }
+.home-help-link--footer { display: none; }
 
 /* Help */
 .howto-page { min-height: 100vh; padding: 24px; background: radial-gradient(circle at 50% 15%, #fffdf8 0, transparent 35%), var(--paper); }
@@ -271,9 +272,9 @@ button { cursor: pointer; }
   .home-topbar, .home-footer, .howto-header { flex-direction: column; align-items: stretch; }
   .home-topbar-actions, .howto-header-actions { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; }
   .home-help-link { align-self: flex-start; }
+  .home-help-link--footer { display: inline-flex; align-self: flex-start; }
   .home-footer { order: 4; }
   .home-topbar { order: 3; }
-  .home-mobile-actions { order: 2; }
   .home-hero { order: 1; }
   .home-hero { gap: 18px; }
   .home-copy h1 { max-width: none; font-size: clamp(36px, 11vw, 46px); }
@@ -281,8 +282,12 @@ button { cursor: pointer; }
   .home-actions { flex-direction: column; }
   .home-cta { width: 100%; min-width: 0; }
   .home-preview { display: none; }
-  .home-mobile-actions { display: grid; gap: 12px; }
   .home-domain { text-align: center; }
+  .home-topbar { flex-direction: row; align-items: center; }
+  .home-topbar-actions { width: auto; flex-direction: row; align-items: center; gap: 10px; }
+  .home-topbar-actions .home-help-link { display: none; }
+  .home-footer { flex-direction: column; align-items: center; gap: 10px; border-top: 1px solid #ddd8ca; }
+  .home-help-link--footer { align-self: center; }
   .howto-intro { font-size: 16px; }
   .howto-actions { flex-direction: column; }
   .howto-actions .primary-action, .howto-actions .secondary-action { width: 100%; }
