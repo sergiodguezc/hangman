@@ -5,7 +5,7 @@ type Props = { language: Language; label: string; onChange: (language: Language)
 export function LanguageSelector({ language, label, onChange }: Props) {
   return (
     <fieldset className="language-selector">
-      <legend>{label}</legend>
+      <legend className="sr-only">{label}</legend>
       <div className="language-options">
         {(['ca', 'es'] as Language[]).map((code) => (
           <button key={code} type="button" className={`${language === code ? 'active' : ''}${code === 'es' ? ' secondary' : ''}`}
