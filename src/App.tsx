@@ -12,47 +12,47 @@ import './App.css'
 type Route = '/' | '/es/' | '/multijugador/' | '/aprendre/' | '/com-es-juga/' | '/es/como-jugar/'
 type Mode = 'home' | 'multiplayer' | 'learning' | 'help'
 
-const routeDescriptions: Record<Route, { title: string; description: string; canonical: Route; language: Language; mode: Mode }> = {
+const routeDescriptions: Record<Route, { title: string; description: string; canonical: Route; interfaceLanguage: Language; mode: Mode }> = {
   '/': {
     title: 'Penjat — Joc del penjat online en català',
     description: 'Juga al Penjat online en català. Endevina paraules, juga amb amics i aprèn vocabulari català de manera divertida.',
     canonical: '/',
-    language: 'ca',
+    interfaceLanguage: 'ca',
     mode: 'home',
   },
   '/es/': {
     title: 'Penjat — Juego del ahorcado online',
     description: 'Juega a Penjat online en español. Adivina palabras, juega con amigos y aprende vocabulario de forma divertida.',
     canonical: '/es/',
-    language: 'es',
+    interfaceLanguage: 'es',
     mode: 'home',
   },
   '/multijugador/': {
     title: 'Penjat multijugador — Juga online amb amics',
     description: 'Juga a Penjat multijugador online amb amics. Crea una sala, comparteix el codi i competeix en català.',
     canonical: '/multijugador/',
-    language: 'ca',
+    interfaceLanguage: 'ca',
     mode: 'multiplayer',
   },
   '/aprendre/': {
     title: 'Aprèn català jugant al Penjat | Penjat',
     description: 'Aprèn vocabulari català jugant al Penjat. Descobreix paraules, significats i traduccions mentre jugues.',
     canonical: '/aprendre/',
-    language: 'ca',
+    interfaceLanguage: 'ca',
     mode: 'learning',
   },
   '/com-es-juga/': {
     title: 'Com es juga a Penjat? | Penjat',
     description: 'Descobreix com es juga a Penjat, tant en multijugador com en mode d’aprenentatge de català.',
     canonical: '/com-es-juga/',
-    language: 'ca',
+    interfaceLanguage: 'ca',
     mode: 'help',
   },
   '/es/como-jugar/': {
     title: '¿Cómo se juega a Penjat? | Penjat',
     description: 'Descubre cómo jugar a Penjat, tanto en multijugador como en el modo de aprendizaje de catalán.',
     canonical: '/es/como-jugar/',
-    language: 'es',
+    interfaceLanguage: 'es',
     mode: 'help',
   },
 }
@@ -73,7 +73,11 @@ function App() {
     if (current !== window.location.pathname) window.history.replaceState({}, '', current)
     return current
   })
-  const [language, setLanguage] = useState<Language>(() => routeDescriptions[normalizeRoute(window.location.pathname)].language)
+  const [interfaceLanguage, setInterfaceLanguage] = useState<Language>(() => {
+    const routeLanguage = routeDescriptions[normalizeRoute(window.location.pathname)].interfaceLanguage
+    return (localStorage.getItem('hangman-interface-language') as Language | null) ?? routeLanguage
+  })
+  const [gameLanguage, setGameLanguage] = useState<Language>(() => (localStorage.getItem('hangman-game-language') as Language | null) ?? routeDescriptions[normalizeRoute(window.location.pathname)].interfaceLanguage)
   const [room, setRoom] = useState<PlayerGameView | null>(null)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [playerId, setPlayerId] = useState(() => loadRoomSession()?.playerId ?? '')
@@ -87,11 +91,11 @@ function App() {
       const next = normalizeRoute(window.location.pathname)
       if (next !== window.location.pathname) window.history.replaceState({}, '', next)
       setRoute(next)
-      setLanguage(routeDescriptions[next].language)
+      setInterfaceLanguage(routeDescriptions[next].interfaceLanguage)
       setView(routeDescriptions[next].mode)
     }
     window.addEventListener('popstate', onPopState)
-    const update = (state: PlayerGameView) => { setRoom(state); setLanguage(state.language) }
+    const update = (state: PlayerGameView) => { setRoom(state); setGameLanguage(state.gameLanguage); localStorage.setItem('hangman-game-language', state.gameLanguage) }
     socket.on('room:state', update)
     const history = (chatMessages: ChatMessage[]) => setMessages(chatMessages)
     const message = (chatMessage: ChatMessage) => setMessages((current) => [...current, chatMessage].slice(-50))
@@ -118,7 +122,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    document.documentElement.lang = page.language
+    document.documentElement.lang = page.interfaceLanguage
     document.title = page.title
     const canonical = new URL(page.canonical, window.location.origin).href
     const description = page.description
@@ -159,22 +163,26 @@ function App() {
         document.head.appendChild(link)
       }
     }
-  }, [page.canonical, page.description, page.language, page.title, route])
+  }, [page.canonical, page.description, page.interfaceLanguage, page.title, route])
 
   const goTo = (next: Route) => {
     if (next !== route) window.history.pushState({}, '', next)
     setRoute(next)
-    setLanguage(routeDescriptions[next].language)
+    setInterfaceLanguage(routeDescriptions[next].interfaceLanguage)
     setView(routeDescriptions[next].mode)
   }
 
-  const changeLanguage = (next: Language) => {
+  const changeInterfaceLanguage = (next: Language) => {
     const target = route === '/com-es-juga/' || route === '/es/como-jugar/'
       ? (next === 'es' ? '/es/como-jugar/' : '/com-es-juga/')
       : (next === 'es' ? '/es/' : '/')
-    setLanguage(next)
-    localStorage.setItem('hangman-language', next)
+    setInterfaceLanguage(next)
+    localStorage.setItem('hangman-interface-language', next)
     goTo(target)
+  }
+  const changeGameLanguage = (next: Language) => {
+    setGameLanguage(next)
+    localStorage.setItem('hangman-game-language', next)
   }
   const leave = () => { socket.emit('chat:typing', { isTyping: false }); socket.emit('room:leave'); clearRoomSession(); setPlayerId(''); setRoom(null); setMessages([]); setTypingPlayer(null) }
   const enterRoom = (view: PlayerGameView, id: string) => { setMessages([]); setPlayerId(id); setNotice(''); setRoom(view) }
@@ -186,20 +194,20 @@ function App() {
 
   useEffect(() => {
     if (room) return
-    if (page.language !== language) setLanguage(page.language)
-  }, [language, page.language, room])
+    if (page.interfaceLanguage !== interfaceLanguage) setInterfaceLanguage(page.interfaceLanguage)
+  }, [interfaceLanguage, page.interfaceLanguage, room])
 
   const startMultiplayer = () => goTo('/multijugador/')
   const startLearning = () => goTo('/aprendre/')
-  const startHelp = () => goTo(language === 'es' ? '/es/como-jugar/' : '/com-es-juga/')
+  const startHelp = () => goTo(interfaceLanguage === 'es' ? '/es/como-jugar/' : '/com-es-juga/')
   const returnHome = () => goTo('/')
 
-  if (!room && view === 'learning') return <LearningPage language={language} onHome={returnHome} />
-  if (!room && view === 'multiplayer') return <HomePage language={language} notice={notice} onLanguage={changeLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />
-  if (!room && view === 'help') return <HowToPlayPage language={language} onLanguage={changeLanguage} onBack={returnHome} onMultiplayer={startMultiplayer} onLearn={startLearning} />
-  if (!room) return <HomePage language={language} notice={notice} onLanguage={changeLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />
-  if (room.phase === 'waiting') return <LobbyPage state={room} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
-  return <GamePage state={room} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
+  if (!room && view === 'learning') return <LearningPage language={interfaceLanguage} onHome={returnHome} />
+  if (!room && view === 'multiplayer') return <HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onInterfaceLanguage={changeInterfaceLanguage} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />
+  if (!room && view === 'help') return <HowToPlayPage language={interfaceLanguage} onLanguage={changeInterfaceLanguage} onBack={returnHome} onMultiplayer={startMultiplayer} onLearn={startLearning} />
+  if (!room) return <HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onInterfaceLanguage={changeInterfaceLanguage} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />
+  if (room.phase === 'waiting') return <LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
+  return <GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
 }
 
 export default App

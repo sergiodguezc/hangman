@@ -28,6 +28,7 @@ const copy = {
     back: 'Tornar a jugar',
     multiplayerCta: 'Multijugador',
     learnCta: 'Aprendre català',
+    interfaceLanguage: 'Idioma',
   },
   es: {
     title: '¿Cómo se juega a Penjat?',
@@ -47,6 +48,7 @@ const copy = {
     back: 'Volver a jugar',
     multiplayerCta: 'Multijugador',
     learnCta: 'Aprender catalán',
+    interfaceLanguage: 'Idioma',
   },
 } satisfies Record<Language, {
   title: string
@@ -57,6 +59,7 @@ const copy = {
   back: string
   multiplayerCta: string
   learnCta: string
+  interfaceLanguage: string
 }>
 
 export function HowToPlayPage({ language, onLanguage, onBack, onMultiplayer, onLearn }: Props) {
@@ -67,7 +70,7 @@ export function HowToPlayPage({ language, onLanguage, onBack, onMultiplayer, onL
       <header className="howto-header">
         <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
         <div className="howto-header-actions">
-          <LanguageSelector language={language} label="Language selector" onChange={onLanguage} variant="codes" />
+          <LanguageSelector language={language} label={t.interfaceLanguage} onChange={onLanguage} variant="codes" />
           <button className="text-button" onClick={onBack}>{t.back}</button>
         </div>
       </header>

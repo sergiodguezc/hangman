@@ -83,11 +83,11 @@ io.on('connection', (socket) => {
     };
     socket.on('room:create', (payload, ack) => {
         const name = cleanName(payload?.name);
-        const language = payload?.language;
+        const gameLanguage = payload?.gameLanguage;
         const matchTarget = cleanMatchTarget(payload?.matchTarget);
-        if (!name || !(language in ALPHABETS) || matchTarget === undefined)
+        if (!name || !(gameLanguage in ALPHABETS) || matchTarget === undefined)
             return ack({ ok: false, error: 'invalid-details' });
-        const { room, playerId, reconnectToken } = games.create(socket.id, name, language, matchTarget);
+        const { room, playerId, reconnectToken } = games.create(socket.id, name, gameLanguage, matchTarget);
         socket.join(room.code);
         ack({ ok: true, data: { view: room.viewFor(playerId), session: { roomCode: room.code, playerId, reconnectToken } } });
         socket.emit('chat:history', room.chatHistory);

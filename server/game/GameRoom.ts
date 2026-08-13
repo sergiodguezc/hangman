@@ -176,7 +176,7 @@ export class GameRoom {
   viewFor(playerId: string): PlayerGameView {
     const reveal = this.phase === 'round-over' || this.phase === 'match-over'
     const view: PlayerGameView = {
-      code: this.code, language: this.language, matchTarget: this.matchTarget, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
+      code: this.code, gameLanguage: this.language, matchTarget: this.matchTarget, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
       roundNumber: this.roundNumber, wordSetterId: this.wordSetterId, guesserId: this.guesserId,
       roundWinnerId: this.roundWinnerId, matchWinnerId: this.matchWinnerId,
       matchResult: this.matchResult, matchEndingPending: this.targetReachedPlayerId !== null,

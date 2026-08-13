@@ -2,7 +2,7 @@ import type { Language } from '../../shared/game'
 
 const es = {
   title: 'Penjat', subtitle: 'El clásico juego de palabras, ahora para dos', name: 'Tu nombre',
-  namePlaceholder: 'Escribe tu nombre', language: 'Idioma', create: 'Crear partida', join: 'Unirse a partida',
+  namePlaceholder: 'Escribe tu nombre', language: 'Idioma', gameLanguage: 'Idioma de la partida', gameLanguageHint: 'Elige el idioma de la palabra.', create: 'Crear partida', join: 'Unirse a partida',
   roomCode: 'Código de sala', codePlaceholder: 'ABCDE', waiting: 'Esperando al otro jugador…', copy: 'Copiar código', copied: 'Copiado',
   players: 'Jugadores', round: 'Ronda', ranking: 'Clasificación', choosing: 'elige la palabra', guessing: 'adivina',
   chooseWord: 'Elige la palabra secreta', secretPlaceholder: 'Palabra o frase secreta', wordPrivacy: 'El otro jugador no verá la palabra.', startRound: 'Empezar ronda',
@@ -35,7 +35,7 @@ const es = {
 
 const ca: typeof es = {
   title: 'Penjat', subtitle: 'El joc de paraules de sempre, ara per a dos', name: 'El teu nom',
-  namePlaceholder: 'Escriu el teu nom', language: 'Llengua', create: 'Crea una partida', join: "Uneix-te a una partida",
+  namePlaceholder: 'Escriu el teu nom', language: 'Llengua', gameLanguage: 'Idioma de la partida', gameLanguageHint: 'Tria l’idioma de la paraula.', create: 'Crea una partida', join: "Uneix-te a una partida",
   roomCode: 'Codi de sala', codePlaceholder: 'ABCDE', waiting: "Esperant l'altre jugador…", copy: 'Copia el codi', copied: 'Codi copiat!',
   players: 'Jugadors', round: 'Ronda', ranking: 'Classificació', choosing: 'tria la paraula', guessing: 'endevina',
   chooseWord: 'Tria la paraula secreta', secretPlaceholder: 'Escriu una paraula o una frase', wordPrivacy: "L'altre jugador no veurà la paraula.", startRound: 'Comença la ronda',

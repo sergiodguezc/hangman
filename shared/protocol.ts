@@ -14,7 +14,7 @@ export type MatchResult = { kind: 'win'; winnerId: string } | { kind: 'draw' } |
 
 export type PlayerGameView = {
   code: string
-  language: Language
+  gameLanguage: Language
   matchTarget: MatchTarget
   players: Player[]
   phase: GamePhase
@@ -40,7 +40,7 @@ export type PlayerGameView = {
 export type Ack<T = undefined> = (response: { ok: true; data: T } | { ok: false; error: string }) => void
 
 export interface ClientToServerEvents {
-  'room:create': (payload: { name: string; language: Language; matchTarget: MatchTarget }, ack: Ack<RoomEntry>) => void
+  'room:create': (payload: { name: string; gameLanguage: Language; matchTarget: MatchTarget }, ack: Ack<RoomEntry>) => void
   'room:join': (payload: { name: string; code: string }, ack: Ack<RoomEntry>) => void
   'room:resume': (payload: RoomSession, ack: Ack<PlayerGameView>) => void
   'round:set-word': (payload: { word: string }, ack: Ack) => void
