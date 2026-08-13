@@ -12,7 +12,6 @@ type Props = {
   gameLanguage: Language
   notice?: string
   mode: 'home' | 'multiplayer'
-  onInterfaceLanguage: (language: Language) => void
   onGameLanguage: (language: Language) => void
   onEnter: (view: PlayerGameView, playerId: string) => void
   onLearn: () => void
@@ -20,7 +19,7 @@ type Props = {
   onHelp: () => void
 }
 
-export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onInterfaceLanguage, onGameLanguage, onEnter, onLearn, onMultiplayer, onHelp }: Props) {
+export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGameLanguage, onEnter, onLearn, onMultiplayer, onHelp }: Props) {
   const [panel, setPanel] = useState<'menu' | 'multiplayer'>(mode === 'multiplayer' ? 'multiplayer' : 'menu')
   const [name, setName] = useState(localStorage.getItem('hangman-name') ?? '')
   const [code, setCode] = useState('')
@@ -94,7 +93,6 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onInte
         <div className="brand home-brand"><span className="brand-mark">P</span><span className="brand-word">PENJAT</span></div>
         <div className="home-topbar-actions">
           <button className="text-button home-help-link" onClick={onHelp}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</button>
-          <LanguageSelector language={interfaceLanguage} label={t.language} onChange={onInterfaceLanguage} variant="codes" />
         </div>
       </header>
 

@@ -6,6 +6,7 @@ import { HomePage } from './pages/HomePage'
 import { LobbyPage } from './pages/LobbyPage'
 import { LearningPage } from './pages/LearningPage'
 import { HowToPlayPage } from './pages/HowToPlayPage'
+import { InterfaceLanguageSelector } from './components/InterfaceLanguageSelector'
 import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import './App.css'
 
@@ -173,11 +174,12 @@ function App() {
   }
 
   const changeInterfaceLanguage = (next: Language) => {
+    setInterfaceLanguage(next)
+    localStorage.setItem('hangman-interface-language', next)
+    if (room) return
     const target = route === '/com-es-juga/' || route === '/es/como-jugar/'
       ? (next === 'es' ? '/es/como-jugar/' : '/com-es-juga/')
       : (next === 'es' ? '/es/' : '/')
-    setInterfaceLanguage(next)
-    localStorage.setItem('hangman-interface-language', next)
     goTo(target)
   }
   const changeGameLanguage = (next: Language) => {
@@ -202,12 +204,14 @@ function App() {
   const startHelp = () => goTo(interfaceLanguage === 'es' ? '/es/como-jugar/' : '/com-es-juga/')
   const returnHome = () => goTo('/')
 
-  if (!room && view === 'learning') return <LearningPage language={interfaceLanguage} onHome={returnHome} />
-  if (!room && view === 'multiplayer') return <HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onInterfaceLanguage={changeInterfaceLanguage} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />
-  if (!room && view === 'help') return <HowToPlayPage language={interfaceLanguage} onLanguage={changeInterfaceLanguage} onBack={returnHome} onMultiplayer={startMultiplayer} onLearn={startLearning} />
-  if (!room) return <HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onInterfaceLanguage={changeInterfaceLanguage} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />
-  if (room.phase === 'waiting') return <LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
-  return <GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />
+  const interfaceSelector = <InterfaceLanguageSelector language={interfaceLanguage} onChange={changeInterfaceLanguage} />
+
+  if (!room && view === 'learning') return <><LearningPage language={interfaceLanguage} onHome={returnHome} />{interfaceSelector}</>
+  if (!room && view === 'multiplayer') return <><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}</>
+  if (!room && view === 'help') return <><HowToPlayPage language={interfaceLanguage} onBack={returnHome} onMultiplayer={startMultiplayer} onLearn={startLearning} />{interfaceSelector}</>
+  if (!room) return <><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}</>
+  if (room.phase === 'waiting') return <><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />{interfaceSelector}</>
+  return <><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />{interfaceSelector}</>
 }
 
 export default App
