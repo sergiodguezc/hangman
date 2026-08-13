@@ -114,18 +114,8 @@ export function HomePage({ language, notice, mode, onLanguage, onEnter, onLearn,
         </aside>
       </div>
 
-      <div className="home-mobile-actions">
-        <button className="home-card-link" onClick={onMultiplayer}>
-          <strong>{isCatalan ? 'MULTIJUGADOR' : 'MULTIJUGADOR'}</strong>
-          <span>{isCatalan ? 'Juga amb els amics' : 'Juega con tus amigos'}</span>
-        </button>
-        <button className="home-card-link" onClick={onLearn}>
-          <strong>{isCatalan ? 'APRENDRE' : 'APRENDER'}</strong>
-          <span>{isCatalan ? 'Practica català' : 'Practica catalán'}</span>
-        </button>
-      </div>
-
       <footer className="home-footer">
+        <button className="text-button home-help-link home-help-link--footer" onClick={onHelp}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</button>
         <span className="home-domain">penjat.cat</span>
       </footer>
       {notice && <p className="form-error home-notice" role="alert">{errorMessage(notice, t)}</p>}
