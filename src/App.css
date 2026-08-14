@@ -87,6 +87,19 @@ button { cursor: pointer; }
 .home-domain { color: #9a9f9b; font-size: 13px; letter-spacing: .08em; text-transform: lowercase; }
 .home-notice { margin-top: -4px; }
 .home-help-link--footer { display: none; }
+.ios-install-card { width: min(100%, 620px); margin: 10px auto 0; border: 1px solid var(--line); border-radius: 13px; color: #455249; background: rgba(255,253,248,.64); overflow: hidden; }
+.ios-install-toggle { width: 100%; min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 13px; border: 0; color: var(--green-dark); background: transparent; text-align: left; font-weight: 700; }
+.ios-install-toggle:hover { background: #f5f3ed; }
+.ios-install-summary { display: inline-flex; align-items: center; gap: 8px; min-width: 0; font-size: 13px; line-height: 1.25; }
+.ios-install-chevron { flex: 0 0 auto; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; transition: transform 160ms ease; }
+.ios-install-toggle[aria-expanded="true"] .ios-install-chevron { transform: rotate(180deg); }
+.ios-install-content { display: grid; grid-template-rows: 0fr; border-top: 0 solid transparent; transition: grid-template-rows 180ms ease, border-color 180ms ease; }
+.ios-install-toggle[aria-expanded="true"] + .ios-install-content { grid-template-rows: 1fr; border-top: 1px solid #e9e4d8; }
+.ios-install-content-inner { min-height: 0; overflow: hidden; padding: 0 14px; }
+.ios-install-toggle[aria-expanded="true"] + .ios-install-content .ios-install-content-inner { padding-bottom: 14px; }
+.ios-install-card p { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.ios-install-card ol { display: grid; gap: 6px; margin: 12px 0 0; padding-left: 21px; font-size: 13px; line-height: 1.45; }
+.ios-install-card strong { color: var(--green-dark); }
 
 /* Help */
 .howto-page { min-height: 100vh; padding: calc(env(safe-area-inset-top, 0px) + 72px) calc(env(safe-area-inset-right, 0px) + 24px) 24px calc(env(safe-area-inset-left, 0px) + 24px); background: radial-gradient(circle at 50% 15%, #fffdf8 0, transparent 35%), var(--paper); }
@@ -307,6 +320,8 @@ button { cursor: pointer; }
   .home-topbar-actions .home-help-link { display: none; }
   .home-footer { flex-direction: column; align-items: center; gap: 10px; margin-top: 22px; padding-top: 16px; border-top: 1px solid #ddd8ca; }
   .home-help-link--footer { align-self: center; }
+  .ios-install-card { width: min(100%, 342px); margin-top: 24px; border-radius: 12px; }
+  .ios-install-toggle { padding-inline: 12px; }
   .howto-intro { font-size: 16px; }
   .howto-actions { flex-direction: column; }
   .howto-actions .primary-action, .howto-actions .secondary-action { width: 100%; }
