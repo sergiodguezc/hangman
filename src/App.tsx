@@ -66,6 +66,8 @@ function App() {
   const [view, setView] = useState<Mode>(() => routeDescriptions[normalizeRoute(window.location.pathname)].mode)
   const [learningSummaryRequested, setLearningSummaryRequested] = useState(false)
   const [learningSummaryVisible, setLearningSummaryVisible] = useState(false)
+  const [learningGameActive, setLearningGameActive] = useState(false)
+  const [pendingExit, setPendingExit] = useState<(() => void) | null>(null)
   const page = routeDescriptions[route]
 
   useEffect(() => {
@@ -172,13 +174,58 @@ function App() {
   const interfaceSelector = <InterfaceLanguageSelector language={interfaceLanguage} onChange={changeInterfaceLanguage} />
   const showBack = !room && view !== 'home'
   const backLabel = room ? (interfaceLanguage === 'ca' ? 'Tornar' : 'Volver') : (interfaceLanguage === 'ca' ? 'Tornar enrere' : 'Volver')
+  const multiplayerGameActive = room ? !['waiting', 'match-over', 'disconnected'].includes(room.phase) : false
+  const requestConfirmedExit = (exit: () => void, requiresConfirmation: boolean) => {
+    if (!requiresConfirmation) { exit(); return }
+    setPendingExit(() => exit)
+  }
+  const cancelExit = () => setPendingExit(null)
+  const confirmExit = () => {
+    const exit = pendingExit
+    setPendingExit(null)
+    exit?.()
+  }
+  const exitDialog = pendingExit ? <ExitConfirmationDialog language={interfaceLanguage} onCancel={cancelExit} onConfirm={confirmExit} /> : null
 
-  if (!room && view === 'learning') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={learningBack} /><LearningPage language={interfaceLanguage} summaryRequested={learningSummaryRequested} onSummaryShown={markLearningSummaryShown} onExitSummary={returnHome} />{interfaceSelector}</>
-  if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}</>
-  if (!room && view === 'help') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HowToPlayPage language={interfaceLanguage} />{interfaceSelector}</>
-  if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}</>
-  if (room.phase === 'waiting') return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}</>
-  return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}</>
+  if (!room && view === 'learning') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={() => requestConfirmedExit(learningBack, learningGameActive)} /><LearningPage language={interfaceLanguage} summaryRequested={learningSummaryRequested} onActiveGameChange={setLearningGameActive} onSummaryShown={markLearningSummaryShown} onExitSummary={returnHome} />{interfaceSelector}{exitDialog}</>
+  if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}{exitDialog}</>
+  if (!room && view === 'help') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HowToPlayPage language={interfaceLanguage} />{interfaceSelector}{exitDialog}</>
+  if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}{exitDialog}</>
+  if (room.phase === 'waiting') return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}{exitDialog}</>
+  return <><GlobalNavigation showBack backLabel={backLabel} onBack={() => requestConfirmedExit(leave, multiplayerGameActive)} /><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}{exitDialog}</>
 }
 
 export default App
+
+function ExitConfirmationDialog({ language, onCancel, onConfirm }: { language: Language; onCancel: () => void; onConfirm: () => void }) {
+  const copy = language === 'ca' ? {
+    title: 'Vols acabar la partida?',
+    body: "Si surts ara, la partida actual s'acabarà.",
+    cancel: 'Cancel·la',
+    confirm: 'Acaba la partida',
+  } : {
+    title: '¿Quieres terminar la partida?',
+    body: 'Si sales ahora, la partida actual terminará.',
+    cancel: 'Cancelar',
+    confirm: 'Terminar partida',
+  }
+
+  useEffect(() => {
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onCancel()
+    }
+    window.addEventListener('keydown', keydown)
+    return () => window.removeEventListener('keydown', keydown)
+  }, [onCancel])
+
+  return <div className="exit-confirmation-backdrop" role="presentation">
+    <section className="exit-confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="exit-confirmation-title" aria-describedby="exit-confirmation-copy">
+      <h2 id="exit-confirmation-title">{copy.title}</h2>
+      <p id="exit-confirmation-copy">{copy.body}</p>
+      <div className="exit-confirmation-actions">
+        <button type="button" className="secondary-action" autoFocus onClick={onCancel}>{copy.cancel}</button>
+        <button type="button" className="primary-action danger-action" onClick={onConfirm}>{copy.confirm}</button>
+      </div>
+    </section>
+  </div>
+}
