@@ -34,8 +34,8 @@ button { cursor: pointer; }
 .home-cta { width: auto; min-width: 220px; }
 .home-preview { align-self: center; display: grid; place-items: center; min-height: 0; aspect-ratio: 1.08 / 1; max-width: 520px; justify-self: end; width: 100%; padding: 22px; border: 1px solid var(--line); border-radius: 30px; background: linear-gradient(180deg, #faf7ef 0%, #f5f0e4 100%); box-shadow: 0 24px 70px rgba(49,58,48,.11); }
 .preview-board { width: 100%; height: 100%; display: grid; grid-template-rows: minmax(0, 1fr) auto; align-items: center; justify-items: center; row-gap: clamp(10px, 1.8vw, 18px); padding: 10px 8px 16px; box-sizing: border-box; }
-.preview-drawing { width: min(100%, 340px); height: 100%; min-height: 0; display: grid; place-items: center; }
-.preview-drawing .hangman { width: auto; height: 100%; max-width: 320px; max-height: 100%; }
+.preview-drawing { width: min(100%, 320px); aspect-ratio: 240 / 260; min-height: 0; display: grid; place-items: center; }
+.preview-drawing .hangman { display: block; width: 100%; height: auto; max-width: 100%; max-height: 100%; }
 .preview-word { width: 100%; display: flex; justify-content: center; align-items: flex-end; gap: clamp(7px, 1.2vw, 12px); min-height: 58px; padding: 2px 0; color: var(--green-dark); }
 .preview-letter { display: inline-grid; place-items: center; width: clamp(24px, 3.4vw, 36px); min-width: clamp(24px, 3.4vw, 36px); min-height: clamp(40px, 4.4vw, 48px); line-height: 1.05; border-bottom: 3px solid #728277; font: 700 clamp(20px, 2.5vw, 28px)/1.05 Georgia, serif; }
 .home-card, .lobby-card, .disconnect-page section, .howto-card { width: min(100%, 480px); padding: clamp(28px, 6vw, 48px); border: 1px solid var(--line); border-radius: 26px; background: var(--cream); box-shadow: 0 24px 70px rgba(49,58,48,.11); }
@@ -310,8 +310,8 @@ button { cursor: pointer; }
   .home-cta { width: 100%; min-width: 0; }
   .home-preview { order: 0; width: min(46vw, 150px); max-width: 150px; margin-top: 34px; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; aspect-ratio: auto; }
   .preview-board { height: auto; grid-template-rows: auto auto; row-gap: 7px; padding: 0; }
-  .preview-drawing { width: auto; height: clamp(96px, 27vw, 120px); }
-  .preview-drawing .hangman { width: auto; height: 100%; max-width: 100%; max-height: none; }
+  .preview-drawing { width: min(100%, clamp(89px, 24.9vw, 111px)); }
+  .preview-drawing .hangman { max-height: none; }
   .preview-word { width: auto; min-height: 30px; gap: clamp(4px, 1.5vw, 6px); padding: 0 0 2px; line-height: 1; }
   .preview-letter { width: clamp(14px, 4.2vw, 17px); min-width: clamp(14px, 4.2vw, 17px); min-height: 25px; border-bottom-width: 2px; font-size: clamp(15px, 4vw, 17px); line-height: 1; }
   .home-domain { text-align: center; }
