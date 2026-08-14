@@ -104,8 +104,7 @@ button { cursor: pointer; }
 /* Help */
 .howto-page { min-height: 100vh; padding: calc(env(safe-area-inset-top, 0px) + 72px) calc(env(safe-area-inset-right, 0px) + 24px) 24px calc(env(safe-area-inset-left, 0px) + 24px); background: radial-gradient(circle at 50% 15%, #fffdf8 0, transparent 35%), var(--paper); }
 .howto-shell { width: min(100%, 980px); margin: auto; display: grid; gap: 18px; }
-.howto-header { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-.howto-header-actions { display: flex; align-items: center; gap: 16px; }
+.howto-header { display: flex; align-items: center; gap: 18px; }
 .howto-card { width: 100%; }
 .howto-intro { margin: 0 0 22px; color: var(--muted); font-size: 18px; line-height: 1.6; }
 .howto-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
@@ -114,8 +113,6 @@ button { cursor: pointer; }
 .howto-section h2 { margin: 0 0 10px; color: var(--green-dark); font: 700 24px Georgia, serif; }
 .howto-section ul { margin: 0; padding-left: 20px; color: #455249; line-height: 1.6; }
 .howto-section li + li { margin-top: 7px; }
-.howto-actions { display: flex; gap: 12px; margin-top: 20px; }
-.howto-actions .primary-action, .howto-actions .secondary-action { width: auto; min-width: 180px; }
 
 /* Catalan learning mode */
 .learning-page { min-height: 100vh; padding: calc(env(safe-area-inset-top, 0px) + 72px) calc(env(safe-area-inset-right, 0px) + 12px) 38px calc(env(safe-area-inset-left, 0px) + 12px); background: var(--paper); }
@@ -298,7 +295,7 @@ button { cursor: pointer; }
   .home-page { place-items: start center; padding-top: calc(env(safe-area-inset-top, 0px) + 62px); }
   .home-shell { min-height: calc(100svh - env(safe-area-inset-top, 0px) - 86px); gap: 0; }
   .home-topbar, .howto-header { flex-direction: column; align-items: stretch; }
-  .home-topbar-actions, .howto-header-actions { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; }
+  .home-topbar-actions { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; }
   .home-help-link { align-self: flex-start; }
   .home-help-link--footer { display: inline-flex; align-self: flex-start; }
   .home-hero { display: flex; flex-direction: column; align-items: center; gap: 0; margin-top: 18px; }
@@ -323,8 +320,6 @@ button { cursor: pointer; }
   .ios-install-card { width: min(100%, 342px); margin-top: 24px; border-radius: 12px; }
   .ios-install-toggle { padding-inline: 12px; }
   .howto-intro { font-size: 16px; }
-  .howto-actions { flex-direction: column; }
-  .howto-actions .primary-action, .howto-actions .secondary-action { width: 100%; }
   .match-page { padding-bottom: 25px; }
   .match-header { flex-wrap: wrap; }.match-meta { order: 3; flex-basis: 100%; flex-wrap: wrap; }
   .game-columns { grid-template-columns: 1fr; }
