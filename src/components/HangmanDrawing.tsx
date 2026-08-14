@@ -17,7 +17,7 @@ export function HangmanDrawing({ errors, label }: Props) {
   )
 
   return (
-    <svg className="hangman" viewBox="0 0 240 260" role="img" aria-label={`${label}: ${errors} / 6`}>
+    <svg className="hangman" width="240" height="260" viewBox="0 0 240 260" role="img" aria-label={`${label}: ${errors} / 6`}>
       <g className="gallows" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="8">
         <path d="M28 240h184M62 240V20h112v28M43 20h38" />
       </g>
