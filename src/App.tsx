@@ -7,6 +7,7 @@ import { LobbyPage } from './pages/LobbyPage'
 import { LearningPage } from './pages/LearningPage'
 import { HowToPlayPage } from './pages/HowToPlayPage'
 import { InterfaceLanguageSelector } from './components/InterfaceLanguageSelector'
+import { GlobalNavigation } from './components/GlobalNavigation'
 import { INTERFACE_LANGUAGE_STORAGE_KEY, readInterfaceLanguage } from './localization'
 import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import { normalizeRoute, type Route } from './routing'
@@ -155,13 +156,15 @@ function App() {
   const returnHome = () => goTo('/')
 
   const interfaceSelector = <InterfaceLanguageSelector language={interfaceLanguage} onChange={changeInterfaceLanguage} />
+  const showBack = !room && view !== 'home'
+  const backLabel = room ? (interfaceLanguage === 'ca' ? 'Tornar' : 'Volver') : (interfaceLanguage === 'ca' ? 'Tornar enrere' : 'Volver')
 
-  if (!room && view === 'learning') return <><LearningPage language={interfaceLanguage} onHome={returnHome} />{interfaceSelector}</>
-  if (!room && view === 'multiplayer') return <><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}</>
-  if (!room && view === 'help') return <><HowToPlayPage language={interfaceLanguage} onBack={returnHome} onMultiplayer={startMultiplayer} onLearn={startLearning} />{interfaceSelector}</>
-  if (!room) return <><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}</>
-  if (room.phase === 'waiting') return <><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />{interfaceSelector}</>
-  return <><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} onLeave={leave} />{interfaceSelector}</>
+  if (!room && view === 'learning') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><LearningPage language={interfaceLanguage} />{interfaceSelector}</>
+  if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}</>
+  if (!room && view === 'help') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HowToPlayPage language={interfaceLanguage} onMultiplayer={startMultiplayer} onLearn={startLearning} />{interfaceSelector}</>
+  if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}</>
+  if (room.phase === 'waiting') return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}</>
+  return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}</>
 }
 
 export default App
