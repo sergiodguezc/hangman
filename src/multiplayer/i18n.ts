@@ -31,6 +31,20 @@ const es = {
   youStart: 'Empiezas eligiendo la palabra.', playerStarts: '{player} empieza eligiendo la palabra.',
   typing: '{player} está escribiendo…',
   multiplayer: 'Multijugador', learnCatalan: 'Aprèn català', chooseMode: 'Elige un modo de juego', back: 'Volver',
+  iosInstallTitle: 'Instala Penjat en tu iPhone o iPad',
+  iosInstallSummary: 'Instala Penjat en tu iPhone o iPad',
+  iosInstallIntro: 'Añade Penjat a la pantalla de inicio y úsalo como una app.',
+  iosInstallOpenPrefix: 'Abre',
+  iosInstallOpenMiddle: 'con',
+  iosInstallTapButton: 'Toca el botón',
+  iosInstallSelect: 'Selecciona',
+  iosInstallTap: 'Toca',
+  iosInstallSite: 'penjat.cat',
+  iosInstallBrowser: 'Safari',
+  iosInstallShare: 'Compartir',
+  iosInstallAddHome: '«Añadir a pantalla de inicio»',
+  iosInstallAdd: '«Añadir»',
+  iosInstallOutro: 'Después podrás abrir Penjat directamente desde la pantalla de inicio.',
 }
 
 const ca: typeof es = {
@@ -64,6 +78,20 @@ const ca: typeof es = {
   youStart: 'Comences triant la paraula.', playerStarts: '{player} comença triant la paraula.',
   typing: '{player} està escrivint…',
   multiplayer: 'Multijugador', learnCatalan: 'Aprèn català', chooseMode: 'Tria un mode de joc', back: 'Torna',
+  iosInstallTitle: 'Instal·la Penjat al teu iPhone o iPad',
+  iosInstallSummary: 'Instal·la Penjat al teu iPhone o iPad',
+  iosInstallIntro: 'Afegeix Penjat a la pantalla d’inici i utilitza’l com una app.',
+  iosInstallOpenPrefix: 'Obre',
+  iosInstallOpenMiddle: 'amb',
+  iosInstallTapButton: 'Toca el botó',
+  iosInstallSelect: 'Selecciona',
+  iosInstallTap: 'Toca',
+  iosInstallSite: 'penjat.cat',
+  iosInstallBrowser: 'Safari',
+  iosInstallShare: 'Compartir',
+  iosInstallAddHome: '«Afegeix a la pantalla d’inici»',
+  iosInstallAdd: '«Afegeix»',
+  iosInstallOutro: 'Després podràs obrir Penjat directament des de la pantalla d’inici.',
 }
 
 export const multiplayerTranslations = { es, ca } satisfies Record<Language, typeof es>

@@ -19,6 +19,15 @@ type Props = {
   onHelp: () => void
 }
 
+function isIosDevice() {
+  const platform = navigator.platform || ''
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+}
+
+function isStandalonePwa() {
+  return window.matchMedia('(display-mode: standalone)').matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone)
+}
+
 export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGameLanguage, onEnter, onLearn, onMultiplayer, onHelp }: Props) {
   const [panel, setPanel] = useState<'menu' | 'multiplayer'>(mode === 'multiplayer' ? 'multiplayer' : 'menu')
   const [name, setName] = useState(localStorage.getItem('hangman-name') ?? '')
@@ -26,11 +35,21 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGame
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [matchTarget, setMatchTarget] = useState<MatchTarget>(5)
+  const [showIosInstall, setShowIosInstall] = useState(false)
+  const [installExpanded, setInstallExpanded] = useState(false)
   const t = multiplayerTranslations[interfaceLanguage]
   const isCatalan = interfaceLanguage === 'ca'
   const previewSlots = ['', 'E', '', 'J', '', 'T']
 
   useEffect(() => { setPanel(mode === 'multiplayer' ? 'multiplayer' : 'menu') }, [mode])
+
+  useEffect(() => {
+    const displayMode = window.matchMedia('(display-mode: standalone)')
+    const updateInstallHint = () => setShowIosInstall(isIosDevice() && !isStandalonePwa())
+    updateInstallHint()
+    displayMode.addEventListener('change', updateInstallHint)
+    return () => displayMode.removeEventListener('change', updateInstallHint)
+  }, [])
 
   const connect = (done: () => void) => {
     setBusy(true); setError('')
@@ -116,6 +135,27 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGame
           </div>
         </aside>
       </div>
+
+      {showIosInstall && <section className="ios-install-card" aria-labelledby="ios-install-title">
+        <button type="button" className="ios-install-toggle" aria-expanded={installExpanded} aria-controls="ios-install-content" onClick={() => setInstallExpanded((expanded) => !expanded)}>
+          <span className="ios-install-summary"><span id="ios-install-title">{t.iosInstallSummary}</span></span>
+          <svg className="ios-install-chevron" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="m4 6 4 4 4-4" />
+          </svg>
+        </button>
+        <div id="ios-install-content" className="ios-install-content" aria-hidden={!installExpanded}>
+          <div className="ios-install-content-inner">
+            <p>{t.iosInstallIntro}</p>
+            <ol>
+              <li>{t.iosInstallOpenPrefix} <strong>{t.iosInstallSite}</strong> {t.iosInstallOpenMiddle} <strong>{t.iosInstallBrowser}</strong>.</li>
+              <li>{t.iosInstallTapButton} <strong>{t.iosInstallShare}</strong>.</li>
+              <li>{t.iosInstallSelect} <strong>{t.iosInstallAddHome}</strong>.</li>
+              <li>{t.iosInstallTap} <strong>{t.iosInstallAdd}</strong>.</li>
+            </ol>
+            <p>{t.iosInstallOutro}</p>
+          </div>
+        </div>
+      </section>}
 
       <footer className="home-footer">
         <button className="text-button home-help-link home-help-link--footer" onClick={onHelp}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</button>
