@@ -1,5 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>Penjat</title>
-  <path fill="#244f3a" d="M31.8 2.8C48.2 1.9 59.6 13.1 61 29.5c1.5 17.2-9.7 29.8-27.4 31.6C16 62.8 3.7 52.3 2.9 35.1 2 17.3 13.8 3.8 31.8 2.8Z"/>
-  <text x="32" y="36" fill="#fffdf8" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, serif" font-size="34" font-weight="700">P</text>
+  <rect width="64" height="64" fill="#244f3a"/>
+  <text
+    x="33"
+    y="35"
+    fill="#fffdf8"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="Georgia, serif"
+    font-size="42"
+    font-style="italic"
+    font-weight="700"
+    transform="rotate(-4 33 35)"
+  >P</text>
 </svg>
