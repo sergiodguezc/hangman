@@ -2,15 +2,14 @@
   <title>Penjat</title>
   <rect width="64" height="64" fill="#244f3a"/>
   <text
-    x="33"
+    x="32"
     y="35"
     fill="#fffdf8"
     text-anchor="middle"
     dominant-baseline="middle"
     font-family="Georgia, serif"
     font-size="42"
-    font-style="italic"
     font-weight="700"
-    transform="rotate(-4 33 35)"
+    transform="rotate(-4 32 35)"
   >P</text>
 </svg>
