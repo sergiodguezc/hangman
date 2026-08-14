@@ -64,6 +64,8 @@ function App() {
   const [notice, setNotice] = useState('')
   const [typingPlayer, setTypingPlayer] = useState<{ playerId: string; playerName: string } | null>(null)
   const [view, setView] = useState<Mode>(() => routeDescriptions[normalizeRoute(window.location.pathname)].mode)
+  const [learningSummaryRequested, setLearningSummaryRequested] = useState(false)
+  const [learningSummaryVisible, setLearningSummaryVisible] = useState(false)
   const page = routeDescriptions[route]
 
   useEffect(() => {
@@ -132,6 +134,10 @@ function App() {
     if (next !== route) window.history.pushState({}, '', next)
     setRoute(next)
     setView(routeDescriptions[next].mode)
+    if (next !== '/aprendre/') {
+      setLearningSummaryRequested(false)
+      setLearningSummaryVisible(false)
+    }
   }
 
   const changeInterfaceLanguage = (next: Language) => {
@@ -154,12 +160,20 @@ function App() {
   const startLearning = () => goTo('/aprendre/')
   const startHelp = () => goTo('/com-es-juga/')
   const returnHome = () => goTo('/')
+  const learningBack = () => {
+    if (learningSummaryVisible) { returnHome(); return }
+    setLearningSummaryRequested(true)
+  }
+  const markLearningSummaryShown = () => {
+    setLearningSummaryRequested(false)
+    setLearningSummaryVisible(true)
+  }
 
   const interfaceSelector = <InterfaceLanguageSelector language={interfaceLanguage} onChange={changeInterfaceLanguage} />
   const showBack = !room && view !== 'home'
   const backLabel = room ? (interfaceLanguage === 'ca' ? 'Tornar' : 'Volver') : (interfaceLanguage === 'ca' ? 'Tornar enrere' : 'Volver')
 
-  if (!room && view === 'learning') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><LearningPage language={interfaceLanguage} />{interfaceSelector}</>
+  if (!room && view === 'learning') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={learningBack} /><LearningPage language={interfaceLanguage} summaryRequested={learningSummaryRequested} onSummaryShown={markLearningSummaryShown} onExitSummary={returnHome} />{interfaceSelector}</>
   if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}</>
   if (!room && view === 'help') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HowToPlayPage language={interfaceLanguage} />{interfaceSelector}</>
   if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}</>
