@@ -2,7 +2,6 @@ import type { Language } from '../../shared/game'
 
 type Props = {
   language: Language
-  onBack: () => void
   onMultiplayer: () => void
   onLearn: () => void
 }
@@ -23,7 +22,6 @@ const copy = {
       title: 'Regles',
       items: ['Endevina lletres.', 'Les lletres correctes es revelen automàticament.', 'Les errònies fan avançar el penjat.', 'Guanyes si completes la paraula i perds si esgotas els intents permesos.'],
     },
-    back: 'Tornar a jugar',
     multiplayerCta: 'Multijugador',
     learnCta: 'Aprendre català',
   },
@@ -42,7 +40,6 @@ const copy = {
       title: 'Reglas',
       items: ['Adivina letras.', 'Las letras correctas se revelan automáticamente.', 'Las erróneas hacen avanzar al ahorcado.', 'Ganas si completas la palabra y pierdes si agotas los intentos permitidos.'],
     },
-    back: 'Volver a jugar',
     multiplayerCta: 'Multijugador',
     learnCta: 'Aprender catalán',
   },
@@ -52,21 +49,17 @@ const copy = {
   multiplayer: { title: string; items: string[] }
   learn: { title: string; items: string[] }
   rules: { title: string; items: string[] }
-  back: string
   multiplayerCta: string
   learnCta: string
 }>
 
-export function HowToPlayPage({ language, onBack, onMultiplayer, onLearn }: Props) {
+export function HowToPlayPage({ language, onMultiplayer, onLearn }: Props) {
   const t = copy[language]
 
   return <main className="howto-page" lang={language}>
     <section className="howto-shell">
       <header className="howto-header">
         <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
-        <div className="howto-header-actions">
-          <button className="text-button" onClick={onBack}>{t.back}</button>
-        </div>
       </header>
 
       <article className="howto-card">

@@ -10,10 +10,10 @@ import { learningTranslations } from '../learning/i18n'
 import type { LearningRound, VocabularyDifficulty } from '../learning/types'
 import { vocabulary } from '../learning/vocabulary'
 
-type Props = { language: Language; onHome: () => void }
+type Props = { language: Language }
 type LearningPhase = 'setup' | 'playing' | 'round-over'
 
-export function LearningPage({ language, onHome }: Props) {
+export function LearningPage({ language }: Props) {
   const [phase, setPhase] = useState<LearningPhase>('setup')
   const [difficulty, setDifficulty] = useState<VocabularyDifficulty>('easy')
   const [round, setRound] = useState<LearningRound | null>(null)
@@ -54,7 +54,6 @@ export function LearningPage({ language, onHome }: Props) {
   return <main className="learning-page" lang={language}>
     <header className="learning-header">
       <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
-      <button className="text-button" onClick={onHome}>{t.home}</button>
     </header>
 
     {phase === 'setup' && <section className="learning-setup">

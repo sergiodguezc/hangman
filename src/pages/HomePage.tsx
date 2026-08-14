@@ -81,7 +81,6 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGame
             onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, ''))} /></label>
           <button type="button" className="secondary-action" disabled={busy || !name.trim() || code.length !== 5} onClick={join}>{t.join}</button>
           {(error || notice) && <p className="form-error" role="alert">{error || errorMessage(notice!, t)}</p>}
-          <button type="button" className="text-button" onClick={() => setPanel('menu')}>{t.back}</button>
         </form>
       </section>
     </main>

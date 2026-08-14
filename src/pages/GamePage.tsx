@@ -9,7 +9,7 @@ import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
 
-type Props = { state: PlayerGameView; interfaceLanguage: 'ca' | 'es'; messages: ChatMessage[]; playerId: string; typingPlayer: { playerId: string; playerName: string } | null; onLeave: () => void }
+type Props = { state: PlayerGameView; interfaceLanguage: 'ca' | 'es'; messages: ChatMessage[]; playerId: string; typingPlayer: { playerId: string; playerName: string } | null }
 
 function groupDisplayWord(characters: string[]) {
   const words: { start: number; characters: string[] }[] = []
@@ -29,7 +29,7 @@ function groupDisplayWord(characters: string[]) {
   return words
 }
 
-export function GamePage({ state, interfaceLanguage, messages, playerId, typingPlayer, onLeave }: Props) {
+export function GamePage({ state, interfaceLanguage, messages, playerId, typingPlayer }: Props) {
   const [word, setWord] = useState('')
   const [error, setError] = useState('')
   const t = multiplayerTranslations[interfaceLanguage]
@@ -75,7 +75,6 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
 
   if (state.phase === 'disconnected') return <main className="disconnect-page"><section>
     <span className="disconnect-icon">!</span><h1>{t.disconnected}</h1><p>{state.disconnectedPlayerName}</p>
-    <button className="primary-action" onClick={onLeave}>{t.home}</button>
   </section></main>
 
   const reconnectingOpponent = state.players.find((player) => player.id !== playerId && player.connectionState === 'reconnecting')
@@ -84,7 +83,6 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
     <header className="match-header">
       <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
       <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.roundNumber}</b></span><span>{t.matchObjective.replace('{target}', state.matchTarget === null ? t.unlimited.toLocaleLowerCase(interfaceLanguage) : t.points.replace('{target}', String(state.matchTarget)))}</span><span>{config.name}</span></div>
-      <button className="text-button" onClick={onLeave}>{t.leave}</button>
     </header>
     <div className="match-layout">
       <Scoreboard players={state.players} setterId={state.wordSetterId} guesserId={state.guesserId} currentId={playerId} t={t} />
