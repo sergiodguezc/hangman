@@ -25,6 +25,29 @@ export type VocabularyEntry = {
 }
 
 export type LearningResult = 'win' | 'loss'
+export type LearningAttemptResult = 'correct' | 'failed'
+
+export type SessionHistoryEntry = {
+  position: number
+  wordId: string
+  result: LearningAttemptResult
+}
+
+export type WordSessionStats = {
+  appearances: number
+  correct: number
+  failed: number
+  lastSeenAt: number
+}
+
+export type LearningSessionStats = {
+  total: number
+  correct: number
+  failed: number
+  accuracy: number
+  uniqueWords: number
+  byWord: Map<string, WordSessionStats>
+}
 
 export type LearningRound = {
   entry: VocabularyEntry
