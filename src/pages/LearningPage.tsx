@@ -10,12 +10,12 @@ import { learningTranslations } from '../learning/i18n'
 import type { LearningRound, SessionHistoryEntry, VocabularyDifficulty, VocabularyEntry } from '../learning/types'
 import { vocabulary } from '../learning/vocabulary'
 
-type Props = { language: Language; summaryRequested?: boolean; onSummaryShown?: () => void; onExitSummary?: () => void }
+type Props = { language: Language; summaryRequested?: boolean; onActiveGameChange?: (active: boolean) => void; onSummaryShown?: () => void; onExitSummary?: () => void }
 type LearningPhase = 'setup' | 'playing' | 'round-over' | 'summary'
 
 const vocabularyById = new Map(vocabulary.map((entry) => [entry.id, entry]))
 
-export function LearningPage({ language, summaryRequested = false, onSummaryShown, onExitSummary }: Props) {
+export function LearningPage({ language, summaryRequested = false, onActiveGameChange, onSummaryShown, onExitSummary }: Props) {
   const [phase, setPhase] = useState<LearningPhase>('setup')
   const [difficulty, setDifficulty] = useState<VocabularyDifficulty>('easy')
   const [round, setRound] = useState<LearningRound | null>(null)
@@ -57,6 +57,11 @@ export function LearningPage({ language, summaryRequested = false, onSummaryShow
     setHistoryExpanded(false)
     onSummaryShown?.()
   }, [onSummaryShown, summaryRequested])
+
+  useEffect(() => {
+    onActiveGameChange?.(phase === 'playing')
+    return () => onActiveGameChange?.(false)
+  }, [onActiveGameChange, phase])
 
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
