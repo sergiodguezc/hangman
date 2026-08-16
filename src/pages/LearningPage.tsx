@@ -21,12 +21,15 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
   const [round, setRound] = useState<LearningRound | null>(null)
   const [history, setHistory] = useState<SessionHistoryEntry[]>([])
   const [historyExpanded, setHistoryExpanded] = useState(false)
+  const [sessionStarted, setSessionStarted] = useState(false)
+  const [difficultySelectorOpen, setDifficultySelectorOpen] = useState(false)
   const completedRoundRef = useRef<LearningRound | null>(null)
   const t = learningTranslations[language]
   const stats = summarizeLearningHistory(history)
 
   const startRound = useCallback((selectedDifficulty: VocabularyDifficulty, currentHistory: readonly SessionHistoryEntry[] = history) => {
     const entry = selectNextEntry(vocabulary, selectedDifficulty, currentHistory)
+    setSessionStarted(true)
     setDifficulty(selectedDifficulty)
     setRound(createLearningRound(entry))
     setHistoryExpanded(false)
@@ -52,16 +55,21 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
 
   useEffect(() => {
     if (!summaryRequested) return
+    if (!sessionStarted) {
+      onExitSummary?.()
+      return
+    }
     setPhase('summary')
     setRound(null)
+    setDifficultySelectorOpen(false)
     setHistoryExpanded(false)
     onSummaryShown?.()
-  }, [onSummaryShown, summaryRequested])
+  }, [onExitSummary, onSummaryShown, sessionStarted, summaryRequested])
 
   useEffect(() => {
-    onActiveGameChange?.(phase === 'playing')
+    onActiveGameChange?.(sessionStarted && phase !== 'setup' && phase !== 'summary')
     return () => onActiveGameChange?.(false)
-  }, [onActiveGameChange, phase])
+  }, [onActiveGameChange, phase, sessionStarted])
 
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
@@ -75,7 +83,12 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
     return () => window.removeEventListener('keydown', keydown)
   }, [guess, phase])
 
-  const changeDifficulty = () => { setRound(null); setPhase('setup') }
+  const openDifficultySelector = () => setDifficultySelectorOpen(true)
+  const closeDifficultySelector = () => setDifficultySelectorOpen(false)
+  const chooseDifficulty = (value: VocabularyDifficulty) => {
+    setDifficulty(value)
+    setDifficultySelectorOpen(false)
+  }
   const difficultyLabel = t[difficulty]
 
   return <main className="learning-page" lang={language}>
@@ -95,10 +108,10 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
       <button className="primary-action" onClick={() => startRound(difficulty)}>{t.start}</button>
     </section>}
 
-    {phase === 'summary' && <LearningSummary history={history} expanded={historyExpanded} language={language} onToggleExpanded={() => setHistoryExpanded((expanded) => !expanded)} onExit={onExitSummary} />}
+    {phase === 'summary' && <LearningSummary history={history} expanded={historyExpanded} language={language} onToggleExpanded={() => setHistoryExpanded((expanded) => !expanded)} onExit={() => { setSessionStarted(false); onExitSummary?.() }} />}
 
     {round && phase !== 'setup' && phase !== 'summary' && <section className="learning-game">
-      <div className="learning-round-meta"><span>{t.currentDifficulty}: <strong>{difficultyLabel}</strong></span><button className="text-button" onClick={changeDifficulty}>{t.changeDifficulty}</button></div>
+      <div className="learning-round-meta"><span>{t.currentDifficulty}: <strong>{difficultyLabel}</strong></span><button className="text-button" onClick={openDifficultySelector}>{t.changeDifficulty}</button></div>
       <div className="learning-hint"><span>{t.hint}</span><strong lang="es">{round.entry.translationEs}</strong></div>
       <div className="learning-columns">
         <div className="drawing-panel"><HangmanDrawing errors={round.errors} label={t.errors} />
@@ -112,13 +125,38 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
             <Keyboard alphabet={ALPHABETS.ca} guesses={round.guesses} incorrect={round.incorrect} disabled={false} label={t.keyboard} onGuess={guess} />
           </>}
           {phase === 'round-over' && round.result && <LearningResultCard entry={round.entry} result={round.result} language={language}
-            onNext={() => startRound(difficulty)} onChangeDifficulty={changeDifficulty} />}
+            onNext={() => startRound(difficulty)} onChangeDifficulty={openDifficultySelector} />}
           <span className="sr-only" aria-live="polite">{displayWord(round.entry.answerCa, round.guesses, 'ca', phase === 'round-over').join(' ')}</span>
         </div>
       </div>
       <LearningSessionPanel history={history} stats={stats} expanded={historyExpanded} language={language} onToggleExpanded={() => setHistoryExpanded((expanded) => !expanded)} />
     </section>}
+    {difficultySelectorOpen && <DifficultyDialog language={language} difficulty={difficulty} onChoose={chooseDifficulty} onCancel={closeDifficultySelector} />}
   </main>
+}
+
+function DifficultyDialog({ language, difficulty, onChoose, onCancel }: { language: Language; difficulty: VocabularyDifficulty; onChoose: (difficulty: VocabularyDifficulty) => void; onCancel: () => void }) {
+  const t = learningTranslations[language]
+
+  useEffect(() => {
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onCancel()
+    }
+    window.addEventListener('keydown', keydown)
+    return () => window.removeEventListener('keydown', keydown)
+  }, [onCancel])
+
+  return <div className="learning-difficulty-backdrop" role="presentation">
+    <section className="learning-difficulty-dialog" role="dialog" aria-modal="true" aria-labelledby="learning-difficulty-title">
+      <h2 id="learning-difficulty-title">{t.changeDifficulty}</h2>
+      <fieldset className="difficulty-selector">
+        <legend>{t.difficulty}</legend>
+        <div>{(['easy', 'medium', 'hard'] as const).map((value) => <button type="button" key={value}
+          className={difficulty === value ? 'active' : ''} aria-pressed={difficulty === value} onClick={() => onChoose(value)}>{t[value]}</button>)}</div>
+      </fieldset>
+      <button className="secondary-action" type="button" autoFocus onClick={onCancel}>{t.cancel}</button>
+    </section>
+  </div>
 }
 
 function LearningSessionPanel({ history, stats, expanded, language, onToggleExpanded }: { history: SessionHistoryEntry[]; stats: ReturnType<typeof summarizeLearningHistory>; expanded: boolean; language: Language; onToggleExpanded: () => void }) {

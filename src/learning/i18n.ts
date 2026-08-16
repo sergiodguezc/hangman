@@ -12,7 +12,7 @@ const es = {
   noHistory: 'Aún no hay palabras completadas.', summaryTitle: 'Resumen de la sesión',
   emptySummary: 'No has completado ninguna palabra en esta sesión.', wordsPlayed: 'Palabras jugadas',
   correctAttempts: 'Correctas', failedAttempts: 'Errores', accuracy: 'Precisión', uniqueWords: 'Palabras diferentes',
-  returnToMenu: 'Volver al menú',
+  returnToMenu: 'Volver al menú', cancel: 'Cancelar',
   statsLine: (total: number, correct: number, failed: number, accuracy: number, unique: number) => `${total} ${total === 1 ? 'palabra' : 'palabras'} · ${correct} correctas · ${failed} errores · ${accuracy}% · ${unique} únicas`,
 }
 
@@ -28,7 +28,7 @@ const ca: typeof es = {
   noHistory: 'Encara no hi ha paraules completades.', summaryTitle: 'Resum de la sessió',
   emptySummary: 'No has completat cap paraula en aquesta sessió.', wordsPlayed: 'Paraules jugades',
   correctAttempts: 'Correctes', failedAttempts: 'Errors', accuracy: 'Precisió', uniqueWords: 'Paraules diferents',
-  returnToMenu: 'Torna al menú',
+  returnToMenu: 'Torna al menú', cancel: 'Cancel·la',
   statsLine: (total, correct, failed, accuracy, unique) => `${total} ${total === 1 ? 'paraula' : 'paraules'} · ${correct} correctes · ${failed} errors · ${accuracy}% · ${unique} úniques`,
 }
 
