@@ -9,12 +9,19 @@ import { HowToPlayPage } from './pages/HowToPlayPage'
 import { InterfaceLanguageSelector } from './components/InterfaceLanguageSelector'
 import { GlobalNavigation } from './components/GlobalNavigation'
 import { INTERFACE_LANGUAGE_STORAGE_KEY, readInterfaceLanguage } from './localization'
+import { normalizeInvitationCode } from './multiplayer/invitations'
 import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import { normalizeRoute, type Route } from './routing'
 import './App.css'
 
 type Mode = 'home' | 'multiplayer' | 'learning' | 'help'
 type PageCopy = { title: string; description: string }
+type InvitationCode = string | null
+
+function readInvitationCode(): InvitationCode {
+  const params = new URLSearchParams(window.location.search)
+  return params.has('sala') ? normalizeInvitationCode(params.get('sala')) : null
+}
 
 const routeDescriptions: Record<Route, { mode: Mode; copy: Record<Language, PageCopy> }> = {
   '/': {
@@ -50,7 +57,7 @@ const routeDescriptions: Record<Route, { mode: Mode; copy: Record<Language, Page
 function App() {
   const [route, setRoute] = useState<Route>(() => {
     const current = normalizeRoute(window.location.pathname)
-    if (current !== window.location.pathname) window.history.replaceState({}, '', current)
+    if (current !== window.location.pathname) window.history.replaceState({}, '', `${current}${window.location.search}`)
     return current
   })
   const [interfaceLanguage, setInterfaceLanguage] = useState<Language>(() => readInterfaceLanguage(localStorage))
@@ -67,15 +74,17 @@ function App() {
   const [learningSummaryRequested, setLearningSummaryRequested] = useState(false)
   const [learningSummaryVisible, setLearningSummaryVisible] = useState(false)
   const [learningGameActive, setLearningGameActive] = useState(false)
+  const [invitedRoomCode, setInvitedRoomCode] = useState<InvitationCode>(() => readInvitationCode())
   const [pendingExit, setPendingExit] = useState<(() => void) | null>(null)
   const page = routeDescriptions[route]
 
   useEffect(() => {
     const onPopState = () => {
       const next = normalizeRoute(window.location.pathname)
-      if (next !== window.location.pathname) window.history.replaceState({}, '', next)
+      if (next !== window.location.pathname) window.history.replaceState({}, '', `${next}${window.location.search}`)
       setRoute(next)
       setView(routeDescriptions[next].mode)
+      setInvitedRoomCode(next === '/multijugador/' ? readInvitationCode() : null)
     }
     window.addEventListener('popstate', onPopState)
     const update = (state: PlayerGameView) => { setRoom(state); setGameLanguage(state.gameLanguage); localStorage.setItem('hangman-game-language', state.gameLanguage) }
@@ -132,10 +141,14 @@ function App() {
     removeIfPresent('link[rel="alternate"][hreflang]')
   }, [interfaceLanguage, page, route])
 
-  const goTo = (next: Route) => {
-    if (next !== route) window.history.pushState({}, '', next)
+  const goTo = (next: Route, options: { replace?: boolean } = {}) => {
+    if (next !== route || window.location.search) {
+      const method = options.replace ? 'replaceState' : 'pushState'
+      window.history[method]({}, '', next)
+    }
     setRoute(next)
     setView(routeDescriptions[next].mode)
+    setInvitedRoomCode(null)
     if (next !== '/aprendre/') {
       setLearningSummaryRequested(false)
       setLearningSummaryVisible(false)
@@ -150,8 +163,23 @@ function App() {
     setGameLanguage(next)
     localStorage.setItem('hangman-game-language', next)
   }
-  const leave = () => { socket.emit('chat:typing', { isTyping: false }); socket.emit('room:leave'); clearRoomSession(); setPlayerId(''); setRoom(null); setMessages([]); setTypingPlayer(null) }
-  const enterRoom = (view: PlayerGameView, id: string) => { setMessages([]); setPlayerId(id); setNotice(''); setRoom(view) }
+  const leave = () => {
+    socket.emit('chat:typing', { isTyping: false })
+    socket.emit('room:leave')
+    clearRoomSession()
+    setPlayerId('')
+    setRoom(null)
+    setMessages([])
+    setTypingPlayer(null)
+    goTo('/multijugador/', { replace: true })
+  }
+  const enterRoom = (view: PlayerGameView, id: string) => {
+    setMessages([])
+    setPlayerId(id)
+    setNotice('')
+    setRoom(view)
+    if (route === '/multijugador/' && window.location.search) goTo('/multijugador/', { replace: true })
+  }
 
   useEffect(() => {
     if (room) return
@@ -188,7 +216,7 @@ function App() {
   const exitDialog = pendingExit ? <ExitConfirmationDialog language={interfaceLanguage} onCancel={cancelExit} onConfirm={confirmExit} /> : null
 
   if (!room && view === 'learning') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={() => requestConfirmedExit(learningBack, learningGameActive)} /><LearningPage language={interfaceLanguage} summaryRequested={learningSummaryRequested} onActiveGameChange={setLearningGameActive} onSummaryShown={markLearningSummaryShown} onExitSummary={returnHome} />{interfaceSelector}{exitDialog}</>
-  if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}{exitDialog}</>
+  if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} invitedRoomCode={invitedRoomCode} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}{exitDialog}</>
   if (!room && view === 'help') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HowToPlayPage language={interfaceLanguage} />{interfaceSelector}{exitDialog}</>
   if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}{exitDialog}</>
   if (room.phase === 'waiting') return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}{exitDialog}</>

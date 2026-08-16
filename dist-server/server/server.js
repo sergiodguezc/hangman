@@ -20,6 +20,20 @@ const httpServer = createServer(async (request, response) => {
     if (url.pathname.startsWith('/socket.io/'))
         return;
     response.setHeader('X-Content-Type-Options', 'nosniff');
+    const previewMatch = /^\/api\/rooms\/([A-Z2-9]{5})\/preview$/i.exec(url.pathname);
+    if (previewMatch) {
+        response.setHeader('Content-Type', 'application/json; charset=utf-8');
+        response.setHeader('Cache-Control', 'no-store');
+        if (!['GET', 'HEAD'].includes(request.method || 'GET')) {
+            response.writeHead(405, { Allow: 'GET, HEAD' });
+            response.end(request.method === 'HEAD' ? undefined : JSON.stringify({ ok: false, error: 'method-not-allowed' }));
+            return;
+        }
+        const result = roomPreview(previewMatch[1]);
+        response.writeHead(result.ok ? 200 : result.error === 'room-full' ? 409 : 404);
+        response.end(request.method === 'HEAD' ? undefined : JSON.stringify(result));
+        return;
+    }
     if (url.pathname === '/health') {
         response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
         response.end(JSON.stringify({ ok: true }));
@@ -67,12 +81,21 @@ const allowedOrigins = CLIENT_ORIGIN || (IS_PRODUCTION ? undefined : localDevelo
 const io = new Server(httpServer, {
     ...(allowedOrigins ? { cors: { origin: allowedOrigins } } : {}),
 });
-const games = new GameManager();
+const games = new GameManager(process.env.DETERMINISTIC_FIRST_SETTER === '1' ? () => 0 : Math.random);
 const DISCONNECT_GRACE_MS = 25_000;
 const disconnectTimers = new Map();
 const timerKey = (code, playerId) => `${code}:${playerId}`;
 const cleanName = (value) => typeof value === 'string' && value.trim().length >= 1 && value.trim().length <= 24 ? value.trim() : null;
 const cleanMatchTarget = (value) => value === null || value === 3 || value === 5 || value === 10 ? value : undefined;
+const roomPreview = (rawCode) => {
+    const code = rawCode.trim().toUpperCase();
+    const room = games.rooms.get(code);
+    if (!room)
+        return { ok: false, error: 'room-not-found' };
+    if (room.players.length >= 2)
+        return { ok: false, error: 'room-full' };
+    return { ok: true, data: { code: room.code, gameLanguage: room.language, matchTarget: room.matchTarget, players: room.players.length } };
+};
 io.on('connection', (socket) => {
     console.info('socket connected', { socketId: socket.id });
     const broadcast = (code) => {
