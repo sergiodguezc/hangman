@@ -20,6 +20,8 @@
     "test:match": "node scripts/match-features-test.mjs",
     "test:vocab": "python3 -m unittest discover -s tests -p 'test_vocab_pipeline.py'",
     "test:learning": "tsx --tsconfig tsconfig.app.json tests/learning-test.ts",
+    "test:daily": "tsx --tsconfig tsconfig.app.json tests/daily-test.ts",
+    "test:seo": "node tests/seo-test.mjs",
     "test:invitation": "tsx --tsconfig tsconfig.app.json tests/invitation-test.ts",
     "test:localization": "tsx --tsconfig tsconfig.app.json tests/localization-test.ts",
     "vocab:fetch": "python3 scripts/fetch-catalan-corpus.py",

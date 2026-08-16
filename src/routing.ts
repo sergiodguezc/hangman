@@ -1,6 +1,6 @@
-export type Route = '/' | '/multijugador/' | '/aprendre/' | '/com-es-juga/'
+export type Route = '/' | '/multijugador/' | '/aprendre/' | '/paraula-del-dia/' | '/com-es-juga/'
 
-const routes = new Set<Route>(['/', '/multijugador/', '/aprendre/', '/com-es-juga/'])
+const routes = new Set<Route>(['/', '/multijugador/', '/aprendre/', '/paraula-del-dia/', '/com-es-juga/'])
 
 export function normalizeRoute(pathname: string): Route {
   const trimmed = pathname.replace(/\/+$/, '') || '/'

@@ -6,6 +6,7 @@ import { LanguageSelector } from '../components/LanguageSelector'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { saveRoomSession, socket } from '../multiplayer/socket'
+import { DAILY_CHALLENGE_PUBLIC_PATH } from '../daily/challenge'
 
 type Props = {
   interfaceLanguage: Language
@@ -16,6 +17,7 @@ type Props = {
   onGameLanguage: (language: Language) => void
   onEnter: (view: PlayerGameView, playerId: string) => void
   onLearn: () => void
+  onDaily?: () => void
   onMultiplayer: () => void
   onHelp: () => void
 }
@@ -29,7 +31,7 @@ function isStandalonePwa() {
   return window.matchMedia('(display-mode: standalone)').matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone)
 }
 
-export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomCode = null, mode, onGameLanguage, onEnter, onLearn, onMultiplayer, onHelp }: Props) {
+export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomCode = null, mode, onGameLanguage, onEnter, onLearn, onDaily, onMultiplayer, onHelp }: Props) {
   const [panel, setPanel] = useState<'menu' | 'multiplayer'>(mode === 'multiplayer' ? 'multiplayer' : 'menu')
   const [name, setName] = useState(localStorage.getItem('hangman-name') ?? '')
   const [code, setCode] = useState('')
@@ -43,6 +45,17 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
   const [installExpanded, setInstallExpanded] = useState(false)
   const t = multiplayerTranslations[interfaceLanguage]
   const isCatalan = interfaceLanguage === 'ca'
+  const homeCopy = isCatalan ? {
+    multiplayerTitle: 'Multijugador',
+    learningTitle: 'Aprendre català',
+    dailyTitle: 'Paraula del dia',
+    dailyBody: "Juga la paraula d'avui",
+  } : {
+    multiplayerTitle: 'Multijugador',
+    learningTitle: 'Aprender catalán',
+    dailyTitle: 'Palabra del día',
+    dailyBody: 'Juega la palabra de hoy',
+  }
   const previewSlots = ['', 'E', '', 'J', '', 'T']
 
   useEffect(() => { setPanel(mode === 'multiplayer' ? 'multiplayer' : 'menu') }, [mode])
@@ -212,9 +225,13 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
           <span className="eyebrow">{isCatalan ? 'EL JOC DEL PENJAT' : 'EL JUEGO DEL AHORCADO'}</span>
           <h1>{isCatalan ? 'Juga al penjat online en català.' : 'Juega a Penjat online.'}</h1>
           <p>{isCatalan ? 'Juga amb els amics o practica vocabulari mentre jugues.' : 'Juega con tus amigos o practica vocabulario mientras juegas.'}</p>
-          <div className="home-actions">
-            <button className="primary-action home-cta" onClick={onMultiplayer}>{t.multiplayer}</button>
-            <button className="secondary-action home-cta" onClick={onLearn}>{isCatalan ? 'Aprendre català' : 'Practicar catalán'}</button>
+          <div className="home-actions home-actions--modes" aria-label={isCatalan ? 'Modes de joc' : 'Modos de juego'}>
+            <button className="primary-action home-cta" onClick={onMultiplayer}>{homeCopy.multiplayerTitle}</button>
+            <button className="secondary-action home-cta home-cta--learning" onClick={onLearn}>{homeCopy.learningTitle}</button>
+            <a className="home-daily-link" href={DAILY_CHALLENGE_PUBLIC_PATH} onClick={(event) => { event.preventDefault(); onDaily?.() }}>
+              <span className="home-daily-marker" aria-hidden="true" />
+              <span><strong>{homeCopy.dailyTitle} →</strong><small>{homeCopy.dailyBody}</small></span>
+            </a>
           </div>
         </section>
         <aside className="home-preview" aria-hidden="true">
