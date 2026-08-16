@@ -5,6 +5,7 @@ import { GamePage } from './pages/GamePage'
 import { HomePage } from './pages/HomePage'
 import { LobbyPage } from './pages/LobbyPage'
 import { LearningPage } from './pages/LearningPage'
+import { DailyChallengePage } from './pages/DailyChallengePage'
 import { HowToPlayPage } from './pages/HowToPlayPage'
 import { InterfaceLanguageSelector } from './components/InterfaceLanguageSelector'
 import { GlobalNavigation } from './components/GlobalNavigation'
@@ -14,9 +15,10 @@ import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import { normalizeRoute, type Route } from './routing'
 import './App.css'
 
-type Mode = 'home' | 'multiplayer' | 'learning' | 'help'
+type Mode = 'home' | 'multiplayer' | 'learning' | 'daily' | 'help'
 type PageCopy = { title: string; description: string }
 type InvitationCode = string | null
+const PUBLIC_SITE_ORIGIN = 'https://penjat.cat'
 
 function readInvitationCode(): InvitationCode {
   const params = new URLSearchParams(window.location.search)
@@ -43,6 +45,13 @@ const routeDescriptions: Record<Route, { mode: Mode; copy: Record<Language, Page
     copy: {
       ca: { title: 'Aprèn català jugant al Penjat | Penjat', description: 'Aprèn vocabulari català jugant al Penjat. Descobreix paraules, significats i traduccions mentre jugues.' },
       es: { title: 'Aprende catalán jugando a Penjat | Penjat', description: 'Aprende vocabulario catalán jugando a Penjat. Descubre palabras, significados y traducciones mientras juegas.' },
+    },
+  },
+  '/paraula-del-dia/': {
+    mode: 'daily',
+    copy: {
+      ca: { title: 'Paraula del dia en català | Penjat', description: 'Descobreix la paraula del dia en català jugant al Penjat. Una nova paraula cada dia per posar a prova el teu vocabulari.' },
+      es: { title: 'Palabra del día en catalán | Penjat', description: 'Descubre la palabra del día en catalán jugando a Penjat. Una nueva palabra cada día para poner a prueba tu vocabulario.' },
     },
   },
   '/com-es-juga/': {
@@ -74,6 +83,7 @@ function App() {
   const [learningSummaryRequested, setLearningSummaryRequested] = useState(false)
   const [learningSummaryVisible, setLearningSummaryVisible] = useState(false)
   const [learningGameActive, setLearningGameActive] = useState(false)
+  const [dailyGameActive, setDailyGameActive] = useState(false)
   const [invitedRoomCode, setInvitedRoomCode] = useState<InvitationCode>(() => readInvitationCode())
   const [pendingExit, setPendingExit] = useState<(() => void) | null>(null)
   const page = routeDescriptions[route]
@@ -117,7 +127,7 @@ function App() {
     const copy = page.copy[interfaceLanguage]
     document.documentElement.lang = interfaceLanguage
     document.title = copy.title
-    const canonical = new URL(route, window.location.origin).href
+    const canonical = new URL(canonicalPath(route), PUBLIC_SITE_ORIGIN).href
     const description = copy.description
     const setMeta = (selector: string, attrs: Record<string, string>) => {
       let element = document.head.querySelector<HTMLMetaElement | HTMLLinkElement>(selector)
@@ -188,6 +198,7 @@ function App() {
 
   const startMultiplayer = () => goTo('/multijugador/')
   const startLearning = () => goTo('/aprendre/')
+  const startDaily = () => goTo('/paraula-del-dia/')
   const startHelp = () => goTo('/com-es-juga/')
   const returnHome = () => goTo('/')
   const learningBack = () => {
@@ -216,14 +227,19 @@ function App() {
   const exitDialog = pendingExit ? <ExitConfirmationDialog language={interfaceLanguage} onCancel={cancelExit} onConfirm={confirmExit} /> : null
 
   if (!room && view === 'learning') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={() => requestConfirmedExit(learningBack, learningGameActive)} /><LearningPage language={interfaceLanguage} summaryRequested={learningSummaryRequested} onActiveGameChange={setLearningGameActive} onSummaryShown={markLearningSummaryShown} onExitSummary={returnHome} />{interfaceSelector}{exitDialog}</>
+  if (!room && view === 'daily') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={() => requestConfirmedExit(returnHome, dailyGameActive)} /><DailyChallengePage language={interfaceLanguage} onActiveGameChange={setDailyGameActive} />{interfaceSelector}{exitDialog}</>
   if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} invitedRoomCode={invitedRoomCode} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}{exitDialog}</>
   if (!room && view === 'help') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HowToPlayPage language={interfaceLanguage} />{interfaceSelector}{exitDialog}</>
-  if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}{exitDialog}</>
+  if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onDaily={startDaily} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}{exitDialog}</>
   if (room.phase === 'waiting') return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}{exitDialog}</>
   return <><GlobalNavigation showBack backLabel={backLabel} onBack={() => requestConfirmedExit(leave, multiplayerGameActive)} /><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}{exitDialog}</>
 }
 
 export default App
+
+function canonicalPath(route: Route): string {
+  return route === '/' ? '/' : route.replace(/\/$/, '')
+}
 
 function ExitConfirmationDialog({ language, onCancel, onConfirm }: { language: Language; onCancel: () => void; onConfirm: () => void }) {
   const copy = language === 'ca' ? {

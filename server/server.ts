@@ -11,11 +11,39 @@ const HOST = process.env.HOST || '0.0.0.0'
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 const frontendDist = resolve(process.cwd(), 'dist')
+const PUBLIC_SITE_ORIGIN = 'https://penjat.cat'
 const mimeTypes: Record<string, string> = {
   '.css': 'text/css; charset=utf-8', '.html': 'text/html; charset=utf-8', '.ico': 'image/x-icon',
   '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png',
   '.svg': 'image/svg+xml', '.txt': 'text/plain; charset=utf-8', '.webp': 'image/webp', '.woff': 'font/woff',
   '.woff2': 'font/woff2', '.xml': 'application/xml; charset=utf-8',
+}
+const routeMetadata: Record<string, { title: string; description: string; canonicalPath: string }> = {
+  '/': {
+    title: 'Penjat — Joc del penjat online en català',
+    description: 'Juga al Penjat online en català. Endevina paraules, juga amb amics i aprèn vocabulari català de manera divertida.',
+    canonicalPath: '/',
+  },
+  '/multijugador/': {
+    title: 'Penjat multijugador — Juga online amb amics',
+    description: 'Juga a Penjat multijugador online amb amics. Crea una sala, comparteix el codi i competeix en català o castellà.',
+    canonicalPath: '/multijugador',
+  },
+  '/aprendre/': {
+    title: 'Aprèn català jugant al Penjat | Penjat',
+    description: 'Aprèn vocabulari català jugant al Penjat. Descobreix paraules, significats i traduccions mentre jugues.',
+    canonicalPath: '/aprendre',
+  },
+  '/paraula-del-dia/': {
+    title: 'Paraula del dia en català | Penjat',
+    description: 'Descobreix la paraula del dia en català jugant al Penjat. Una nova paraula cada dia per posar a prova el teu vocabulari.',
+    canonicalPath: '/paraula-del-dia',
+  },
+  '/com-es-juga/': {
+    title: 'Com es juga a Penjat? | Penjat',
+    description: 'Descobreix com es juga a Penjat, tant en multijugador com en mode d’aprenentatge de català.',
+    canonicalPath: '/com-es-juga',
+  },
 }
 
 const httpServer = createServer(async (request, response) => {
@@ -66,11 +94,15 @@ const httpServer = createServer(async (request, response) => {
     if (!fileStats?.isFile()) filePath = resolve(frontendDist, 'index.html')
     const body = await readFile(filePath)
     const isAsset = filePath.includes(`${sep}assets${sep}`)
+    const routeKey = normalizeMetadataRoute(url.pathname)
+    const responseBody = extname(filePath).toLowerCase() === '.html' && routeMetadata[routeKey]
+      ? applyRouteMetadata(body.toString('utf8'), routeMetadata[routeKey])
+      : body
     response.writeHead(200, {
       'Content-Type': mimeTypes[extname(filePath).toLowerCase()] || 'application/octet-stream',
       'Cache-Control': isAsset ? 'public, max-age=31536000, immutable' : 'no-cache',
     })
-    response.end(request.method === 'HEAD' ? undefined : body)
+    response.end(request.method === 'HEAD' ? undefined : responseBody)
   } catch {
     response.writeHead(503, { 'Content-Type': 'text/plain; charset=utf-8' })
     response.end('Frontend build unavailable. Run npm run build before starting the server.')
@@ -255,3 +287,29 @@ io.on('connection', (socket) => {
 httpServer.listen(PORT, HOST, () => console.log(`Hangman server listening on http://${HOST}:${PORT}`))
 
 export { httpServer, games }
+
+function normalizeMetadataRoute(pathname: string): string {
+  const trimmed = pathname.replace(/\/+$/, '') || '/'
+  return trimmed === '/' ? '/' : `${trimmed}/`
+}
+
+function applyRouteMetadata(html: string, metadata: { title: string; description: string; canonicalPath: string }): string {
+  const canonical = new URL(metadata.canonicalPath, PUBLIC_SITE_ORIGIN).href
+  return html
+    .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(metadata.title)}</title>`)
+    .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeHtml(metadata.description)}" />`)
+    .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
+    .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeHtml(metadata.title)}" />`)
+    .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeHtml(metadata.description)}" />`)
+    .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${canonical}" />`)
+    .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(metadata.title)}" />`)
+    .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(metadata.description)}" />`)
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+}
