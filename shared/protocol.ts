@@ -6,6 +6,7 @@ export type ConnectionState = 'connected' | 'reconnecting'
 export type Player = { id: string; name: string; score: number; connectionState: ConnectionState }
 export type RoomSession = { roomCode: string; playerId: string; reconnectToken: string }
 export type RoomEntry = { view: PlayerGameView; session: RoomSession }
+export type RoomPreview = { code: string; gameLanguage: Language; matchTarget: MatchTarget; players: number }
 export const REACTION_TYPES = ['❤️', '😂', '💀'] as const
 export type ReactionType = typeof REACTION_TYPES[number]
 export type MessageReactions = Record<ReactionType, string[]>

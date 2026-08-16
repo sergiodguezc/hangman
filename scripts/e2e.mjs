@@ -10,15 +10,38 @@ const connect = () => new Promise((resolve, reject) => {
 })
 const emit = (socket, event, payload) => new Promise((resolve) => socket.emit(event, payload, resolve))
 const stateAfter = (socket, action) => new Promise((resolve) => { socket.once('room:state', resolve); action() })
+const preview = async (code) => {
+  const response = await fetch(`${url}/api/rooms/${code}/preview`)
+  return { status: response.status, body: await response.json() }
+}
 
 const p1 = await connect()
 let p2 = await connect()
 const p3 = await connect()
 try {
-  const created = await emit(p1, 'room:create', { name: 'Sergio', language: 'ca', matchTarget: null })
+  const spanishRoom = await emit(p3, 'room:create', { name: 'Elena', gameLanguage: 'es', matchTarget: 10 })
+  assert.equal(spanishRoom.ok, true)
+  assert.deepEqual(await preview(spanishRoom.data.view.code), {
+    status: 200,
+    body: { ok: true, data: { code: spanishRoom.data.view.code, gameLanguage: 'es', matchTarget: 10, players: 1 } },
+  })
+  p3.emit('room:leave')
+
+  const unlimitedRoom = await emit(p3, 'room:create', { name: 'Nuria', gameLanguage: 'ca', matchTarget: null })
+  assert.equal(unlimitedRoom.ok, true)
+  assert.deepEqual(await preview(unlimitedRoom.data.view.code), {
+    status: 200,
+    body: { ok: true, data: { code: unlimitedRoom.data.view.code, gameLanguage: 'ca', matchTarget: null, players: 1 } },
+  })
+  p3.emit('room:leave')
+
+  const created = await emit(p1, 'room:create', { name: 'Sergio', gameLanguage: 'ca', matchTarget: 5 })
   assert.equal(created.ok, true)
   const code = created.data.view.code
   const p1Id = created.data.session.playerId
+  assert.deepEqual(await preview(code), { status: 200, body: { ok: true, data: { code, gameLanguage: 'ca', matchTarget: 5, players: 1 } } })
+  assert.equal(created.data.view.players.length, 1)
+  assert.deepEqual(await preview('XXXXX'), { status: 404, body: { ok: false, error: 'room-not-found' } })
   const waitingMessage = await emit(p1, 'chat:send', { text: '  Missatge abans d’entrar  ' })
   assert.equal(waitingMessage.ok, true)
   assert.equal(waitingMessage.data.senderName, 'Sergio')
@@ -50,7 +73,8 @@ try {
 
   const full = await emit(p3, 'room:join', { name: 'Third', code })
   assert.deepEqual(full, { ok: false, error: 'room-full' })
-  const otherRoom = await emit(p3, 'room:create', { name: 'Other', language: 'es', matchTarget: 3 })
+  assert.deepEqual(await preview(code), { status: 409, body: { ok: false, error: 'room-full' } })
+  const otherRoom = await emit(p3, 'room:create', { name: 'Other', gameLanguage: 'es', matchTarget: 3 })
   assert.equal(otherRoom.ok, true)
   const foreignMessages = []
   p3.on('chat:message', (message) => foreignMessages.push(message))

@@ -1,6 +1,6 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import type { Language } from '../../shared/game'
-import type { MatchTarget, PlayerGameView } from '../../shared/protocol'
+import type { MatchTarget, PlayerGameView, RoomPreview } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { getLanguageConfig } from '../game/languages'
@@ -11,6 +11,7 @@ type Props = {
   interfaceLanguage: Language
   gameLanguage: Language
   notice?: string
+  invitedRoomCode?: string | null
   mode: 'home' | 'multiplayer'
   onGameLanguage: (language: Language) => void
   onEnter: (view: PlayerGameView, playerId: string) => void
@@ -28,13 +29,16 @@ function isStandalonePwa() {
   return window.matchMedia('(display-mode: standalone)').matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone)
 }
 
-export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGameLanguage, onEnter, onLearn, onMultiplayer, onHelp }: Props) {
+export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomCode = null, mode, onGameLanguage, onEnter, onLearn, onMultiplayer, onHelp }: Props) {
   const [panel, setPanel] = useState<'menu' | 'multiplayer'>(mode === 'multiplayer' ? 'multiplayer' : 'menu')
   const [name, setName] = useState(localStorage.getItem('hangman-name') ?? '')
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [matchTarget, setMatchTarget] = useState<MatchTarget>(5)
+  const [invitation, setInvitation] = useState<RoomPreview | null>(null)
+  const [invitationStatus, setInvitationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
+  const [previewRetry, setPreviewRetry] = useState(0)
   const [showIosInstall, setShowIosInstall] = useState(false)
   const [installExpanded, setInstallExpanded] = useState(false)
   const t = multiplayerTranslations[interfaceLanguage]
@@ -51,13 +55,64 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGame
     return () => displayMode.removeEventListener('change', updateInstallHint)
   }, [])
 
-  const connect = (done: () => void) => {
+  const connect = useCallback((done: () => void, onError?: (error: string) => void) => {
     setBusy(true); setError('')
     if (socket.connected) return done()
+    const handleConnect = () => {
+      socket.off('connect_error', handleError)
+      done()
+    }
+    const handleError = () => {
+      socket.off('connect', handleConnect)
+      setBusy(false)
+      setError('connect_error')
+      onError?.('connect_error')
+    }
     socket.connect()
-    socket.once('connect', done)
-    socket.once('connect_error', () => { setBusy(false); setError(t.connectionError) })
-  }
+    socket.once('connect', handleConnect)
+    socket.once('connect_error', handleError)
+  }, [])
+
+  useEffect(() => {
+    if (mode !== 'multiplayer' || invitedRoomCode === null) {
+      setInvitation(null)
+      setInvitationStatus('idle')
+      return
+    }
+    if (!invitedRoomCode) {
+      setInvitation(null)
+      setInvitationStatus('error')
+      setError('invalid-invitation')
+      return
+    }
+    let cancelled = false
+    const controller = new AbortController()
+    setInvitation(null)
+    setInvitationStatus('loading')
+    setError('')
+    setBusy(true)
+    fetch(`/api/rooms/${encodeURIComponent(invitedRoomCode)}/preview`, { signal: controller.signal, cache: 'no-store' })
+      .then(async (previewResponse) => {
+        const response = await previewResponse.json() as { ok: true; data: RoomPreview } | { ok: false; error: string }
+        if (cancelled) return
+        setBusy(false)
+        if (!response.ok) {
+          setInvitationStatus('error')
+          setError(response.error)
+          return
+        }
+        setInvitation(response.data)
+        setCode(response.data.code)
+        setInvitationStatus('ready')
+      })
+      .catch((fetchError) => {
+        if (cancelled || fetchError instanceof DOMException && fetchError.name === 'AbortError') return
+        setBusy(false)
+        setInvitationStatus('error')
+        setError('preview-load-failed')
+      })
+    return () => { cancelled = true; controller.abort() }
+  }, [invitedRoomCode, mode, previewRetry])
 
   const create = (event: FormEvent) => {
     event.preventDefault()
@@ -77,6 +132,44 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, mode, onGame
   }
 
   if (panel === 'multiplayer') {
+    if (invitedRoomCode !== null) {
+      return <main className="home-page home-page--multiplayer">
+        <section className="home-card home-card--join invitation-card">
+          <div className="home-intro home-intro--compact">
+            <span className="brand-mark">P</span>
+            <h1>{t.title}</h1>
+            <p>{t.subtitle}</p>
+          </div>
+          {invitationStatus === 'loading' && <p className="invitation-loading">{t.invitationLoading}</p>}
+          {invitationStatus === 'error' && <div className="invitation-invalid">
+            <h2>{t.invitationUnavailable}</h2>
+            <p className="form-error" role="alert">{errorMessage(error || 'room-not-found', t)}</p>
+            <div className="invitation-error-actions">
+              {invitedRoomCode && <button type="button" className="primary-action" onClick={() => setPreviewRetry((current) => current + 1)}>{t.retryInvitation}</button>}
+              <button type="button" className="secondary-action" onClick={onMultiplayer}>{t.goToMultiplayer}</button>
+            </div>
+          </div>}
+          {invitationStatus === 'ready' && invitation && <form className="invitation-form">
+            <h2>{t.invitationHeading}</h2>
+            <section className="invitation-rules" aria-labelledby="invitation-rules-title">
+              <h3 id="invitation-rules-title">{t.invitationRules}</h3>
+              <dl>
+                <div><dt>{t.gameLanguage}</dt><dd>{getLanguageConfig(invitation.gameLanguage).name}</dd></div>
+                <div><dt>{t.matchTarget}</dt><dd>{invitation.matchTarget === null ? t.unlimited : t.points.replace('{target}', String(invitation.matchTarget))}</dd></div>
+              </dl>
+            </section>
+            <label>{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
+            <button type="button" className="primary-action" disabled={busy || !name.trim()} onClick={join}>{t.joinInvitation}</button>
+            {(error || notice) && <p className="form-error" role="alert">{errorMessage(error || notice!, t)}</p>}
+            <div className="invitation-alternative">
+              <span>{t.preferDifferentRules}</span>
+              <button type="button" className="text-button" onClick={onMultiplayer}>{t.createYourGame}</button>
+            </div>
+          </form>}
+        </section>
+      </main>
+    }
+
     return <main className="home-page home-page--multiplayer">
       <section className="home-card home-card--join">
         <div className="home-intro home-intro--compact">
