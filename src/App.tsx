@@ -50,8 +50,8 @@ const routeDescriptions: Record<Route, { mode: Mode; copy: Record<Language, Page
   '/paraula-del-dia/': {
     mode: 'daily',
     copy: {
-      ca: { title: 'Paraula del dia en català | Penjat', description: 'Descobreix la paraula del dia en català jugant al Penjat. Una nova paraula cada dia per posar a prova el teu vocabulari.' },
-      es: { title: 'Palabra del día en catalán | Penjat', description: 'Descubre la palabra del día en catalán jugando a Penjat. Una nueva palabra cada día para poner a prueba tu vocabulario.' },
+      ca: { title: 'Paraula del dia en català | Penjat', description: 'Descobreix la paraula catalana del dia jugant al Penjat. Tothom juga amb la mateixa paraula i pot compartir el resultat sense revelar-la.' },
+      es: { title: 'Palabra del día en catalán | Penjat', description: 'Descubre la palabra catalana del día jugando a Penjat. Todo el mundo juega con la misma palabra y puede compartir el resultado sin revelarla.' },
     },
   },
   '/com-es-juga/': {

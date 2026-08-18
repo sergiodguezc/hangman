@@ -4,7 +4,7 @@ import type { Language } from '../../shared/game'
 import { HangmanDrawing } from '../components/HangmanDrawing'
 import { HangmanWord } from '../components/HangmanWord'
 import { Keyboard } from '../components/Keyboard'
-import { getDailyChallenge, getDailyChallengeUrl, formatDailyShareText } from '../daily/challenge'
+import { getDailyChallenge, getDailyChallengeUrl, formatDailyShareData } from '../daily/challenge'
 import { applyDailyGuess, createDailyRound, type DailyRound } from '../daily/game'
 import { dailyTranslations } from '../daily/i18n'
 import { readDailyAttempt, writeDailyAttempt } from '../daily/storage'
@@ -55,11 +55,11 @@ export function DailyChallengePage({ language, onActiveGameChange }: Props) {
   const share = async () => {
     if (!round.result) return
     const url = getDailyChallengeUrl(window.location.origin)
-    const text = formatDailyShareText({ language, challengeNumber: challenge.number, result: round.result, errors: round.errors, url })
+    const shareData = formatDailyShareData({ language, challengeNumber: challenge.number, result: round.result, errors: round.errors, url })
     setShareStatus('idle')
     try {
-      if (navigator.share) await navigator.share({ text, url, title: t.heading(challenge.number) })
-      else await navigator.clipboard.writeText(text)
+      if (navigator.share) await navigator.share(shareData)
+      else await navigator.clipboard.writeText(shareData.text ?? '')
       setShareStatus('copied')
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return
