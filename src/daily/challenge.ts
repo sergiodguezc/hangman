@@ -77,6 +77,16 @@ export function formatDailyShareText(input: {
   return `${title}\n\n${result}\n${errors}\n\n${input.url}`
 }
 
+export function formatDailyShareData(input: Parameters<typeof formatDailyShareText>[0]): ShareData {
+  const title = input.language === 'ca'
+    ? `Paraula del dia #${input.challengeNumber}`
+    : `Palabra del día #${input.challengeNumber}`
+  return {
+    title,
+    text: formatDailyShareText(input),
+  }
+}
+
 function dateKeyToUtcDay(key: string): number {
   const [year, month, day] = key.split('-').map(Number)
   return Math.trunc(Date.UTC(year, month - 1, day) / 86_400_000)

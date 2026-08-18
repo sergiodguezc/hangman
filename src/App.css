@@ -211,8 +211,7 @@ button { cursor: pointer; }
 .daily-titlebar { padding: 20px; border-bottom: 1px solid var(--line); text-align: center; }
 .daily-titlebar h1 { margin: 6px 0 4px; color: var(--green-dark); font: 700 clamp(31px, 5vw, 42px)/1.03 Georgia, serif; }
 .daily-titlebar p { margin: 0; color: var(--muted); }
-.daily-date { text-transform: lowercase; }
-.daily-intro { max-width: 56ch; margin: 10px auto 0; font-size: 14px; line-height: 1.45; }
+.daily-titlebar .daily-intro { width: min(100%, 560px); margin: 10px auto 0; font-size: 14px; line-height: 1.45; }
 .daily-columns { min-height: 520px; display: grid; grid-template-columns: minmax(230px, .7fr) minmax(420px, 1.3fr); }
 .daily-today-label { margin-bottom: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 11px; font-weight: 800; }
 .daily-word-scroll { width: 100%; margin-bottom: 18px; overflow-x: auto; overflow-y: hidden; padding: 5px; }

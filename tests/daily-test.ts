@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { getDailyChallenge, formatDailyShareText, getDailyChallengeUrl } from '../src/daily/challenge'
+import { getDailyChallenge, formatDailyShareData, formatDailyShareText, getDailyChallengeUrl } from '../src/daily/challenge'
 import { createDailyRound, applyDailyGuess } from '../src/daily/game'
 import { readDailyAttempt, writeDailyAttempt } from '../src/daily/storage'
 import type { VocabularyEntry } from '../src/learning/types'
@@ -73,11 +73,22 @@ const share = formatDailyShareText({
   errors: 2,
   url: getDailyChallengeUrl('https://penjat.cat'),
 })
+const shareUrlMatches = [...share.matchAll(/https:\/\/penjat\.cat\/paraula-del-dia/g)]
 assert.match(share, /#37/)
 assert.match(share, /Victòria/)
 assert.match(share, /2 errors/)
-assert.match(share, /https:\/\/penjat\.cat\/paraula-del-dia/)
+assert.equal(shareUrlMatches.length, 1)
 assert.doesNotMatch(share.toLocaleLowerCase('ca'), /aigua/)
+
+const nativeShare = formatDailyShareData({
+  language: 'ca',
+  challengeNumber: 37,
+  result: 'win',
+  errors: 2,
+  url: getDailyChallengeUrl('https://penjat.cat'),
+})
+assert.equal(nativeShare.text, share)
+assert.equal('url' in nativeShare, false)
 
 console.log('Daily challenge tests passed.')
 
