@@ -13,6 +13,7 @@ const PUBLIC_SITE_ORIGIN = 'https://penjat.cat';
 const mimeTypes = {
     '.css': 'text/css; charset=utf-8', '.html': 'text/html; charset=utf-8', '.ico': 'image/x-icon',
     '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png',
+    '.webmanifest': 'application/manifest+json; charset=utf-8',
     '.svg': 'image/svg+xml', '.txt': 'text/plain; charset=utf-8', '.webp': 'image/webp', '.woff': 'font/woff',
     '.woff2': 'font/woff2', '.xml': 'application/xml; charset=utf-8',
 };
