@@ -14,6 +14,7 @@ dist-ssr
 
 # Reproducibly downloaded vocabulary sources
 data/raw/
+data/experiments/
 __pycache__/
 *.pyc
 
