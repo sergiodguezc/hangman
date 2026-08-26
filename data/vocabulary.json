@@ -33,7 +33,7 @@
     "translationsEs": [
       "abril"
     ],
-    "exampleCa": "A l'abril, dues hores de migdiada és dormir.",
+    "exampleCa": "A l'abril floreixen molts arbres.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 161,
@@ -50,13 +50,13 @@
     "word": "accident",
     "answerCa": "accident",
     "type": "word",
-    "definitionCa": "fet o circumstància no prevista que passa de manera casual, no pas per intenció; també, en el context de l’exemple, allò que és accessori o no essencial",
+    "definitionCa": "fet o circumstància no prevista que passa de manera casual, no pas per intenció",
     "translationEs": "accidente",
     "hintEs": "accidente",
     "translationsEs": [
       "accidente"
     ],
-    "exampleCa": "Els problemes específics d'aquests sistemes no són cap accident; són el resultat de l'objectiu bàsic.",
+    "exampleCa": "Hi va haver un accident a la carretera.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 2,
@@ -66,6 +66,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -142,13 +145,13 @@
     "word": "activitat",
     "answerCa": "activitat",
     "type": "word",
-    "definitionCa": "Acció o conjunt d'accions que es fan en un espai, un període o un context determinat; aquí, la conversa és el que s'hi fa principalment.",
+    "definitionCa": "Acció o conjunt d'accions que es fan en un espai, un període o un context determinat.",
     "translationEs": "actividad",
     "hintEs": "actividad",
     "translationsEs": [
       "actividad"
     ],
-    "exampleCa": "Als tercers espais la conversa és l'activitat principal.",
+    "exampleCa": "La lectura és l'activitat principal del taller.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 20,
@@ -158,6 +161,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -194,7 +200,7 @@
     "translationsEs": [
       "administración"
     ],
-    "exampleCa": "Històricament, els nostres ajuntaments naixen amb l'administració romana.",
+    "exampleCa": "L'administració pública gestiona els serveis de la ciutat.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 22,
@@ -217,7 +223,7 @@
     "translationsEs": [
       "añadir"
     ],
-    "exampleCa": "Hauria pogut afegir: n'és al mateix temps la prova.",
+    "exampleCa": "Si vols, hi puc afegir una foto.",
     "partOfSpeech": "verb",
     "difficulty": "easy",
     "corpusCount": 8,
@@ -424,7 +430,7 @@
     "translationsEs": [
       "alguien"
     ],
-    "exampleCa": "Si vols saber qui és algú, dóna-li poder.",
+    "exampleCa": "Hi ha algú a la porta.",
     "partOfSpeech": "other",
     "difficulty": "easy",
     "corpusCount": 38,
@@ -447,7 +453,7 @@
     "translationsEs": [
       "aquello"
     ],
-    "exampleCa": "Allò no era tindre promès ni tindre res.",
+    "exampleCa": "Allò que vas dir ahir encara em preocupa.",
     "partOfSpeech": "other",
     "difficulty": "easy",
     "corpusCount": 141,
@@ -516,7 +522,7 @@
     "translationsEs": [
       "botella"
     ],
-    "exampleCa": "Jo vull crispetes i una ampolla d'aigua!",
+    "exampleCa": "Em pots portar una ampolla d'aigua, si us plau?",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 4,
@@ -539,7 +545,7 @@
     "translationsEs": [
       "arriba"
     ],
-    "exampleCa": "A allò que està fet, pit i amunt.",
+    "exampleCa": "Mira amunt i veuràs la llum.",
     "partOfSpeech": "adverb",
     "difficulty": "easy",
     "corpusCount": 20,
@@ -608,7 +614,7 @@
     "translationsEs": [
       "animal"
     ],
-    "exampleCa": "Animal de pic no fa l'amo ric.",
+    "exampleCa": "El cavall és un animal molt fort.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 19,
@@ -631,7 +637,7 @@
     "translationsEs": [
       "llamado"
     ],
-    "exampleCa": "Formen el que hem anomenat com a motiu del sermó.",
+    "exampleCa": "El llibre anomenat \"Camins\" és molt conegut.",
     "partOfSpeech": "adjective",
     "difficulty": "medium",
     "corpusCount": 6,
@@ -677,7 +683,7 @@
     "translationsEs": [
       "antiguo"
     ],
-    "exampleCa": "El dandisme antic del comerç tenia aquestes coses.",
+    "exampleCa": "Vam visitar un palau antic.",
     "partOfSpeech": "adjective",
     "difficulty": "easy",
     "corpusCount": 25,
@@ -700,7 +706,7 @@
     "translationsEs": [
       "aparecer"
     ],
-    "exampleCa": "De per què van aparèixer les lleis de la propietat intel·lectual.",
+    "exampleCa": "De sobte va aparèixer una llum al cel.",
     "partOfSpeech": "verb",
     "difficulty": "medium",
     "corpusCount": 7,
@@ -769,7 +775,7 @@
     "translationsEs": [
       "árbol"
     ],
-    "exampleCa": "Arbre que siga trasplantat, que siga ben regat.",
+    "exampleCa": "Aquest arbre fa molta ombra.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 48,
@@ -1160,7 +1166,7 @@
     "translationsEs": [
       "blanco"
     ],
-    "exampleCa": "Passaven per un poblet tot pintat de blanc.",
+    "exampleCa": "La paret era de blanc molt pur.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 22,
@@ -1200,13 +1206,13 @@
     "word": "boig",
     "answerCa": "boig",
     "type": "word",
-    "definitionCa": "Persona que té una alteració mental o que actua de manera irreflexiva o imprudent.",
+    "definitionCa": "Que no actua d'una manera raonable o que ha perdut el seny.",
     "translationEs": "loco",
     "hintEs": "loco",
     "translationsEs": [
       "loco"
     ],
-    "exampleCa": "Déu nos guard d'un boig en lloc estret.",
+    "exampleCa": "No siguis boig: abriga't abans de sortir.",
     "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 24,
@@ -1216,6 +1222,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -1315,13 +1324,13 @@
     "word": "buscar",
     "answerCa": "buscar",
     "type": "word",
-    "definitionCa": "Intentar trobar o aconseguir alguna cosa; en aquest context, anar a la recerca de la mort o provocar-la.",
+    "definitionCa": "Intentar trobar o aconseguir alguna cosa.",
     "translationEs": "buscar",
     "hintEs": "buscar",
     "translationsEs": [
       "buscar"
     ],
-    "exampleCa": "No; era una bogeria buscar la mort.",
+    "exampleCa": "Va buscar les claus per tota la casa.",
     "partOfSpeech": "verb",
     "difficulty": "easy",
     "corpusCount": 16,
@@ -1331,6 +1340,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -1528,7 +1540,7 @@
     "translationsEs": [
       "capa"
     ],
-    "exampleCa": "Els sants de gener porten capa i barret.",
+    "exampleCa": "Portava una capa negra.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 26,
@@ -1551,7 +1563,7 @@
     "translationsEs": [
       "capacidad"
     ],
-    "exampleCa": "La capacitat de detenir el temps era possible.",
+    "exampleCa": "Aquest recipient té molta capacitat.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 13,
@@ -1574,7 +1586,7 @@
     "translationsEs": [
       "capaz"
     ],
-    "exampleCa": "O parlava o era capaç d'arrancar-se la llengua.",
+    "exampleCa": "És capaç de fer-ho sol.",
     "partOfSpeech": "adjective",
     "difficulty": "easy",
     "corpusCount": 21,
@@ -1620,7 +1632,7 @@
     "translationsEs": [
       "calle"
     ],
-    "exampleCa": "Es perceben més grues que bits pel carrer.",
+    "exampleCa": "El carrer era ple de gent i de cotxes.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 38,
@@ -1689,7 +1701,7 @@
     "translationsEs": [
       "castillo"
     ],
-    "exampleCa": "Boira al castell, pica espart i fes cordell.",
+    "exampleCa": "El castell s'alçava dalt del turó.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 7,
@@ -1706,13 +1718,13 @@
     "word": "català",
     "answerCa": "català",
     "type": "word",
-    "definitionCa": "Llengua catalana; també, persona catalana si el context ho indica.",
+    "definitionCa": "Llengua romànica parlada a Catalunya i en altres territoris de parla catalana.",
     "translationEs": "catalán",
     "hintEs": "catalán",
     "translationsEs": [
       "catalán"
     ],
-    "exampleCa": "Accepteu fer difusió de programes propietaris en català?",
+    "exampleCa": "A l'escola estudiem català.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 177,
@@ -1722,6 +1734,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -1735,7 +1750,7 @@
     "translationsEs": [
       "caer"
     ],
-    "exampleCa": "Eixir del foc i caure en les brases.",
+    "exampleCa": "Vaig caure a terra.",
     "partOfSpeech": "verb",
     "difficulty": "easy",
     "corpusCount": 20,
@@ -1781,7 +1796,7 @@
     "translationsEs": [
       "caballo"
     ],
-    "exampleCa": "A cavall donat no li mires el dentat.",
+    "exampleCa": "El cavall menjava herba al prat.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 46,
@@ -1804,7 +1819,7 @@
     "translationsEs": [
       "cien"
     ],
-    "exampleCa": "Tinc cent quaranta-vuit missatges de correu per obrir.",
+    "exampleCa": "Hi ha cent persones a la sala.",
     "partOfSpeech": "other",
     "difficulty": "easy",
     "corpusCount": 127,
@@ -1873,7 +1888,7 @@
     "translationsEs": [
       "cinco"
     ],
-    "exampleCa": "Feu-los a trossos d'uns cinc o sis centímetres.",
+    "exampleCa": "Tinc cinc llibres a la motxilla.",
     "partOfSpeech": "other",
     "difficulty": "easy",
     "corpusCount": 72,
@@ -1896,7 +1911,7 @@
     "translationsEs": [
       "cincuenta"
     ],
-    "exampleCa": "Posa'm dos-cents cinquanta grams de pernil dolç.",
+    "exampleCa": "Hem comprat cinquanta cadires per a la sala.",
     "partOfSpeech": "other",
     "difficulty": "medium",
     "corpusCount": 26,
@@ -1942,7 +1957,7 @@
     "translationsEs": [
       "ciencia"
     ],
-    "exampleCa": "L'experiència és la mare de la ciència.",
+    "exampleCa": "La ciència ajuda a entendre el món.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 5,
@@ -1959,14 +1974,14 @@
     "word": "clar",
     "answerCa": "clar",
     "type": "word",
-    "definitionCa": "evident, que es veu o s'entén amb facilitat",
+    "definitionCa": "de manera evident, amb claredat",
     "translationEs": "claro",
     "hintEs": "claro",
     "translationsEs": [
       "claro"
     ],
     "exampleCa": "És clar que no li hem caigut bé.",
-    "partOfSpeech": "adjective",
+    "partOfSpeech": "adverb",
     "difficulty": "easy",
     "corpusCount": 83,
     "frequencyRank": 262,
@@ -1975,6 +1990,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -2051,14 +2069,14 @@
     "word": "cobert",
     "answerCa": "cobert",
     "type": "word",
-    "definitionCa": "Que està tapat o recobert per una capa o una altra cosa.",
+    "definitionCa": "que està tapat o recobert per una capa o una altra cosa",
     "translationEs": "cubierto",
     "hintEs": "cubierto",
     "translationsEs": [
       "cubierto"
     ],
-    "exampleCa": "Les barques portaven el fons cobert d'una capa de palla d'arròs per a combatre el fred.",
-    "partOfSpeech": "noun",
+    "exampleCa": "El terra estava cobert de pols.",
+    "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 1,
     "frequencyRank": 1818,
@@ -2067,6 +2085,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -2080,7 +2101,7 @@
     "translationsEs": [
       "cubierta"
     ],
-    "exampleCa": "Timoner que està alerta no banya sa coberta.",
+    "exampleCa": "La coberta del vaixell estava mullada.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 4,
@@ -2126,7 +2147,7 @@
     "translationsEs": [
       "comienzo"
     ],
-    "exampleCa": "Començament de maig l'hivern fa revifar.",
+    "exampleCa": "El començament de la pel·lícula m'ha agradat molt.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 7,
@@ -2149,7 +2170,7 @@
     "translationsEs": [
       "comercio"
     ],
-    "exampleCa": "El dandisme antic del comerç tenia aquestes coses.",
+    "exampleCa": "El comerç del barri obre cada matí.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 15,
@@ -2264,7 +2285,7 @@
     "translationsEs": [
       "condición"
     ],
-    "exampleCa": "La tercera condició ha estat de mentalitat.",
+    "exampleCa": "La condició principal és tenir bona salut.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 10,
@@ -2327,14 +2348,14 @@
     "word": "conscient",
     "answerCa": "conscient",
     "type": "word",
-    "definitionCa": "Que és plenament aware o que té coneixement clar de si mateix, de la realitat o d’una situació; també, que actua amb voluntat i intenció.",
+    "definitionCa": "que és plenament conscient de si mateix, de la realitat o d’una situació; que actua amb voluntat i intenció",
     "translationEs": "consciente",
     "hintEs": "consciente",
     "translationsEs": [
       "consciente"
     ],
-    "exampleCa": "Sóc per tant un valencià conscient.",
-    "partOfSpeech": "noun",
+    "exampleCa": "Sóc un valencià conscient.",
+    "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 6,
     "frequencyRank": 1451,
@@ -2343,6 +2364,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B2"
     }
   },
   {
@@ -2425,7 +2449,7 @@
     "translationsEs": [
       "contenido"
     ],
-    "exampleCa": "Caminaven i devoraven distretament el contingut del mocador.",
+    "exampleCa": "El contingut de la capsa era ple de sorpreses.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 19,
@@ -2517,7 +2541,7 @@
     "translationsEs": [
       "convencer"
     ],
-    "exampleCa": "Ara et va molt bé perquè et puga convèncer: però qui riu primer, plora darrer.",
+    "exampleCa": "Vaig convèncer el meu amic perquè m'ajudés.",
     "partOfSpeech": "verb",
     "difficulty": "hard",
     "corpusCount": 2,
@@ -2678,7 +2702,7 @@
     "translationsEs": [
       "crecimiento"
     ],
-    "exampleCa": "En època de creixement era una menja obligada.",
+    "exampleCa": "El creixement de la població ha augmentat molt.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 12,
@@ -2724,7 +2748,7 @@
     "translationsEs": [
       "creer"
     ],
-    "exampleCa": "S'ha de creure, que deu ser veritat.",
+    "exampleCa": "No ho puc creure.",
     "partOfSpeech": "verb",
     "difficulty": "easy",
     "corpusCount": 20,
@@ -2879,14 +2903,14 @@
     "word": "banda",
     "answerCa": "d'altra banda",
     "type": "expression",
-    "definitionCa": "Expressió que introdueix un altre aspecte d'un tema.",
+    "definitionCa": "Expressió que introdueix un altre aspecte o una altra consideració.",
     "translationEs": "por otra parte",
     "hintEs": "por otra parte",
     "translationsEs": [
       "por otra parte"
     ],
-    "exampleCa": "D'altra banda, la xarxa era un autèntic caos.",
-    "partOfSpeech": "noun",
+    "exampleCa": "D'altra banda, aquesta opció és més econòmica.",
+    "partOfSpeech": "other",
     "difficulty": "hard",
     "corpusCount": 55,
     "targetExpression": "d'altra banda",
@@ -2896,6 +2920,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -2995,14 +3022,14 @@
     "word": "tant",
     "answerCa": "de tant en tant",
     "type": "expression",
-    "definitionCa": "Algunes vegades, amb intervals de temps.",
+    "definitionCa": "De manera ocasional; de tant en tant.",
     "translationEs": "de vez en cuando",
     "hintEs": "de vez en cuando",
     "translationsEs": [
       "de vez en cuando"
     ],
-    "exampleCa": "Cal ensenyar-los el bastó de tant en tant.",
-    "partOfSpeech": "noun",
+    "exampleCa": "De tant en tant anem al teatre.",
+    "partOfSpeech": "adverb",
     "difficulty": "hard",
     "corpusCount": 273,
     "targetExpression": "de tant en tant",
@@ -3012,6 +3039,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -3042,13 +3072,13 @@
     "word": "decidit",
     "answerCa": "decidit",
     "type": "word",
-    "definitionCa": "Que ha pres una decisió o que està determinat a fer una cosa.",
+    "definitionCa": "Que ha pres una decisió o està determinat a fer una cosa.",
     "translationEs": "decidido",
     "hintEs": "decidido",
     "translationsEs": [
       "decidido"
     ],
-    "exampleCa": "Allà, diverses institucions públiques han decidit abandonar Microsoft.",
+    "exampleCa": "Estava decidit a abandonar el projecte.",
     "partOfSpeech": "adjective",
     "difficulty": "medium",
     "corpusCount": 5,
@@ -3058,6 +3088,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -3088,13 +3121,13 @@
     "word": "deixar",
     "answerCa": "deixar",
     "type": "word",
-    "definitionCa": "Fer que alguna cosa no es continuï fent, o no abandonar una cosa; en aquest context, no tancar el cotxe.",
+    "definitionCa": "Fer que alguna cosa no continuï fent-se; abandonar o no seguir fent una acció.",
     "translationEs": "dejar",
     "hintEs": "dejar",
     "translationsEs": [
       "dejar"
     ],
-    "exampleCa": "Per tant, cal no deixar mai el cotxe obert.",
+    "exampleCa": "Cal no deixar mai de provar-ho.",
     "partOfSpeech": "verb",
     "difficulty": "easy",
     "corpusCount": 32,
@@ -3104,6 +3137,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -3456,14 +3492,14 @@
     "word": "doble",
     "answerCa": "doble",
     "type": "word",
-    "definitionCa": "Que té dues parts, dues vegades una quantitat, o un significat duplicat.",
+    "definitionCa": "Que té dues parts o que és dues vegades una quantitat.",
     "translationEs": "doble",
     "hintEs": "doble",
     "translationsEs": [
       "doble"
     ],
-    "exampleCa": "Aquestes fal·làcies tindrien, doncs, una doble lectura.",
-    "partOfSpeech": "noun",
+    "exampleCa": "Avui necessito una ració doble.",
+    "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 9,
     "frequencyRank": 1497,
@@ -3472,6 +3508,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -3554,7 +3593,7 @@
     "translationsEs": [
       "doce"
     ],
-    "exampleCa": "L'AVE arribarà a Alacant el dos mil dotze.",
+    "exampleCa": "Hi havia dotze persones a la sala.",
     "partOfSpeech": "other",
     "difficulty": "medium",
     "corpusCount": 26,
@@ -3761,7 +3800,7 @@
     "translationsEs": [
       "encender"
     ],
-    "exampleCa": "Dos estudiants van encendre el petard.",
+    "exampleCa": "Van encendre el foc per escalfar-se.",
     "partOfSpeech": "verb",
     "difficulty": "hard",
     "corpusCount": 11,
@@ -3830,7 +3869,7 @@
     "translationsEs": [
       "energía"
     ],
-    "exampleCa": "Ulls negres duen energia, talent i valentia.",
+    "exampleCa": "Treballa amb molta energia i constància.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 8,
@@ -3853,7 +3892,7 @@
     "translationsEs": [
       "acullá"
     ],
-    "exampleCa": "No hi havia perill que anara més enllà.",
+    "exampleCa": "Mira enllà del riu.",
     "partOfSpeech": "adverb",
     "difficulty": "easy",
     "corpusCount": 28,
@@ -4123,7 +4162,7 @@
     "word": "espai",
     "answerCa": "espai",
     "type": "word",
-    "definitionCa": "Lloc o zona disponible en un entorn, especialment en una pàgina web o en un sistema digital.",
+    "definitionCa": "Lloc o zona disponible o extensió que hi ha entre coses o dins d’un entorn.",
     "translationEs": "espacio",
     "hintEs": "espacio",
     "translationsEs": [
@@ -4139,6 +4178,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -4146,14 +4188,14 @@
     "word": "espanyol",
     "answerCa": "espanyol",
     "type": "word",
-    "definitionCa": "Relatiu a Espanya o natural d’Espanya; també, la llengua pròpia d’Espanya.",
+    "definitionCa": "Relatiu a Espanya o als espanyols.",
     "translationEs": "español",
     "hintEs": "español",
     "translationsEs": [
       "español"
     ],
-    "exampleCa": "És un dels defectes del sistema electoral espanyol.",
-    "partOfSpeech": "noun",
+    "exampleCa": "A la biblioteca hi ha un llibre espanyol.",
+    "partOfSpeech": "adjective",
     "difficulty": "medium",
     "corpusCount": 35,
     "frequencyRank": 758,
@@ -4162,6 +4204,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -4284,13 +4329,13 @@
     "word": "esquerra",
     "answerCa": "esquerra",
     "type": "word",
-    "definitionCa": "costat o mà situats al costat oposat al dret; també, en política, orientació ideològica d’esquerres",
+    "definitionCa": "costat o mà situats al costat oposat al dret",
     "translationEs": "izquierda",
     "hintEs": "izquierda",
     "translationsEs": [
       "izquierda"
     ],
-    "exampleCa": "Sosté amb l'esquerra un breu pomell de tan sols dues roses.",
+    "exampleCa": "Alça la mà esquerra.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 9,
@@ -4300,6 +4345,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -4635,7 +4683,7 @@
     "translationsEs": [
       "ejército"
     ],
-    "exampleCa": "La disminució del comerç proporciona un exèrcit i les necessitats d'un exèrcit creen un nou comerç.",
+    "exampleCa": "L'exèrcit va entrar a la ciutat al matí.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 2,
@@ -4727,7 +4775,7 @@
     "translationsEs": [
       "hierro"
     ],
-    "exampleCa": "El nostre ferro és superior al d'altres països.",
+    "exampleCa": "La porta és de ferro.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 6,
@@ -4773,7 +4821,7 @@
     "translationsEs": [
       "hijo"
     ],
-    "exampleCa": "Aquell petit seria un verdader fill de l'Albufera.",
+    "exampleCa": "És el seu fill gran.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 155,
@@ -4865,7 +4913,7 @@
     "translationsEs": [
       "fuera"
     ],
-    "exampleCa": "Les plantes de fora casa solen ser feréstegues.",
+    "exampleCa": "Queda't fora de casa.",
     "partOfSpeech": "adverb",
     "difficulty": "easy",
     "corpusCount": 59,
@@ -4957,7 +5005,7 @@
     "translationsEs": [
       "francés"
     ],
-    "exampleCa": "Aquell estiu em vaig embolicar amb un francès.",
+    "exampleCa": "És un francès de Lió.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 9,
@@ -5003,7 +5051,7 @@
     "translationsEs": [
       "frío"
     ],
-    "exampleCa": "Com un bitxo, que està fred i encén.",
+    "exampleCa": "Té fred a les mans.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 140,
@@ -5020,7 +5068,7 @@
     "word": "front",
     "answerCa": "front",
     "type": "word",
-    "definitionCa": "Línia o bloc d'oposició o de combat; també, banda o zona frontal.",
+    "definitionCa": "Línia o bloc d'oposició o de combat.",
     "translationEs": "frente",
     "hintEs": "frente",
     "translationsEs": [
@@ -5036,6 +5084,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B2"
     }
   },
   {
@@ -5066,13 +5117,13 @@
     "word": "funció",
     "answerCa": "funció",
     "type": "word",
-    "definitionCa": "Acte o cerimònia religiosa; en aquest context, referit a l'ofici o servei religiós.",
+    "definitionCa": "Espectacle teatral, cinematogràfic o musical que es representa davant del públic.",
     "translationEs": "función",
     "hintEs": "función",
     "translationsEs": [
       "función"
     ],
-    "exampleCa": "A l'església l'oració i al llit la funció.",
+    "exampleCa": "Dissabte anirem a una funció al teatre.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 15,
@@ -5082,6 +5133,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -5095,7 +5149,7 @@
     "translationsEs": [
       "madera"
     ],
-    "exampleCa": "La fusta de maig fa més bona música.",
+    "exampleCa": "La fusta serveix per fer mobles i paper.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 22,
@@ -5555,7 +5609,7 @@
     "translationsEs": [
       "humano"
     ],
-    "exampleCa": "L'esdeveniment providencial apareix després de l'esdeveniment humà.",
+    "exampleCa": "L’ésser humà necessita descans.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 6,
@@ -5992,7 +6046,7 @@
     "translationsEs": [
       "investigación"
     ],
-    "exampleCa": "El seu gran interès en la recerca i investigació tecnològica el porta a viatjar contínuament arreu del món.",
+    "exampleCa": "La investigació científica requereix temps i rigor.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 1,
@@ -6061,7 +6115,7 @@
     "translationsEs": [
       "juntamente"
     ],
-    "exampleCa": "Afegiu els macarrons a la cassola i remeneu-los bé, juntament amb la carn.",
+    "exampleCa": "Vam arribar juntament al mateix temps.",
     "partOfSpeech": "adverb",
     "difficulty": "medium",
     "corpusCount": 7,
@@ -6101,13 +6155,13 @@
     "word": "just",
     "answerCa": "just",
     "type": "word",
-    "definitionCa": "Que és conforme a la justícia o equitatiu; també, en aquest context, 'just' en el sentit de suficient, exactament el necessari.",
+    "definitionCa": "Que és suficient o exactament el necessari.",
     "translationEs": "justo",
     "hintEs": "justo",
     "translationsEs": [
       "justo"
     ],
-    "exampleCa": "Flor d'olivera per l'abril, oli just per amanir.",
+    "exampleCa": "Tinc just el que cal per acabar-ho.",
     "partOfSpeech": "adjective",
     "difficulty": "easy",
     "corpusCount": 21,
@@ -6117,6 +6171,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -6130,7 +6187,7 @@
     "translationsEs": [
       "juez"
     ],
-    "exampleCa": "Val més sentència de metge que de jutge.",
+    "exampleCa": "El jutge va dictar sentència al final del judici.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 8,
@@ -6199,7 +6256,7 @@
     "translationsEs": [
       "largo"
     ],
-    "exampleCa": "Llarg mal cansa el metge i el malalt.",
+    "exampleCa": "El llibre és molt llarg.",
     "partOfSpeech": "adjective",
     "difficulty": "easy",
     "corpusCount": 45,
@@ -6314,7 +6371,7 @@
     "translationsEs": [
       "levadura"
     ],
-    "exampleCa": "No fareu cap llei llevat de les que a mi em plaguen?",
+    "exampleCa": "El llevat ajuda a fer pujar el pa.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 2,
@@ -6337,7 +6394,7 @@
     "translationsEs": [
       "libertad"
     ],
-    "exampleCa": "Aquesta llibertat és difícil d'aconseguir tenint una subvenció.",
+    "exampleCa": "La llibertat d'expressió és un dret fonamental.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 25,
@@ -6383,7 +6440,7 @@
     "translationsEs": [
       "lista"
     ],
-    "exampleCa": "Que fort, l'Ernest va de cap de llista.",
+    "exampleCa": "Fes una llista de la compra abans de sortir.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 26,
@@ -6406,7 +6463,7 @@
     "translationsEs": [
       "libre"
     ],
-    "exampleCa": "Jo anava a fer migdiada a l'aire lliure.",
+    "exampleCa": "Tinc la tarda lliure.",
     "partOfSpeech": "adjective",
     "difficulty": "medium",
     "corpusCount": 101,
@@ -6429,7 +6486,7 @@
     "translationsEs": [
       "luna"
     ],
-    "exampleCa": "La nit de la Cena, la lluna plena.",
+    "exampleCa": "La lluna plena brillava al cel.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 166,
@@ -6452,7 +6509,7 @@
     "translationsEs": [
       "lejos"
     ],
-    "exampleCa": "Al cavall desenfrenat, mira'l de lluny i amagat.",
+    "exampleCa": "La casa és molt lluny d'aquí.",
     "partOfSpeech": "adverb",
     "difficulty": "easy",
     "corpusCount": 59,
@@ -6498,7 +6555,7 @@
     "translationsEs": [
       "mayor"
     ],
-    "exampleCa": "Després d'una festa major, una sopa amb oli.",
+    "exampleCa": "El meu germà gran és major que jo.",
     "partOfSpeech": "adjective",
     "difficulty": "easy",
     "corpusCount": 33,
@@ -6590,7 +6647,7 @@
     "translationsEs": [
       "marido"
     ],
-    "exampleCa": "Baralles de marit, de la taula al llit.",
+    "exampleCa": "El seu marit treballa a l'hospital.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 24,
@@ -6630,13 +6687,13 @@
     "word": "matèria",
     "answerCa": "matèria",
     "type": "word",
-    "definitionCa": "Àmbit d’estudi o disciplina; també, substància de què està fet alguna cosa, segons el context.",
+    "definitionCa": "Assignatura o camp d'estudi que forma part d'un programa educatiu.",
     "translationEs": "materia",
     "hintEs": "materia",
     "translationsEs": [
       "materia"
     ],
-    "exampleCa": "La lingüística és una matèria feta de paraules.",
+    "exampleCa": "La matemàtica és una matèria important.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 13,
@@ -6646,6 +6703,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -6728,7 +6788,7 @@
     "translationsEs": [
       "mente"
     ],
-    "exampleCa": "Qui compra i ment, a sa bossa ho sent.",
+    "exampleCa": "La ment humana és capaç de pensar, recordar i imaginar.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 3,
@@ -6746,12 +6806,12 @@
     "answerCa": "mentrestant",
     "type": "word",
     "definitionCa": "Dit d'un període o acció que té lloc al mateix temps que una altra, o mentre passa una altra cosa; també pot introduir una acció intermèdia.",
-    "translationEs": "mientras",
-    "hintEs": "mientras",
+    "translationEs": "mientras tanto",
+    "hintEs": "mientras tanto",
     "translationsEs": [
-      "mientras"
+      "mientras tanto"
     ],
-    "exampleCa": "Mentrestant bulliu els ous quinze minuts i deixeu-los refredar.",
+    "exampleCa": "Ell preparava el sopar i, mentrestant, ella parava taula.",
     "partOfSpeech": "adverb",
     "difficulty": "hard",
     "corpusCount": 17,
@@ -6761,6 +6821,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -6774,8 +6837,8 @@
     "translationsEs": [
       "menos"
     ],
-    "exampleCa": "Quan menys s'espera el llebrer, salta la llebre.",
-    "partOfSpeech": "adjective",
+    "exampleCa": "Avui hi ha menys gent que ahir.",
+    "partOfSpeech": "adverb",
     "difficulty": "easy",
     "corpusCount": 73,
     "frequencyRank": 289,
@@ -6784,6 +6847,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -7044,14 +7110,14 @@
     "word": "morta",
     "answerCa": "morta",
     "type": "word",
-    "definitionCa": "animal o persona que ha deixat de viure, o molt feble per falta d'aliment",
+    "definitionCa": "Que ha deixat de viure; morta.",
     "translationEs": "muerta",
     "hintEs": "muerta",
     "translationsEs": [
       "muerta"
     ],
-    "exampleCa": "Cabra morta de fam no l'ha vista ningú.",
-    "partOfSpeech": "noun",
+    "exampleCa": "La gata va quedar morta a la carretera.",
+    "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 14,
     "frequencyRank": 1508,
@@ -7060,6 +7126,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -7073,7 +7142,7 @@
     "translationsEs": [
       "muestra"
     ],
-    "exampleCa": "Mostra d'abril, no en posaràs oli al setrill.",
+    "exampleCa": "Ens han donat una mostra de perfum per provar-lo.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 21,
@@ -7096,7 +7165,7 @@
     "translationsEs": [
       "mostrar"
     ],
-    "exampleCa": "A un vell gat no li cal mostrar la rata.",
+    "exampleCa": "Em va mostrar la fotografia a la llum del sol.",
     "partOfSpeech": "verb",
     "difficulty": "medium",
     "corpusCount": 8,
@@ -7234,7 +7303,7 @@
     "translationsEs": [
       "museo"
     ],
-    "exampleCa": "El vint-i-tres de març al Museu Picasso de Barcelona.",
+    "exampleCa": "El Museu Picasso de Barcelona és molt visitat.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 3,
@@ -7257,7 +7326,7 @@
     "translationsEs": [
       "mínimo"
     ],
-    "exampleCa": "Com a mínim em podries haver deixat la galeta.",
+    "exampleCa": "El preu mínim és de deu euros.",
     "partOfSpeech": "adjective",
     "difficulty": "medium",
     "corpusCount": 13,
@@ -7372,7 +7441,7 @@
     "translationsEs": [
       "naturalmente"
     ],
-    "exampleCa": "Naturalment davalla i puja sempre amb l'ascensor.",
+    "exampleCa": "Naturalment, accepto la teva proposta.",
     "partOfSpeech": "adverb",
     "difficulty": "medium",
     "corpusCount": 7,
@@ -7458,13 +7527,13 @@
     "word": "nombre",
     "answerCa": "nombre",
     "type": "word",
-    "definitionCa": "quantitat expressada amb xifres; també, en aquest context, signe o dada que identifica una posició o element en una sèrie.",
+    "definitionCa": "Quantitat expressada amb xifres o lletres.",
     "translationEs": "número",
     "hintEs": "número",
     "translationsEs": [
       "número"
     ],
-    "exampleCa": "A la dreta indiquem el nombre de l'estrofa.",
+    "exampleCa": "El nombre de participants ha augmentat.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 21,
@@ -7474,6 +7543,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -7648,7 +7720,7 @@
     "translationsEs": [
       "abierto"
     ],
-    "exampleCa": "A Xert, tots caguen amb el cul obert.",
+    "exampleCa": "La porta està obert.",
     "partOfSpeech": "adjective",
     "difficulty": "medium",
     "corpusCount": 33,
@@ -7717,7 +7789,7 @@
     "translationsEs": [
       "abrir"
     ],
-    "exampleCa": "Tinc cent quaranta-vuit missatges de correu per obrir.",
+    "exampleCa": "Va obrir la finestra per deixar entrar l'aire.",
     "partOfSpeech": "verb",
     "difficulty": "easy",
     "corpusCount": 30,
@@ -7763,7 +7835,7 @@
     "translationsEs": [
       "obtener"
     ],
-    "exampleCa": "Obtenir una codificació informàtica correcta de la ela geminada.",
+    "exampleCa": "Va obtenir una bona nota a l'examen.",
     "partOfSpeech": "verb",
     "difficulty": "medium",
     "corpusCount": 10,
@@ -7855,7 +7927,7 @@
     "translationsEs": [
       "tío"
     ],
-    "exampleCa": "Oncle ric, un bon amic.",
+    "exampleCa": "El meu oncle viu al costat de casa.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 6,
@@ -7878,7 +7950,7 @@
     "translationsEs": [
       "once"
     ],
-    "exampleCa": "Ambdós projectes celebren deu anys d'existència l'any dos mil onze.",
+    "exampleCa": "Hi havia onze persones a la sala.",
     "partOfSpeech": "other",
     "difficulty": "hard",
     "corpusCount": 21,
@@ -7987,14 +8059,14 @@
     "word": "original",
     "answerCa": "original",
     "type": "word",
-    "definitionCa": "Primera versió o formació d’alguna cosa; la que existeix des del principi.",
+    "definitionCa": "Primera, inicial; que és de l’origen.",
     "translationEs": "original",
     "hintEs": "original",
     "translationsEs": [
       "original"
     ],
-    "exampleCa": "És més, el grup original està deixant d'existir.",
-    "partOfSpeech": "noun",
+    "exampleCa": "La versió original era millor.",
+    "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 13,
     "frequencyRank": 1518,
@@ -8003,6 +8075,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -8545,7 +8620,7 @@
     "translationsEs": [
       "pequeño"
     ],
-    "exampleCa": "Aquell petit seria un verdader fill de l'Albufera.",
+    "exampleCa": "Tenia una casa petit.",
     "partOfSpeech": "adjective",
     "difficulty": "easy",
     "corpusCount": 40,
@@ -8591,7 +8666,7 @@
     "translationsEs": [
       "pintor"
     ],
-    "exampleCa": "El pintor fa servir les fruites de temporada.",
+    "exampleCa": "El pintor pinta un quadre amb colors vius.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 2,
@@ -8890,7 +8965,7 @@
     "translationsEs": [
       "posibilidad"
     ],
-    "exampleCa": "Més llengües amb possibilitat de tesaurus.",
+    "exampleCa": "Hi ha la possibilitat que plogui demà.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 14,
@@ -8913,7 +8988,7 @@
     "translationsEs": [
       "posible"
     ],
-    "exampleCa": "La capacitat de detenir el temps era possible.",
+    "exampleCa": "És possible que arribin tard.",
     "partOfSpeech": "adjective",
     "difficulty": "easy",
     "corpusCount": 55,
@@ -8959,7 +9034,7 @@
     "translationsEs": [
       "quizás"
     ],
-    "exampleCa": "Potser en la banda ampla, no ho sé.",
+    "exampleCa": "Potser vindrà demà.",
     "partOfSpeech": "adverb",
     "difficulty": "easy",
     "corpusCount": 71,
@@ -8976,13 +9051,13 @@
     "word": "precisament",
     "answerCa": "precisament",
     "type": "word",
-    "definitionCa": "D'una manera precisa o exacta; en aquest context, amb valor enfàtic de 'justament' o 'just al contrari del que s'esperava'.",
+    "definitionCa": "D'una manera exacta o justament.",
     "translationEs": "precisamente",
     "hintEs": "precisamente",
     "translationsEs": [
       "precisamente"
     ],
-    "exampleCa": "M'ha cridat l'atenció, precisament, que fores diferent.",
+    "exampleCa": "Precisament avui no puc venir.",
     "partOfSpeech": "adverb",
     "difficulty": "medium",
     "corpusCount": 10,
@@ -8992,6 +9067,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -9281,7 +9359,7 @@
     "translationsEs": [
       "principio"
     ],
-    "exampleCa": "De principi a fi, l'abril sol ser roí.",
+    "exampleCa": "El principi de la reunió va ser molt puntual.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 11,
@@ -9390,14 +9468,14 @@
     "word": "professional",
     "answerCa": "professional",
     "type": "word",
-    "definitionCa": "Persona que exerceix una professió o que té una activitat professional determinada.",
+    "definitionCa": "Relatiu a una professió o als professionals; propi d’una activitat professional.",
     "translationEs": "profesional",
     "hintEs": "profesional",
     "translationsEs": [
       "profesional"
     ],
-    "exampleCa": "Eixe oci experiencial està positivament relacionat amb la creativitat professional.",
-    "partOfSpeech": "noun",
+    "exampleCa": "Té una actitud professional a la feina.",
+    "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 5,
     "frequencyRank": 1660,
@@ -9406,6 +9484,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -9419,7 +9500,7 @@
     "translationsEs": [
       "profesor"
     ],
-    "exampleCa": "El professor diu que sóc massa atordida, i m'ha declarat incapaç.",
+    "exampleCa": "El professor explica la lliçó als alumnes.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 5,
@@ -9505,13 +9586,13 @@
     "word": "propietat",
     "answerCa": "propietat",
     "type": "word",
-    "definitionCa": "Dret o qualitat de pertànyer a algú; en l'àmbit informàtic, programa o tecnologia que és de titularitat privada i no de codi obert.",
+    "definitionCa": "Dret o qualitat de pertànyer a algú.",
     "translationEs": "propiedad",
     "hintEs": "propiedad",
     "translationsEs": [
       "propiedad"
     ],
-    "exampleCa": "Internet Explorer és un programa de propietat gratuït.",
+    "exampleCa": "La casa és de la seva propietat.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 15,
@@ -9521,6 +9602,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -9580,7 +9664,7 @@
     "translationsEs": [
       "provincia"
     ],
-    "exampleCa": "Resulta evident que la Constitució espanyola no imposa, doncs, la província en tot cas.",
+    "exampleCa": "Barcelona és la capital de la província.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 4,
@@ -9620,13 +9704,13 @@
     "word": "príncep",
     "answerCa": "príncep",
     "type": "word",
-    "definitionCa": "Persona de rang reial, habitualment fill o membre d’una família reial; també pot referir-se al protagonista de l’obra 'El Petit Príncep'.",
+    "definitionCa": "Persona de rang reial, habitualment fill o membre d’una família reial.",
     "translationEs": "príncipe",
     "hintEs": "príncipe",
     "translationsEs": [
       "príncipe"
     ],
-    "exampleCa": "El planeta del Petit Príncep és inventat.",
+    "exampleCa": "El príncep va saludar el públic des del balcó.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 3,
@@ -9636,6 +9720,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -9666,13 +9753,13 @@
     "word": "públic",
     "answerCa": "públic",
     "type": "word",
-    "definitionCa": "Conjunt de persones que assisteixen a un acte, espectacle o debat, o bé el col·lectiu destinatari d’una comunicació.",
+    "definitionCa": "Conjunt de persones que assisteixen a un acte, espectacle o debat.",
     "translationEs": "público",
     "hintEs": "público",
     "translationsEs": [
       "público"
     ],
-    "exampleCa": "El desenvolupament es realitza en un fòrum públic.",
+    "exampleCa": "El públic va aplaudir al final de l'obra.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 28,
@@ -9682,6 +9769,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -9758,13 +9848,13 @@
     "word": "quart",
     "answerCa": "quart",
     "type": "word",
-    "definitionCa": "Quarta part d’una unitat o d’un conjunt; també, una de les fases de la Lluna.",
+    "definitionCa": "Quarta part d’una unitat o d’un conjunt.",
     "translationEs": "cuarto",
     "hintEs": "cuarto",
     "translationsEs": [
       "cuarto"
     ],
-    "exampleCa": "Quan la lluna mira a llevant, quart minvant.",
+    "exampleCa": "Vaig llegir un quart del llibre.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 16,
@@ -9774,6 +9864,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -9879,7 +9972,7 @@
     "translationsEs": [
       "realidad"
     ],
-    "exampleCa": "Els turistes fan servir apps de realitat augmentada.",
+    "exampleCa": "La realitat és sovint més complexa del que sembla.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 54,
@@ -10316,7 +10409,7 @@
     "translationsEs": [
       "salud"
     ],
-    "exampleCa": "El peix fa salut i no fa greix.",
+    "exampleCa": "Fer exercici regularment és bo per a la salut.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 35,
@@ -10339,7 +10432,7 @@
     "translationsEs": [
       "sangre"
     ],
-    "exampleCa": "No era treballador, però tenia la seua sang.",
+    "exampleCa": "La sang circula per les artèries i les venes.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 31,
@@ -10454,7 +10547,7 @@
     "translationsEs": [
       "seguramente"
     ],
-    "exampleCa": "Però segurament deu haver anat a dormir ja.",
+    "exampleCa": "Segurament arribarà demà.",
     "partOfSpeech": "adverb",
     "difficulty": "medium",
     "corpusCount": 19,
@@ -10546,7 +10639,7 @@
     "translationsEs": [
       "sesenta"
     ],
-    "exampleCa": "Més de quatre-centes seixanta mil categories temàtiques.",
+    "exampleCa": "Hi havia seixanta persones a la sala.",
     "partOfSpeech": "other",
     "difficulty": "hard",
     "corpusCount": 15,
@@ -10569,7 +10662,7 @@
     "translationsEs": [
       "parecer"
     ],
-    "exampleCa": "Un sàtir, em va semblar.",
+    "exampleCa": "La pel·lícula em va semblar interessant.",
     "partOfSpeech": "verb",
     "difficulty": "easy",
     "corpusCount": 6,
@@ -10615,7 +10708,7 @@
     "translationsEs": [
       "sensación"
     ],
-    "exampleCa": "Tinc la sensació que comencem a fer el pagerol.",
+    "exampleCa": "Tinc la sensació que avui plourà.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 10,
@@ -10638,7 +10731,7 @@
     "translationsEs": [
       "sentimiento"
     ],
-    "exampleCa": "Malauradament, aquest sentiment a València és minoritari.",
+    "exampleCa": "Aquest sentiment de tristesa li costava d'amagar.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 3,
@@ -10655,13 +10748,13 @@
     "word": "sentit",
     "answerCa": "sentit",
     "type": "word",
-    "definitionCa": "Percepció o facultat amb què es perceben els estímuls; també, significat o raó d'alguna cosa segons el context.",
+    "definitionCa": "Percepció o facultat amb què es perceben els estímuls.",
     "translationEs": "sentido",
     "hintEs": "sentido",
     "translationsEs": [
       "sentido"
     ],
-    "exampleCa": "El soroll que has sentit és el tro.",
+    "exampleCa": "Va perdre el sentit de l'oïda després de l'accident.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 54,
@@ -10671,6 +10764,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B2"
     }
   },
   {
@@ -10914,7 +11010,7 @@
     "translationsEs": [
       "sociedad"
     ],
-    "exampleCa": "Abans d'iniciar l'elaboració de Societat de la informació.",
+    "exampleCa": "Vivim en una societat molt diversa.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 58,
@@ -10931,14 +11027,14 @@
     "word": "sola",
     "answerCa": "sola",
     "type": "word",
-    "definitionCa": "Part inferior del calçat que toca a terra; peça de la sabata o del peu d'una bota.",
-    "translationEs": "suela",
-    "hintEs": "suela",
+    "definitionCa": "Sense estar sense companyia o sense una altra cosa que l'acompanyi.",
+    "translationEs": "sola",
+    "hintEs": "sola",
     "translationsEs": [
-      "suela"
+      "sola"
     ],
-    "exampleCa": "No es fa bona olla amb aigua sola.",
-    "partOfSpeech": "noun",
+    "exampleCa": "La nena va arribar sola a casa.",
+    "partOfSpeech": "adjective",
     "difficulty": "easy",
     "corpusCount": 20,
     "frequencyRank": 528,
@@ -10947,6 +11043,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -11000,13 +11099,13 @@
     "word": "sopar",
     "answerCa": "sopar",
     "type": "word",
-    "definitionCa": "Menjar que es fa al vespre.",
+    "definitionCa": "Àpat que es fa al vespre o a la nit.",
     "translationEs": "cena",
     "hintEs": "cena",
     "translationsEs": [
       "cena"
     ],
-    "exampleCa": "Llebeig per a sopar, aigua per a esmorzar.",
+    "exampleCa": "El sopar és a les nou.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 34,
@@ -11016,6 +11115,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -11259,7 +11361,7 @@
     "translationsEs": [
       "tarde"
     ],
-    "exampleCa": "De tard o de primer, Carnestoltes pel febrer.",
+    "exampleCa": "Va arribar tard a classe.",
     "partOfSpeech": "adverb",
     "difficulty": "easy",
     "corpusCount": 58,
@@ -11368,13 +11470,13 @@
     "word": "temporada",
     "answerCa": "temporada",
     "type": "word",
-    "definitionCa": "Període de l'any o del cicle en què alguna cosa es dona o és habitual; en l'exemple, el període en què una fruita és madura i es troba en el seu moment òptim.",
+    "definitionCa": "Període de l'any en què una activitat, fenomen o producte és habitual o es troba en el seu moment òptim.",
     "translationEs": "temporada",
     "hintEs": "temporada",
     "translationsEs": [
       "temporada"
     ],
-    "exampleCa": "El pintor fa servir les fruites de temporada.",
+    "exampleCa": "A l'estiu és temporada de préssecs.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 11,
@@ -11384,6 +11486,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "B1"
     }
   },
   {
@@ -11420,7 +11525,7 @@
     "translationsEs": [
       "teoría"
     ],
-    "exampleCa": "En teoria.",
+    "exampleCa": "La teoria de l'evolució és fonamental en biologia.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 3,
@@ -11604,7 +11709,7 @@
     "translationsEs": [
       "tranquilo"
     ],
-    "exampleCa": "Qui és tranquil, tot el món és d'ell.",
+    "exampleCa": "Després de la notícia, es va quedar tranquil.",
     "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 7,
@@ -11644,13 +11749,13 @@
     "word": "treballar",
     "answerCa": "treballar",
     "type": "word",
-    "definitionCa": "Realitzar una activitat o una feina, sovint amb esforç; en el context, col·laborar amb altres de manera coordinada.",
+    "definitionCa": "Realitzar una activitat o una feina, sovint amb esforç.",
     "translationEs": "trabajar",
     "hintEs": "trabajar",
     "translationsEs": [
       "trabajar"
     ],
-    "exampleCa": "Als editors se'ls demana saber treballar en equip.",
+    "exampleCa": "Demà he de treballar vuit hores.",
     "partOfSpeech": "verb",
     "difficulty": "medium",
     "corpusCount": 38,
@@ -11660,6 +11765,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -11690,13 +11798,13 @@
     "word": "tres",
     "answerCa": "tres",
     "type": "word",
-    "definitionCa": "Nombre cardinal equivalent a 3; en aquest context, fa referència a tres dones.",
+    "definitionCa": "Nombre cardinal equivalent a 3.",
     "translationEs": "tres",
     "hintEs": "tres",
     "translationsEs": [
       "tres"
     ],
-    "exampleCa": "Allò trencava el cor a les tres dones.",
+    "exampleCa": "Hi havia tres dones a la sala.",
     "partOfSpeech": "other",
     "difficulty": "easy",
     "corpusCount": 182,
@@ -11706,6 +11814,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -11736,14 +11847,14 @@
     "word": "mica",
     "answerCa": "una mica",
     "type": "expression",
-    "definitionCa": "Una quantitat o un grau petit.",
+    "definitionCa": "En una quantitat o un grau petit.",
     "translationEs": "un poco",
     "hintEs": "un poco",
     "translationsEs": [
       "un poco"
     ],
-    "exampleCa": "Ets una mica sòmines, però em fas riure.",
-    "partOfSpeech": "noun",
+    "exampleCa": "Espera una mica, si us plau.",
+    "partOfSpeech": "other",
     "difficulty": "easy",
     "corpusCount": 97,
     "targetExpression": "una mica",
@@ -11753,6 +11864,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -11812,7 +11926,7 @@
     "translationsEs": [
       "barco"
     ],
-    "exampleCa": "El mariner i el vaixell són de la mateixa pell.",
+    "exampleCa": "El vaixell navegava pel port.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 6,
@@ -11829,14 +11943,14 @@
     "word": "valencià",
     "answerCa": "valencià",
     "type": "word",
-    "definitionCa": "Relatiu a València o al País Valencià; també, la llengua pròpia parlada al País Valencià.",
+    "definitionCa": "Relatiu a València o al País Valencià.",
     "translationEs": "valenciano",
     "hintEs": "valenciano",
     "translationsEs": [
       "valenciano"
     ],
-    "exampleCa": "I això és especialment significatiu en l'àmbit valencià.",
-    "partOfSpeech": "noun",
+    "exampleCa": "L'àmbit valencià té una gran riquesa cultural.",
+    "partOfSpeech": "adjective",
     "difficulty": "hard",
     "corpusCount": 80,
     "frequencyRank": 1697,
@@ -11845,6 +11959,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A2"
     }
   },
   {
@@ -11875,13 +11992,13 @@
     "word": "vegada",
     "answerCa": "vegada",
     "type": "word",
-    "definitionCa": "ocasió o moment en què passa alguna cosa; també, en expressions com «d'una vegada», indica fer una cosa d'una sola vegada o d'un sol cop",
+    "definitionCa": "Ocasió o moment en què passa alguna cosa.",
     "translationEs": "vez",
     "hintEs": "vez",
     "translationsEs": [
       "vez"
     ],
-    "exampleCa": "Llegeix-t'ho tot d'una vegada o no aprovaràs mai!",
+    "exampleCa": "Aquesta vegada arribaré puntual.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 96,
@@ -11891,6 +12008,9 @@
       "example": "softcatala-ca-text-corpus",
       "frequency": "softcatala-catalan-dict-tools",
       "translation": "apertium-spa-cat"
+    },
+    "linguistics": {
+      "cefr": "A1"
     }
   },
   {
@@ -11973,7 +12093,7 @@
     "translationsEs": [
       "vergüenza"
     ],
-    "exampleCa": "A les vuit, sense vergonya al llit.",
+    "exampleCa": "Va sentir vergonya quan va parlar en públic.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 18,
@@ -12065,7 +12185,7 @@
     "translationsEs": [
       "viaje"
     ],
-    "exampleCa": "Durant el viatge descobrirem que era la mesura exacta.",
+    "exampleCa": "El viatge va durar tres hores.",
     "partOfSpeech": "noun",
     "difficulty": "easy",
     "corpusCount": 25,
@@ -12134,7 +12254,7 @@
     "translationsEs": [
       "villa"
     ],
-    "exampleCa": "Sant Sebastià de la vila, tanca la porta i fila.",
+    "exampleCa": "La vila té un centre històric molt bonic.",
     "partOfSpeech": "noun",
     "difficulty": "medium",
     "corpusCount": 1,
@@ -12180,7 +12300,7 @@
     "translationsEs": [
       "violencia"
     ],
-    "exampleCa": "La violència em tranquil·litza.",
+    "exampleCa": "La violència mai no és la solució.",
     "partOfSpeech": "noun",
     "difficulty": "hard",
     "corpusCount": 3,
