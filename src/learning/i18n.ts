@@ -1,13 +1,13 @@
 import type { Language } from '../../shared/game'
 
 const es = {
-  title: 'Aprèn català', setupTitle: 'Aprender catalán', difficulty: 'Dificultad',
-  easy: 'Fácil', medium: 'Media', hard: 'Difícil', difficultyHelp: 'Agrupación de juego basada en frecuencia y longitud; no es un nivel oficial.',
+  title: 'Aprèn català', setupTitle: 'Aprender catalán', difficulty: 'Dificultad', cefr: 'Nivel', allLevels: 'Todos',
+  easy: 'Fácil', medium: 'Media', hard: 'Difícil', difficultyHelp: 'Elige un nivel CEFR o practica con todo el vocabulario.',
   start: 'Empezar', hint: 'Pista en español', errors: 'Errores', incorrect: 'Letras incorrectas', none: 'Ninguna todavía',
   keyboard: 'Teclado de letras catalanas', progress: 'Progreso de la palabra catalana', won: '¡Has acertado la palabra!',
-  lost: 'La palabra era…', spanish: 'Español', example: 'Ejemplo', next: 'Siguiente palabra',
+  lost: 'La palabra era…', reviewLater: 'La volveremos a practicar más adelante en esta sesión.', spanish: 'Español', definition: 'Definición', example: 'Ejemplo', next: 'Siguiente palabra',
   also: 'También',
-  changeDifficulty: 'Cambiar dificultad', home: 'Volver al inicio', currentDifficulty: 'Dificultad',
+  changeDifficulty: 'Cambiar nivel', home: 'Volver al inicio', currentDifficulty: 'Nivel',
   sessionProgress: 'Progreso de la sesión', history: 'Historial', showAll: 'Ver todo', showLess: 'Ver menos',
   noHistory: 'Aún no hay palabras completadas.', summaryTitle: 'Resumen de la sesión',
   emptySummary: 'No has completado ninguna palabra en esta sesión.', wordsPlayed: 'Palabras jugadas',
@@ -17,13 +17,13 @@ const es = {
 }
 
 const ca: typeof es = {
-  title: 'Aprèn català', setupTitle: 'Aprèn català', difficulty: 'Dificultat',
-  easy: 'Fàcil', medium: 'Mitjana', hard: 'Difícil', difficultyHelp: 'Agrupació de joc basada en la freqüència i la longitud; no és un nivell oficial.',
+  title: 'Aprèn català', setupTitle: 'Aprèn català', difficulty: 'Dificultat', cefr: 'Nivell', allLevels: 'Tots',
+  easy: 'Fàcil', medium: 'Mitjana', hard: 'Difícil', difficultyHelp: 'Tria un nivell CEFR o practica amb tot el vocabulari.',
   start: 'Comença', hint: 'Pista en castellà', errors: 'Errors', incorrect: 'Lletres incorrectes', none: 'Cap encara',
   keyboard: 'Teclat de lletres catalanes', progress: 'Progrés de la paraula catalana', won: 'Has encertat la paraula!',
-  lost: 'La paraula era…', spanish: 'Castellà', example: 'Exemple', next: 'Paraula següent',
+  lost: 'La paraula era…', reviewLater: 'La tornarem a practicar més endavant en aquesta sessió.', spanish: 'Castellà', definition: 'Definició', example: 'Exemple', next: 'Paraula següent',
   also: 'També',
-  changeDifficulty: 'Canviar la dificultat', home: "Torna a l'inici", currentDifficulty: 'Dificultat',
+  changeDifficulty: 'Canviar el nivell', home: "Torna a l'inici", currentDifficulty: 'Nivell',
   sessionProgress: 'Progrés de la sessió', history: 'Historial', showAll: 'Veure tot', showLess: 'Veure menys',
   noHistory: 'Encara no hi ha paraules completades.', summaryTitle: 'Resum de la sessió',
   emptySummary: 'No has completat cap paraula en aquesta sessió.', wordsPlayed: 'Paraules jugades',

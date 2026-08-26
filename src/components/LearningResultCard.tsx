@@ -22,9 +22,11 @@ export function LearningResultCard({ entry, result, language, onNext, onChangeDi
   return <section className={`learning-result ${result}`} aria-live="polite">
     <p className="learning-result-message">{result === 'win' ? t.won : t.lost}</p>
     <h2 lang="ca">{entry.answerCa}</h2>
+    {result === 'loss' && <p className="learning-result-review-note">{t.reviewLater}</p>}
     <dl>
       <div><dt>{t.spanish}</dt><dd lang="es">{entry.translationEs}</dd></div>
-      <div><dt>Definició</dt><dd lang="ca">{entry.definitionCa}</dd></div>
+      <div><dt>{t.definition}</dt><dd lang="ca">{entry.definitionCa}</dd></div>
+      {entry.linguistics?.cefr && <div><dt>{t.cefr}</dt><dd>{entry.linguistics.cefr}</dd></div>}
       <div><dt>{t.example}</dt><dd lang="ca"><ExampleSentence entry={entry} /></dd></div>
     </dl>
     <div className="learning-result-actions">

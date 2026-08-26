@@ -156,7 +156,8 @@ button { cursor: pointer; }
 .learning-setup > p { max-width: 46ch; margin: 14px auto 24px; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .difficulty-selector { margin: 0; padding: 0; border: 0; }
 .difficulty-selector legend { margin: 0 auto 10px; color: #455249; font-weight: 700; }
-.difficulty-selector > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 5px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
+.difficulty-selector > div { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; padding: 5px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
+.cefr-selector { grid-template-columns: repeat(4, 1fr) !important; }
 .difficulty-selector button { border: 0; border-radius: 8px; padding: 11px 6px; color: #606860; background: transparent; font-weight: 700; }
 .difficulty-selector button.active { color: white; background: var(--green); }
 .learning-difficulty-backdrop { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: calc(env(safe-area-inset-top, 0px) + 18px) calc(env(safe-area-inset-right, 0px) + 18px) calc(env(safe-area-inset-bottom, 0px) + 18px) calc(env(safe-area-inset-left, 0px) + 18px); background: rgba(27, 34, 29, .42); }

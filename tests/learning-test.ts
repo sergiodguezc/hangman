@@ -3,20 +3,23 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { displayWord } from '../shared/game.ts'
 import { LearningResultCard } from '../src/components/LearningResultCard.tsx'
-import { applyLearningGuess, createLearningRound, entriesForDifficulty, selectNextEntry, summarizeLearningHistory } from '../src/learning/game.ts'
-import type { SessionHistoryEntry, VocabularyEntry } from '../src/learning/types.ts'
+import { applyLearningGuess, createLearningRound, entriesForCefr, entriesForDifficulty, selectNextEntry, summarizeLearningHistory } from '../src/learning/game.ts'
+import type { CefrLevel, SessionHistoryEntry, VocabularyEntry } from '../src/learning/types.ts'
 
-const entry = (id: string, word: string, difficulty: VocabularyEntry['difficulty'] = 'easy'): VocabularyEntry => ({
+const entry = (id: string, word: string, difficulty: VocabularyEntry['difficulty'] = 'easy', cefr: CefrLevel = 'A1'): VocabularyEntry => ({
   id, word, answerCa: word, type: 'word', definitionCa: `Definició de ${word}.`, translationEs: `traducción-${id}`,
   difficulty, hintEs: `traducción-${id}`, translationsEs: [`traducción-${id}`], exampleCa: `Una frase amb ${word}.`, corpusCount: 1,
   sources: { word: 'test', example: 'test' },
+  linguistics: { cefr },
 })
 
-const entries = [entry('a', 'cançó'), entry('b', 'pingüí'), entry('c', 'col·legi', 'hard')]
+const entries = [entry('a', 'cançó', 'easy', 'A1'), entry('b', 'pingüí', 'easy', 'A2'), entry('c', 'col·legi', 'hard', 'B1')]
 
 assert.deepEqual(entriesForDifficulty(entries, 'easy').map(({ id }) => id), ['a', 'b'])
-assert.equal(selectNextEntry(entries, 'easy', [{ position: 1, wordId: 'a', result: 'correct' }], () => 0).id, 'b')
-assert.equal(selectNextEntry(entries, 'hard', [], () => 0).difficulty, 'hard')
+assert.deepEqual(entriesForCefr(entries, 'A2').map(({ id }) => id), ['b'])
+assert.equal(entriesForCefr(entries, 'all').length, 3)
+assert.equal(selectNextEntry(entries, 'A1', [], () => 0).id, 'a')
+assert.equal(selectNextEntry(entries, 'B1', [], () => 0).difficulty, 'hard')
 
 const sessionHistory: SessionHistoryEntry[] = [
   { position: 1, wordId: 'a', result: 'correct' },
@@ -29,7 +32,11 @@ assert.equal(stats.correct, 1)
 assert.equal(stats.failed, 2)
 assert.equal(stats.accuracy, 33)
 assert.equal(stats.uniqueWords, 2)
-assert.deepEqual(selectNextEntry(entries, 'easy', sessionHistory, () => 0).id, 'a')
+assert.deepEqual(selectNextEntry(entries, 'A1', sessionHistory, () => 0).id, 'a')
+assert.equal(selectNextEntry(entries, 'A1', [{ position: 1, wordId: 'a', result: 'failed' }], () => 0).id, 'a')
+assert.equal(stats.recoveredWords, 1)
+const recovered = [...sessionHistory, { position: 4, wordId: 'b', result: 'failed' }, { position: 5, wordId: 'b', result: 'correct' }]
+assert.equal(summarizeLearningHistory(recovered).recoveredWords, 2)
 
 let winning = createLearningRound(entry('win', 'cançó'))
 for (const letter of ['c', 'a', 'n', 'ç', 'ó']) winning = applyLearningGuess(winning, letter)

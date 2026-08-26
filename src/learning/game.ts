@@ -1,5 +1,5 @@
 import { isCorrectGuess, isWordComplete, normalizeGuess } from '../../shared/game'
-import type { LearningAttemptResult, LearningRound, LearningSessionStats, SessionHistoryEntry, VocabularyDifficulty, VocabularyEntry, WordSessionStats } from './types'
+import type { LearningAttemptResult, LearningCefrSelection, LearningRound, LearningSessionStats, SessionHistoryEntry, VocabularyDifficulty, VocabularyEntry, WordSessionStats } from './types'
 
 export const MAX_LEARNING_ERRORS = 6
 export const RECENT_WORD_LIMIT = 8
@@ -8,19 +8,29 @@ export function entriesForDifficulty(entries: readonly VocabularyEntry[], diffic
   return entries.filter((entry) => entry.difficulty === difficulty)
 }
 
+export function entriesForCefr(entries: readonly VocabularyEntry[], level: LearningCefrSelection) {
+  return level === 'all' ? [...entries] : entries.filter((entry) => entry.linguistics?.cefr === level)
+}
+
 export function selectNextEntry(
   entries: readonly VocabularyEntry[],
-  difficulty: VocabularyDifficulty,
+  level: LearningCefrSelection,
   history: readonly SessionHistoryEntry[] = [],
   random: () => number = Math.random,
 ): VocabularyEntry {
-  const matching = entriesForDifficulty(entries, difficulty)
-  if (!matching.length) throw new Error(`No vocabulary entries found for difficulty “${difficulty}”.`)
+  const matching = entriesForCefr(entries, level)
+  if (!matching.length) throw new Error(`No vocabulary entries found for CEFR level “${level}”.`)
   const stats = summarizeLearningHistory(history).byWord
-  const recentDistinctIds = distinctRecentWordIds(history, 2)
-  const eligible = matching.filter((entry) => !recentDistinctIds.includes(entry.id))
-  const pool = eligible.length ? eligible : matching
-  const weighted = pool.map((entry) => ({ entry, weight: learningEntryWeight(stats.get(entry.id), history.length) }))
+  const unseen = matching.filter((entry) => !stats.has(entry.id))
+  const reviewable = matching.filter((entry) => {
+    const word = stats.get(entry.id)
+    return word && word.failed > 0 && history.length - word.lastSeenAt >= 4
+  })
+  const cooledDown = matching.filter((entry) => !stats.get(entry.id) || history.length - (stats.get(entry.id)?.lastSeenAt ?? 0) >= 4)
+  const pool = unseen.length
+    ? [...unseen, ...reviewable.filter((entry) => !unseen.includes(entry))]
+    : (reviewable.length ? reviewable : (cooledDown.length ? cooledDown : matching))
+  const weighted = pool.map((entry) => ({ entry, weight: learningEntryWeight(stats.get(entry.id), history.length, unseen.length > 0) }))
   const totalWeight = weighted.reduce((sum, item) => sum + item.weight, 0)
   let threshold = random() * totalWeight
   for (const item of weighted) {
@@ -68,23 +78,15 @@ export function summarizeLearningHistory(history: readonly SessionHistoryEntry[]
     byWord.set(entry.wordId, current)
   }
   const total = history.length
-  return { total, correct, failed, accuracy: total ? Math.round((correct / total) * 100) : 0, uniqueWords: byWord.size, byWord }
+  const recoveredWords = [...byWord.values()].filter((word) => word.failed > 0 && word.correct > 0).length
+  return { total, correct, failed, accuracy: total ? Math.round((correct / total) * 100) : 0, uniqueWords: byWord.size, recoveredWords, byWord }
 }
-
-function distinctRecentWordIds(history: readonly SessionHistoryEntry[], limit: number): string[] {
-  const ids: string[] = []
-  for (let index = history.length - 1; index >= 0 && ids.length < limit; index -= 1) {
-    const id = history[index].wordId
-    if (!ids.includes(id)) ids.push(id)
-  }
-  return ids
-}
-
-function learningEntryWeight(stats: WordSessionStats | undefined, completedAttempts: number): number {
-  if (!stats) return 3
+function learningEntryWeight(stats: WordSessionStats | undefined, completedAttempts: number, unseenRemain: boolean): number {
+  if (!stats) return 10
+  if (unseenRemain && stats.correct > 0 && stats.failed === 0) return 0.05
   const age = completedAttempts - stats.lastSeenAt + 1
-  const failureBonus = stats.failed > 0 ? 2 : 1
-  const successPenalty = stats.correct > 0 ? 0.7 : 1
+  const failureBonus = stats.failed > 0 ? Math.min(7, 2 + stats.failed * 1.5) : 1
+  const successPenalty = stats.correct > 0 ? 0.35 : 1
   const appearancesPenalty = 1 / Math.sqrt(stats.appearances)
   return Math.max(0.01, failureBonus * successPenalty * appearancesPenalty * recencyWeight(age))
 }
