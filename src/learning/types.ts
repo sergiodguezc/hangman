@@ -1,4 +1,19 @@
 export type VocabularyDifficulty = 'easy' | 'medium' | 'hard'
+export type CefrLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
+export type VocabularyPartOfSpeech = 'noun' | 'verb' | 'adjective' | 'adverb' | 'other'
+
+export type LinguisticMetadata = {
+  cefr?: CefrLevel
+  /** Confidence in this linguistic classification, from 0.0 to 1.0 inclusive. */
+  confidence?: number
+  thematicCategory?: string
+  partOfSpeech?: VocabularyPartOfSpeech
+  provenance?: {
+    source: string
+    version?: string
+    method?: string
+  }
+}
 
 export type VocabularyEntry = {
   id: string
@@ -12,7 +27,8 @@ export type VocabularyEntry = {
   hintEs: string
   translationsEs?: string[]
   exampleCa: string
-  partOfSpeech?: 'noun' | 'verb' | 'adjective' | 'adverb' | 'other'
+  partOfSpeech?: VocabularyPartOfSpeech
+  linguistics?: LinguisticMetadata
   difficulty: VocabularyDifficulty
   corpusCount: number
   frequencyRank?: number
