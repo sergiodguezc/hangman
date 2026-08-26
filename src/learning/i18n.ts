@@ -2,6 +2,7 @@ import type { Language } from '../../shared/game'
 
 const es = {
   title: 'Aprèn català', setupTitle: 'Aprender catalán', difficulty: 'Dificultad', cefr: 'Nivel', allLevels: 'Todos',
+  levelGroups: { basic: 'Básico', intermediate: 'Intermedio', advanced: 'Avanzado', all: 'Todos' },
   easy: 'Fácil', medium: 'Media', hard: 'Difícil', difficultyHelp: 'Elige un nivel CEFR o practica con todo el vocabulario.',
   start: 'Empezar', hint: 'Pista en español', errors: 'Errores', incorrect: 'Letras incorrectas', none: 'Ninguna todavía',
   keyboard: 'Teclado de letras catalanas', progress: 'Progreso de la palabra catalana', won: '¡Has acertado la palabra!',
@@ -18,6 +19,7 @@ const es = {
 
 const ca: typeof es = {
   title: 'Aprèn català', setupTitle: 'Aprèn català', difficulty: 'Dificultat', cefr: 'Nivell', allLevels: 'Tots',
+  levelGroups: { basic: 'Bàsic', intermediate: 'Intermedi', advanced: 'Avançat', all: 'Tots' },
   easy: 'Fàcil', medium: 'Mitjana', hard: 'Difícil', difficultyHelp: 'Tria un nivell CEFR o practica amb tot el vocabulari.',
   start: 'Comença', hint: 'Pista en castellà', errors: 'Errors', incorrect: 'Lletres incorrectes', none: 'Cap encara',
   keyboard: 'Teclat de lletres catalanes', progress: 'Progrés de la paraula catalana', won: 'Has encertat la paraula!',

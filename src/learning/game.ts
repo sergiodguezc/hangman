@@ -1,5 +1,5 @@
 import { isCorrectGuess, isWordComplete, normalizeGuess } from '../../shared/game'
-import type { LearningAttemptResult, LearningCefrSelection, LearningRound, LearningSessionStats, SessionHistoryEntry, VocabularyDifficulty, VocabularyEntry, WordSessionStats } from './types'
+import type { CefrLevel, LearningAttemptResult, LearningCefrSelection, LearningLevelGroup, LearningRound, LearningSessionStats, SessionHistoryEntry, VocabularyDifficulty, VocabularyEntry, WordSessionStats } from './types'
 
 export const MAX_LEARNING_ERRORS = 6
 export const RECENT_WORD_LIMIT = 8
@@ -8,8 +8,27 @@ export function entriesForDifficulty(entries: readonly VocabularyEntry[], diffic
   return entries.filter((entry) => entry.difficulty === difficulty)
 }
 
+const LEVEL_GROUP_CEFR: Record<LearningLevelGroup, readonly CefrLevel[]> = {
+  basic: ['A1', 'A2'], intermediate: ['B1', 'B2'], advanced: ['C1', 'C2'], all: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
+}
+
+export function levelGroupFromStoredSelection(selection: LearningCefrSelection | null | undefined): LearningLevelGroup {
+  if (selection === 'A1' || selection === 'A2') return 'basic'
+  if (selection === 'B1' || selection === 'B2') return 'intermediate'
+  if (selection === 'C1' || selection === 'C2') return 'advanced'
+  return selection ?? 'all'
+}
+
+export function allowedCefrLevelsForGroup(selection: LearningCefrSelection): readonly CefrLevel[] {
+  return LEVEL_GROUP_CEFR[levelGroupFromStoredSelection(selection)]
+}
+
 export function entriesForCefr(entries: readonly VocabularyEntry[], level: LearningCefrSelection) {
-  return level === 'all' ? [...entries] : entries.filter((entry) => entry.linguistics?.cefr === level)
+  if (level !== 'all' && level !== 'basic' && level !== 'intermediate' && level !== 'advanced') {
+    return entries.filter((entry) => entry.linguistics?.cefr === level)
+  }
+  const allowed = allowedCefrLevelsForGroup(level)
+  return entries.filter((entry) => entry.linguistics?.cefr && allowed.includes(entry.linguistics.cefr))
 }
 
 export function selectNextEntry(

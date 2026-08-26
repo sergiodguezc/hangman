@@ -3,7 +3,7 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { displayWord } from '../shared/game.ts'
 import { LearningResultCard } from '../src/components/LearningResultCard.tsx'
-import { applyLearningGuess, createLearningRound, entriesForCefr, entriesForDifficulty, selectNextEntry, summarizeLearningHistory } from '../src/learning/game.ts'
+import { allowedCefrLevelsForGroup, applyLearningGuess, createLearningRound, entriesForCefr, entriesForDifficulty, levelGroupFromStoredSelection, selectNextEntry, summarizeLearningHistory } from '../src/learning/game.ts'
 import type { CefrLevel, SessionHistoryEntry, VocabularyEntry } from '../src/learning/types.ts'
 
 const entry = (id: string, word: string, difficulty: VocabularyEntry['difficulty'] = 'easy', cefr: CefrLevel = 'A1'): VocabularyEntry => ({
@@ -13,11 +13,23 @@ const entry = (id: string, word: string, difficulty: VocabularyEntry['difficulty
   linguistics: { cefr },
 })
 
-const entries = [entry('a', 'cançó', 'easy', 'A1'), entry('b', 'pingüí', 'easy', 'A2'), entry('c', 'col·legi', 'hard', 'B1')]
+const entries = [entry('a', 'cançó', 'easy', 'A1'), entry('b', 'pingüí', 'easy', 'A2'), entry('c', 'col·legi', 'hard', 'B1'), entry('d', 'casa', 'medium', 'B2'), entry('e', 'món', 'medium', 'C1'), entry('f', 'univers', 'hard', 'C2')]
 
 assert.deepEqual(entriesForDifficulty(entries, 'easy').map(({ id }) => id), ['a', 'b'])
 assert.deepEqual(entriesForCefr(entries, 'A2').map(({ id }) => id), ['b'])
-assert.equal(entriesForCefr(entries, 'all').length, 3)
+assert.equal(entriesForCefr(entries, 'all').length, 6)
+assert.deepEqual(allowedCefrLevelsForGroup('basic'), ['A1', 'A2'])
+assert.deepEqual(entriesForCefr(entries, 'basic').map(({ id }) => id), ['a', 'b'])
+assert.deepEqual(entriesForCefr(entries, 'intermediate').map(({ id }) => id), ['c', 'd'])
+assert.deepEqual(entriesForCefr(entries, 'advanced').map(({ id }) => id), ['e', 'f'])
+assert.deepEqual(entriesForCefr(entries, 'all').map(({ id }) => id), ['a', 'b', 'c', 'd', 'e', 'f'])
+assert.equal(levelGroupFromStoredSelection('A1'), 'basic')
+assert.equal(levelGroupFromStoredSelection('A2'), 'basic')
+assert.equal(levelGroupFromStoredSelection('B1'), 'intermediate')
+assert.equal(levelGroupFromStoredSelection('B2'), 'intermediate')
+assert.equal(levelGroupFromStoredSelection('C1'), 'advanced')
+assert.equal(levelGroupFromStoredSelection('C2'), 'advanced')
+assert.equal(levelGroupFromStoredSelection('all'), 'all')
 assert.equal(selectNextEntry(entries, 'A1', [], () => 0).id, 'a')
 assert.equal(selectNextEntry(entries, 'B1', [], () => 0).difficulty, 'hard')
 

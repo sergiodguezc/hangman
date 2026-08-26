@@ -1,6 +1,7 @@
 export type VocabularyDifficulty = 'easy' | 'medium' | 'hard'
 export type CefrLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
-export type LearningCefrSelection = CefrLevel | 'all'
+export type LearningLevelGroup = 'basic' | 'intermediate' | 'advanced' | 'all'
+export type LearningCefrSelection = LearningLevelGroup | CefrLevel
 export type VocabularyPartOfSpeech = 'noun' | 'verb' | 'adjective' | 'adverb' | 'other'
 
 export type LinguisticMetadata = {
@@ -48,6 +49,7 @@ export type SessionHistoryEntry = {
   position: number
   wordId: string
   result: LearningAttemptResult
+  cefr?: CefrLevel
 }
 
 export type WordSessionStats = {
