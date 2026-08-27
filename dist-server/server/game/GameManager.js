@@ -9,11 +9,11 @@ export class GameManager {
     constructor(random = Math.random) {
         this.random = random;
     }
-    create(socketId, name, language, matchTarget = null) {
+    create(socketId, name, language, voltes) {
         let code = this.code();
         while (this.rooms.has(code))
             code = this.code();
-        const room = new GameRoom(code, language, matchTarget, this.random);
+        const room = new GameRoom(code, language, voltes, this.random);
         const playerId = randomUUID(), reconnectToken = randomUUID();
         room.addPlayer(playerId, socketId, reconnectToken, name);
         this.rooms.set(code, room);
@@ -73,7 +73,7 @@ export class GameManager {
         this.playerRooms.delete(playerId);
         if (socketId)
             this.socketPlayers.delete(socketId);
-        if (!room.players.length)
+        if (!room.activePlayers.length)
             this.rooms.delete(room.code);
         return room;
     }

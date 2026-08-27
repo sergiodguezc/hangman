@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { GameRoom } from '../dist-server/server/game/GameRoom.js'
 
-const room = new GameRoom('CHAT', 'es', null, () => 0.1)
+const room = new GameRoom('CHAT', 'es', 1, () => 0.1)
 room.addPlayer('p1', 's1', 't1', 'Sergio')
 
 const first = room.addChatMessage('p1', '  Hola <img src=x onerror=alert(1)>  ')
@@ -34,13 +34,14 @@ assert.deepEqual(reactionMessage.reactions['😂'], ['p2'])
 assert.throws(() => room.toggleChatReaction('p1', reactionMessage.id, '🔥'), /invalid-reaction/)
 assert.throws(() => room.toggleChatReaction('outsider', reactionMessage.id, '❤️'), /not-room-member/)
 
-const otherRoom = new GameRoom('OTHER', 'es', null, () => 0.1)
+const otherRoom = new GameRoom('OTHER', 'es', 1, () => 0.1)
 otherRoom.addPlayer('p3', 's3', 't3', 'Otro')
 assert.throws(() => otherRoom.toggleChatReaction('p3', reactionMessage.id, '❤️'), /chat-message-not-found/)
 
 room.markReconnecting('p2', 's2')
 room.resume('p2', 't2', 's2-next')
 assert.deepEqual(room.chatHistory.find((message) => message.id === reactionMessage.id)?.reactions['💀'], ['p2'])
+room.start('p1')
 room.setWord('p1', 'CASA')
 room.guess('p2', 'C')
 assert.equal(room.chatHistory.length, 50)

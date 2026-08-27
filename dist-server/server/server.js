@@ -3,6 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { extname, resolve, sep } from 'node:path';
 import { Server } from 'socket.io';
 import { ALPHABETS } from '../shared/game.js';
+import { SUPPORTED_VOLTES } from '../shared/protocol.js';
 import { GameManager } from './game/GameManager.js';
 const PORT = Number(process.env.PORT) || 3001;
 const HOST = process.env.HOST || '0.0.0.0';
@@ -119,15 +120,15 @@ const DISCONNECT_GRACE_MS = 25_000;
 const disconnectTimers = new Map();
 const timerKey = (code, playerId) => `${code}:${playerId}`;
 const cleanName = (value) => typeof value === 'string' && value.trim().length >= 1 && value.trim().length <= 24 ? value.trim() : null;
-const cleanMatchTarget = (value) => value === null || value === 3 || value === 5 || value === 10 ? value : undefined;
+const cleanVoltes = (value) => SUPPORTED_VOLTES.includes(value) ? value : undefined;
 const roomPreview = (rawCode) => {
     const code = rawCode.trim().toUpperCase();
     const room = games.rooms.get(code);
     if (!room)
         return { ok: false, error: 'room-not-found' };
-    if (room.players.length >= 2)
+    if (!room.acceptingPlayers)
         return { ok: false, error: 'room-full' };
-    return { ok: true, data: { code: room.code, gameLanguage: room.language, matchTarget: room.matchTarget, players: room.players.length } };
+    return { ok: true, data: { code: room.code, gameLanguage: room.language, voltes: room.voltes, players: room.activePlayers.length, acceptingPlayers: room.acceptingPlayers } };
 };
 io.on('connection', (socket) => {
     console.info('socket connected', { socketId: socket.id });
@@ -151,10 +152,10 @@ io.on('connection', (socket) => {
     socket.on('room:create', (payload, ack) => {
         const name = cleanName(payload?.name);
         const gameLanguage = payload?.gameLanguage;
-        const matchTarget = cleanMatchTarget(payload?.matchTarget);
-        if (!name || !(gameLanguage in ALPHABETS) || matchTarget === undefined)
+        const voltes = cleanVoltes(payload?.voltes);
+        if (!name || !(gameLanguage in ALPHABETS) || voltes === undefined)
             return ack({ ok: false, error: 'invalid-details' });
-        const { room, playerId, reconnectToken } = games.create(socket.id, name, gameLanguage, matchTarget);
+        const { room, playerId, reconnectToken } = games.create(socket.id, name, gameLanguage, voltes);
         socket.join(room.code);
         ack({ ok: true, data: { view: room.viewFor(playerId), session: { roomCode: room.code, playerId, reconnectToken } } });
         socket.emit('chat:history', room.chatHistory);
@@ -199,6 +200,13 @@ io.on('connection', (socket) => {
             console.info('resume rejected', { roomCode, playerId, socketId: socket.id, reason: message });
         }
     });
+    socket.on('room:start', (ack) => action(ack, () => {
+        const identity = games.identityForSocket(socket.id), room = identity?.room;
+        if (!room)
+            throw new Error('room-not-found');
+        room.start(identity.playerId);
+        broadcast(room.code);
+    }));
     socket.on('round:set-word', (payload, ack) => action(ack, () => {
         const identity = games.identityForSocket(socket.id), room = identity?.room;
         if (!room)
@@ -217,7 +225,16 @@ io.on('connection', (socket) => {
         const identity = games.identityForSocket(socket.id), room = identity?.room;
         if (!room)
             throw new Error('room-not-found');
-        room.decideForgiveness(identity.playerId, payload?.forgive);
+        room.decideForgiveness(identity.playerId, payload?.requestId, payload?.forgive);
+        broadcast(room.code);
+    }));
+    socket.on('round:observe-player', (payload, ack) => action(ack, () => {
+        const identity = games.identityForSocket(socket.id), room = identity?.room;
+        if (!room)
+            throw new Error('room-not-found');
+        if (typeof payload?.playerId !== 'string')
+            throw new Error('invalid-observed-player');
+        room.observePlayer(identity.playerId, payload.playerId);
         broadcast(room.code);
     }));
     socket.on('round:continue', (ack) => action(ack, () => {

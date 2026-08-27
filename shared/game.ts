@@ -1,5 +1,7 @@
 export type Language = 'es' | 'ca'
 
+export const MAX_ERRORS = 6
+
 export const ALPHABETS: Record<Language, readonly string[]> = {
   es: 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split(''),
   ca: 'ABCÇDEFGHIJKLMNOPQRSTUVXYZ'.split(''),

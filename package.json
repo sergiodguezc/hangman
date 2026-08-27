@@ -18,6 +18,8 @@
     "test:chat": "node scripts/chat-test.mjs",
     "test:lifecycle": "node scripts/lifecycle-test.mjs",
     "test:match": "node scripts/match-features-test.mjs",
+    "test:n-player": "node scripts/n-player-test.mjs",
+    "test:multiplayer-ui": "tsx --tsconfig tsconfig.app.json tests/multiplayer-ui-test.tsx",
     "test:vocab": "python3 -m unittest discover -s tests -p 'test_vocab_pipeline.py'",
     "test:learning": "tsx --tsconfig tsconfig.app.json tests/learning-test.ts",
     "test:vocabulary": "tsx --tsconfig tsconfig.app.json tests/vocabulary-contract-test.ts",

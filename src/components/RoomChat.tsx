@@ -4,9 +4,9 @@ import type { MultiplayerTranslations } from '../multiplayer/i18n'
 import { errorMessage } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
 
-type Props = { messages: ChatMessage[]; currentPlayerId: string; typingPlayer: { playerId: string; playerName: string } | null; t: MultiplayerTranslations }
+type Props = { messages: ChatMessage[]; currentPlayerId: string; typingPlayers: { playerId: string; playerName: string }[]; t: MultiplayerTranslations }
 
-export function RoomChat({ messages, currentPlayerId, typingPlayer, t }: Props) {
+export function RoomChat({ messages, currentPlayerId, typingPlayers, t }: Props) {
   const [text, setText] = useState('')
   const [error, setError] = useState('')
   const [openMessageId, setOpenMessageId] = useState<string | null>(null)
@@ -55,7 +55,7 @@ export function RoomChat({ messages, currentPlayerId, typingPlayer, t }: Props) 
         </div>
       </article>)}
     </div>
-    {typingPlayer && typingPlayer.playerId !== currentPlayerId && <p className="typing-indicator" role="status">{t.typing.replace('{player}', typingPlayer.playerName)}</p>}
+    {typingPlayers.filter((player) => player.playerId !== currentPlayerId).map((player) => <p key={player.playerId} className="typing-indicator" role="status">{t.typing.replace('{player}', player.playerName)}</p>)}
     <form className="chat-form" onSubmit={send}>
       <input ref={inputRef} value={text} maxLength={300} aria-label={t.chatPlaceholder}
         placeholder={t.chatPlaceholder} onChange={(event) => { const next = event.target.value; setText(next); window.clearTimeout(typingTimer.current); if (!next.trim()) stopTyping(); else { if (!isTyping.current) { isTyping.current = true; socket.emit('chat:typing', { isTyping: true }) } typingTimer.current = window.setTimeout(stopTyping, 2000) } }} />

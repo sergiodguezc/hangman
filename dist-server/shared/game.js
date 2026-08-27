@@ -1,3 +1,4 @@
+export const MAX_ERRORS = 6;
 export const ALPHABETS = {
     es: 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split(''),
     ca: 'ABCÇDEFGHIJKLMNOPQRSTUVXYZ'.split(''),

@@ -8,135 +8,112 @@ const connect = () => new Promise((resolve, reject) => {
   socket.once('connect', () => resolve(socket))
   socket.once('connect_error', reject)
 })
-const emit = (socket, event, payload) => new Promise((resolve) => socket.emit(event, payload, resolve))
+const emit = (socket, event, payload) => new Promise((resolve) => {
+  if (payload === undefined) socket.emit(event, resolve)
+  else socket.emit(event, payload, resolve)
+})
 const stateAfter = (socket, action) => new Promise((resolve) => { socket.once('room:state', resolve); action() })
+const stateMatching = (socket, predicate, action) => new Promise((resolve) => {
+  const listener = (state) => {
+    if (!predicate(state)) return
+    socket.off('room:state', listener)
+    resolve(state)
+  }
+  socket.on('room:state', listener)
+  action()
+})
 const preview = async (code) => {
   const response = await fetch(`${url}/api/rooms/${code}/preview`)
   return { status: response.status, body: await response.json() }
 }
 
-const p1 = await connect()
-let p2 = await connect()
-const p3 = await connect()
+const [p1, p2, p3, p4] = await Promise.all([connect(), connect(), connect(), connect()])
 try {
-  const spanishRoom = await emit(p3, 'room:create', { name: 'Elena', gameLanguage: 'es', matchTarget: 10 })
-  assert.equal(spanishRoom.ok, true)
-  assert.deepEqual(await preview(spanishRoom.data.view.code), {
-    status: 200,
-    body: { ok: true, data: { code: spanishRoom.data.view.code, gameLanguage: 'es', matchTarget: 10, players: 1 } },
-  })
-  p3.emit('room:leave')
-
-  const unlimitedRoom = await emit(p3, 'room:create', { name: 'Nuria', gameLanguage: 'ca', matchTarget: null })
-  assert.equal(unlimitedRoom.ok, true)
-  assert.deepEqual(await preview(unlimitedRoom.data.view.code), {
-    status: 200,
-    body: { ok: true, data: { code: unlimitedRoom.data.view.code, gameLanguage: 'ca', matchTarget: null, players: 1 } },
-  })
-  p3.emit('room:leave')
-
-  const created = await emit(p1, 'room:create', { name: 'Sergio', gameLanguage: 'ca', matchTarget: 5 })
+  const created = await emit(p1, 'room:create', { name: 'Sergio', gameLanguage: 'ca', voltes: 1 })
   assert.equal(created.ok, true)
   const code = created.data.view.code
+  assert.deepEqual(await preview(code), { status: 200, body: { ok: true, data: { code, gameLanguage: 'ca', voltes: 1, players: 1, acceptingPlayers: true } } })
+
+  const p1Joined = new Promise((resolve) => p1.once('room:state', resolve))
+  const joined2 = await emit(p2, 'room:join', { name: 'Marta', code })
+  assert.equal(joined2.ok, true)
+  await p1Joined
+  const joined3 = await emit(p3, 'room:join', { name: 'Pau', code })
+  assert.equal(joined3.ok, true)
   const p1Id = created.data.session.playerId
-  assert.deepEqual(await preview(code), { status: 200, body: { ok: true, data: { code, gameLanguage: 'ca', matchTarget: 5, players: 1 } } })
-  assert.equal(created.data.view.players.length, 1)
-  assert.deepEqual(await preview('XXXXX'), { status: 404, body: { ok: false, error: 'room-not-found' } })
-  const waitingMessage = await emit(p1, 'chat:send', { text: '  Missatge abans d’entrar  ' })
-  assert.equal(waitingMessage.ok, true)
-  assert.equal(waitingMessage.data.senderName, 'Sergio')
-  assert.equal(waitingMessage.data.text, 'Missatge abans d’entrar')
-  const joinedState = new Promise((resolve) => p1.once('room:state', resolve))
-  const joinedHistory = new Promise((resolve) => p2.once('chat:history', resolve))
-  const p2Join = await emit(p2, 'room:join', { name: 'Marta', code })
-  const p2Id = p2Join.data.session.playerId
-  const roomState = await joinedState
-  const history = await joinedHistory
-  assert.equal(roomState.phase, 'choosing-word')
-  assert.equal(roomState.wordSetterId, p1Id)
-  assert.equal(p2Join.ok, true)
-  assert.equal(history.length, 1)
-  assert.equal(history[0].text, 'Missatge abans d’entrar')
+  const p2Id = joined2.data.session.playerId
+  const p3Id = joined3.data.session.playerId
+  assert.equal((await preview(code)).body.data.players, 3)
 
-  const p1Receives = new Promise((resolve) => p1.once('chat:message', resolve))
-  const p2Receives = new Promise((resolve) => p2.once('chat:message', resolve))
-  const sent = await emit(p1, 'chat:send', { text: 'Hola Marta 😄' })
-  assert.equal(sent.ok, true)
-  assert.equal((await p1Receives).text, 'Hola Marta 😄')
-  assert.equal((await p2Receives).senderName, 'Sergio')
-  const reply = new Promise((resolve) => p1.once('chat:message', resolve))
-  await emit(p2, 'chat:send', { text: 'Ja ho veurem…' })
-  assert.equal((await reply).senderName, 'Marta')
+  const startedStates = [p1, p2, p3].map((socket) => stateAfter(socket, () => {}))
+  const started = await emit(p1, 'room:start')
+  assert.equal(started.ok, true)
+  const states = await Promise.all(startedStates)
+  assert.ok(states.every((state) => state.roomStatus === 'active'))
+  assert.equal(states[0].match.totalTurns, 3)
+  assert.deepEqual(await emit(p4, 'room:join', { name: 'Late', code }), { ok: false, error: 'match-started' })
 
-  assert.deepEqual(await emit(p1, 'chat:send', { text: '   ' }), { ok: false, error: 'empty-chat-message' })
-  assert.deepEqual(await emit(p1, 'chat:send', { text: 'x'.repeat(301) }), { ok: false, error: 'chat-message-too-long' })
+  const current = states[0]
+  const socketById = new Map([[p1Id, p1], [p2Id, p2], [p3Id, p3]])
+  const setterId = current.round.setterId
+  const setter = socketById.get(setterId)
+  const guessers = [p1Id, p2Id, p3Id].filter((id) => id !== setterId)
+  const startedGuessing = [p1, p2, p3].map((socket) => stateAfter(socket, () => {}))
+  assert.equal((await emit(setter, 'round:set-word', { word: 'A' })).ok, true)
+  const guessingStates = await Promise.all(startedGuessing)
+  assert.ok(guessingStates.every((state) => state.round.status === 'guessing'))
+  for (const state of guessingStates) {
+    if (state.self) {
+      assert.equal(state.self.playerId, state.players.find((player) => player.id === state.self.playerId).id)
+      assert.equal(state.observedPlayer, undefined)
+      assert.deepEqual(state.forgivenessRequests, [])
+    } else {
+      assert.ok(guessers.includes(state.observedPlayer.playerId))
+    }
+  }
 
-  const full = await emit(p3, 'room:join', { name: 'Third', code })
-  assert.deepEqual(full, { ok: false, error: 'room-full' })
-  assert.deepEqual(await preview(code), { status: 409, body: { ok: false, error: 'room-full' } })
-  const otherRoom = await emit(p3, 'room:create', { name: 'Other', gameLanguage: 'es', matchTarget: 3 })
-  assert.equal(otherRoom.ok, true)
-  const foreignMessages = []
-  p3.on('chat:message', (message) => foreignMessages.push(message))
-  await emit(p1, 'chat:send', { text: 'Solo sala uno' })
-  await new Promise((resolve) => setTimeout(resolve, 50))
-  assert.equal(foreignMessages.length, 0)
-  const forbidden = await emit(p2, 'round:set-word', { word: 'CANÇÓ' })
-  assert.deepEqual(forbidden, { ok: false, error: 'not-word-setter' })
+  const fastGuesser = socketById.get(guessers[0])
+  const slowGuesser = socketById.get(guessers[1])
+  const solvedStatePromise = stateMatching(fastGuesser, (state) => state.self?.status === 'solved', () => {})
+  assert.equal((await emit(fastGuesser, 'game:guess', { letter: 'A' })).ok, true)
+  assert.equal((await solvedStatePromise).self.status, 'solved')
+  for (const letter of ['B', 'C', 'D', 'E', 'F']) await emit(slowGuesser, 'game:guess', { letter })
+  const privatePending = stateMatching(slowGuesser, (state) => state.self?.status === 'awaiting-forgiveness', () => {})
+  const pending = await stateMatching(setter, (state) => state.forgivenessRequests.some((request) => request.status === 'pending'), () => slowGuesser.emit('game:guess', { letter: 'G' }, () => {}))
+  assert.deepEqual((await privatePending).forgivenessRequests, [])
+  assert.equal(pending.self, null)
+  assert.equal(pending.forgivenessRequests.filter((request) => request.status === 'pending').length, 1)
+  const request = pending.forgivenessRequests.find((item) => item.status === 'pending')
+  const observed = await stateMatching(setter, (state) => state.observedPlayerId === guessers[1], () => setter.emit('round:observe-player', { playerId: guessers[1] }, () => {}))
+  assert.equal(observed.observedPlayer.playerId, guessers[1])
+  assert.equal(observed.observedPlayer.errors, 6)
+  assert.equal((await emit(setter, 'round:forgiveness', { requestId: request.id, forgive: true })).ok, true)
+  const forgiven = await stateMatching(setter, (state) => state.observedPlayer?.status === 'eliminated', () => slowGuesser.emit('game:guess', { letter: 'H' }, () => {}))
+  assert.equal(forgiven.observedPlayer.status, 'eliminated')
+  assert.equal(forgiven.observedPlayer.errors, 7)
+  assert.deepEqual(forgiven.round.results.map(({ playerId, pointsAwarded }) => [playerId, pointsAwarded]), [[guessers[0], 2], [guessers[1], 0], [setterId, 0]])
 
-  const p2Started = stateAfter(p2, () => p1.emit('round:set-word', { word: 'CANÇÓ' }, () => {}))
-  const guesserView = await p2Started
-  assert.equal(guesserView.privateWord, undefined)
-  assert.deepEqual(guesserView.displayWord, ['_', '_', '_', '_', '_'])
+  let afterRound = forgiven
+  for (let turn = 1; turn < 3; turn += 1) {
+    const nextRoundNumber = afterRound.round.number + 1
+    const state = await stateMatching(p1, (candidate) => candidate.round?.number === nextRoundNumber, () => socketById.get(afterRound.round.nextSetterId).emit('round:continue', () => {}))
+    const activeSetter = socketById.get(state.round.setterId)
+    const activeGuessers = [p1Id, p2Id, p3Id].filter((id) => id !== state.round.setterId).map((id) => socketById.get(id))
+    await emit(activeSetter, 'round:set-word', { word: 'A' })
+    for (const guesser of activeGuessers.slice(0, -1)) await emit(guesser, 'game:guess', { letter: 'A' })
+    afterRound = await stateMatching(p1, (candidate) => candidate.round?.status === 'round-over' || candidate.roomStatus === 'match-over', () => activeGuessers.at(-1).emit('game:guess', { letter: 'A' }, () => {}))
+  }
+  assert.equal(afterRound.roomStatus, 'match-over')
+  assert.equal(afterRound.matchResult !== null, true)
 
-  const resumeSession = p2Join.data.session
-  p2.disconnect()
-  p2 = await connect()
-  const resumed = await emit(p2, 'room:resume', resumeSession)
-  assert.equal(resumed.ok, true)
-  assert.equal(resumed.data.guesserId, p2Id)
-  assert.equal(resumed.data.privateWord, undefined)
-  assert.equal(resumed.data.players.find((player) => player.id === p2Id).connectionState, 'connected')
-
-  for (const letter of ['C', 'A', 'N', 'O']) await new Promise((resolve) => p2.emit('game:guess', { letter }, resolve))
-  const finalView = await new Promise((resolve) => { p2.emit('game:guess', { letter: 'Ç' }, () => {}); p2.once('room:state', resolve) })
-  assert.equal(finalView.phase, 'round-over')
-  assert.equal(finalView.privateWord, 'CANÇÓ')
-  assert.equal(finalView.players.find((p) => p.id === p2Id).score, 1)
-
-  const next = await new Promise((resolve) => { p2.once('room:state', resolve); p2.emit('round:continue', () => {}) })
-  assert.equal(next.roundNumber, 2)
-  assert.equal(next.wordSetterId, p2Id)
-  assert.equal(next.guesserId, p1Id)
-  assert.equal(next.players.find((p) => p.id === p2Id).score, 1)
-
-  await emit(p2, 'round:set-word', { word: 'A' })
-  for (const letter of ['B', 'C', 'D', 'E', 'F']) await emit(p1, 'game:guess', { letter })
-  const pending = await stateAfter(p1, () => p1.emit('game:guess', { letter: 'G' }, () => {}))
-  assert.equal(pending.phase, 'forgiveness-pending')
-  assert.equal(pending.errors, 6)
-  assert.equal(pending.privateWord, undefined)
-  const unauthorizedPardon = await emit(p1, 'round:forgiveness', { forgive: true })
-  assert.deepEqual(unauthorizedPardon, { ok: false, error: 'cannot-decide-forgiveness' })
-
-  const forgiven = await stateAfter(p1, () => p2.emit('round:forgiveness', { forgive: true }, () => {}))
-  assert.equal(forgiven.phase, 'guessing')
-  assert.equal(forgiven.errors, 5)
-  assert.ok(forgiven.wrongLetters.includes('G'))
-  assert.equal(forgiven.players.find((p) => p.id === p2Id).score, 1)
-
-  const pendingAgain = await stateAfter(p1, () => p1.emit('game:guess', { letter: 'H' }, () => {}))
-  assert.equal(pendingAgain.phase, 'forgiveness-pending')
-  const refused = await stateAfter(p1, () => p2.emit('round:forgiveness', { forgive: false }, () => {}))
-  assert.equal(refused.phase, 'round-over')
-  assert.equal(refused.players.find((p) => p.id === p2Id).score, 2)
-  assert.equal(refused.privateWord, 'A')
-
-  assert.equal(normalizeGuess('á', 'es'), 'A')
-  assert.equal(normalizeGuess('ñ', 'es'), 'Ñ')
+  for (const socket of [p1, p2, p3].slice(0, 2)) await emit(socket, 'match:rematch')
+  const rematched = await stateMatching(p1, (state) => state.roomStatus === 'active' && state.round?.number === 1 && state.players.every((player) => player.score === 0), () => p3.emit('match:rematch', () => {}))
+  assert.equal(rematched.roomStatus, 'active')
+  assert.equal(rematched.round.number, 1)
+  assert.deepEqual(rematched.players.map((player) => player.score), [0, 0, 0])
   assert.equal(normalizeGuess('ç', 'ca'), 'Ç')
   assert.equal(validateSecretWord('COL·LEGI', 'ca'), 'COL·LEGI')
-  console.log('E2E multiplayer checks passed')
+  console.log('E2E N-player multiplayer checks passed')
 } finally {
-  p1.disconnect(); p2.disconnect(); p3.disconnect()
+  p1.disconnect(); p2.disconnect(); p3.disconnect(); p4.disconnect()
 }

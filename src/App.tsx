@@ -78,7 +78,7 @@ function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [playerId, setPlayerId] = useState(() => loadRoomSession()?.playerId ?? '')
   const [notice, setNotice] = useState('')
-  const [typingPlayer, setTypingPlayer] = useState<{ playerId: string; playerName: string } | null>(null)
+  const [typingPlayers, setTypingPlayers] = useState<Record<string, { playerId: string; playerName: string }>>({})
   const [view, setView] = useState<Mode>(() => routeDescriptions[normalizeRoute(window.location.pathname)].mode)
   const [learningSummaryRequested, setLearningSummaryRequested] = useState(false)
   const [learningSummaryVisible, setLearningSummaryVisible] = useState(false)
@@ -105,7 +105,12 @@ function App() {
     socket.on('chat:message', message)
     const reaction = ({ messageId, reactions }: { messageId: string; reactions: ChatMessage['reactions'] }) => setMessages((current) => current.map((item) => item.id === messageId ? { ...item, reactions } : item))
     socket.on('chat:reaction-updated', reaction)
-    const typing = (payload: { playerId: string; playerName: string; isTyping: boolean }) => setTypingPlayer(payload.isTyping ? payload : null)
+    const typing = (payload: { playerId: string; playerName: string; isTyping: boolean }) => setTypingPlayers((current) => {
+      const next = { ...current }
+      if (payload.isTyping) next[payload.playerId] = payload
+      else delete next[payload.playerId]
+      return next
+    })
     socket.on('chat:typing', typing)
     const resume = () => {
       const session = loadRoomSession()
@@ -180,7 +185,7 @@ function App() {
     setPlayerId('')
     setRoom(null)
     setMessages([])
-    setTypingPlayer(null)
+    setTypingPlayers({})
     goTo('/multijugador/', { replace: true })
   }
   const enterRoom = (view: PlayerGameView, id: string) => {
@@ -213,7 +218,7 @@ function App() {
   const interfaceSelector = <InterfaceLanguageSelector language={interfaceLanguage} onChange={changeInterfaceLanguage} />
   const showBack = !room && view !== 'home'
   const backLabel = room ? (interfaceLanguage === 'ca' ? 'Tornar' : 'Volver') : (interfaceLanguage === 'ca' ? 'Tornar enrere' : 'Volver')
-  const multiplayerGameActive = room ? !['waiting', 'match-over', 'disconnected'].includes(room.phase) : false
+  const multiplayerGameActive = room?.roomStatus === 'active'
   const requestConfirmedExit = (exit: () => void, requiresConfirmation: boolean) => {
     if (!requiresConfirmation) { exit(); return }
     setPendingExit(() => exit)
@@ -231,8 +236,8 @@ function App() {
   if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} invitedRoomCode={invitedRoomCode} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}{exitDialog}</>
   if (!room && view === 'help') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HowToPlayPage language={interfaceLanguage} />{interfaceSelector}{exitDialog}</>
   if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onDaily={startDaily} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}{exitDialog}</>
-  if (room.phase === 'waiting') return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}{exitDialog}</>
-  return <><GlobalNavigation showBack backLabel={backLabel} onBack={() => requestConfirmedExit(leave, multiplayerGameActive)} /><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayer={typingPlayer} />{interfaceSelector}{exitDialog}</>
+  if (room.roomStatus === 'waiting') return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayers={Object.values(typingPlayers)} />{interfaceSelector}{exitDialog}</>
+  return <><GlobalNavigation showBack backLabel={backLabel} onBack={() => requestConfirmedExit(leave, multiplayerGameActive)} /><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayers={Object.values(typingPlayers)} />{interfaceSelector}{exitDialog}</>
 }
 
 export default App

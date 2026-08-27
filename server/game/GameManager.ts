@@ -1,7 +1,7 @@
 import type { Language } from '../../shared/game.js'
 import { GameRoom } from './GameRoom.js'
 import { randomUUID } from 'node:crypto'
-import type { MatchTarget } from '../../shared/protocol.js'
+import type { Voltes } from '../../shared/protocol.js'
 
 const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
 
@@ -12,10 +12,10 @@ export class GameManager {
 
   constructor(private readonly random = Math.random) {}
 
-  create(socketId: string, name: string, language: Language, matchTarget: MatchTarget = null) {
+  create(socketId: string, name: string, language: Language, voltes: Voltes) {
     let code = this.code()
     while (this.rooms.has(code)) code = this.code()
-    const room = new GameRoom(code, language, matchTarget, this.random)
+    const room = new GameRoom(code, language, voltes, this.random)
     const playerId = randomUUID(), reconnectToken = randomUUID()
     room.addPlayer(playerId, socketId, reconnectToken, name)
     this.rooms.set(code, room)
@@ -75,7 +75,7 @@ export class GameManager {
     room.disconnect(playerId)
     this.playerRooms.delete(playerId)
     if (socketId) this.socketPlayers.delete(socketId)
-    if (!room.players.length) this.rooms.delete(room.code)
+    if (!room.activePlayers.length) this.rooms.delete(room.code)
     return room
   }
 

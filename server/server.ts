@@ -3,7 +3,7 @@ import { readFile, stat } from 'node:fs/promises'
 import { extname, resolve, sep } from 'node:path'
 import { Server } from 'socket.io'
 import { ALPHABETS, type Language } from '../shared/game.js'
-import type { ClientToServerEvents, ServerToClientEvents, Ack, MatchTarget } from '../shared/protocol.js'
+import { SUPPORTED_VOLTES, type ClientToServerEvents, type ServerToClientEvents, type Ack, type Voltes } from '../shared/protocol.js'
 import { GameManager } from './game/GameManager.js'
 
 const PORT = Number(process.env.PORT) || 3001
@@ -120,13 +120,13 @@ const disconnectTimers = new Map<string, NodeJS.Timeout>()
 const timerKey = (code: string, playerId: string) => `${code}:${playerId}`
 
 const cleanName = (value: unknown) => typeof value === 'string' && value.trim().length >= 1 && value.trim().length <= 24 ? value.trim() : null
-const cleanMatchTarget = (value: unknown): MatchTarget | undefined => value === null || value === 3 || value === 5 || value === 10 ? value : undefined
+const cleanVoltes = (value: unknown): Voltes | undefined => SUPPORTED_VOLTES.includes(value as Voltes) ? value as Voltes : undefined
 const roomPreview = (rawCode: string) => {
   const code = rawCode.trim().toUpperCase()
   const room = games.rooms.get(code)
   if (!room) return { ok: false as const, error: 'room-not-found' }
-  if (room.players.length >= 2) return { ok: false as const, error: 'room-full' }
-  return { ok: true as const, data: { code: room.code, gameLanguage: room.language, matchTarget: room.matchTarget, players: room.players.length } }
+  if (!room.acceptingPlayers) return { ok: false as const, error: 'room-full' }
+  return { ok: true as const, data: { code: room.code, gameLanguage: room.language, voltes: room.voltes, players: room.activePlayers.length, acceptingPlayers: room.acceptingPlayers } }
 }
 
 io.on('connection', (socket) => {
@@ -144,9 +144,9 @@ io.on('connection', (socket) => {
   socket.on('room:create', (payload, ack) => {
     const name = cleanName(payload?.name)
     const gameLanguage = payload?.gameLanguage as Language
-    const matchTarget = cleanMatchTarget(payload?.matchTarget)
-    if (!name || !(gameLanguage in ALPHABETS) || matchTarget === undefined) return ack({ ok: false, error: 'invalid-details' })
-    const { room, playerId, reconnectToken } = games.create(socket.id, name, gameLanguage, matchTarget)
+    const voltes = cleanVoltes(payload?.voltes)
+    if (!name || !(gameLanguage in ALPHABETS) || voltes === undefined) return ack({ ok: false, error: 'invalid-details' })
+    const { room, playerId, reconnectToken } = games.create(socket.id, name, gameLanguage, voltes)
     socket.join(room.code)
     ack({ ok: true, data: { view: room.viewFor(playerId), session: { roomCode: room.code, playerId, reconnectToken } } })
     socket.emit('chat:history', room.chatHistory)
@@ -188,6 +188,13 @@ io.on('connection', (socket) => {
     }
   })
 
+  socket.on('room:start', (ack) => action(ack, () => {
+    const identity = games.identityForSocket(socket.id), room = identity?.room
+    if (!room) throw new Error('room-not-found')
+    room.start(identity.playerId)
+    broadcast(room.code)
+  }))
+
   socket.on('round:set-word', (payload, ack) => action(ack, () => {
     const identity = games.identityForSocket(socket.id), room = identity?.room
     if (!room) throw new Error('room-not-found')
@@ -205,7 +212,15 @@ io.on('connection', (socket) => {
   socket.on('round:forgiveness', (payload, ack) => action(ack, () => {
     const identity = games.identityForSocket(socket.id), room = identity?.room
     if (!room) throw new Error('room-not-found')
-    room.decideForgiveness(identity.playerId, payload?.forgive)
+    room.decideForgiveness(identity.playerId, payload?.requestId, payload?.forgive)
+    broadcast(room.code)
+  }))
+
+  socket.on('round:observe-player', (payload, ack) => action(ack, () => {
+    const identity = games.identityForSocket(socket.id), room = identity?.room
+    if (!room) throw new Error('room-not-found')
+    if (typeof payload?.playerId !== 'string') throw new Error('invalid-observed-player')
+    room.observePlayer(identity.playerId, payload.playerId)
     broadcast(room.code)
   }))
 

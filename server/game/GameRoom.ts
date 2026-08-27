@@ -1,47 +1,85 @@
-import { displayWord, isCorrectGuess, isWordComplete, normalizeGuess, validateSecretWord, type Language } from '../../shared/game.js'
+import { displayWord, isCorrectGuess, isWordComplete, MAX_ERRORS, normalizeGuess, validateSecretWord, type Language } from '../../shared/game.js'
+import { MAX_ROOM_PLAYERS, REACTION_TYPES, type ChatMessage, type ForgivenessRequest, type MatchResult, type MatchView, type MessageReactions, type Player, type PlayerGameView, type PlayerRoundStatus, type PlayerRoundView, type PublicPlayer, type ReactionType, type RoundResultEntry, type RoundStatus, type RoomStatus, type Voltes } from '../../shared/protocol.js'
 import { randomUUID } from 'node:crypto'
-import { REACTION_TYPES, type ChatMessage, type MessageReactions, type Player, type PlayerGameView, type GamePhase, type MatchResult, type MatchTarget, type ReactionType } from '../../shared/protocol.js'
 
-export type RoomPlayer = Player & { socketId: string | null; reconnectToken: string }
+export type RoomPlayer = Player & { socketId: string | null; reconnectToken: string; joinedAt: number }
 
-const MAX_ERRORS = 6
+type MutablePlayerRoundState = {
+  playerId: string
+  status: PlayerRoundStatus
+  guessedLetters: Set<string>
+  errors: number
+  forgiven: boolean
+  startedAt: number | null
+  finishedAt: number | null
+  resolutionTimeMs: number | null
+  roundRank: number | null
+}
+
+type MutableRoundState = {
+  id: string
+  number: number
+  voltaNumber: number
+  setterId: string
+  secretWord: string | null
+  status: RoundStatus
+  playerStates: Map<string, MutablePlayerRoundState>
+  forgivenessRequests: Map<string, ForgivenessRequest>
+  ranking: string[]
+  results: RoundResultEntry[]
+}
+
 const MAX_CHAT_MESSAGES = 50
 const MAX_CHAT_LENGTH = 300
 
 export class GameRoom {
   readonly players: RoomPlayer[] = []
-  phase: GamePhase = 'waiting'
-  roundNumber = 0
-  wordSetterId: string | null = null
-  guesserId: string | null = null
-  roundWinnerId: string | null = null
-  matchWinnerId: string | null = null
-  matchResult: MatchResult = null
-  targetReachedPlayerId: string | null = null
+  roomStatus: RoomStatus = 'waiting'
+  hostId: string | null = null
   readonly rematchReady = new Set<string>()
-  firstSetterId: string | null = null
-  private secretWord: string | null = null
-  private readonly guesses = new Set<string>()
-  private errorCount = 0
+  private matchRosterIds: string[] = []
+  private turnIndex = 0
+  private currentRound: MutableRoundState | null = null
+  private matchResult: MatchResult = null
+  private readonly observerBySetter = new Map<string, string>()
   private readonly chatMessages: ChatMessage[] = []
   reconnectedPlayerName?: string
   disconnectedPlayerName?: string
 
-  constructor(readonly code: string, readonly language: Language, readonly matchTarget: MatchTarget = null, private readonly random = Math.random) {}
+  constructor(readonly code: string, readonly language: Language, readonly voltes: Voltes, private readonly random = Math.random) {}
+
+  get activePlayers() { return this.players.filter((player) => player.active) }
+  get acceptingPlayers() { return this.roomStatus === 'waiting' && this.activePlayers.length < MAX_ROOM_PLAYERS }
+  get totalTurns() { return this.matchRosterIds.length * this.voltes }
+  get completedTurns() { return this.roomStatus === 'waiting' ? 0 : Math.min(this.turnIndex + (this.currentRound?.status === 'round-over' ? 1 : 0), this.totalTurns) }
 
   addPlayer(id: string, socketId: string, reconnectToken: string, name: string) {
-    if (this.players.length >= 2) throw new Error('room-full')
-    this.players.push({ id, socketId, reconnectToken, name, score: 0, connectionState: 'connected' })
-    if (this.players.length === 2) {
-      this.startMatch()
-    }
+    if (!this.acceptingPlayers) throw new Error(this.roomStatus === 'waiting' ? 'room-full' : 'match-started')
+    this.players.push({ id, socketId, reconnectToken, name, score: 0, connectionState: 'connected', active: true, joinedAt: Date.now() })
+    if (!this.hostId) this.hostId = id
   }
 
   player(id: string) { return this.players.find((player) => player.id === id) }
 
+  start(playerId: string) {
+    if (this.roomStatus !== 'waiting') throw new Error('cannot-start')
+    if (playerId !== this.hostId) throw new Error('not-host')
+    const activeIds = this.activePlayers.map((player) => player.id)
+    if (activeIds.length < 2) throw new Error('not-enough-players')
+    this.matchRosterIds = [...activeIds]
+    const firstSetterIndex = Math.floor(this.random() * this.matchRosterIds.length)
+    this.matchRosterIds = this.matchRosterIds.slice(firstSetterIndex).concat(this.matchRosterIds.slice(0, firstSetterIndex))
+    this.turnIndex = 0
+    this.matchResult = null
+    this.rematchReady.clear()
+    for (const player of this.players) player.score = 0
+    this.roomStatus = 'active'
+    this.startNextTurn()
+  }
+
   markReconnecting(playerId: string, socketId: string) {
     const player = this.player(playerId)
-    if (!player || player.socketId !== socketId) return false
+    if (!player || !player.active || player.socketId !== socketId) return false
     player.socketId = null
     player.connectionState = 'reconnecting'
     this.reconnectedPlayerName = undefined
@@ -50,95 +88,141 @@ export class GameRoom {
 
   resume(playerId: string, reconnectToken: string, socketId: string) {
     const player = this.player(playerId)
-    if (!player || player.reconnectToken !== reconnectToken) throw new Error('resume-rejected')
+    if (!player || !player.active || player.reconnectToken !== reconnectToken) throw new Error('resume-rejected')
     player.socketId = socketId
     player.connectionState = 'connected'
     this.reconnectedPlayerName = player.name
     return player
   }
 
-  assertPlayable() {
-    if (this.players.some((player) => player.connectionState !== 'connected')) throw new Error('opponent-reconnecting')
-  }
-
   setWord(playerId: string, input: unknown) {
-    this.assertPlayable()
-    if (this.phase !== 'choosing-word' || playerId !== this.wordSetterId) throw new Error('not-word-setter')
+    const round = this.requireRound('choosing-word')
+    if (playerId !== round.setterId) throw new Error('not-word-setter')
+    this.requireConnected(playerId)
     const word = validateSecretWord(input, this.language)
     if (!word) throw new Error('invalid-word')
-    this.secretWord = word
-    this.guesses.clear()
-    this.errorCount = 0
-    this.roundWinnerId = null
-    this.phase = 'guessing'
+    round.secretWord = word
+    round.status = 'guessing'
+    const startedAt = Date.now()
+    for (const state of round.playerStates.values()) {
+      state.status = 'playing'
+      state.startedAt = startedAt
+    }
+    this.maybeFinishRound()
   }
 
   guess(playerId: string, input: unknown) {
-    this.assertPlayable()
-    if (this.phase !== 'guessing' || playerId !== this.guesserId || !this.secretWord) throw new Error('not-guesser')
+    const round = this.requireRound('guessing')
+    const state = round.playerStates.get(playerId)
+    if (!state || state.status !== 'playing') throw new Error('not-guesser')
+    this.requireConnected(playerId)
     if (typeof input !== 'string') throw new Error('invalid-guess')
     const guess = normalizeGuess(input, this.language)
     if (!guess) throw new Error('invalid-guess')
-    if (this.guesses.has(guess)) return
-    this.guesses.add(guess)
-    if (isWordComplete(this.secretWord, this.guesses, this.language)) {
-      this.finishRound(this.guesserId)
+    if (state.guessedLetters.has(guess)) return
+    state.guessedLetters.add(guess)
+    if (isWordComplete(round.secretWord!, state.guessedLetters, this.language)) {
+      this.finishPlayer(state, 'solved')
+      this.maybeFinishRound()
       return
     }
-    if (!isCorrectGuess(this.secretWord, guess, this.language)) {
-      this.errorCount += 1
-      if (this.errorCount >= MAX_ERRORS) this.phase = 'forgiveness-pending'
+    if (!isCorrectGuess(round.secretWord!, guess, this.language)) {
+      state.errors += 1
+      if (!state.forgiven && state.errors >= MAX_ERRORS) {
+        state.status = 'awaiting-forgiveness'
+        this.createForgivenessRequest(round, state.playerId)
+      } else if (state.forgiven && state.errors > MAX_ERRORS) {
+        this.finishPlayer(state, 'eliminated')
+      }
     }
+    this.maybeFinishRound()
   }
 
-  decideForgiveness(playerId: string, forgive: unknown) {
-    this.assertPlayable()
-    if (this.phase !== 'forgiveness-pending' || playerId !== this.wordSetterId || this.errorCount !== MAX_ERRORS) {
-      throw new Error('cannot-decide-forgiveness')
-    }
-    if (typeof forgive !== 'boolean') throw new Error('invalid-forgiveness')
+  decideForgiveness(playerId: string, requestId: unknown, forgive: unknown) {
+    const round = this.requireRound('guessing')
+    if (playerId !== round.setterId) throw new Error('cannot-decide-forgiveness')
+    this.requireConnected(playerId)
+    if (typeof requestId !== 'string' || typeof forgive !== 'boolean') throw new Error('invalid-forgiveness')
+    const request = round.forgivenessRequests.get(requestId)
+    if (!request || request.roundId !== round.id || request.status !== 'pending') throw new Error('cannot-decide-forgiveness')
+    const state = round.playerStates.get(request.playerId)
+    if (!state || state.status !== 'awaiting-forgiveness') throw new Error('cannot-decide-forgiveness')
+    request.status = forgive ? 'granted' : 'denied'
+    request.decidedAt = Date.now()
     if (forgive) {
-      this.errorCount -= 1
-      this.phase = 'guessing'
+      state.forgiven = true
+      state.status = 'playing'
     } else {
-      this.finishRound(this.wordSetterId)
+      this.finishPlayer(state, 'failed')
     }
+    this.maybeFinishRound()
+  }
+
+  observePlayer(setterId: string, observedPlayerId: string) {
+    const round = this.requireRound()
+    if (setterId !== round.setterId) throw new Error('not-word-setter')
+    this.requireConnected(setterId)
+    const observed = round.playerStates.get(observedPlayerId)
+    if (!observed || observedPlayerId === setterId) throw new Error('invalid-observed-player')
+    this.observerBySetter.set(setterId, observedPlayerId)
   }
 
   continue(playerId: string) {
-    this.assertPlayable()
-    if (this.phase !== 'round-over' || playerId !== this.guesserId) throw new Error('cannot-continue')
-    const oldSetter = this.wordSetterId
-    this.wordSetterId = this.guesserId
-    this.guesserId = oldSetter
-    this.roundNumber += 1
-    this.secretWord = null
-    this.guesses.clear()
-    this.errorCount = 0
-    this.roundWinnerId = null
-    this.phase = 'choosing-word'
+    this.requireRound('round-over')
+    const nextSetterId = this.nextActiveSetterId()
+    if (playerId !== nextSetterId) throw new Error('cannot-continue')
+    this.requireConnected(playerId)
+    this.turnIndex += 1
+    this.startNextTurn()
   }
 
   requestRematch(playerId: string) {
-    this.assertPlayable()
-    if (this.phase !== 'match-over' || !this.player(playerId)) throw new Error('cannot-rematch')
+    if (this.roomStatus !== 'match-over' || !this.player(playerId)?.active) throw new Error('cannot-rematch')
+    this.requireConnected(playerId)
     if (this.rematchReady.has(playerId)) throw new Error('rematch-already-ready')
     this.rematchReady.add(playerId)
-    if (this.rematchReady.size === 2) this.startMatch(true)
+    const eligible = this.activePlayers.map((player) => player.id)
+    if (eligible.length >= 2 && eligible.every((id) => this.rematchReady.has(id))) this.startRematch()
   }
 
   disconnect(playerId: string) {
-    const leaving = this.players.find((player) => player.id === playerId)
-    if (!leaving) return
-    this.players.splice(this.players.indexOf(leaving), 1)
+    const leaving = this.player(playerId)
+    if (!leaving || !leaving.active) return
+    leaving.active = false
+    leaving.socketId = null
+    leaving.connectionState = 'disconnected'
     this.disconnectedPlayerName = leaving.name
-    if (this.players.length) this.phase = 'disconnected'
+    this.rematchReady.delete(playerId)
+    if (this.hostId === playerId) this.hostId = this.activePlayers[0]?.id ?? null
+    const round = this.currentRound
+    if (this.roomStatus === 'active' && round) {
+      if (round.setterId === playerId) {
+        if (round.status !== 'round-over') this.cancelCurrentTurn()
+        else this.advanceAfterCompletedTurn()
+      } else {
+        const state = round.playerStates.get(playerId)
+        if (state && !this.isTerminal(state.status)) {
+          this.finishPlayer(state, 'eliminated')
+          for (const request of round.forgivenessRequests.values()) {
+            if (request.playerId === playerId && request.status === 'pending') {
+              request.status = 'cancelled'
+              request.decidedAt = Date.now()
+            }
+          }
+          this.maybeFinishRound()
+        }
+      }
+      if (this.activePlayers.length < 2) this.finishMatch()
+    }
+    if (this.roomStatus === 'match-over') {
+      const eligible = this.activePlayers.map((player) => player.id)
+      if (eligible.length >= 2 && eligible.every((id) => this.rematchReady.has(id))) this.startRematch()
+    }
   }
 
   addChatMessage(playerId: string, input: unknown): ChatMessage {
-    this.assertPlayable()
-    const sender = this.players.find((player) => player.id === playerId)
-    if (!sender) throw new Error('not-room-member')
+    const sender = this.player(playerId)
+    if (!sender?.active) throw new Error('not-room-member')
     if (typeof input !== 'string') throw new Error('invalid-chat-message')
     const text = input.trim()
     if (!text) throw new Error('empty-chat-message')
@@ -151,8 +235,7 @@ export class GameRoom {
   }
 
   toggleChatReaction(playerId: string, messageId: unknown, reaction: unknown): { messageId: string; reactions: MessageReactions } {
-    this.assertPlayable()
-    if (!this.player(playerId)) throw new Error('not-room-member')
+    if (!this.player(playerId)?.active) throw new Error('not-room-member')
     if (typeof messageId !== 'string') throw new Error('invalid-chat-message')
     if (typeof reaction !== 'string' || !REACTION_TYPES.includes(reaction as ReactionType)) throw new Error('invalid-reaction')
     const message = this.chatMessages.find((candidate) => candidate.id === messageId)
@@ -164,81 +247,178 @@ export class GameRoom {
     return { messageId, reactions: message.reactions }
   }
 
-  get chatHistory(): ChatMessage[] {
-    return [...this.chatMessages]
-  }
-
-  get wrongLetters() {
-    if (!this.secretWord) return []
-    return [...this.guesses].filter((guess) => !isCorrectGuess(this.secretWord!, guess, this.language))
-  }
+  get chatHistory(): ChatMessage[] { return [...this.chatMessages] }
 
   viewFor(playerId: string): PlayerGameView {
-    const reveal = this.phase === 'round-over' || this.phase === 'match-over'
-    const view: PlayerGameView = {
-      code: this.code, gameLanguage: this.language, matchTarget: this.matchTarget, players: this.players.map(({ id, name, score, connectionState }) => ({ id, name, score, connectionState })), phase: this.phase,
-      roundNumber: this.roundNumber, wordSetterId: this.wordSetterId, guesserId: this.guesserId,
-      roundWinnerId: this.roundWinnerId, matchWinnerId: this.matchWinnerId,
-      matchResult: this.matchResult, matchEndingPending: this.targetReachedPlayerId !== null,
-      targetReachedPlayerId: this.targetReachedPlayerId,
-      rematchReadyPlayerIds: [...this.rematchReady], firstSetterId: this.firstSetterId,
-      displayWord: this.secretWord ? displayWord(this.secretWord, this.guesses, this.language, reveal) : [],
-      guessedLetters: [...this.guesses], wrongLetters: this.wrongLetters, errors: this.errorCount,
-      reconnectedPlayerName: this.reconnectedPlayerName,
-      disconnectedPlayerName: this.disconnectedPlayerName,
+    const round = this.currentRound
+    const selfState = round?.playerStates.get(playerId)
+    const isSetter = round?.setterId === playerId
+    const publicPlayers: PublicPlayer[] = this.players.map((player) => ({
+      id: player.id, name: player.name, score: player.score, connectionState: player.connectionState, active: player.active,
+      roundStatus: this.publicRoundStatus(player.id),
+    }))
+    const match: MatchView = {
+      status: this.roomStatus, ownerId: this.hostId ?? '', turnOrder: [...this.matchRosterIds], turnIndex: this.turnIndex,
+      voltaNumber: this.matchRosterIds.length ? Math.min(this.voltes, Math.floor(this.turnIndex / this.matchRosterIds.length) + 1) : 0,
+      completedTurns: this.completedTurns, totalTurns: this.totalTurns, rematchReadyPlayerIds: [...this.rematchReady],
     }
-    if (this.secretWord && (playerId === this.wordSetterId || reveal)) view.privateWord = this.secretWord
+    const privateSelf = round && selfState ? this.playerRoundView(round, selfState, this.shouldReveal(round)) : null
+    const view: PlayerGameView = {
+      code: this.code, gameLanguage: this.language, voltes: this.voltes, players: publicPlayers, roomStatus: this.roomStatus, hostId: this.hostId,
+      match, round: round ? this.roundView(round) : null, self: privateSelf,
+      observedPlayerId: isSetter ? this.observerBySetter.get(playerId) ?? null : null,
+      forgivenessRequests: isSetter && round ? [...round.forgivenessRequests.values()] : [], matchResult: this.matchResult,
+      reconnectedPlayerName: this.reconnectedPlayerName, disconnectedPlayerName: this.disconnectedPlayerName,
+    }
+    const observedId = isSetter ? this.observerBySetter.get(playerId) : undefined
+    const observedState = observedId ? round?.playerStates.get(observedId) : undefined
+    if (round && observedState && isSetter) view.observedPlayer = this.playerRoundView(round, observedState, this.shouldReveal(round))
+    if (round?.secretWord && (isSetter || this.shouldReveal(round))) view.privateWord = round.secretWord
     return view
   }
 
-  private finishRound(winnerId: string | null) {
-    if (!winnerId) return
-    const winner = this.players.find((player) => player.id === winnerId)
-    if (winner) winner.score += 1
-    this.roundWinnerId = winnerId
-    if (this.matchTarget === null) {
-      this.phase = 'round-over'
+  private startRematch() {
+    for (const player of this.players) player.score = 0
+    this.matchRosterIds = []
+    this.turnIndex = 0
+    this.currentRound = null
+    this.matchResult = null
+    this.rematchReady.clear()
+    this.roomStatus = 'waiting'
+    this.start(this.hostId ?? this.activePlayers[0]?.id ?? '')
+  }
+
+  private startNextTurn() {
+    while (this.turnIndex < this.totalTurns) {
+      const setterId = this.matchRosterIds[this.turnIndex % this.matchRosterIds.length]
+      if (!this.player(setterId)?.active) { this.turnIndex += 1; continue }
+      const playerStates = new Map<string, MutablePlayerRoundState>()
+      for (const id of this.matchRosterIds) {
+        if (id !== setterId && this.player(id)?.active) playerStates.set(id, this.newPlayerRoundState(id))
+      }
+      this.currentRound = { id: randomUUID(), number: this.turnIndex + 1, voltaNumber: Math.floor(this.turnIndex / this.matchRosterIds.length) + 1, setterId, secretWord: null, status: 'choosing-word', playerStates, forgivenessRequests: new Map(), ranking: [], results: [] }
+      const firstGuesserId = playerStates.keys().next().value
+      if (firstGuesserId) this.observerBySetter.set(setterId, firstGuesserId)
+      else this.observerBySetter.delete(setterId)
       return
     }
-
-    if (!this.targetReachedPlayerId && this.players.some((player) => player.score >= this.matchTarget!)) {
-      this.targetReachedPlayerId = winnerId
-    }
-    if (this.targetReachedPlayerId && this.roundNumber % 2 === 0) this.resolveMatchResult()
-    else this.phase = 'round-over'
+    this.finishMatch()
   }
 
-  private resolveMatchResult() {
-    const [first, second] = this.players
-    if (!first || !second) return
-    if (first.score === second.score) {
-      this.matchResult = { kind: 'draw' }
-      this.matchWinnerId = null
-    } else {
-      const winner = first.score > second.score ? first : second
-      this.matchResult = { kind: 'win', winnerId: winner.id }
-      this.matchWinnerId = winner.id
-    }
-    this.targetReachedPlayerId = null
-    this.phase = 'match-over'
+  private newPlayerRoundState(playerId: string): MutablePlayerRoundState {
+    return { playerId, status: 'playing', guessedLetters: new Set(), errors: 0, forgiven: false, startedAt: null, finishedAt: null, resolutionTimeMs: null, roundRank: null }
   }
 
-  private startMatch(resetScores = false) {
-    if (this.players.length !== 2) return
-    if (resetScores) for (const player of this.players) player.score = 0
-    const setterIndex = this.random() < 0.5 ? 0 : 1
-    this.wordSetterId = this.players[setterIndex].id
-    this.guesserId = this.players[1 - setterIndex].id
-    this.firstSetterId = this.wordSetterId
-    this.roundNumber = 1
-    this.secretWord = null
-    this.guesses.clear()
-    this.errorCount = 0
-    this.roundWinnerId = null
-    this.matchWinnerId = null
-    this.matchResult = null
-    this.targetReachedPlayerId = null
+  private createForgivenessRequest(round: MutableRoundState, playerId: string) {
+    const request: ForgivenessRequest = { id: randomUUID(), roundId: round.id, playerId, setterId: round.setterId, status: 'pending', createdAt: Date.now(), decidedAt: null }
+    round.forgivenessRequests.set(request.id, request)
+  }
+
+  private finishPlayer(state: MutablePlayerRoundState, status: 'solved' | 'failed' | 'eliminated') {
+    state.status = status
+    state.finishedAt ??= Date.now()
+    state.resolutionTimeMs = state.startedAt === null ? null : state.finishedAt - state.startedAt
+  }
+
+  private maybeFinishRound() {
+    const round = this.currentRound
+    if (!round || round.status !== 'guessing' || [...round.playerStates.values()].some((state) => !this.isTerminal(state.status))) return
+    round.status = 'round-over'
+    round.ranking = [...round.playerStates.values()].sort((a, b) => this.compareRoundStates(a, b)).map((state) => state.playerId)
+    const guesserCount = round.playerStates.size
+    round.results = round.ranking.map((playerId, index) => {
+      const state = round.playerStates.get(playerId)!
+      state.roundRank = index + 1
+      const player = this.player(playerId)
+      const pointsAwarded = state.status === 'solved' ? guesserCount - index : 0
+      if (player) player.score += pointsAwarded
+      return {
+        playerId,
+        position: index + 1,
+        status: state.status as RoundResultEntry['status'],
+        errors: state.errors,
+        resolutionTimeMs: state.resolutionTimeMs,
+        pointsAwarded,
+      }
+    })
+    round.results.push({ playerId: round.setterId, position: null, status: 'setter', errors: null, resolutionTimeMs: null, pointsAwarded: 0 })
+    if (this.activePlayers.length < 2 || this.turnIndex + 1 >= this.totalTurns) this.finishMatch()
+  }
+
+  private compareRoundStates(a: MutablePlayerRoundState, b: MutablePlayerRoundState) {
+    const solvedDifference = Number(b.status === 'solved') - Number(a.status === 'solved')
+    if (solvedDifference) return solvedDifference
+    if (a.errors !== b.errors) return a.errors - b.errors
+    const aTime = a.resolutionTimeMs ?? Number.POSITIVE_INFINITY
+    const bTime = b.resolutionTimeMs ?? Number.POSITIVE_INFINITY
+    if (aTime !== bTime) return aTime - bTime
+    return this.matchRosterIds.indexOf(a.playerId) - this.matchRosterIds.indexOf(b.playerId)
+  }
+
+  private finishMatch() {
+    if (this.roomStatus === 'match-over') return
+    const ranking = [...this.matchRosterIds].sort((a, b) => (this.player(b)?.score ?? 0) - (this.player(a)?.score ?? 0) || this.matchRosterIds.indexOf(a) - this.matchRosterIds.indexOf(b))
+    const scores: Record<string, number> = {}
+    for (const player of this.players) scores[player.id] = player.score
+    this.matchResult = { ranking, scores }
+    this.roomStatus = 'match-over'
     this.rematchReady.clear()
-    this.phase = 'choosing-word'
+  }
+
+  private cancelCurrentTurn() {
+    const round = this.currentRound
+    if (!round) return
+    for (const request of round.forgivenessRequests.values()) if (request.status === 'pending') { request.status = 'cancelled'; request.decidedAt = Date.now() }
+    round.status = 'round-over'
+    round.ranking = []
+    round.results = [{ playerId: round.setterId, position: null, status: 'setter', errors: null, resolutionTimeMs: null, pointsAwarded: 0 }]
+    this.advanceAfterCompletedTurn()
+  }
+
+  private advanceAfterCompletedTurn() {
+    this.turnIndex += 1
+    if (this.activePlayers.length < 2) this.finishMatch()
+    else this.startNextTurn()
+  }
+
+  private nextActiveSetterId() {
+    for (let index = this.turnIndex + 1; index < this.totalTurns; index += 1) {
+      const id = this.matchRosterIds[index % this.matchRosterIds.length]
+      if (this.player(id)?.active) return id
+    }
+    return null
+  }
+
+  private requireRound(status?: RoundStatus): MutableRoundState {
+    if (this.roomStatus !== 'active' || !this.currentRound || (status && this.currentRound.status !== status)) throw new Error(status === 'round-over' ? 'cannot-continue' : 'not-available')
+    return this.currentRound
+  }
+
+  private requireConnected(playerId: string) {
+    const player = this.player(playerId)
+    if (!player?.active || player.connectionState !== 'connected') throw new Error('player-reconnecting')
+  }
+
+  private isTerminal(status: PlayerRoundStatus) { return status === 'solved' || status === 'failed' || status === 'eliminated' }
+
+  private shouldReveal(round: MutableRoundState) { return round.status === 'round-over' || this.roomStatus === 'match-over' }
+
+  private publicRoundStatus(playerId: string): PublicPlayer['roundStatus'] {
+    if (!this.player(playerId)?.active) return 'eliminated'
+    const round = this.currentRound
+    return round?.setterId === playerId ? 'setter' : round?.playerStates.get(playerId)?.status ?? 'playing'
+  }
+
+  private roundView(round: MutableRoundState) {
+    return { id: round.id, number: round.number, voltaNumber: round.voltaNumber, setterId: round.setterId, nextSetterId: this.nextActiveSetterId(), status: round.status, ranking: [...round.ranking], results: round.results.map((result) => ({ ...result })) }
+  }
+
+  private playerRoundView(round: MutableRoundState, state: MutablePlayerRoundState, reveal: boolean): PlayerRoundView {
+    const guessedLetters = [...state.guessedLetters]
+    return {
+      playerId: state.playerId, status: state.status, guessedLetters, wrongLetters: round.secretWord ? guessedLetters.filter((guess) => !isCorrectGuess(round.secretWord!, guess, this.language)) : [], errors: state.errors,
+      displayWord: round.secretWord ? displayWord(round.secretWord, state.guessedLetters, this.language, reveal) : [], forgiven: state.forgiven,
+      startedAt: state.startedAt, finishedAt: state.finishedAt, resolutionTimeMs: state.resolutionTimeMs, roundRank: state.roundRank,
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import type { Language } from '../../shared/game'
-import type { MatchTarget, PlayerGameView, RoomPreview } from '../../shared/protocol'
+import { SUPPORTED_VOLTES, type PlayerGameView, type RoomPreview, type Voltes } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { getLanguageConfig } from '../game/languages'
@@ -37,7 +37,7 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
-  const [matchTarget, setMatchTarget] = useState<MatchTarget>(5)
+  const [voltes, setVoltes] = useState<Voltes>(3)
   const [invitation, setInvitation] = useState<RoomPreview | null>(null)
   const [invitationStatus, setInvitationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
   const [previewRetry, setPreviewRetry] = useState(0)
@@ -129,7 +129,7 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
 
   const create = (event: FormEvent) => {
     event.preventDefault()
-    connect(() => socket.emit('room:create', { name, gameLanguage, matchTarget }, (response) => {
+    connect(() => socket.emit('room:create', { name, gameLanguage, voltes }, (response) => {
       setBusy(false)
       if (!response.ok) return setError(errorMessage(response.error, t))
       localStorage.setItem('hangman-name', name.trim()); saveRoomSession(response.data.session); onEnter(response.data.view, response.data.session.playerId)
@@ -168,7 +168,7 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
               <h3 id="invitation-rules-title">{t.invitationRules}</h3>
               <dl>
                 <div><dt>{t.gameLanguage}</dt><dd>{getLanguageConfig(invitation.gameLanguage).name}</dd></div>
-                <div><dt>{t.matchTarget}</dt><dd>{invitation.matchTarget === null ? t.unlimited : t.points.replace('{target}', String(invitation.matchTarget))}</dd></div>
+                <div><dt>{t.voltes}</dt><dd>{invitation.voltes}</dd></div>
               </dl>
             </section>
             <label>{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
@@ -197,9 +197,9 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
             <LanguageSelector language={gameLanguage} label={t.gameLanguage} onChange={onGameLanguage} />
           </label>
           <p className="target-help">{t.gameLanguageHint}</p>
-          <fieldset className="target-selector"><legend>{t.matchTarget}</legend><div>
-            {([3, 5, 10, null] as MatchTarget[]).map((target) => <button type="button" key={target ?? 'unlimited'} className={matchTarget === target ? 'active' : ''} onClick={() => setMatchTarget(target)}>{target === null ? t.unlimited : t.points.replace('{target}', String(target))}</button>)}
-          </div><p className="target-help">{t.matchTargetExplanation}</p></fieldset>
+          <fieldset className="target-selector"><legend>{t.voltes}</legend><div>
+            {SUPPORTED_VOLTES.map((value) => <button type="button" key={value} className={voltes === value ? 'active' : ''} onClick={() => setVoltes(value)}>{value}</button>)}
+          </div><p className="target-help">{t.voltesExplanation}</p></fieldset>
           <button className="primary-action" disabled={busy}>{t.create}</button>
           <div className="join-divider"><span>o</span></div>
           <label>{t.roomCode}<input value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"

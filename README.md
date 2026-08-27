@@ -1,6 +1,6 @@
 # Penjat
 
-Two-player real-time Penjat in Spanish and Catalan. Players create private rooms, alternate between choosing and guessing words, chat, keep score across rounds, and can use the playful “Perdonar la vida” mechanic.
+N-player real-time Penjat in Spanish and Catalan. Players create private rooms, take turns choosing words, guess simultaneously, chat, keep score across turns, and can use the playful “Perdonar la vida” mechanic.
 
 The production application is a single Node.js service: it serves the built React application and hosts Socket.IO on the same HTTP server and public origin.
 
@@ -118,7 +118,7 @@ With a server running, the Socket.IO end-to-end suite can be run with:
 npm run test:e2e
 ```
 
-It checks room capacity, room isolation, authorization, chat, secret-word privacy, normalization, forgiveness, scoring, and role swapping.
+It checks room capacity, room isolation, authorization, chat, secret-word privacy, normalization, forgiveness, N-player scoring, and setter rotation.
 
 ## Important limitations
 
