@@ -107,7 +107,7 @@ button { cursor: pointer; }
 }
 .target-selector { margin: 0; padding: 0; border: 0; }
 .target-selector legend { margin-bottom: 9px; color: #455249; font-size: 13px; font-weight: 700; }
-.target-selector div { display: grid; grid-template-columns: repeat(3, minmax(52px, 1fr)) minmax(92px, auto); gap: 8px; padding: 5px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
+.target-selector div { display: grid; grid-template-columns: repeat(3, minmax(52px, 1fr)); gap: 8px; padding: 5px; border: 1px solid #d9d5ca; border-radius: 11px; background: #f5f3ed; }
 .target-selector button { border: 0; border-radius: 8px; padding: 9px 7px; color: #606860; background: transparent; font-size: 13px; font-weight: 600; white-space: nowrap; }
 .target-selector button.active { color: white; background: var(--green); }
 .target-help { max-width: 44ch; margin: 15px 2px 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
@@ -488,6 +488,5 @@ button { cursor: pointer; }
 }
 @media (max-width: 390px) {
   .target-selector div { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .target-selector button:last-child { grid-column: 1 / -1; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
