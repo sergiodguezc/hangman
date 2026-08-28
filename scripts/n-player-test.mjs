@@ -35,6 +35,7 @@ assert.deepEqual(setterView.round.ranking, ['p2', 'p3', 'p4', 'p6', 'p5'])
 assert.deepEqual(setterView.players.slice(1).map((player) => player.score), [5, 4, 3, 0, 0])
 assert.equal(setterView.roomStatus, 'active')
 assert.equal(setterView.players.find((player) => player.id === 'p5').roundStatus, 'eliminated')
+assert.equal(setterView.round.results.find((result) => result.playerId === 'p5').forgiven, true)
 
 // Guesser privacy and setter-only observation are enforced on serialized views.
 const guesserView = ranking.viewFor('p2')

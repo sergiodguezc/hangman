@@ -44,6 +44,7 @@ export type RoundResultEntry = {
   playerId: string
   position: number | null
   status: 'setter' | 'solved' | 'failed' | 'eliminated'
+  forgiven: boolean
   errors: number | null
   resolutionTimeMs: number | null
   pointsAwarded: number

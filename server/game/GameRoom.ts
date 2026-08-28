@@ -336,12 +336,13 @@ export class GameRoom {
         playerId,
         position: index + 1,
         status: state.status as RoundResultEntry['status'],
+        forgiven: state.forgiven,
         errors: state.errors,
         resolutionTimeMs: state.resolutionTimeMs,
         pointsAwarded,
       }
     })
-    round.results.push({ playerId: round.setterId, position: null, status: 'setter', errors: null, resolutionTimeMs: null, pointsAwarded: 0 })
+    round.results.push({ playerId: round.setterId, position: null, status: 'setter', forgiven: false, errors: null, resolutionTimeMs: null, pointsAwarded: 0 })
     if (this.activePlayers.length < 2 || this.turnIndex + 1 >= this.totalTurns) this.finishMatch()
   }
 
@@ -371,7 +372,7 @@ export class GameRoom {
     for (const request of round.forgivenessRequests.values()) if (request.status === 'pending') { request.status = 'cancelled'; request.decidedAt = Date.now() }
     round.status = 'round-over'
     round.ranking = []
-    round.results = [{ playerId: round.setterId, position: null, status: 'setter', errors: null, resolutionTimeMs: null, pointsAwarded: 0 }]
+    round.results = [{ playerId: round.setterId, position: null, status: 'setter', forgiven: false, errors: null, resolutionTimeMs: null, pointsAwarded: 0 }]
     this.advanceAfterCompletedTurn()
   }
 

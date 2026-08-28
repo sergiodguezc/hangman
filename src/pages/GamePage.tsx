@@ -8,6 +8,7 @@ import { RoomChat } from '../components/RoomChat'
 import { ForgivenessTray } from '../components/ForgivenessTray'
 import { PlayerRoundStatusNotice } from '../components/PlayerRoundStatusNotice'
 import { RoundResults } from '../components/RoundResults'
+import { ObserverSelector } from '../components/ObserverSelector'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
@@ -110,7 +111,7 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
 
         {roundStatus === 'guessing' || roundStatus === 'round-over' ? <>
           <div className="role-line">{roundStatus === 'round-over' ? t.roundComplete : isSetter ? t.youChose : self?.status === 'awaiting-forgiveness' ? t.finalErrorGuesser : self?.status === 'solved' ? t.youSolved : self?.status === 'failed' || self?.status === 'eliminated' ? t.youAreOut : t.yourGuess}</div>
-          {isSetter && <div className="observer-selector" role="group" aria-label={t.selectPlayer}><strong>{t.selectPlayer}</strong><div>{state.players.filter((player) => player.active && player.id !== playerId).map((player) => <button type="button" key={player.id} className={state.observedPlayerId === player.id ? 'active' : ''} onClick={() => observePlayer(player.id)}>{player.name}</button>)}</div></div>}
+          {isSetter && <ObserverSelector players={state.players.filter((player) => player.id !== playerId)} selectedPlayerId={state.observedPlayerId} t={t} onSelect={observePlayer} />}
           {observed ? <div className="game-columns"><div className="drawing-panel"><HangmanDrawing errors={observed.errors} label={t.errors} />
             <div className="error-copy"><span>{t.errors}</span><strong>{observed.errors} / {MAX_ERRORS}{observed.forgiven ? ' · ♥' : ''}</strong></div></div><div className="guess-area">
               <div className="multiplayer-word-scroll" tabIndex={0} style={wordSizing} aria-label={config.translations.progressLabel}><div className="multiplayer-word">{displayWords.map(({ start, characters }) => <span className="multiplayer-word-group" key={start}>{characters.map((character, offset) => <span key={start + offset} className={character === '_' ? 'blank' : normalizeGuess(character, state.gameLanguage) ? 'letter' : 'punctuation'}>{character === '_' ? '\u00a0' : character}</span>)}</span>)}</div></div>

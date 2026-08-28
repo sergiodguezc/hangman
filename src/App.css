@@ -275,6 +275,12 @@ button { cursor: pointer; }
 .scoreboard .player-name { overflow: hidden; text-overflow: ellipsis; font-weight: 700; white-space: nowrap; }
 .scoreboard li strong { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 50%; color: white; background: var(--green); }
 .scoreboard li small { grid-column: 2 / 4; color: var(--muted); font-size: 11px; }
+.departed-players { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.departed-players h3 { margin: 0 0 8px; color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.departed-players ul { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.departed-players li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; border-radius: 9px; color: var(--muted); background: #f5f3ed; font-size: 13px; }
+.departed-players .player-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.departed-players li strong { width: auto; height: auto; color: var(--muted); background: transparent; font-size: 14px; }
 
 /* Game phases */
 .multiplayer-game { grid-area: game; min-height: 620px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
@@ -315,11 +321,13 @@ button { cursor: pointer; }
 .setter-secret strong { color: var(--green-dark); }
 .round-result { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; padding: 10px 18px; border-radius: 11px; color: #1f6844; background: #e8f5eb; text-align: center; }
 .forgiveness-panel, .forgiveness-wait { width: min(100%, 440px); display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; padding: 14px 16px; border: 1px solid #e4c98f; border-radius: 12px; color: #684916; background: #fff6df; text-align: center; }
-.observer-selector { width: min(100% - 40px, 620px); margin: 0 auto 14px; padding: 10px 12px; border: 1px solid #d8c79f; border-radius: 12px; color: #684916; background: #fffaf0; overflow: hidden; }
-.observer-selector strong { display: block; margin-bottom: 7px; font-size: 12px; }
-.observer-selector > div { display: flex; align-items: center; gap: 7px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
-.observer-selector button { border: 1px solid #d8c79f; border-radius: 8px; padding: 7px 10px; color: #684916; background: transparent; font-weight: 700; }
-.observer-selector button.active { color: white; background: var(--green); }
+.observer-selector { width: 100%; margin: 0; padding: 0 20px; border-bottom: 1px solid #e5e2d9; background: var(--cream); overflow: hidden; }
+.observer-tabs { display: flex; align-items: stretch; gap: 3px; overflow-x: auto; overscroll-behavior-inline: contain; padding: 0 0 1px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+.observer-selector button { position: relative; flex: 0 0 clamp(72px, 16vw, 150px); min-width: 0; min-height: 42px; overflow: hidden; border: 0; border-radius: 7px 7px 0 0; padding: 8px 9px 10px; color: var(--muted); background: transparent; font-size: 13px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.observer-selector button:hover { color: var(--green-dark); background: #f4f6f0; }
+.observer-selector button[aria-selected="true"] { color: var(--green-dark); background: #eef4eb; }
+.observer-selector button[aria-selected="true"]::after { position: absolute; right: 9px; bottom: -1px; left: 9px; height: 3px; border-radius: 3px 3px 0 0; background: var(--green); content: ''; }
+.observer-selector button:focus-visible { outline: 2px solid #e5a33c; outline-offset: -2px; }
 .forgiveness-tray { grid-area: forgiveness; align-self: start; padding: 14px; border-color: #dfc27f; border-radius: 16px; color: #684916; background: #fff7e4; }
 .forgiveness-tray > strong { display: block; margin-bottom: 5px; color: #684916; font: 700 17px Georgia, serif; }
 .forgiveness-tray-list { display: grid; }
@@ -347,18 +355,21 @@ button { cursor: pointer; }
 .keyboard button.correct { color: #2c6847; background: #e7f1e7; }.keyboard button.incorrect { color: #9a514b; background: #f4e8e5; text-decoration: line-through; }
 .guess-area > .primary-action { width: auto; }
 .continue-note { color: var(--muted); font-size: 13px; }
-.round-results { margin: 0 18px 18px; padding: 14px 16px 8px; border-top: 1px solid #dedbd1; }
-.round-results h2 { margin: 0 0 8px; color: var(--green-dark); font: 700 19px Georgia, serif; text-align: center; }
+.round-results { margin: 0 18px 18px; padding: 13px 16px 7px; border-top: 1px solid #dedbd1; }
+.round-results h2 { margin: 0 0 6px; color: var(--green-dark); font: 700 17px Georgia, serif; text-align: left; }
 .round-results-list { margin: 0; padding: 0; list-style: none; }
-.round-result-row { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 40px; padding: 6px 4px; border-bottom: 1px solid #e5e2d9; }
+.round-result-row { display: grid; grid-template-columns: 52px minmax(0, 1fr); align-items: center; gap: 10px; min-height: 38px; padding: 5px 4px; border-bottom: 1px solid #e5e2d9; }
 .round-result-row:last-child { border-bottom: 0; }
-.round-result-points { color: var(--green-dark); font: 700 22px Georgia, serif; letter-spacing: -.02em; text-align: right; }
-.round-result-player { min-width: 0; display: flex; align-items: center; gap: 8px; }
-.round-result-outcome { flex: 0 0 auto; font-size: 13px; line-height: 1; }
+.round-result-points { color: var(--green); font: 700 23px Georgia, serif; letter-spacing: -.02em; text-align: left; }
+.round-result-content { min-width: 0; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.round-result-player { min-width: 0; display: flex; align-items: baseline; gap: 7px; }
 .round-result-name { min-width: 0; overflow: hidden; color: #303a33; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
-.round-result-meta { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.round-result-meta { flex: 0 0 auto; color: var(--muted); font-size: 12px; white-space: nowrap; }
+.outcome-solved .round-result-points { color: var(--green); }
+.outcome-forgiven .round-result-points { color: #d39b2c; }
+.outcome-failed .round-result-points { color: var(--red); }
 .outcome-forgiven .round-result-meta { color: #80631d; }
-.outcome-failed .round-result-points, .outcome-setter .round-result-points { color: #6f786f; }
+.outcome-setter .round-result-points { color: #6f786f; }
 .match-result { width: min(100% - 40px, 460px); margin: auto; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
 .match-result h2 { margin: 0; color: var(--green-dark); font: 700 34px Georgia, serif; }
 .match-result > p { margin: 0; color: var(--muted); }
@@ -448,12 +459,13 @@ button { cursor: pointer; }
   .guess-area { padding: 25px 12px; }.keyboard { gap: 5px; }.keyboard button { width: 33px; height: 35px; font-size: 13px; }
   .multiplayer-game { min-height: 0; }.scoreboard li { padding: 9px 7px; }
   .forgiveness-tray { position: sticky; z-index: 3; top: calc(env(safe-area-inset-top, 0px) + 68px); width: 100%; }
-  .observer-selector { width: calc(100% - 24px); margin-bottom: 8px; }
-  .observer-selector > div { flex-wrap: nowrap; }
-  .observer-selector button { flex: 0 0 auto; }
+  .observer-selector { padding-inline: 12px; }
+  .observer-selector button { min-height: 44px; }
   .round-results { margin-inline: 8px; padding-inline: 4px; }
-  .round-result-row { grid-template-columns: 44px minmax(0, 1fr); gap: 4px 9px; padding-block: 7px; }
-  .round-result-meta { grid-column: 2; white-space: normal; }
+  .round-result-row { grid-template-columns: 44px minmax(0, 1fr); gap: 4px 9px; padding-block: 6px; }
+  .round-result-content { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .round-result-player { width: 100%; }
+  .round-result-meta { white-space: normal; }
   .lobby-layout { grid-template-columns: 1fr; }.lobby-layout .room-chat { min-height: 380px; height: 380px; }
   .room-chat { height: 380px; }.chat-form { padding: 9px; }.chat-form button { padding-inline: 9px; }
   .learning-header, .daily-header { padding-inline: 4px; }
