@@ -75,9 +75,9 @@ export function DailyChallengePage({ language, onActiveGameChange }: Props) {
     <section className="daily-game" aria-labelledby="daily-title">
       <div className="daily-titlebar">
         <span className="eyebrow">{t.eyebrow}</span>
-        <h1 id="daily-title">{t.seoTitle}</h1>
-        <p className="daily-date">{t.heading(challenge.number)} · {challenge.displayDate[language]}</p>
+        <h1 id="daily-title">{t.gameTitle}</h1>
         <p className="daily-intro">{t.intro}</p>
+        <p className="daily-date">{t.heading(challenge.number)} · {challenge.displayDate[language]}</p>
       </div>
       <div className="daily-columns">
         <div className="drawing-panel">
@@ -97,6 +97,12 @@ export function DailyChallengePage({ language, onActiveGameChange }: Props) {
           <span className="sr-only" aria-live="polite">{displayWord(challenge.entry.answerCa, round.guesses, 'ca', completed).join(' ')}</span>
         </div>
       </div>
+    </section>
+
+    <section className="daily-about" aria-labelledby="daily-about-title">
+      <h2 id="daily-about-title">{t.aboutTitle}</h2>
+      <p>{t.aboutFirst}</p>
+      <p>{t.aboutSecond}</p>
     </section>
   </main>
 }

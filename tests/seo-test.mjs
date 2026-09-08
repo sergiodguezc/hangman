@@ -20,10 +20,14 @@ try {
   assert.match(home, /<link rel="canonical" href="https:\/\/penjat\.cat\/" \/>/)
 
   const daily = await fetchText(`http://127.0.0.1:${port}/paraula-del-dia`)
-  assert.match(daily, /<title>Paraula del dia en català \| Penjat<\/title>/)
-  assert.match(daily, /Descobreix la paraula del dia en català jugant al Penjat/)
+  assert.match(daily, /<title>El penjat del dia: endevina una paraula en català \| Penjat<\/title>/)
+  assert.equal([...daily.matchAll(/<meta name="description"/g)].length, 1)
+  assert.match(daily, /<meta name="description" content="Juga al penjat del dia en català\. Cada dia hi ha una nova paraula, la mateixa per a tothom\. Endevina-la i comparteix el resultat\." \/>/)
   assert.match(daily, /<link rel="canonical" href="https:\/\/penjat\.cat\/paraula-del-dia" \/>/)
+  assert.match(daily, /<meta property="og:title" content="Paraula del dia \| Penjat" \/>/)
+  assert.match(daily, /<meta property="og:description" content="Endevina la paraula catalana del dia jugant al Penjat i comparteix el resultat sense revelar-la\." \/>/)
   assert.match(daily, /<meta property="og:url" content="https:\/\/penjat\.cat\/paraula-del-dia" \/>/)
+  assert.match(daily, /<meta name="twitter:title" content="Paraula del dia \| Penjat" \/>/)
   assert.doesNotMatch(daily, /Juga al Penjat online en català\. Endevina paraules/)
 } finally {
   server.kill('SIGTERM')

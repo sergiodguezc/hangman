@@ -49,12 +49,12 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
     multiplayerTitle: 'Multijugador',
     learningTitle: 'Aprendre català',
     dailyTitle: 'Paraula del dia',
-    dailyBody: "Juga la paraula d'avui",
+    dailyBody: "Endevina la paraula d'avui jugant al penjat.",
   } : {
     multiplayerTitle: 'Multijugador',
     learningTitle: 'Aprender catalán',
     dailyTitle: 'Palabra del día',
-    dailyBody: 'Juega la palabra de hoy',
+    dailyBody: 'Adivina la palabra de hoy jugando al ahorcado.',
   }
   const previewSlots = ['', 'E', '', 'J', '', 'T']
 

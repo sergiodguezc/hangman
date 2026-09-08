@@ -19,7 +19,9 @@ const mimeTypes: Record<string, string> = {
   '.svg': 'image/svg+xml', '.txt': 'text/plain; charset=utf-8', '.webp': 'image/webp', '.woff': 'font/woff',
   '.woff2': 'font/woff2', '.xml': 'application/xml; charset=utf-8',
 }
-const routeMetadata: Record<string, { title: string; description: string; canonicalPath: string }> = {
+type RouteMetadata = { title: string; description: string; canonicalPath: string; socialTitle?: string; socialDescription?: string }
+
+const routeMetadata: Record<string, RouteMetadata> = {
   '/': {
     title: 'Penjat — Joc del penjat online en català',
     description: 'Juga al Penjat online en català. Endevina paraules, juga amb amics i aprèn vocabulari català de manera divertida.',
@@ -36,9 +38,11 @@ const routeMetadata: Record<string, { title: string; description: string; canoni
     canonicalPath: '/aprendre',
   },
   '/paraula-del-dia/': {
-    title: 'Paraula del dia en català | Penjat',
-    description: 'Descobreix la paraula del dia en català jugant al Penjat. Una nova paraula cada dia per posar a prova el teu vocabulari.',
+    title: 'El penjat del dia: endevina una paraula en català | Penjat',
+    description: 'Juga al penjat del dia en català. Cada dia hi ha una nova paraula, la mateixa per a tothom. Endevina-la i comparteix el resultat.',
     canonicalPath: '/paraula-del-dia',
+    socialTitle: 'Paraula del dia | Penjat',
+    socialDescription: 'Endevina la paraula catalana del dia jugant al Penjat i comparteix el resultat sense revelar-la.',
   },
   '/com-es-juga/': {
     title: 'Com es juga a Penjat? | Penjat',
@@ -309,17 +313,19 @@ function normalizeMetadataRoute(pathname: string): string {
   return trimmed === '/' ? '/' : `${trimmed}/`
 }
 
-function applyRouteMetadata(html: string, metadata: { title: string; description: string; canonicalPath: string }): string {
+function applyRouteMetadata(html: string, metadata: RouteMetadata): string {
   const canonical = new URL(metadata.canonicalPath, PUBLIC_SITE_ORIGIN).href
+  const socialTitle = metadata.socialTitle ?? metadata.title
+  const socialDescription = metadata.socialDescription ?? metadata.description
   return html
     .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(metadata.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeHtml(metadata.description)}" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
-    .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeHtml(metadata.title)}" />`)
-    .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeHtml(metadata.description)}" />`)
+    .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeHtml(socialTitle)}" />`)
+    .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeHtml(socialDescription)}" />`)
     .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${canonical}" />`)
-    .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(metadata.title)}" />`)
-    .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(metadata.description)}" />`)
+    .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(socialTitle)}" />`)
+    .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(socialDescription)}" />`)
 }
 
 function escapeHtml(value: string): string {

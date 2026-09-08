@@ -16,7 +16,7 @@ import { normalizeRoute, type Route } from './routing'
 import './App.css'
 
 type Mode = 'home' | 'multiplayer' | 'learning' | 'daily' | 'help'
-type PageCopy = { title: string; description: string }
+type PageCopy = { title: string; description: string; socialTitle?: string; socialDescription?: string }
 type InvitationCode = string | null
 const PUBLIC_SITE_ORIGIN = 'https://penjat.cat'
 
@@ -50,8 +50,18 @@ const routeDescriptions: Record<Route, { mode: Mode; copy: Record<Language, Page
   '/paraula-del-dia/': {
     mode: 'daily',
     copy: {
-      ca: { title: 'Paraula del dia en català | Penjat', description: 'Descobreix la paraula catalana del dia jugant al Penjat. Tothom juga amb la mateixa paraula i pot compartir el resultat sense revelar-la.' },
-      es: { title: 'Palabra del día en catalán | Penjat', description: 'Descubre la palabra catalana del día jugando a Penjat. Todo el mundo juega con la misma palabra y puede compartir el resultado sin revelarla.' },
+      ca: {
+        title: 'El penjat del dia: endevina una paraula en català | Penjat',
+        description: 'Juga al penjat del dia en català. Cada dia hi ha una nova paraula, la mateixa per a tothom. Endevina-la i comparteix el resultat.',
+        socialTitle: 'Paraula del dia | Penjat',
+        socialDescription: 'Endevina la paraula catalana del dia jugant al Penjat i comparteix el resultat sense revelar-la.',
+      },
+      es: {
+        title: 'El ahorcado del día: adivina una palabra en catalán | Penjat',
+        description: 'Juega al ahorcado del día en catalán. Cada día hay una palabra nueva, la misma para todos. Adivínala y comparte el resultado.',
+        socialTitle: 'Palabra del día | Penjat',
+        socialDescription: 'Adivina la palabra catalana del día jugando a Penjat y comparte el resultado sin revelarla.',
+      },
     },
   },
   '/com-es-juga/': {
@@ -146,12 +156,12 @@ function App() {
     setMeta('meta[name="description"]', { name: 'description', content: description })
     setMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' })
     setMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: 'Penjat' })
-    setMeta('meta[property="og:title"]', { property: 'og:title', content: copy.title })
-    setMeta('meta[property="og:description"]', { property: 'og:description', content: description })
+    setMeta('meta[property="og:title"]', { property: 'og:title', content: copy.socialTitle ?? copy.title })
+    setMeta('meta[property="og:description"]', { property: 'og:description', content: copy.socialDescription ?? description })
     setMeta('meta[property="og:url"]', { property: 'og:url', content: canonical })
     setMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary' })
-    setMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: copy.title })
-    setMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description })
+    setMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: copy.socialTitle ?? copy.title })
+    setMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: copy.socialDescription ?? description })
     setMeta('link[rel="canonical"]', { rel: 'canonical', href: canonical })
     removeIfPresent('link[rel="alternate"][hreflang]')
   }, [interfaceLanguage, page, route])

@@ -2,8 +2,11 @@ import type { Language } from '../../shared/game'
 
 const es = {
   title: 'Palabra del día',
-  seoTitle: 'Palabra del día en catalán',
-  intro: 'Cada día hay una nueva palabra catalana por descubrir. Todo el mundo juega con la misma palabra: intenta adivinarla antes de completar el ahorcado y comparte el resultado sin revelarla.',
+  gameTitle: 'El ahorcado del día',
+  intro: 'Adivina la palabra catalana de hoy',
+  aboutTitle: 'Un juego de palabras diario en catalán',
+  aboutFirst: 'Cada día tienes una nueva palabra catalana por descubrir jugando al ahorcado. La palabra es la misma para todos los jugadores y tienes seis errores antes de perder la partida.',
+  aboutSecond: 'Si te gustan los retos de palabras diarios como Wordle, aquí la idea es parecida —una palabra nueva cada día—, pero juegas con las reglas clásicas del ahorcado, proponiendo una letra cada vez.',
   heading: (number: number) => `Palabra del día #${number}`,
   eyebrow: 'Reto diario',
   today: 'La misma palabra para todos hoy',
@@ -29,8 +32,11 @@ const es = {
 
 const ca: typeof es = {
   title: 'Paraula del dia',
-  seoTitle: 'Paraula del dia en català',
-  intro: 'Cada dia hi ha una nova paraula catalana per descobrir. Tothom juga amb la mateixa paraula: intenta endevinar-la abans de completar el penjat i comparteix el resultat sense revelar-la.',
+  gameTitle: 'El penjat del dia',
+  intro: "Endevina la paraula catalana d'avui",
+  aboutTitle: 'Un joc de paraules diari en català',
+  aboutFirst: 'Cada dia tens una nova paraula catalana per descobrir jugant al penjat. La paraula és la mateixa per a tots els jugadors i tens sis errors abans de perdre la partida.',
+  aboutSecond: "Si t'agraden els reptes de paraules diaris com Wordle, aquí la idea és semblant —una paraula nova cada dia—, però jugues amb les regles clàssiques del penjat, proposant una lletra cada vegada.",
   heading: (number) => `Paraula del dia #${number}`,
   eyebrow: 'Repte diari',
   today: 'La mateixa paraula per a tothom avui',

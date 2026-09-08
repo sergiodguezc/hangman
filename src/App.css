@@ -235,6 +235,9 @@ button { cursor: pointer; }
 .daily-result .primary-action { width: min(100%, 280px); }
 .daily-share-status.copied { color: var(--green); font-weight: 800; }
 .daily-share-status.failed { color: var(--red); }
+.daily-about { width: min(100%, 760px); margin: 24px auto 0; padding: 0 18px; color: var(--muted); text-align: center; }
+.daily-about h2 { margin: 0 0 10px; color: var(--green-dark); font: 700 clamp(22px, 3vw, 28px)/1.15 Georgia, serif; }
+.daily-about p { margin: 7px 0 0; font-size: 14px; line-height: 1.55; }
 
 /* Lobby */
 .lobby-layout { width: min(100%, 850px); display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 20px; align-items: stretch; }
