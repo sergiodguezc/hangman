@@ -59,7 +59,8 @@
     "vocab:validate": "python3 scripts/validate-vocabulary.py",
     "vocab": "python3 scripts/vocab_pipeline.py all",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:browser": "node scripts/browser-audit-test.mjs"
   },
   "engines": {
     "node": ">=22.12.0 <23"
