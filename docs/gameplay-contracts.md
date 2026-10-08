@@ -1,0 +1,31 @@
+# Gameplay contracts
+
+These describe inspected implementation and regression suites. Audit discrepancies belong in [the October report](audit-2026-10-08.md), rather than being treated as guaranteed rules.
+
+## Local play and learning
+
+The current single-player flows are learning and daily mode. Matching uses `shared/game.ts`: accents fold for guesses, Catalan Ç and Spanish Ñ retain their alphabet rules, punctuation/spaces reveal automatically. Repeated or invalid guesses do not advance errors. Terminal rounds ignore later guesses. Six incorrect letters lose a local round; local modes have no forgiveness.
+
+Learning phases are setup → playing → round-over → next word or summary. Completed attempts record word ID, result, position and CEFR. Abandoning an unfinished word does not record an attempt. Session success is `round(correct / completedAttempts * 100)`; failed attempts count words, not incorrect letters. Repeats contribute attempts while unique-word count deduplicates IDs. A recovered word has both a failed and successful attempt in this session. History disappears when the page unmounts; only level preference persists.
+
+CEFR groups are basic A1/A2, intermediate B1/B2, advanced C1/C2; `all` includes classified entries. Stored individual CEFR values map to their group; unknown preferences fall back to all. Empty selections return no round and show a recoverable localized message. Selecting the next level does not relabel the current word. Summaries list levels from completed attempts, excluding pending or unfinished selections. Selection stays within the requested group and favors unseen entries; failed words become review candidates after four completed attempts. Tests: `test:learning`, `test:vocabulary`.
+
+## Multiplayer
+
+Rooms accept 2–10 participants before starting, with 1, 3 or 5 voltes. Only the host starts. Start snapshots the active roster, randomly chooses its first setter, and rotates through that roster for roster-size × voltes turns. Departed setters are skipped. Only the next eligible setter continues a completed turn. All eligible active players must request a rematch, which resets scores, rounds and readiness and selects a first setter again.
+
+Each guesser has private letters, errors, status and timing. Setter cannot guess; setter sees the secret word and one observed board. Scores finalize once **all** guessers are solved/failed/eliminated, including forgiveness decisions. With G guessers, solved entries ordered at zero-based index i receive G−i points, other entries receive zero, setter receives zero. Round ordering: solved first, fewer errors, shorter resolution time, then original roster order. This intentional round tiebreaker must not be confused with total-match score ties. Match results order by total score then roster order; that stable order does not itself award additional points. Sidebar and final scores share competition ranking (1, 1, 3): equal totals receive equal places, with no invented winner. The sidebar ranks active members only and separately lists departed players; the final result retains the full historical match roster. Those populations can differ after departures.
+
+At error six a guesser awaits setter forgiveness. Granting forgiveness resumes play with six errors and unchanged guesses; one additional wrong guess eliminates. Denial fails the word. Each guesser gets at most one grant per round. Pending requests are private to the setter and independently decided. See `test:game`, `test:n-player`, `test:match`, `test:multiplayer-ui`, `test:e2e`.
+
+## Departure and reconnect
+
+Socket loss marks a player reconnecting for 25 seconds. Their token can resume membership with existing guesses and scores. Replacement socket identity supersedes the old mapping. Explicit leave or timeout removes the player; host transfers to the first remaining active player. A departing guesser is eliminated and their pending requests cancelled; a departing setter cancels an unfinished turn without points and advances. Fewer than two active players finishes the match. Departed players retain historical scores and are separated in the sidebar. Last departure deletes the room. A server restart cannot restore membership.
+
+Completed rooms remain for rematches rather than clearing credentials automatically. Invitation previews expose only code, language, voltes, count and availability. Invalid tokens must not resume. Incoming invitations take precedence over unrelated stored sessions, including opener/duplicated-tab copies. Invalid invitations show their error rather than restoring another room. Stored credentials remain until successful entry replaces them, explicit leave clears them, or a genuine resume rejection invalidates them. Same-room invitations still resume. Late resume acknowledgements/snapshots cannot override a different invitation. Match status takes precedence over retained round state; completed matches expose no word-entry/forgiveness actions or waiting-for-other-guessers notices. A solved player's waiting notice appears only while the round is guessing. See `test:lifecycle`, live `test:e2e`, `test:multiplayer-ui` and optional `test:browser`.
+
+## Daily challenge
+
+Epoch is 2026-08-16, timezone Europe/Madrid, ordered pool is `DAILY_CHALLENGE_WORD_IDS`. Day-index modulo pool length selects the same word on all clients with the same build/date. Do not reorder the pool or change IDs casually. The page reads the challenge at mount; automatic rollover while left open overnight is not guaranteed.
+
+One local-storage record stores the current attempt, including guesses, completion, win and mistakes. Restore accepts only the matching date, filters/deduplicates valid guesses and replays them. Finished attempts remain finished after reload; a new date begins fresh. Sharing reports outcome/errors without revealing the word. No server, account or historical archive is involved. See `test:daily` and `test:vocabulary`.

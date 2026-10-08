@@ -4,6 +4,10 @@ N-player real-time Penjat in Spanish and Catalan. Players create private rooms, 
 
 The production application is a single Node.js service: it serves the built React application and hosts Socket.IO on the same HTTP server and public origin.
 
+## Contributor documentation
+
+Start with [AGENTS.md](AGENTS.md), [architecture](docs/architecture.md), [development](docs/development.md), and [gameplay contracts](docs/gameplay-contracts.md). The [October audit report](docs/audit-2026-10-08.md) records baseline checks and functional fixes.
+
 ## Requirements
 
 - Node.js 22.12 or newer in the Node 22 release line
