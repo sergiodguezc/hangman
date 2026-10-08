@@ -25,6 +25,7 @@ flowchart LR
 | --- | --- | --- |
 | Learning round, attempt history, summary | `LearningPage`, pure `learning/game.ts` rules | Mounted page only |
 | Daily round | `DailyChallengePage`, `daily/game.ts` | Replayed from local storage for current Madrid date |
+| Homepage daily summary (number, won/lost, mistakes) | `HomePage`, pure `daily/homeSummary.ts` | Re-read on mount, focus, storage events and each minute; never shows the word |
 | Match, score, turn roster, forgiveness, secret word | `GameRoom` | Server process / room |
 | Identity → room/socket mappings | `GameManager` | Server process |
 | Disconnect timers | `server.ts` | 25 seconds after socket loss |
@@ -44,7 +45,7 @@ The offline Python pipeline is in `scripts/vocab_pipeline.py`, with small comman
 
 ## Persistence and limits
 
-Daily storage (`penjat-daily-challenge`) stores one date's guesses/result; restore reconstructs the round from guesses, not trusted score flags. Learning history/stats are not persisted; `penjat-learning-cefr` is a preference only. Interface preference is separate from `hangman-game-language`; multiplayer name uses `hangman-name`. Room credentials use `hangman-room-session` in session storage. No accounts or cross-device saves exist. Restarting the server loses all rooms; multiple replicas cannot share state.
+Daily storage (`penjat-daily-challenge`) stores one date's guesses/result; restore (including the homepage summary) reconstructs the round from guesses, not trusted score flags. Learning history/stats are not persisted; `penjat-learning-cefr` is a preference only. Interface preference is separate from `hangman-game-language`; multiplayer name uses `hangman-name`. Room credentials use `hangman-room-session` in session storage. No accounts or cross-device saves exist. Restarting the server loses all rooms; multiple replicas cannot share state.
 
 ## Incremental concerns
 
