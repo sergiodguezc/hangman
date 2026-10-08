@@ -1,4 +1,7 @@
 import assert from 'node:assert/strict'
+import { GameRoom } from '../server/game/GameRoom'
+import { multiplayerPhase } from '../src/multiplayer/presentation'
+import { rankByScore } from '../shared/ranking'
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import type { PublicPlayer, RoundResultEntry } from '../shared/protocol'
@@ -6,12 +9,12 @@ import { ForgivenessTray } from '../src/components/ForgivenessTray'
 import { ObserverSelector } from '../src/components/ObserverSelector'
 import { PlayerRoundStatusNotice } from '../src/components/PlayerRoundStatusNotice'
 import { RoundResults } from '../src/components/RoundResults'
-import { Scoreboard } from '../src/components/Scoreboard'
+import { FinalScores, Scoreboard } from '../src/components/Scoreboard'
 import { multiplayerTranslations } from '../src/multiplayer/i18n'
 
-const solvedCa = renderToStaticMarkup(<PlayerRoundStatusNotice status="solved" t={multiplayerTranslations.ca} />)
-const solvedEs = renderToStaticMarkup(<PlayerRoundStatusNotice status="solved" t={multiplayerTranslations.es} />)
-const eliminated = renderToStaticMarkup(<PlayerRoundStatusNotice status="eliminated" t={multiplayerTranslations.ca} />)
+const solvedCa = renderToStaticMarkup(<PlayerRoundStatusNotice phase="guessing" status="solved" t={multiplayerTranslations.ca} />)
+const solvedEs = renderToStaticMarkup(<PlayerRoundStatusNotice phase="guessing" status="solved" t={multiplayerTranslations.es} />)
+const eliminated = renderToStaticMarkup(<PlayerRoundStatusNotice phase="guessing" status="eliminated" t={multiplayerTranslations.ca} />)
 assert.match(solvedCa, /Has encertat la paraula!/)
 assert.match(solvedCa, /role="status"/)
 assert.match(solvedEs, /¡Has acertado la palabra!/)
@@ -94,3 +97,50 @@ assert.match(trayMarkup, /Out/)
 assert.match(trayMarkup, /Perdonar la vida/)
 
 console.log('Multiplayer terminal-state and round-result UI checks passed')
+
+// Actual domain transitions supply the phase; no independent UI waiting flag.
+for (const count of [2, 3]) {
+  const room = new GameRoom('ABC23', 'ca', 1, () => 0)
+  for (let index = 0; index < count; index++) room.addPlayer(String(index), `s${index}`, `t${index}`, `P${index}`)
+  room.start('0')
+  const notice = (playerId: string) => {
+    const view = room.viewFor(playerId)
+    return renderToStaticMarkup(<PlayerRoundStatusNotice phase={multiplayerPhase(view)} status={view.self?.status ?? 'setter'} t={multiplayerTranslations.ca} />)
+  }
+  assert.equal(notice('1'), '')
+  for (let turn = 0; turn < count; turn++) {
+    const setter = String(turn)
+    room.setWord(setter, 'A')
+    const guessers = room.activePlayers.filter((player) => player.id !== setter)
+    room.guess(guessers[0].id, 'A')
+    if (count > 2) assert.match(notice(guessers[0].id), /Espera/)
+    for (const player of guessers.slice(1)) room.guess(player.id, 'A')
+    assert.equal(notice(guessers[0].id), '')
+    if (turn + 1 < count) room.continue(String(turn + 1))
+  }
+  assert.equal(multiplayerPhase(room.viewFor('0')), 'match-over')
+  for (const player of room.activePlayers) room.requestRematch(player.id)
+  assert.equal(multiplayerPhase(room.viewFor('0')), 'choosing-word')
+  assert.equal(notice('1'), '')
+  room.setWord('0', 'A')
+  assert.equal(notice('1'), '')
+}
+const abandoned = new GameRoom('ABC23', 'ca', 1, () => 0)
+abandoned.addPlayer('a', 'sa', 'ta', 'A'); abandoned.addPlayer('b', 'sb', 'tb', 'B')
+abandoned.start('a'); abandoned.disconnect('b')
+assert.equal(abandoned.viewFor('a').round?.status, 'choosing-word')
+assert.equal(multiplayerPhase(abandoned.viewFor('a')), 'match-over', 'match completion overrides retained round state')
+
+for (const scores of [[1, 1], [5, 5, 5, 3, 3, 1], [3, 1, 2, 2]]) {
+  const tiedPlayers = scores.map((score, index) => ({ ...players[0], id: String(index), name: `P${index}`, score }))
+  const expected = scores.map((score) => 1 + scores.filter((other) => other > score).length)
+  const ranked = rankByScore(tiedPlayers)
+  for (const { player, rank } of ranked) assert.equal(rank, expected[Number(player.id)])
+  const sidebar = renderToStaticMarkup(<Scoreboard players={tiedPlayers} setterId={null} currentId="" t={multiplayerTranslations.ca} />)
+  const final = renderToStaticMarkup(<FinalScores players={tiedPlayers} result={{ ranking: tiedPlayers.map((p) => p.id).reverse(), scores: Object.fromEntries(tiedPlayers.map((p) => [p.id, p.score])) }} />)
+  for (const { player, rank } of ranked) {
+    assert.ok(sidebar.includes(`<span class="rank">${rank}</span><span class="player-name">${player.name}</span>`))
+    assert.ok(final.includes(`<span>${rank}. ${player.name}<b>${player.score}</b></span>`))
+  }
+}
+console.log('Audit phase transitions and shared score-tie regressions passed')

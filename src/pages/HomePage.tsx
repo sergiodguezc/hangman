@@ -5,7 +5,8 @@ import { HangmanDrawing } from '../components/HangmanDrawing'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
-import { saveRoomSession, socket } from '../multiplayer/socket'
+import { loadRoomSession, saveRoomSession, socket } from '../multiplayer/socket'
+import { shouldResumeRoomSession } from '../multiplayer/invitations'
 import { DAILY_CHALLENGE_PUBLIC_PATH } from '../daily/challenge'
 
 type Props = {
@@ -44,6 +45,8 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
   const [showIosInstall, setShowIosInstall] = useState(false)
   const [installExpanded, setInstallExpanded] = useState(false)
   const t = multiplayerTranslations[interfaceLanguage]
+  const storedSession = loadRoomSession()
+  const invitationOverridesSession = storedSession && !shouldResumeRoomSession(storedSession.roomCode, invitedRoomCode)
   const isCatalan = interfaceLanguage === 'ca'
   const homeCopy = isCatalan ? {
     multiplayerTitle: 'Multijugador',
@@ -153,6 +156,7 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
             <h1>{t.title}</h1>
             <p>{t.subtitle}</p>
           </div>
+          {invitationOverridesSession && <p role="status">{t.invitationTakesPriority}</p>}
           {invitationStatus === 'loading' && <p className="invitation-loading">{t.invitationLoading}</p>}
           {invitationStatus === 'error' && <div className="invitation-invalid">
             <h2>{t.invitationUnavailable}</h2>

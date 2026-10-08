@@ -3,7 +3,7 @@ import { ALPHABETS, MAX_ERRORS, normalizeGuess } from '../../shared/game'
 import type { Ack, ChatMessage, PlayerGameView } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
 import { Keyboard } from '../components/Keyboard'
-import { Scoreboard } from '../components/Scoreboard'
+import { FinalScores, Scoreboard } from '../components/Scoreboard'
 import { RoomChat } from '../components/RoomChat'
 import { ForgivenessTray } from '../components/ForgivenessTray'
 import { PlayerRoundStatusNotice } from '../components/PlayerRoundStatusNotice'
@@ -12,6 +12,7 @@ import { ObserverSelector } from '../components/ObserverSelector'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
+import { multiplayerPhase } from '../multiplayer/presentation'
 
 type Props = { state: PlayerGameView; interfaceLanguage: 'ca' | 'es'; messages: ChatMessage[]; playerId: string; typingPlayers: { playerId: string; playerName: string }[] }
 
@@ -37,6 +38,7 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
   const [error, setError] = useState('')
   const t = multiplayerTranslations[interfaceLanguage]
   const config = getLanguageConfig(state.gameLanguage)
+  const phase = multiplayerPhase(state)
   const round = state.round
   const roundResults = round?.results ?? []
   const isSetter = round?.setterId === playerId
@@ -49,15 +51,15 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
   const wrong = new Set(observed?.wrongLetters ?? [])
   const displayWords = groupDisplayWord(observed?.displayWord ?? [])
   const wordSizing = { '--longest-word': Math.max(1, ...displayWords.map(({ characters }) => characters.length)) } as CSSProperties
-  const pendingRequests = isSetter ? state.forgivenessRequests.filter((request) => request.status === 'pending') : []
+  const pendingRequests = isSetter && phase === 'guessing' ? state.forgivenessRequests.filter((request) => request.status === 'pending') : []
 
   const handleAck = useCallback((response: Parameters<Ack>[0]) => {
     if (!response.ok) setError(errorMessage(response.error, t))
   }, [t])
   const guess = useCallback((letter: string) => {
-    if (!isGuesser || self?.status !== 'playing' || round?.status !== 'guessing') return
+    if (!isGuesser || self?.status !== 'playing' || phase !== 'guessing') return
     socket.emit('game:guess', { letter }, handleAck)
-  }, [handleAck, isGuesser, round?.status, self?.status])
+  }, [handleAck, isGuesser, phase, self?.status])
 
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
@@ -100,34 +102,34 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
       <Scoreboard players={state.players} setterId={round?.setterId ?? null} currentId={playerId} t={t} />
       <ForgivenessTray requests={pendingRequests} players={state.players} t={t} onDecide={decideForgiveness} />
       <section className="multiplayer-game">
-        {reconnectingPlayers.length > 0 && <div className="form-error" role="status">{t.opponentReconnecting}</div>}
-        {state.reconnectedPlayerName && <div className="role-line" role="status">{t.opponentReconnected}</div>}
-        {roundStatus === 'choosing-word' && <>{round?.number === 1 && <div className="role-line" role="status">{isSetter ? t.youStart : t.playerStarts.replace('{player}', setter?.name ?? '')}</div>}{isSetter ? <form className="word-form" onSubmit={submitWord}>
+        {state.roomStatus === 'active' && reconnectingPlayers.length > 0 && <div className="form-error" role="status">{t.opponentReconnecting}</div>}
+        {state.roomStatus === 'active' && state.reconnectedPlayerName && <div className="role-line" role="status">{t.opponentReconnected}</div>}
+        {phase === 'choosing-word' && <>{round?.number === 1 && <div className="role-line" role="status">{isSetter ? t.youStart : t.playerStarts.replace('{player}', setter?.name ?? '')}</div>}{isSetter ? <form className="word-form" onSubmit={submitWord}>
           <span className="role-badge setter">✎ {t.chooseWord}</span>
           <input type="text" autoFocus maxLength={50} value={word} placeholder={t.secretPlaceholder} autoComplete="off" spellCheck={false} onChange={(e) => setWord(e.target.value)} />
           <p className="word-privacy">{t.wordPrivacy}</p>
           <button className="primary-action">{t.startRound}</button>
         </form> : <div className="phase-message"><div className="thinking">•••</div><h2>{setter?.name} {t.rivalChoosing}</h2></div>}</>}
 
-        {roundStatus === 'guessing' || roundStatus === 'round-over' ? <>
+        {phase === 'guessing' || roundStatus === 'round-over' ? <>
           <div className="role-line">{roundStatus === 'round-over' ? t.roundComplete : isSetter ? t.youChose : self?.status === 'awaiting-forgiveness' ? t.finalErrorGuesser : self?.status === 'solved' ? t.youSolved : self?.status === 'failed' || self?.status === 'eliminated' ? t.youAreOut : t.yourGuess}</div>
-          {isSetter && <ObserverSelector players={state.players.filter((player) => player.id !== playerId)} selectedPlayerId={state.observedPlayerId} t={t} onSelect={observePlayer} />}
+          {isSetter && state.roomStatus === 'active' && <ObserverSelector players={state.players.filter((player) => player.id !== playerId)} selectedPlayerId={state.observedPlayerId} t={t} onSelect={observePlayer} />}
           {observed ? <div className="game-columns"><div className="drawing-panel"><HangmanDrawing errors={observed.errors} label={t.errors} />
             <div className="error-copy"><span>{t.errors}</span><strong>{observed.errors} / {MAX_ERRORS}{observed.forgiven ? ' · ♥' : ''}</strong></div></div><div className="guess-area">
               <div className="multiplayer-word-scroll" tabIndex={0} style={wordSizing} aria-label={config.translations.progressLabel}><div className="multiplayer-word">{displayWords.map(({ start, characters }) => <span className="multiplayer-word-group" key={start}>{characters.map((character, offset) => <span key={start + offset} className={character === '_' ? 'blank' : normalizeGuess(character, state.gameLanguage) ? 'letter' : 'punctuation'}>{character === '_' ? '\u00a0' : character}</span>)}</span>)}</div></div>
               {isSetter && state.privateWord && <p className="setter-secret">{t.youChose}: <strong>{state.privateWord}</strong></p>}
-              {!isSetter && self?.status === 'awaiting-forgiveness' && <div className="forgiveness-wait" role="status"><strong>{t.finalErrorGuesser}</strong><span>{t.waitingForgiveness}</span></div>}
-              {!isSetter && self && <PlayerRoundStatusNotice status={self.status} t={t} />}
+              {phase === 'guessing' && !isSetter && self?.status === 'awaiting-forgiveness' && <div className="forgiveness-wait" role="status"><strong>{t.finalErrorGuesser}</strong><span>{t.waitingForgiveness}</span></div>}
+              {!isSetter && self && <PlayerRoundStatusNotice phase={phase} status={self.status} t={t} />}
               {roundStatus === 'round-over' && <div className="round-result"><strong>{t.roundComplete}</strong><span>{t.wordWas}: {state.privateWord}</span></div>}
               <div className="incorrect-list"><span>{t.incorrect}</span><strong>{observed.wrongLetters.length ? observed.wrongLetters.join(' · ') : t.none}</strong></div>
-              {!isSetter && <Keyboard alphabet={ALPHABETS[state.gameLanguage]} guesses={guessed} incorrect={wrong} disabled={self?.status !== 'playing' || roundStatus !== 'guessing'} label={t.keyboard} onGuess={guess} />}
+              {!isSetter && <Keyboard alphabet={ALPHABETS[state.gameLanguage]} guesses={guessed} incorrect={wrong} disabled={self?.status !== 'playing' || phase !== 'guessing'} label={t.keyboard} onGuess={guess} />}
               {roundStatus === 'round-over' && round?.nextSetterId === playerId && state.roomStatus === 'active' && <button className="primary-action" onClick={() => socket.emit('round:continue', handleAck)}>{t.next}</button>}
               {roundStatus === 'round-over' && round?.nextSetterId !== playerId && state.roomStatus === 'active' && <p className="continue-note">{playersById.get(round?.nextSetterId ?? '')?.name} · {t.next}</p>}
             </div></div> : <div className="phase-message"><h2>{t.selectPlayer}</h2></div>}
           {roundStatus === 'round-over' && roundResults.length > 0 && <RoundResults results={roundResults} players={state.players} t={t} />}
         </> : null}
 
-        {state.roomStatus === 'match-over' && <div className="match-result"><span className="role-badge">{t.matchComplete}</span><h2>{t.finalScore}</h2><div className="final-scores">{(state.matchResult?.ranking ?? state.players.map((player) => player.id)).map((id, index) => <span key={id}>{index + 1}. {playersById.get(id)?.name}<b>{playersById.get(id)?.score ?? 0}</b></span>)}</div>
+        {state.roomStatus === 'match-over' && <div className="match-result"><span className="role-badge">{t.matchComplete}</span><h2>{t.finalScore}</h2><FinalScores players={state.players} result={state.matchResult} />
           {!state.match.rematchReadyPlayerIds.includes(playerId) ? <button className="primary-action" onClick={() => socket.emit('match:rematch', handleAck)}>{t.rematch}</button> : <p>{t.waitingRematch}</p>}
           {state.match.rematchReadyPlayerIds.some((id) => id !== playerId) && !state.match.rematchReadyPlayerIds.includes(playerId) && <p>{t.opponentWantsRematch}</p>}
         </div>}

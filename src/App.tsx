@@ -10,7 +10,7 @@ import { HowToPlayPage } from './pages/HowToPlayPage'
 import { InterfaceLanguageSelector } from './components/InterfaceLanguageSelector'
 import { GlobalNavigation } from './components/GlobalNavigation'
 import { INTERFACE_LANGUAGE_STORAGE_KEY, readInterfaceLanguage } from './localization'
-import { normalizeInvitationCode } from './multiplayer/invitations'
+import { normalizeInvitationCode, shouldResumeRoomSession } from './multiplayer/invitations'
 import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import { normalizeRoute, type Route } from './routing'
 import './App.css'
@@ -105,9 +105,17 @@ function App() {
       setRoute(next)
       setView(routeDescriptions[next].mode)
       setInvitedRoomCode(next === '/multijugador/' ? readInvitationCode() : null)
+      const session = loadRoomSession()
+      if (session && !shouldResumeRoomSession(session.roomCode, readInvitationCode())) {
+        setRoom(null); setMessages([]); setTypingPlayers({}); setPlayerId(''); setNotice('')
+        socket.disconnect().connect()
+      }
     }
     window.addEventListener('popstate', onPopState)
-    const update = (state: PlayerGameView) => { setRoom(state); setGameLanguage(state.gameLanguage); localStorage.setItem('hangman-game-language', state.gameLanguage) }
+    const update = (state: PlayerGameView) => {
+      if (!shouldResumeRoomSession(state.code, readInvitationCode())) return
+      setRoom(state); setGameLanguage(state.gameLanguage); localStorage.setItem('hangman-game-language', state.gameLanguage)
+    }
     socket.on('room:state', update)
     const history = (chatMessages: ChatMessage[]) => setMessages(chatMessages)
     const message = (chatMessage: ChatMessage) => setMessages((current) => [...current, chatMessage].slice(-50))
@@ -124,8 +132,9 @@ function App() {
     socket.on('chat:typing', typing)
     const resume = () => {
       const session = loadRoomSession()
-      if (!session) return
+      if (!session || !shouldResumeRoomSession(session.roomCode, readInvitationCode())) return
       socket.emit('room:resume', session, (response) => {
+        if (!shouldResumeRoomSession(session.roomCode, readInvitationCode()) || loadRoomSession()?.reconnectToken !== session.reconnectToken) return
         if (response.ok) { setPlayerId(session.playerId); setRoom(response.data); return }
         clearRoomSession(); setPlayerId(''); setRoom(null); setMessages([]); setNotice(response.error)
       })

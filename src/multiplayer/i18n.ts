@@ -1,6 +1,7 @@
 import type { Language } from '../../shared/game'
 
 const es = {
+  invitationTakesPriority: 'Has abierto una invitación a otra sala. La sala anterior no se retomará automáticamente.',
   title: 'Penjat', subtitle: 'El clásico juego de palabras, ahora para todos', name: 'Tu nombre',
   namePlaceholder: 'Escribe tu nombre', language: 'Idioma', gameLanguage: 'Idioma de la partida', gameLanguageHint: 'Elige el idioma de la palabra.', create: 'Crear partida', join: 'Unirse a partida',
   roomCode: 'Código de sala', codePlaceholder: 'ABCDE', waiting: 'Esperando jugadores…', waitingToStart: 'La sala está lista para empezar.', copy: 'Copiar código', copied: 'Copiado',
@@ -60,6 +61,7 @@ const es = {
 }
 
 const ca: typeof es = {
+  invitationTakesPriority: 'Has obert una invitació a una altra sala. La sala anterior no es reprendrà automàticament.',
   title: 'Penjat', subtitle: 'El joc de paraules de sempre, ara per a tothom', name: 'El teu nom',
   namePlaceholder: 'Escriu el teu nom', language: 'Llengua', gameLanguage: 'Idioma de la partida', gameLanguageHint: 'Tria l’idioma de la paraula.', create: 'Crea una partida', join: "Uneix-te a una partida",
   roomCode: 'Codi de sala', codePlaceholder: 'ABCDE', waiting: 'Esperant jugadors…', waitingToStart: 'La sala està preparada per començar.', copy: 'Copia el codi', copied: 'Codi copiat!',
