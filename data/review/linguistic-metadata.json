@@ -1,1 +1,5986 @@
-{}
+{
+  "abans": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "abril": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time and dates",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "accident": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "everyday events / incidents",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "acció": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "general abstract nouns",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "accés": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "daily life / access / technology",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "acompanyar": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "daily activities / social interaction",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "activitat": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "general everyday actions and events",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "actualment": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "administració": {
+    "cefr": "B1",
+    "confidence": 0.78,
+    "thematicCategory": "public administration / institutions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "afegir": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "general actions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "afirmar": {
+    "cefr": "B1",
+    "confidence": 0.92,
+    "thematicCategory": "communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "agost": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "agradable": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "personal_description",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ahir": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "aigua": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "basic nature and daily life",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ajuda": {
+    "cefr": "A1",
+    "confidence": 0.96,
+    "thematicCategory": "daily life / assistance",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ajuntament": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "public administration / city government",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "alemany": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "languages",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "algú": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "pronouns and indefinite reference",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "allò": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "grammar and reference",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ambient": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "general surroundings / atmosphere",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "amic": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "people and relationships",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ampolla": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "food and drink / everyday objects",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "amunt": {
+    "cefr": "A1",
+    "confidence": 0.97,
+    "thematicCategory": "spatial direction",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "anar": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "movement/transport",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "anglès": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "languages",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "animal": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "animals",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "anomenat": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "general description / reference",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "anterior": {
+    "cefr": "A2",
+    "confidence": 0.86,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "antic": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "time",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "aparèixer": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "general action/state",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "aprendre": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "education/learning",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "aprofitar": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "actions and decision-making",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "arbre": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "arma": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "crime_and_security",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "arribar": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "movement/travel",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "article": {
+    "cefr": "B2",
+    "confidence": 0.84,
+    "thematicCategory": "media and publishing",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "assegurar": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "assentir": {
+    "cefr": "A2",
+    "confidence": 0.78,
+    "thematicCategory": "communication/body language",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "assenyalar": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "asseure": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "daily actions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "assumpte": {
+    "cefr": "B1",
+    "confidence": 0.84,
+    "thematicCategory": "general communication / affairs",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "atac": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "conflict/military",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "atenció": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "general abstract nouns / interpersonal communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "augment": {
+    "cefr": "B2",
+    "confidence": 0.79,
+    "thematicCategory": "general abstract quantity/change",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "aviat": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "avui": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "barret": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "clothing",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "barri": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "places_and_geography",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "bisbe": {
+    "cefr": "B1",
+    "confidence": 0.84,
+    "thematicCategory": "religion",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "blanc": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "colors",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "boca": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "body",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "boig": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "personality/mental state",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "bosc": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "botiga": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "shopping/commerce",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "braç": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "body",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "breu": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "time/duration",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "buscar": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "everyday actions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "butxaca": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "clothing and personal objects",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cadira": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "home/furniture",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cafè": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "food and drink",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "caixa": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "objects/containers",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cambra": {
+    "cefr": "B2",
+    "confidence": 0.79,
+    "thematicCategory": "politics/institutions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "camisa": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "clothing",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "camp": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "nature / geography",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cançó": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "music",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "capa": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "clothing",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "capacitat": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "general abstract noun",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "capaç": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "personal abilities",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "carn": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "food",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "carrer": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "places and town",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "caràcter": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "personality and description",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "casa": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "home and living",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "castell": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "buildings & places",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "català": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "languages",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "caure": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "movement and physical actions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "causa": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "abstract relations / reasons",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cavall": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "animals",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cent": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "centre": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "places and institutions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cert": {
+    "cefr": "A1",
+    "confidence": 0.97,
+    "thematicCategory": "basic evaluation / truth",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cinc": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cinquanta": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ciutat": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "places/settlement",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ciència": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "education/science",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "clar": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "description and manner",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "clarament": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "general descriptors",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "classe": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "education",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "club": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "leisure and social organizations",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cobert": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "descriptions and physical states",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "coberta": {
+    "cefr": "B1",
+    "confidence": 0.78,
+    "thematicCategory": "transport/maritime",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "comarca": {
+    "cefr": "B2",
+    "confidence": 0.91,
+    "thematicCategory": "administration and geography",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "començament": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "comerç": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "economy and business",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "completament": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "degree/intensity",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "comprar": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "daily life / shopping",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "comprovar": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "general actions / verification",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "concepte": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "abstract thought / ideas",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "condició": {
+    "cefr": "B1",
+    "confidence": 0.92,
+    "thematicCategory": "general abstract nouns / requirements",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "coneixement": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "education/abstract concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "congrés": {
+    "cefr": "B1",
+    "confidence": 0.87,
+    "thematicCategory": "meetings and events",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "conscient": {
+    "cefr": "B2",
+    "confidence": 0.83,
+    "thematicCategory": "mental states and personality",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "conseqüència": {
+    "cefr": "B1",
+    "confidence": 0.92,
+    "thematicCategory": "cause and effect",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "contacte": {
+    "cefr": "A2",
+    "confidence": 0.87,
+    "thematicCategory": "communication/social relations",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "content": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "emotions and feelings",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "contingut": {
+    "cefr": "B2",
+    "confidence": 0.84,
+    "thematicCategory": "general",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "continuació": {
+    "cefr": "B1",
+    "confidence": 0.92,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "contrari": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "describing relations/opposites",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "conversa": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "convèncer": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "communication and persuasion",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "copa": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "objects",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "corrent": {
+    "cefr": "B1",
+    "confidence": 0.89,
+    "thematicCategory": "home/environment",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "costat": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "space/location",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "costum": {
+    "cefr": "B1",
+    "confidence": 0.89,
+    "thematicCategory": "everyday life / habits",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cotxe": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "transport",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "creació": {
+    "cefr": "B2",
+    "confidence": 0.93,
+    "thematicCategory": "general abstract concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "creixement": {
+    "cefr": "B1",
+    "confidence": 0.96,
+    "thematicCategory": "general development / biology",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "creu": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "religion / symbols",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "creure": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "cognition/belief",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "crisi": {
+    "cefr": "B1",
+    "confidence": 0.97,
+    "thematicCategory": "society/economy",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "crit": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cultura": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "society and culture",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "cultural": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "culture and society",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "curiositat": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "cognition and traits",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "càrrec": {
+    "cefr": "B2",
+    "confidence": 0.78,
+    "thematicCategory": "work and administration",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "d-altra-banda": {
+    "cefr": "B1",
+    "confidence": 0.95,
+    "thematicCategory": "discourse markers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "damunt": {
+    "cefr": "A1",
+    "confidence": 0.97,
+    "thematicCategory": "spatial relations / prepositions and adverbs",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "darrer": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "time/sequence",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "data": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "time and dates",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "davant": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "space and location",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "de-tant-en-tant": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "frequency and time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "decidir": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "decision and choice",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "decidit": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "personality/attitude",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "defensar": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "safety and conflict",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "deixar": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "general actions / everyday communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "demà": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "desaparèixer": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "appearance/visibility",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "descobrir": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "general",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "desembre": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time and dates",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "desig": {
+    "cefr": "B1",
+    "confidence": 0.97,
+    "thematicCategory": "emotions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "despertar": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "daily routines and sleep",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "destí": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "abstract concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "diari": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "media and communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "diferent": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "descriptive adjectives",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "difícil": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "general adjective / evaluation",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "dins": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "spatial relations",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "directament": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "manner/time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "director": {
+    "cefr": "A2",
+    "confidence": 0.78,
+    "thematicCategory": "work and institutions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "dissabte": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time and calendar",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "diumenge": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "time and calendar",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "doble": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "quantities and measurement",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "dolor": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "health/body",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "domini": {
+    "cefr": "C1",
+    "confidence": 0.91,
+    "thematicCategory": "law and ownership",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "dona": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "people / family",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "dotze": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "dreta": {
+    "cefr": "A1",
+    "confidence": 0.96,
+    "thematicCategory": "directions and location",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "dues": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "economia": {
+    "cefr": "A2",
+    "confidence": 0.84,
+    "thematicCategory": "money and finance",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "econòmic": {
+    "cefr": "B1",
+    "confidence": 0.89,
+    "thematicCategory": "economy and society",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "edat": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "personal information / time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "edició": {
+    "cefr": "B1",
+    "confidence": 0.74,
+    "thematicCategory": "media/publications/technology",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "educació": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "society/education",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "empresa": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "work and business",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "encendre": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "everyday actions and home/technology",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "endavant": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "direction/movement and discourse markers",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "enemic": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "people and social relations",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "energia": {
+    "cefr": "A2",
+    "confidence": 0.78,
+    "thematicCategory": "general",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "enllà": {
+    "cefr": "B1",
+    "confidence": 0.84,
+    "thematicCategory": "space/direction",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "enmig": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "space / location",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "enorme": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "descriptive adjectives",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "enrere": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "spatial direction / time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ensenyar": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "education",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "entendre": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "cognition / communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "equip": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "work and collaboration",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "escapar": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "movement and actions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "escola": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "education",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "escriptor": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "people/professions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "esforç": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "effort and achievement",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "església": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "places and buildings",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "espai": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "space/place",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "espanyol": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nationality and origin",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "especial": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "descriptors/qualities",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "especialment": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "general language",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "espectacle": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "arts and entertainment",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "esperit": {
+    "cefr": "C1",
+    "confidence": 0.88,
+    "thematicCategory": "abstract human qualities / psychology",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "esquena": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "body",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "esquerra": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "direction and body",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "estació": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "transport",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "estat": {
+    "cefr": "B1",
+    "confidence": 0.96,
+    "thematicCategory": "government/politics",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "estil": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "general description / personality",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "estiu": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time and seasons",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "estona": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "estrany": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "description/qualities",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "estructura": {
+    "cefr": "B2",
+    "confidence": 0.88,
+    "thematicCategory": "abstract concepts / organization",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "evident": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "description/assessment",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "evidentment": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "discourse markers",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "evitar": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "general actions / problem solving",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "evolució": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "abstract process / change over time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "exactament": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "general",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "existència": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "abstract concepts / life",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "exterior": {
+    "cefr": "A2",
+    "confidence": 0.89,
+    "thematicCategory": "space and location",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "exèrcit": {
+    "cefr": "A2",
+    "confidence": 0.86,
+    "thematicCategory": "society & institutions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "família": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "people & family",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "febrer": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time and calendar",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "feina": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "work and daily life",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ferro": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "materials/metals",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "festa": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "social life / celebrations",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "fill": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "family",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "final": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "finestra": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "home and environment",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "fons": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "space/places",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "fora": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "space / location",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "format": {
+    "cefr": "A2",
+    "confidence": 0.76,
+    "thematicCategory": "technology/media",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "fosc": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "describing light/visibility",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "foscor": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "light and darkness",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "francès": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nationalities",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "frase": {
+    "cefr": "A1",
+    "confidence": 0.97,
+    "thematicCategory": "language and communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "fred": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "weather and physical sensations",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "front": {
+    "cefr": "B2",
+    "confidence": 0.88,
+    "thematicCategory": "politics and conflict",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "fugir": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "movement / safety / escape",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "funció": {
+    "cefr": "A2",
+    "confidence": 0.84,
+    "thematicCategory": "entertainment/culture",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "fusta": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "materials/nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "futur": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "fàcil": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "general adjectives / evaluation",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "gairebé": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "quantifiers and degree",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "gana": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "food and body",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "gener": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "gens": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "quantity and degree",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "gent": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "people",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "germà": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "family",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "gest": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "body language / communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "govern": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "politics/government",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "greu": {
+    "cefr": "B1",
+    "confidence": 0.94,
+    "thematicCategory": "general adjectives / seriousness",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "guerra": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "conflict and politics",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "habitació": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "home and living spaces",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "habitual": {
+    "cefr": "B1",
+    "confidence": 0.94,
+    "thematicCategory": "general description",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "hivern": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time and seasons",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "honor": {
+    "cefr": "B2",
+    "confidence": 0.78,
+    "thematicCategory": "abstract qualities / social values",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "hora": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "hospital": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "health",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "hotel": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "travel/accommodation",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "humà": {
+    "cefr": "A2",
+    "confidence": 0.89,
+    "thematicCategory": "human traits / society",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "idea": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "cognition",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "igual": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "general description/comparison",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "igualment": {
+    "cefr": "B1",
+    "confidence": 0.87,
+    "thematicCategory": "grammar/discourse markers",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "illa": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "geography/nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "immediatament": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "important": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "general evaluation",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "importància": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "abstract qualities and evaluation",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "impossible": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "general adjectives / evaluation",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "industrial": {
+    "cefr": "B1",
+    "confidence": 0.83,
+    "thematicCategory": "society/economy",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "influència": {
+    "cefr": "B1",
+    "confidence": 0.94,
+    "thematicCategory": "abstract social relations",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "informació": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "communication/general knowledge",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "instant": {
+    "cefr": "A2",
+    "confidence": 0.84,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "institut": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "education",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "intenció": {
+    "cefr": "B1",
+    "confidence": 0.97,
+    "thematicCategory": "abstract concepts / intentions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "intent": {
+    "cefr": "B2",
+    "confidence": 0.88,
+    "thematicCategory": "abstract actions and plans",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "intentar": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "actions and effort",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "interessant": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "general description/opinion",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "internacional": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "society and politics",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "investigació": {
+    "cefr": "B2",
+    "confidence": 0.91,
+    "thematicCategory": "education and research",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "jardí": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "home and living",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "juliol": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time and calendar",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "juntament": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "time/sequence & manner",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "juny": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "just": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "quantity and sufficiency",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "jutge": {
+    "cefr": "B1",
+    "confidence": 0.95,
+    "thematicCategory": "law and justice",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "lentament": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "adverbs of manner / tempo",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llac": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llarg": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "describing physical properties / time",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llavors": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "time/connectors",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llegir": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "education and literacy",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llengua": {
+    "cefr": "A1",
+    "confidence": 0.93,
+    "thematicCategory": "communication/languages",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llenguatge": {
+    "cefr": "B2",
+    "confidence": 0.93,
+    "thematicCategory": "education/linguistics",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llevat": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "food and cooking",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llibertat": {
+    "cefr": "B1",
+    "confidence": 0.95,
+    "thematicCategory": "abstract concepts / rights",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llibre": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "education/reading",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "llista": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "general vocabulary",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "lliure": {
+    "cefr": "A2",
+    "confidence": 0.86,
+    "thematicCategory": "general description / social state",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "lluna": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nature/space",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "lluny": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "space/distance",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "maig": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "calendar",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "major": {
+    "cefr": "A2",
+    "confidence": 0.82,
+    "thematicCategory": "age/comparison",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "majoria": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "quantity and comparison",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "malalt": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "health",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mare": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "family",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "marit": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "family",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "març": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "matèria": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "education",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "matí": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time of day",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "meitat": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "quantity and measurement",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "menjador": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "house and home",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ment": {
+    "cefr": "C2",
+    "confidence": 0.93,
+    "thematicCategory": "abstract mental faculties",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mentrestant": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "menys": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "quantity/comparison",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mercat": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "shopping and commerce",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "merda": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "body and waste / colloquial evaluation",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "metge": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "health",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "migdia": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "millor": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "descriptors/quality",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "minut": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mirada": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "body and appearance",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mirar": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "perception/observation",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mitjançant": {
+    "cefr": "B2",
+    "confidence": 0.86,
+    "thematicCategory": "language and communication",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "molts": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "quantity",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "moment": {
+    "cefr": "A1",
+    "confidence": 0.96,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "morta": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "life and death",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mostra": {
+    "cefr": "B1",
+    "confidence": 0.89,
+    "thematicCategory": "general",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mostrar": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "communication/actions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "motiu": {
+    "cefr": "B1",
+    "confidence": 0.86,
+    "thematicCategory": "abstract relations and explanation",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "moure": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "basic actions and movement",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "moviment": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "general actions and states",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mundial": {
+    "cefr": "A2",
+    "confidence": 0.86,
+    "thematicCategory": "international/global",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "municipi": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "administration and local government",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "museu": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "places and public buildings",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "mínim": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "quantity/measurement",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "nacional": {
+    "cefr": "B1",
+    "confidence": 0.95,
+    "thematicCategory": "society/politics",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "nadal": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "holidays and celebrations",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "natural": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "general description / qualities",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "naturalesa": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "nature/environment",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "naturalment": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "general",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "necessari": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "general adjectives / necessity",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "negar": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ningú": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "pronouns and quantifiers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "nombre": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "numbers and quantities",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "nord": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "directions and geography",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "normal": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "general description / qualities",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "normalment": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "time/frequency",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "nosaltres": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "grammar_pronouns",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "novel-la": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "literature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "novembre": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "time and calendar",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "néixer": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "life events",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "obert": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "descriptors/physical state",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "objectiu": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "goals and intentions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "oblidar": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "daily life / memory",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "obrir": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "everyday actions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "observar": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "perception and observation",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "obtenir": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "general actions / achievement",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "octubre": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "time and calendar",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ombra": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "omplir": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "general actions / containers",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "oncle": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "family",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "onze": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ordre": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "everyday communication / instructions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "orella": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "body parts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "organització": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "social organization / administration",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "origen": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "abstract concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "original": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "general description / qualities",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "palau": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "places/buildings",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pantalons": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "clothing",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "paper": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "everyday objects/materials",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "paraula": {
+    "cefr": "A1",
+    "confidence": 0.94,
+    "thematicCategory": "basic communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pare": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "family",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "parell": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "quantity and measurement",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "parella": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "people and relationships",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "paret": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "home/buildings",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "parlament": {
+    "cefr": "B1",
+    "confidence": 0.96,
+    "thematicCategory": "politics/government",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "parlar": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "participació": {
+    "cefr": "B1",
+    "confidence": 0.87,
+    "thematicCategory": "society/civic engagement",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "passadís": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "home/buildings",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pati": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "home and living",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pausa": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "time/activities",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pel-lícula": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "entertainment and media",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pensament": {
+    "cefr": "A2",
+    "confidence": 0.84,
+    "thematicCategory": "mind and abstract concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "perfectament": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "manner/intensity",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "perill": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "safety/risk",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "permetre": {
+    "cefr": "B1",
+    "confidence": 0.95,
+    "thematicCategory": "general communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "persona": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "people",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "personal": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "workplace / people",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "personatge": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "people",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "període": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "petit": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "descriptive adjectives",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "petó": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "body/relationships",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pintor": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "occupations and jobs",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pitjor": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "description/qualities",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "plaer": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "emotions and feelings",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "platja": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "places and nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "plaça": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "city and public places",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pluja": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "weather",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "població": {
+    "cefr": "B1",
+    "confidence": 0.94,
+    "thematicCategory": "society/demographics",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pocs": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "quantity",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "poesia": {
+    "cefr": "A2",
+    "confidence": 0.76,
+    "thematicCategory": "arts and literature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "policia": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "public services / law enforcement",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "popular": {
+    "cefr": "B1",
+    "confidence": 0.94,
+    "thematicCategory": "society/culture",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "porta": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "home",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "posició": {
+    "cefr": "B1",
+    "confidence": 0.85,
+    "thematicCategory": "social and abstract status",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "possibilitat": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "general abstraction",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "possible": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "general description / modality",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "posteriorment": {
+    "cefr": "B2",
+    "confidence": 0.9,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "potser": {
+    "cefr": "A1",
+    "confidence": 0.96,
+    "thematicCategory": "general language / modality",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "precisament": {
+    "cefr": "B1",
+    "confidence": 0.94,
+    "thematicCategory": "degree and precision",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pregunta": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "preguntar": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "premi": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "everyday life / awards",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "premsa": {
+    "cefr": "B1",
+    "confidence": 0.82,
+    "thematicCategory": "tools & machinery",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "present": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "president": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "people and society",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pressa": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "everyday actions/time management",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "presència": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "general social presence/attendance",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "presó": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "law and justice",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "preu": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "shopping and money",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "primer": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "number and order",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "principal": {
+    "cefr": "A2",
+    "confidence": 0.89,
+    "thematicCategory": "general description / importance",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "principi": {
+    "cefr": "A2",
+    "confidence": 0.99,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "probablement": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "adverbs of probability",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "problema": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "general abstract situations",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "procés": {
+    "cefr": "B1",
+    "confidence": 0.92,
+    "thematicCategory": "general abstract nouns",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "produir": {
+    "cefr": "B1",
+    "confidence": 0.92,
+    "thematicCategory": "general action/result/cause",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "professional": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "work and professions",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "professor": {
+    "cefr": "A1",
+    "confidence": 0.88,
+    "thematicCategory": "education",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "projecte": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "work/education/planning",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "prop": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "space and location",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "propi": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "descriptors/ownership & identity",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "propietat": {
+    "cefr": "B1",
+    "confidence": 0.84,
+    "thematicCategory": "law and ownership",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "proposta": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "communication/ideas",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "prou": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "quantity and degree",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "província": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "geography / administration",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pràcticament": {
+    "cefr": "B1",
+    "confidence": 0.92,
+    "thematicCategory": "degree/approximation",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "príncep": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "people and society",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "pujar": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "movement / change / quantities",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "públic": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "society/culture",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "qualitat": {
+    "cefr": "B1",
+    "confidence": 0.94,
+    "thematicCategory": "abstract properties / personal traits",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "quantitat": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "measurement and quantity",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "quaranta": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "quart": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "quantity and fractions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "quasi": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "degree/approximation",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "quatre": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "quinze": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "real": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "general description",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "realitat": {
+    "cefr": "B1",
+    "confidence": 0.95,
+    "thematicCategory": "abstract concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "realment": {
+    "cefr": "A2",
+    "confidence": 0.86,
+    "thematicCategory": "general",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "rebre": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "communication and transactions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "recollir": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "everyday actions / household",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "redacció": {
+    "cefr": "B2",
+    "confidence": 0.86,
+    "thematicCategory": "writing/communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "regió": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "geography",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "regne": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "politics/government",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "rellotge": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "everyday objects / time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "remei": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "health/problem-solving",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "república": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "politics and government",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "respirar": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "body and health",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "reunió": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "work and social life",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "risc": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "abstract concepts / safety",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ritme": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "general concepts / time and action",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "rosa": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nature/flowers",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ràbia": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "emotions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "ràpidament": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "time and manner",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "règim": {
+    "cefr": "B2",
+    "confidence": 0.87,
+    "thematicCategory": "society_law_government",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sala": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "house and home / public spaces",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "salut": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "health",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sang": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "body",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sector": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "society/economy",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "segle": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "seguir": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "movement / general actions",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "segur": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "certainty/safety",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "segurament": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "certainty/probability",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "seguretat": {
+    "cefr": "B1",
+    "confidence": 0.95,
+    "thematicCategory": "abstract/social",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "següent": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "seient": {
+    "cefr": "A1",
+    "confidence": 0.97,
+    "thematicCategory": "everyday objects / furniture",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "seixanta": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "semblar": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "describing and judging appearance/impression",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sempre": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time/frequency",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sensació": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "perception/feelings",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sentiment": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "emotions and feelings",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sentit": {
+    "cefr": "B2",
+    "confidence": 0.92,
+    "thematicCategory": "body and perception",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "senyal": {
+    "cefr": "A2",
+    "confidence": 0.89,
+    "thematicCategory": "communication/signs",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "serra": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "geography/nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "servir": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "general actions / use",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "setembre": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time and calendar",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "setmana": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "silenci": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "everyday life / sounds",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "simple": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "descriptors and qualities",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "simplement": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "function_and_degree",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "situació": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "general life / circumstances",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "social": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "society",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "societat": {
+    "cefr": "B1",
+    "confidence": 0.89,
+    "thematicCategory": "society",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sola": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "descriptive states / people",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "solament": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "quantification / restriction",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "solució": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "problem solving",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sopar": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "food and meals",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "soroll": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "everyday environment and sounds",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sorra": {
+    "cefr": "A2",
+    "confidence": 0.99,
+    "thematicCategory": "nature/materials",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sort": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "general concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sortir": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "movement and location",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sostre": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "house and home",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "sovint": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "frequency/time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "suau": {
+    "cefr": "B1",
+    "confidence": 0.82,
+    "thematicCategory": "adjectives of quality / intensity",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "superfície": {
+    "cefr": "A2",
+    "confidence": 0.86,
+    "thematicCategory": "space/materials/nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "superior": {
+    "cefr": "A2",
+    "confidence": 0.79,
+    "thematicCategory": "descriptive qualities / evaluation",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tampoc": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "function words / adverbs of negation",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tard": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "time",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "teatre": {
+    "cefr": "A1",
+    "confidence": 0.93,
+    "thematicCategory": "arts and entertainment",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "telèfon": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "technology and communication",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tema": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "communication/general discourse",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "temple": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "religion",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "temporada": {
+    "cefr": "B1",
+    "confidence": 0.87,
+    "thematicCategory": "time and seasons",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "temps": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "teoria": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "education/science",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "terme": {
+    "cefr": "C1",
+    "confidence": 0.79,
+    "thematicCategory": "abstract concepts / time and limits",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "terreny": {
+    "cefr": "B1",
+    "confidence": 0.81,
+    "thematicCategory": "nature/land/scenery",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "text": {
+    "cefr": "A1",
+    "confidence": 0.95,
+    "thematicCategory": "communication and media",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tipus": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "general",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tornar": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "movement/change",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "totalment": {
+    "cefr": "A2",
+    "confidence": 0.91,
+    "thematicCategory": "general description / degree",
+    "partOfSpeech": "adverb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tractament": {
+    "cefr": "B2",
+    "confidence": 0.85,
+    "thematicCategory": "general abstract / interpersonal / arts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tranquil": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "personal qualities / emotions",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "treball": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "work",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "treballar": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "work and daily routine",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tren": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "transport",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "tres": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "títol": {
+    "cefr": "A2",
+    "confidence": 0.94,
+    "thematicCategory": "education/culture",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "una-mica": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "quantity/degree",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "unió": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "social relations / abstract concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "utilitzar": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "everyday actions / use and manipulation",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vaixell": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "transport",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "valencià": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "geography and identity",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vall": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "geography/nature",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vegada": {
+    "cefr": "A1",
+    "confidence": 0.98,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "vocabulary-repair-final-cefr-recheck-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vell": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "descriptors of age",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vent": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "nature/weather",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "verd": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "colors",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vergonya": {
+    "cefr": "A2",
+    "confidence": 0.92,
+    "thematicCategory": "emotions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "veritat": {
+    "cefr": "A2",
+    "confidence": 0.98,
+    "thematicCategory": "abstract concepts",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vermell": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "colors",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "versió": {
+    "cefr": "B1",
+    "confidence": 0.93,
+    "thematicCategory": "technology and media",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "viatge": {
+    "cefr": "A2",
+    "confidence": 0.96,
+    "thematicCategory": "travel",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "victòria": {
+    "cefr": "A2",
+    "confidence": 0.97,
+    "thematicCategory": "competition and success",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vida": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "basic life and existence",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vila": {
+    "cefr": "B1",
+    "confidence": 0.86,
+    "thematicCategory": "places and settlements",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vint": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "violència": {
+    "cefr": "B1",
+    "confidence": 0.91,
+    "thematicCategory": "social issues / conflict",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "visió": {
+    "cefr": "B2",
+    "confidence": 0.87,
+    "thematicCategory": "abstract concepts / thinking",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "voler": {
+    "cefr": "A1",
+    "confidence": 0.92,
+    "thematicCategory": "basic communication",
+    "partOfSpeech": "verb",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "voltant": {
+    "cefr": "A2",
+    "confidence": 0.86,
+    "thematicCategory": "space/location",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "volum": {
+    "cefr": "B1",
+    "confidence": 0.88,
+    "thematicCategory": "books/publishing",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "voluntat": {
+    "cefr": "B1",
+    "confidence": 0.89,
+    "thematicCategory": "abstract qualities and intentions",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vosaltres": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "pronouns / personal reference",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vostre": {
+    "cefr": "A2",
+    "confidence": 0.88,
+    "thematicCategory": "grammar & pronouns / possession",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "vuit": {
+    "cefr": "A1",
+    "confidence": 0.99,
+    "thematicCategory": "numbers",
+    "partOfSpeech": "other",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "àmbit": {
+    "cefr": "B1",
+    "confidence": 0.84,
+    "thematicCategory": "abstract domains / scope",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "àrea": {
+    "cefr": "B1",
+    "confidence": 0.9,
+    "thematicCategory": "space / abstract domains",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "època": {
+    "cefr": "A2",
+    "confidence": 0.9,
+    "thematicCategory": "time",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "èxit": {
+    "cefr": "A2",
+    "confidence": 0.93,
+    "thematicCategory": "general abstract result/outcome",
+    "partOfSpeech": "noun",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "últim": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "time and sequence",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  },
+  "únic": {
+    "cefr": "A2",
+    "confidence": 0.95,
+    "thematicCategory": "general description / quantity",
+    "partOfSpeech": "adjective",
+    "provenance": {
+      "source": "cefr-full-544-output.json",
+      "version": "vocabulary-v1",
+      "method": "completed-cefr-classification-with-targeted-rechecks"
+    }
+  }
+}

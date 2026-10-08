@@ -5,9 +5,9 @@ import { HangmanDrawing } from '../components/HangmanDrawing'
 import { HangmanWord } from '../components/HangmanWord'
 import { Keyboard } from '../components/Keyboard'
 import { LearningResultCard } from '../components/LearningResultCard'
-import { applyLearningGuess, createLearningRound, learningResultToAttemptResult, levelGroupFromStoredSelection, selectNextEntry, summarizeLearningHistory } from '../learning/game'
+import { applyLearningGuess, createLearningRound, learningResultToAttemptResult, levelGroupFromStoredSelection, practicedLearningLevels, selectNextEntry, summarizeLearningHistory } from '../learning/game'
 import { learningTranslations } from '../learning/i18n'
-import type { LearningCefrSelection, LearningLevelGroup, LearningRound, SessionHistoryEntry, VocabularyEntry } from '../learning/types'
+import type { LearningLevelGroup, LearningRound, SessionHistoryEntry, VocabularyEntry } from '../learning/types'
 import { vocabulary } from '../learning/vocabulary'
 
 type Props = { language: Language; summaryRequested?: boolean; onActiveGameChange?: (active: boolean) => void; onSummaryShown?: () => void; onExitSummary?: () => void }
@@ -17,7 +17,8 @@ const vocabularyById = new Map(vocabulary.map((entry) => [entry.id, entry]))
 
 export function LearningPage({ language, summaryRequested = false, onActiveGameChange, onSummaryShown, onExitSummary }: Props) {
   const [phase, setPhase] = useState<LearningPhase>('setup')
-  const [level, setLevel] = useState<LearningLevelGroup>(() => levelGroupFromStoredSelection(localStorage.getItem('penjat-learning-cefr') as LearningCefrSelection | null))
+  const [level, setLevel] = useState<LearningLevelGroup>(() => levelGroupFromStoredSelection(localStorage.getItem('penjat-learning-cefr')))
+  const [selectionEmpty, setSelectionEmpty] = useState(false)
   const [round, setRound] = useState<LearningRound | null>(null)
   const [history, setHistory] = useState<SessionHistoryEntry[]>([])
   const [historyExpanded, setHistoryExpanded] = useState(false)
@@ -29,6 +30,8 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
 
   const startRound = useCallback((selectedLevel: LearningLevelGroup, currentHistory: readonly SessionHistoryEntry[] = history) => {
     const entry = selectNextEntry(vocabulary, selectedLevel, currentHistory)
+    setSelectionEmpty(!entry)
+    if (!entry) return
     setSessionStarted(true)
     setLevel(selectedLevel)
     setRound(createLearningRound(entry))
@@ -59,6 +62,7 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
       onExitSummary?.()
       return
     }
+    setSelectionEmpty(false)
     setPhase('summary')
     setRound(null)
     setDifficultySelectorOpen(false)
@@ -86,31 +90,34 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
   const openDifficultySelector = () => setDifficultySelectorOpen(true)
   const closeDifficultySelector = () => setDifficultySelectorOpen(false)
   const chooseDifficulty = (value: LearningLevelGroup) => {
-    setLevel(value); localStorage.setItem('penjat-learning-cefr', value)
+    setSelectionEmpty(false); setLevel(value); localStorage.setItem('penjat-learning-cefr', value)
     setDifficultySelectorOpen(false)
   }
-  const levelLabel = t.levelGroups[level]
+  const levelLabel = round ? t.levelGroups[levelGroupFromStoredSelection(round.entry.linguistics?.cefr)] : t.levelGroups[level]
 
   return <main className="learning-page" lang={language}>
     <header className="learning-header">
       <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
     </header>
 
+    {selectionEmpty && <p className="form-error" role="alert">{t.emptySelection}</p>}
+
     {phase === 'setup' && <section className="learning-setup">
       <span className="eyebrow">Català per a castellanoparlants</span>
       <h2>{t.setupTitle}</h2>
       <fieldset className="difficulty-selector">
         <legend>{t.cefr}</legend>
-        <div className="cefr-selector">{(['basic', 'intermediate', 'advanced', 'all'] as const).map((value) => <button type="button" key={value} className={level === value ? 'active' : ''} aria-pressed={level === value} onClick={() => { setLevel(value); localStorage.setItem('penjat-learning-cefr', value) }}>{t.levelGroups[value]}</button>)}</div>
+        <div className="cefr-selector">{(['basic', 'intermediate', 'advanced', 'all'] as const).map((value) => <button type="button" key={value} className={level === value ? 'active' : ''} aria-pressed={level === value} onClick={() => { setSelectionEmpty(false); setLevel(value); localStorage.setItem('penjat-learning-cefr', value) }}>{t.levelGroups[value]}</button>)}</div>
       </fieldset>
       <p>{t.difficultyHelp}</p>
       <button className="primary-action" onClick={() => startRound(level)}>{t.start}</button>
     </section>}
 
-    {phase === 'summary' && <LearningSummary history={history} level={level} expanded={historyExpanded} language={language} onToggleExpanded={() => setHistoryExpanded((expanded) => !expanded)} onExit={() => { setSessionStarted(false); onExitSummary?.() }} />}
+    {phase === 'summary' && <LearningSummary history={history} expanded={historyExpanded} language={language} onToggleExpanded={() => setHistoryExpanded((expanded) => !expanded)} onExit={() => { setSessionStarted(false); onExitSummary?.() }} />}
 
     {round && phase !== 'setup' && phase !== 'summary' && <section className="learning-game">
       <div className="learning-round-meta"><span>{t.cefr}: <strong>{levelLabel}</strong></span><button className="text-button" onClick={openDifficultySelector}>{t.cefr}</button></div>
+      {t.levelGroups[level] !== levelLabel && <p className="learning-next-level">{t.nextLevel}: {t.levelGroups[level]}</p>}
       <div className="learning-hint"><span>{t.hint}</span><strong lang="es">{round.entry.translationEs}</strong></div>
       <div className="learning-columns">
         <div className="drawing-panel"><HangmanDrawing errors={round.errors} label={t.errors} />
@@ -165,7 +172,7 @@ function LearningSessionPanel({ history, stats, expanded, language, onToggleExpa
   </aside>
 }
 
-function LearningSummary({ history, level, expanded, language, onToggleExpanded, onExit }: { history: SessionHistoryEntry[]; level: LearningLevelGroup; expanded: boolean; language: Language; onToggleExpanded: () => void; onExit?: () => void }) {
+export function LearningSummary({ history, expanded, language, onToggleExpanded, onExit }: { history: SessionHistoryEntry[]; expanded: boolean; language: Language; onToggleExpanded: () => void; onExit?: () => void }) {
   const t = learningTranslations[language]
   const stats = summarizeLearningHistory(history)
   return <section className="learning-summary">
@@ -177,7 +184,7 @@ function LearningSummary({ history, level, expanded, language, onToggleExpanded,
       <SummaryStat label={t.failedAttempts} value={stats.failed} />
       <SummaryStat label={t.accuracy} value={`${stats.accuracy}%`} />
       <SummaryStat label={t.uniqueWords} value={stats.uniqueWords} />
-      <SummaryStat label={t.cefr} value={t.levelGroups[level]} />
+      <SummaryStat label={t.practicedLevels} value={practicedLearningLevels(history).map((value) => t.levelGroups[value]).join(' · ') || t.unknownLevel} />
     </dl>}
     <HistoryList history={history} expanded={expanded} language={language} onToggleExpanded={onToggleExpanded} />
     {onExit && <button className="primary-action" type="button" onClick={onExit}>{t.returnToMenu}</button>}

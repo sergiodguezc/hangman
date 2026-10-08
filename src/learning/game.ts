@@ -12,11 +12,11 @@ const LEVEL_GROUP_CEFR: Record<LearningLevelGroup, readonly CefrLevel[]> = {
   basic: ['A1', 'A2'], intermediate: ['B1', 'B2'], advanced: ['C1', 'C2'], all: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
 }
 
-export function levelGroupFromStoredSelection(selection: LearningCefrSelection | null | undefined): LearningLevelGroup {
+export function levelGroupFromStoredSelection(selection: string | null | undefined): LearningLevelGroup {
   if (selection === 'A1' || selection === 'A2') return 'basic'
   if (selection === 'B1' || selection === 'B2') return 'intermediate'
   if (selection === 'C1' || selection === 'C2') return 'advanced'
-  return selection ?? 'all'
+  return selection === 'basic' || selection === 'intermediate' || selection === 'advanced' ? selection : 'all'
 }
 
 export function allowedCefrLevelsForGroup(selection: LearningCefrSelection): readonly CefrLevel[] {
@@ -36,9 +36,9 @@ export function selectNextEntry(
   level: LearningCefrSelection,
   history: readonly SessionHistoryEntry[] = [],
   random: () => number = Math.random,
-): VocabularyEntry {
+): VocabularyEntry | null {
   const matching = entriesForCefr(entries, level)
-  if (!matching.length) throw new Error(`No vocabulary entries found for CEFR level “${level}”.`)
+  if (!matching.length) return null
   const stats = summarizeLearningHistory(history).byWord
   const unseen = matching.filter((entry) => !stats.has(entry.id))
   const reviewable = matching.filter((entry) => {
@@ -99,6 +99,11 @@ export function summarizeLearningHistory(history: readonly SessionHistoryEntry[]
   const total = history.length
   const recoveredWords = [...byWord.values()].filter((word) => word.failed > 0 && word.correct > 0).length
   return { total, correct, failed, accuracy: total ? Math.round((correct / total) * 100) : 0, uniqueWords: byWord.size, recoveredWords, byWord }
+}
+
+export function practicedLearningLevels(history: readonly SessionHistoryEntry[]): LearningLevelGroup[] {
+  const practiced = new Set(history.filter((entry) => entry.cefr).map((entry) => levelGroupFromStoredSelection(entry.cefr)))
+  return (['basic', 'intermediate', 'advanced'] as const).filter((level) => practiced.has(level))
 }
 function learningEntryWeight(stats: WordSessionStats | undefined, completedAttempts: number, unseenRemain: boolean): number {
   if (!stats) return 10

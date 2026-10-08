@@ -1,6 +1,8 @@
 # Catalan vocabulary data
 
-This directory contains the reproducible dataset loaded by the Catalan-learning Hangman mode.
+This directory contains the dataset loaded by the Catalan-learning Hangman mode. The approved lexical baseline is [Vocabulary v1](../docs/vocabulary-v1.md). Current production has 544 entries with complete CEFR metadata; gameplay groups are A1/A2 (basic), B1/B2 (intermediate), C1/C2 (advanced). The October metadata repair is documented in [the audit report](../docs/audit-2026-10-08.md).
+
+The experiment sections below describe the historical review pipeline. Its ignored outputs are not runtime dependencies. Validate current data with `npm run vocab:validate` and `npm run test:vocabulary`; do not blindly regenerate approved v1 lexical fields from older intermediate files.
 
 ## Sources and licenses
 
@@ -45,11 +47,11 @@ Every result has `accept`, `review`, or `reject` status, a deterministic heurist
 
 Human decisions take precedence. Put accepted corrections (including `translationEs` and `definitionCa`) in `config/translation-overrides.json`, and put one normalized Catalan word per line in `config/rejected-vocabulary.txt`. Review and rejected records are omitted from production. `review/summary.json` and the deterministic 50-record `review/sample.json` support an offline human or future LLM-assisted review step; the runtime has no API dependency.
 
-Difficulty is an approximate, deterministic game label, not CEFR or an official linguistic level. It uses selection rank, total letters, and expression word count; spaces do not inflate the letter count, though expressions of four words are hard. `Aprendre català` still filters words only by this `difficulty` value.
+Difficulty is an approximate, deterministic game label, not CEFR or an official linguistic level. It uses selection rank, total letters, and expression word count; spaces do not inflate the letter count, though expressions of four words are hard. `Aprendre català` filters by `linguistics.cefr`; `difficulty` remains a compatibility/game label and is not a substitute for CEFR.
 
 ## Optional linguistic metadata
 
-Phase 2 introduces an optional `linguistics` object for future reviewed classifications. Existing production entries remain valid when this field is absent, and current gameplay does not read it.
+The schema permits an optional `linguistics` object for compatibility with older/pipeline records. The current production corpus has complete metadata and learning gameplay requires CEFR coverage; `test:vocabulary` guards this coverage and parity with the reviewed artifact.
 
 Reviewed metadata is stored separately in `data/review/linguistic-metadata.json`, keyed by the stable production `id`:
 
@@ -69,7 +71,7 @@ Reviewed metadata is stored separately in `data/review/linguistic-metadata.json`
 }
 ```
 
-The checked-in artifact may be `{}` until reviewed data exists. Do not add unreviewed classifications directly to `data/vocabulary.json`.
+The checked-in artifact now contains all 544 completed classifications, with targeted rechecks taking precedence. Preserve the reviewed artifact and runtime metadata together; do not invent replacement classifications to fill a level.
 
 Supported CEFR values are `A1`, `A2`, `B1`, `B2`, `C1`, and `C2`. These values will be estimates for learner-facing organization, not official certification. If `confidence` is present, it must be a number from `0.0` to `1.0` inclusive and represents confidence in the linguistic classification, not confidence in the existing game difficulty. `thematicCategory`, if present, must be a non-empty string. `partOfSpeech`, if present, uses the same values as the top-level compatibility field: `noun`, `verb`, `adjective`, `adverb`, or `other`. `provenance.source` is required when `provenance` exists; `version` and `method` are optional strings.
 

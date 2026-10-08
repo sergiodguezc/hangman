@@ -2,8 +2,10 @@ import assert from 'node:assert/strict'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { displayWord } from '../shared/game.ts'
+import { LearningSummary } from '../src/pages/LearningPage.tsx'
+import { learningTranslations } from '../src/learning/i18n.ts'
 import { LearningResultCard } from '../src/components/LearningResultCard.tsx'
-import { allowedCefrLevelsForGroup, applyLearningGuess, createLearningRound, entriesForCefr, entriesForDifficulty, levelGroupFromStoredSelection, selectNextEntry, summarizeLearningHistory } from '../src/learning/game.ts'
+import { allowedCefrLevelsForGroup, applyLearningGuess, createLearningRound, entriesForCefr, entriesForDifficulty, levelGroupFromStoredSelection, selectNextEntry, summarizeLearningHistory, practicedLearningLevels } from '../src/learning/game.ts'
 import type { CefrLevel, SessionHistoryEntry, VocabularyEntry } from '../src/learning/types.ts'
 
 const entry = (id: string, word: string, difficulty: VocabularyEntry['difficulty'] = 'easy', cefr: CefrLevel = 'A1'): VocabularyEntry => ({
@@ -86,3 +88,41 @@ for (const [word, guesses] of [['cançó', ['c', 'a', 'n', 'ç', 'o']], ['pingü
 }
 
 console.log('learning mode tests passed')
+
+for (const level of ['basic', 'intermediate', 'advanced', 'all'] as const) {
+  assert.ok(selectNextEntry(entries, level))
+  assert.equal(selectNextEntry([], level), null)
+}
+assert.equal(selectNextEntry(entries.slice(0, 2), 'advanced'), null)
+assert.equal(levelGroupFromStoredSelection('corrupt-preference'), 'all')
+const mixedHistory: SessionHistoryEntry[] = [
+  { position: 1, wordId: 'a', result: 'correct', cefr: 'A1' },
+  { position: 2, wordId: 'c', result: 'failed', cefr: 'B1' },
+]
+assert.deepEqual(practicedLearningLevels(mixedHistory), ['basic', 'intermediate'])
+assert.deepEqual(practicedLearningLevels([]), [])
+const advanced = selectNextEntry(entries, 'advanced', mixedHistory)
+assert.ok(advanced)
+assert.equal(levelGroupFromStoredSelection(advanced.linguistics?.cefr), 'advanced')
+// Selecting/starting a word does not add it to completed practice history.
+assert.deepEqual(practicedLearningLevels(mixedHistory), ['basic', 'intermediate'])
+for (const language of ['ca', 'es'] as const) {
+  const t = learningTranslations[language]
+  const summary = renderToStaticMarkup(createElement(LearningSummary, { history: mixedHistory, expanded: false, language, onToggleExpanded: () => {} }))
+  assert.ok(summary.includes(t.practicedLevels))
+  assert.ok(summary.includes(`${t.levelGroups.basic} · ${t.levelGroups.intermediate}`))
+  assert.ok(!summary.includes(t.levelGroups.advanced))
+  assert.ok(summary.includes(t.failedAttempts))
+  assert.ok(summary.includes('50%'))
+  assert.ok(!t.statsLine(2, 1, 1, 50, 2).includes('errors'))
+  assert.ok(!t.statsLine(2, 1, 1, 50, 2).includes('errores'))
+}
+let imperfectWin = createLearningRound(entry('imperfect', 'casa'))
+for (const guess of ['Z', 'X', 'C', 'A', 'S']) imperfectWin = applyLearningGuess(imperfectWin, guess)
+assert.equal(imperfectWin.result, 'win')
+assert.equal(imperfectWin.errors, 2)
+const wordStats = summarizeLearningHistory([{ position: 1, wordId: 'imperfect', result: 'correct' }, { position: 2, wordId: 'loss', result: 'failed' }])
+assert.equal(wordStats.correct, 1)
+assert.equal(wordStats.failed, 1)
+assert.equal(wordStats.accuracy, 50)
+console.log('Learning empty selection, mixed levels and word/letter statistics regressions passed')
