@@ -1,6 +1,9 @@
 import type { Language } from '../../shared/game'
 
 const es = {
+  sameForEveryone: 'La misma para todos',
+  wonWith: (count: number): string => count === 0 ? 'Acertada sin errores' : `Acertada con ${es.mistakes(count)}`,
+  comeBackTomorrow: 'vuelve mañana',
   title: 'Palabra del día',
   gameTitle: 'El ahorcado del día',
   intro: 'Adivina la palabra catalana de hoy',
@@ -31,6 +34,9 @@ const es = {
 }
 
 const ca: typeof es = {
+  sameForEveryone: 'La mateixa per a tothom',
+  wonWith: (count: number): string => count === 0 ? 'Encertada sense errors' : `Encertada amb ${ca.mistakes(count)}`,
+  comeBackTomorrow: 'torna demà',
   title: 'Paraula del dia',
   gameTitle: 'El penjat del dia',
   intro: "Endevina la paraula catalana d'avui",

@@ -3,6 +3,7 @@ import { getDailyChallenge, formatDailyShareData, formatDailyShareText, getDaily
 import { createDailyRound, applyDailyGuess } from '../src/daily/game'
 import { readDailyAttempt, writeDailyAttempt } from '../src/daily/storage'
 import type { VocabularyEntry } from '../src/learning/types'
+import { getHomeDailyStatus } from '../src/daily/homeSummary'
 
 const pool = [
   entry('aigua', 'aigua'),
@@ -90,7 +91,25 @@ const nativeShare = formatDailyShareData({
 assert.equal(nativeShare.text, share)
 assert.equal('url' in nativeShare, false)
 
-console.log('Daily challenge tests passed.')
+const challenge = getDailyChallenge(first, pool)
+const summary = (value: unknown) => getHomeDailyStatus(challenge, { getItem: () => JSON.stringify(value) })
+const fresh = { status: 'new', mistakes: 0 }
+assert.deepEqual(getHomeDailyStatus(challenge, { getItem: () => null }), fresh)
+assert.deepEqual(getHomeDailyStatus(challenge, { getItem: () => '{' }), fresh)
+assert.deepEqual(getHomeDailyStatus(challenge, { getItem: () => { throw new Error('Storage unavailable') } }), fresh)
+for (const invalid of [null, {}, [], { challengeId: challenge.id, guesses: 'AIGU' }, { challengeId: '2026-08-15', guesses: ['A', 'I', 'G', 'U'] }]) {
+  assert.deepEqual(summary(invalid), fresh)
+}
+for (let mistakes = 0; mistakes <= 2; mistakes++) {
+  const status = summary({ challengeId: challenge.id, guesses: [...['X', 'Z'].slice(0, mistakes), 'A', 'I', 'G', 'U'], completed: false, won: false, mistakes: 999 })
+  assert.deepEqual(status, { status: 'won', mistakes })
+  assert.deepEqual(Object.keys(status).sort(), ['mistakes', 'status'])
+}
+assert.deepEqual(summary({ challengeId: challenge.id, guesses: ['X', 'Z', 'B', 'C', 'D', 'E', 'A', 'I', 'G', 'U'], won: true }), { status: 'lost', mistakes: 6 })
+assert.deepEqual(summary({ challengeId: challenge.id, guesses: ['A', 'A', 17, null, 'INVALID'], completed: true, won: true, mistakes: 0 }), fresh)
+assert.deepEqual(summary({ challengeId: challenge.id, guesses: ['A', 'X'], completed: true, won: true }), { status: 'new', mistakes: 1 })
+
+console.log('Daily challenge tests passed (including homepage replay and storage failures).')
 
 function entry(id: string, answerCa: string): VocabularyEntry {
   return {
