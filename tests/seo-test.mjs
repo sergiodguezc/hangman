@@ -19,6 +19,10 @@ try {
   assert.match(home, /<title>Penjat — Joc del penjat online en català<\/title>/)
   assert.match(home, /<link rel="canonical" href="https:\/\/penjat\.cat\/" \/>/)
 
+  assert.equal([...home.matchAll(/<meta name="description"/g)].length, 1)
+  assert.ok(home.includes('content="Juga al Penjat online en català. Endevina paraules, juga amb amics i aprèn vocabulari català de manera divertida."'))
+  assert.ok(home.includes('<meta property="og:url" content="https://penjat.cat/"'))
+
   const daily = await fetchText(`http://127.0.0.1:${port}/paraula-del-dia`)
   assert.match(daily, /<title>El penjat del dia: endevina una paraula en català \| Penjat<\/title>/)
   assert.equal([...daily.matchAll(/<meta name="description"/g)].length, 1)

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useState, type FormEvent, type MouseEvent } from 'react'
 import type { Language } from '../../shared/game'
 import { SUPPORTED_VOLTES, type PlayerGameView, type RoomPreview, type Voltes } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
@@ -7,7 +7,10 @@ import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { loadRoomSession, saveRoomSession, socket } from '../multiplayer/socket'
 import { shouldResumeRoomSession } from '../multiplayer/invitations'
-import { DAILY_CHALLENGE_PUBLIC_PATH } from '../daily/challenge'
+import { DAILY_CHALLENGE_PUBLIC_PATH, getDailyChallenge } from '../daily/challenge'
+import { getHomeDailyStatus } from '../daily/homeSummary'
+import { dailyTranslations } from '../daily/i18n'
+import { homeTranslations } from '../home/i18n'
 
 type Props = {
   interfaceLanguage: Language
@@ -32,9 +35,28 @@ function isStandalonePwa() {
   return window.matchMedia('(display-mode: standalone)').matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone)
 }
 
+function route(action?: () => void) {
+  return (event: MouseEvent<HTMLAnchorElement>) => {
+    if (!action || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    event.preventDefault()
+    action()
+  }
+}
+
+function readHomeDaily() {
+  const challenge = getDailyChallenge()
+  try {
+    return { number: challenge.number, ...getHomeDailyStatus(challenge, localStorage) }
+  } catch {
+    return { number: challenge.number, status: 'new' as const, mistakes: 0 }
+  }
+}
+
 export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomCode = null, mode, onGameLanguage, onEnter, onLearn, onDaily, onMultiplayer, onHelp }: Props) {
   const [panel, setPanel] = useState<'menu' | 'multiplayer'>(mode === 'multiplayer' ? 'multiplayer' : 'menu')
-  const [name, setName] = useState(localStorage.getItem('hangman-name') ?? '')
+  const [name, setName] = useState(() => {
+    try { return localStorage.getItem('hangman-name') ?? '' } catch { return '' }
+  })
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
@@ -44,24 +66,31 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
   const [previewRetry, setPreviewRetry] = useState(0)
   const [showIosInstall, setShowIosInstall] = useState(false)
   const [installExpanded, setInstallExpanded] = useState(false)
+  const [daily, setDaily] = useState(readHomeDaily)
   const t = multiplayerTranslations[interfaceLanguage]
   const storedSession = loadRoomSession()
   const invitationOverridesSession = storedSession && !shouldResumeRoomSession(storedSession.roomCode, invitedRoomCode)
   const isCatalan = interfaceLanguage === 'ca'
-  const homeCopy = isCatalan ? {
-    multiplayerTitle: 'Multijugador',
-    learningTitle: 'Aprendre català',
-    dailyTitle: 'Paraula del dia',
-    dailyBody: "Endevina la paraula d'avui jugant al penjat.",
-  } : {
-    multiplayerTitle: 'Multijugador',
-    learningTitle: 'Aprender catalán',
-    dailyTitle: 'Palabra del día',
-    dailyBody: 'Adivina la palabra de hoy jugando al ahorcado.',
-  }
+  const homeCopy = homeTranslations[interfaceLanguage]
+  const d = dailyTranslations[interfaceLanguage]
   const previewSlots = ['', 'E', '', 'J', '', 'T']
 
   useEffect(() => { setPanel(mode === 'multiplayer' ? 'multiplayer' : 'menu') }, [mode])
+
+  // Re-read on return from another tab and after the Madrid date changes while open.
+  useEffect(() => {
+    if (mode !== 'home') return
+    const refresh = () => setDaily(readHomeDaily())
+    const timer = window.setInterval(refresh, 60_000)
+    window.addEventListener('focus', refresh)
+    window.addEventListener('storage', refresh)
+    refresh()
+    return () => {
+      window.clearInterval(timer)
+      window.removeEventListener('focus', refresh)
+      window.removeEventListener('storage', refresh)
+    }
+  }, [mode])
 
   useEffect(() => {
     const displayMode = window.matchMedia('(display-mode: standalone)')
@@ -220,7 +249,7 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
       <header className="home-topbar">
         <div className="brand home-brand"><span className="brand-mark">P</span><span className="brand-word">PENJAT</span></div>
         <div className="home-topbar-actions">
-          <button className="text-button home-help-link" onClick={onHelp}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</button>
+          <a className="text-button home-help-link" href="/com-es-juga" onClick={route(onHelp)}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</a>
         </div>
       </header>
 
@@ -228,15 +257,22 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
         <section className="home-copy">
           <span className="eyebrow">{isCatalan ? 'EL JOC DEL PENJAT' : 'EL JUEGO DEL AHORCADO'}</span>
           <h1>{isCatalan ? 'Juga al penjat online en català.' : 'Juega a Penjat online.'}</h1>
-          <p>{isCatalan ? 'Juga amb els amics o practica vocabulari mentre jugues.' : 'Juega con tus amigos o practica vocabulario mientras juegas.'}</p>
-          <div className="home-actions home-actions--modes" aria-label={isCatalan ? 'Modes de joc' : 'Modos de juego'}>
-            <button className="primary-action home-cta" onClick={onMultiplayer}>{homeCopy.multiplayerTitle}</button>
-            <button className="secondary-action home-cta home-cta--learning" onClick={onLearn}>{homeCopy.learningTitle}</button>
-            <a className="home-daily-link" href={DAILY_CHALLENGE_PUBLIC_PATH} onClick={(event) => { event.preventDefault(); onDaily?.() }}>
-              <span className="home-daily-marker" aria-hidden="true" />
-              <span><strong>{homeCopy.dailyTitle} →</strong><small>{homeCopy.dailyBody}</small></span>
-            </a>
-          </div>
+          <p className="home-lede">{homeCopy.lede}</p>
+          <nav className="home-modes" aria-label={homeCopy.modes}>
+            <ul className="mode-pair">
+              <li><a className="primary-action" href="/multijugador" aria-describedby="home-mp" onClick={route(onMultiplayer)}>{homeCopy.multiplayer}</a>
+                <p className="mode-caption" id="home-mp">{homeCopy.multiplayerCaption}</p></li>
+              <li><a className="secondary-action" href="/aprendre" aria-describedby="home-learn" onClick={route(onLearn)}>{homeCopy.learning}</a>
+                <p className="mode-caption" id="home-learn">{homeCopy.learningCaption}</p></li>
+              <li className="mode-daily"><a className="daily-entry" href={DAILY_CHALLENGE_PUBLIC_PATH} onClick={route(onDaily)}>
+                <span>
+                  <span className="daily-head"><span className="daily-title">{d.title}</span><span className="daily-number">#{daily.number}</span></span>
+                  <span className="daily-caption">{daily.status === 'new' ? d.sameForEveryone : <>{daily.status === 'won' ? d.wonWith(daily.mistakes) : d.lost}<span className="daily-sep" aria-hidden="true"> · </span><span className="daily-tomorrow">{d.comeBackTomorrow}</span></>}</span>
+                </span>
+                <span className="daily-arrow" aria-hidden="true">→</span>
+              </a></li>
+            </ul>
+          </nav>
         </section>
         <aside className="home-preview" aria-hidden="true">
           <div className="preview-board">
@@ -272,7 +308,7 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
       </section>}
 
       <footer className="home-footer">
-        <button className="text-button home-help-link home-help-link--footer" onClick={onHelp}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</button>
+        <a className="text-button home-help-link home-help-link--footer" href="/com-es-juga" onClick={route(onHelp)}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</a>
         <span className="home-domain">penjat.cat</span>
       </footer>
       {notice && <p className="form-error home-notice" role="alert">{errorMessage(notice, t)}</p>}
