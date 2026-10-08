@@ -2,7 +2,7 @@
 
 Status: **approved — F1 adopted** for desktop and mobile, with the tablet range replaced by [T1](phase-2-1-tablet.md) and S0 sizing; F2 was not adopted. Implemented in [the Phase 2.1 homepage report](../implementation/phase-2-1-homepage.md). Exploration artifacts under `design-explorations/` (galleries, prototypes, screenshots) are local working files and are not committed, so links into that directory resolve only in the original workspace.
 
-Original proposal status: final proposal, awaiting approval. No application code, tests, SEO configuration or dependencies were changed. This round refines [D2](phase-2-1-multiplayer-first.md). The product hierarchy, identity and layout were already settled and are not reopened here.
+Original proposal status: final proposal, awaiting approval. No application code, tests, SEO configuration or dependencies were changed. This round refines D2, the earlier multiplayer-first proposal (an uncommitted working document that followed the product decision that multiplayer is Penjat's primary mode). Everything F1 keeps from D2 is restated in §1, so this specification stands on its own. The product hierarchy, identity and layout were already settled and are not reopened here.
 
 | Artifact | Path (under `design-explorations/phase-2-1-final/`) |
 | --- | --- |
