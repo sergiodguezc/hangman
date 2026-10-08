@@ -2,6 +2,8 @@
 // Start a dedicated headless Firefox with --remote-debugging-port 9222 and a built local server.
 import assert from 'node:assert/strict'
 import { io } from 'socket.io-client'
+import { checkResponsiveScope } from './responsive-scope-checks.mjs'
+import { checkHomeNavigation, checkHomeLayout, homeMetrics } from './homepage-browser-checks.mjs'
 
 const origin = process.env.TEST_SERVER_URL || 'http://127.0.0.1:3002'
 assert.ok(['localhost', '127.0.0.1', '[::1]'].includes(new URL(origin).hostname), 'Browser tests must target a local server')
@@ -65,6 +67,49 @@ try {
   await command('session.subscribe', { events: ['log.entryAdded'] })
   const profile = (await command('browser.createUserContext')).userContext
   const isolatedProfile = (await command('browser.createUserContext')).userContext
+  const home = await newTab(isolatedProfile)
+  await checkHomeNavigation({ context: home, command, evaluate, waitFor, navigate })
+  for (const language of ['ca', 'es']) {
+    await navigate(home, '/')
+    await evaluate(home, `localStorage.setItem('hangman-interface-language', '${language}')`)
+    await navigate(home, '/')
+    await waitFor(home, "document.querySelector('.home-modes') !== null")
+    for (const [width, height] of [[1440,900], [1024,768], [768,1024], [820,1180], [390,844], [320,568], [599,960], [600,960], [660,1000], [661,1000], [860,1180], [861,1180], [1024,1366], [844,390]]) {
+      await command('browsingContext.setViewport', { context: home, viewport: { width, height } })
+      checkHomeLayout(JSON.parse(await evaluate(home, homeMetrics)))
+    }
+  }
+  await evaluate(home, "localStorage.setItem('hangman-interface-language', 'ca')")
+  await navigate(home, '/paraula-del-dia/')
+  await waitFor(home, "document.querySelector('.keyboard') !== null")
+  for (let i=0; i<28 && !await evaluate(home, "document.querySelector('.daily-result') !== null"); i++) {
+    await evaluate(home, "document.querySelector('.keyboard button:not(:disabled)')?.click()")
+  }
+  await waitFor(home, "document.querySelector('.daily-result') !== null")
+  await command('browsingContext.setViewport', { context:home, viewport:{ width:320, height:568 } })
+  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-result .daily-tomorrow')).whiteSpace"), 'normal')
+  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-result .daily-tomorrow')).fontSize"), '13px')
+  const wonDaily = await evaluate(home, "document.querySelector('.daily-result').classList.contains('win')")
+  const secretDaily = await evaluate(home, "document.querySelector('.daily-result dd').textContent")
+  await evaluate(home, "document.querySelector('.global-back-button').click()")
+  await waitFor(home, "document.querySelector('.daily-tomorrow') !== null")
+  assert.equal(await evaluate(home, "document.querySelector('.daily-caption').textContent.includes('Encertada')"), wonDaily)
+  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-entry .daily-tomorrow')).fontSize"), '14px')
+  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-entry .daily-tomorrow')).color"), 'rgb(95, 106, 98)')
+  assert.equal(await evaluate(home, `document.querySelector('.home-modes').textContent.replace('Paraula del dia', '').includes(${JSON.stringify(secretDaily)})`), false)
+  for (const attempt of ['{', JSON.stringify({ challengeId:'2000-01-01', guesses:['A'], completed:true, won:true })]) {
+    await evaluate(home, `localStorage.setItem('penjat-daily-challenge', ${JSON.stringify(attempt)}); window.dispatchEvent(new Event('focus'))`)
+    await waitFor(home, "document.querySelector('.daily-caption').textContent === 'La mateixa per a tothom'")
+  }
+  assert.equal(await evaluate(home, "document.querySelector('.home-modes .primary-action').textContent"), 'Juga amb amics')
+  console.log('Homepage daily status passed: completed game return, corrupt/outdated storage refresh, stable primary action.')
+  console.log('Homepage responsive checks passed in CA/ES, including all six boundaries.')
+  await navigate(home, '/multijugador/')
+  await waitFor(home, "document.querySelector('.home-card form') !== null")
+  await checkResponsiveScope({ context:home, command, evaluate, page:'setup', root:'.home-card', selectors:'.home-card, .home-card *' })
+  await navigate(home, '/com-es-juga/')
+  await waitFor(home, "document.querySelector('.howto-header') !== null")
+  await checkResponsiveScope({ context:home, command, evaluate, page:'help', root:'.howto-page', selectors:'.howto-page, .howto-page *' })
   const oldRoom = await createRoom('Old host')
   const invitedRoom = await createRoom('New host')
   const source = await newTab(profile)
@@ -77,6 +122,7 @@ try {
   const shared = await newTab(profile)
   await navigate(shared, `/multijugador/?sala=${invitedRoom.roomCode}`)
   await waitFor(shared, "document.querySelector('.invitation-form') !== null")
+  await checkResponsiveScope({ context:shared, command, evaluate, page:'invitation', root:'.invitation-card', selectors:'.invitation-card, .invitation-card *' })
   assert.equal(await evaluate(shared, "localStorage.getItem('hangman-name')"), 'Shared name')
   assert.equal(await evaluate(shared, "sessionStorage.getItem('hangman-room-session')"), null)
 
@@ -106,6 +152,7 @@ try {
     // A same-room invitation still restores the valid session.
     await navigate(source, `/multijugador/?sala=${oldRoom.roomCode}`)
     await waitFor(source, "document.querySelector('.lobby-page') !== null")
+    await checkResponsiveScope({ context:source, command, evaluate, page:'lobby', root:'.lobby-page', selectors:'.lobby-page, .lobby-page *' })
     // Joining replaces credentials only after the new room accepts the player.
     await evaluate(copied, "document.querySelector('.invitation-form button.primary-action').click()")
     await waitFor(copied, "document.querySelector('.lobby-page') !== null")
@@ -194,6 +241,7 @@ try {
     await evaluate(terminal, `sessionStorage.setItem('hangman-room-session', ${JSON.stringify(JSON.stringify(setterSession))})`)
     await navigate(terminal, '/multijugador/')
     await waitFor(terminal, "document.querySelector('.word-form') !== null")
+    await checkResponsiveScope({ context:terminal, command, evaluate, page:'match', root:'.match-page', selectors:'.match-page, .match-page *' })
     leavingSocket.emit('room:leave')
     await waitFor(terminal, "document.querySelector('.match-result') !== null")
     assert.equal(await evaluate(terminal, "document.querySelector('.word-form, .forgiveness-wait, .player-terminal-state, .keyboard button:not(:disabled)') !== null"), false)
