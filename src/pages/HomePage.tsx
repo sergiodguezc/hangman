@@ -279,6 +279,25 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
             </div>
           </div>
         </aside>
+        {/* Phones only (CSS): the same destinations as .home-modes, re-ranked below the illustration with one dominant action. */}
+        <nav className="home-quick" aria-label={homeCopy.modes}>
+          <ul>
+            <li className="quick-play-item"><a className="quick-play" href="/multijugador" onClick={route(onMultiplayer)}>
+              <span className="quick-play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8 5.5v13l11-6.5z" /></svg></span>
+              <span className="quick-play-text"><span className="quick-play-label">{homeCopy.play}</span><span className="quick-play-caption">{homeCopy.playCaption}</span></span>
+              <span className="quick-play-arrow" aria-hidden="true">→</span>
+            </a></li>
+            <li><a className="quick-card quick-card--learn" href="/aprendre" onClick={route(onLearn)}>
+              <span className="quick-card-icon"><ModeIcon mode="learning" /></span>
+              <span className="quick-card-label">{homeCopy.quickLearning}</span>
+            </a></li>
+            <li><a className="quick-card quick-card--daily" href={DAILY_CHALLENGE_PUBLIC_PATH} onClick={route(onDaily)}>
+              <span className="quick-card-icon"><ModeIcon mode="daily" /></span>
+              <span className="quick-card-label">{d.title}</span>
+              <span className="quick-card-tag">#{daily.number}{daily.status !== 'new' && <><span aria-hidden="true"> ✓</span><span className="sr-only"> · {homeCopy.dailyPlayed}</span></>}</span>
+            </a></li>
+          </ul>
+        </nav>
       </div>
 
       {showIosInstall && <section className="ios-install-card" aria-labelledby="ios-install-title">

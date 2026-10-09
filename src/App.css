@@ -165,6 +165,8 @@ button { cursor: pointer; }
 .preview-drawing .hangman { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; }
 .preview-word { width: 100%; display: flex; justify-content: center; align-items: flex-end; gap: var(--space-3); color: var(--ink); }
 .preview-letter { display: inline-grid; place-items: center; width: 2.25rem; min-width: 2.25rem; min-height: 2.75rem; border-bottom: 3px solid var(--ink); font: 700 1.75rem/1.05 var(--font-display); }
+/* Phone-only hero actions (see the phone hero block below); tablets and desktop keep .home-modes. */
+.home-quick { display: none; }
 /* Mode cards: one per real mode. Colour carries the mode; supporting text stays restrained. */
 .mode-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
 .mode-card { grid-column: span 3; min-width: 0; }
@@ -732,6 +734,60 @@ button { cursor: pointer; }
   .ios-install-card { width: 100%; border-radius: 12px; }
   .ios-install-toggle { padding-inline: 12px; }
 }
+/* Phone hero (Phase 3C): headline → character → one dominant "Jugar" → two equal secondary cards. Same destinations as
+   .home-modes, which phones hide. Breakpoint in em, so enlarged text on wider screens also gets this single-column hero. */
+@media (max-width: 37.4375em) {
+  .home-hero { gap: var(--space-5); }
+  .home-modes { display: none; }
+  .home-preview { width: 100%; padding: 0; border: 0; background: none; box-shadow: none; }
+  .home-preview .preview-tag { display: none; }
+  .home-preview .preview-board { row-gap: var(--space-1); }
+  .home-preview .preview-drawing { width: min(52vw, 11.5rem); }
+  .home-quick { display: block; }
+  .home-quick ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+  .home-quick li { display: grid; min-width: 0; }
+  .home-quick .quick-play-item { grid-column: 1 / -1; margin-bottom: var(--space-1); }
+  .home-quick a { color: var(--ink); text-decoration: none; transition: background-color 140ms ease, transform 140ms ease, box-shadow 140ms ease; }
+  .home-quick a:hover { transform: translate(-1px, -1px); }
+  .home-quick a:active { transform: translate(2px, 2px); box-shadow: var(--shadow-ink-pressed); }
+  .home-quick a:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 4px; box-shadow: 0 0 0 4px var(--focus-gap), var(--shadow-ink-pressed); }
+  .quick-play { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; column-gap: var(--space-4); min-height: 6.5rem; padding: var(--space-3) var(--space-5); border: 2px solid var(--ink); border-radius: var(--radius-card); color: var(--on-primary) !important; background: var(--primary); box-shadow: 4px 4px 0 var(--ink); }
+  .quick-play:hover { background: var(--primary-hover); box-shadow: 6px 6px 0 var(--ink); }
+  .quick-play-badge { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border: 2px solid var(--ink); border-radius: 50%; background: var(--surface); box-shadow: var(--shadow-ink-sm); }
+  .quick-play-badge svg { width: 1.75rem; height: 1.75rem; margin-left: .2rem; fill: var(--magrana); stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; }
+  .quick-play-text { display: grid; min-width: 0; }
+  .quick-play-label { font: 800 var(--text-display)/1 var(--font-display); letter-spacing: -.03em; overflow-wrap: anywhere; }
+  .quick-play-caption { margin-top: var(--space-1); overflow-wrap: anywhere; text-wrap: balance; font-size: var(--text-meta); font-weight: var(--weight-semibold); line-height: var(--leading-ui); }
+  .quick-play-arrow { font: 700 1.75rem/1 var(--font-display); transition: transform 140ms ease; }
+  .quick-play:hover .quick-play-arrow { transform: translateX(3px); }
+  .quick-card { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: var(--space-3); min-height: 4.25rem; padding: var(--space-2) var(--space-3); border: 2px solid var(--ink); border-radius: var(--radius-inner); box-shadow: var(--shadow-ink-sm); }
+  .quick-card--learn { background: var(--oliva-surface); }
+  .quick-card--daily { background: var(--warning-surface); }
+  .quick-card--learn:hover { background: color-mix(in oklch, var(--oliva) 40%, var(--surface)); }
+  .quick-card--daily:hover { background: var(--safra); }
+  .quick-card:hover { box-shadow: 3px 3px 0 var(--ink); }
+  .quick-card-icon { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 2px solid var(--ink); border-radius: 50%; background: var(--surface); }
+  .quick-card-icon .mode-icon { width: 1.25rem; height: 1.25rem; }
+  .quick-card-label { min-width: 0; font: 700 1.125rem/1.1 var(--font-display); letter-spacing: -.01em; text-wrap: balance; overflow-wrap: anywhere; }
+  .quick-card-tag { position: absolute; top: -.75rem; right: var(--space-2); padding: 0 .4rem; border: 2px solid var(--ink); border-radius: var(--radius-control); background: var(--safra); font-size: var(--text-label); font-weight: var(--weight-bold); line-height: 1.35; font-variant-numeric: tabular-nums; transform: rotate(3deg); }
+}
+/* Small phones (≤359px): a smaller character and no arrow. */
+@media (max-width: 22.4375em) {
+  .home-preview .preview-drawing { width: min(100%, 9.5rem); }
+  .quick-play { column-gap: var(--space-3); padding-inline: var(--space-4); }
+  .quick-play-badge { width: 3rem; height: 3rem; }
+  .quick-play-arrow { display: none; }
+}
+/* Below 375px the card icons lose their circle so "Aprende catalán" / "Paraula del dia" keep whole words on two lines. */
+@media (max-width: 23.375em) {
+  .quick-card { column-gap: var(--space-2); padding-inline: var(--space-2); }
+  .quick-card-icon { width: auto; height: auto; border: 0; background: none; }
+}
+/* Under 320 CSS px at the default size (or enlarged text): the secondary cards stack instead of clipping. */
+@media (max-width: 19.9375em) {
+  .home-quick ul { grid-template-columns: minmax(0, 1fr); }
+  .quick-play { grid-template-columns: minmax(0, 1fr); justify-items: center; row-gap: var(--space-2); padding-block: var(--space-4); text-align: center; }
+}
 @media (max-width: 23.75em) {
   .daily-sep { display: none; }
   .daily-entry .daily-tomorrow { display: block; }
@@ -922,6 +978,7 @@ body { background-image: radial-gradient(oklch(0.2 0.015 60 / 5%) .7px, transpar
 .keyboard button.incorrect { color: var(--error); background: var(--error-surface); border-color: var(--error); text-decoration: line-through; }
 @media (prefers-reduced-motion: reduce) {
   .primary-action:not(:disabled):hover, .secondary-action:not(:disabled):hover, .primary-action:not(:disabled):active, .secondary-action:not(:disabled):active,
-  .keyboard button:not(:disabled):hover, .mode-card > a:hover, .mode-card > a:active, .daily-entry:active { transform: none; }
+  .keyboard button:not(:disabled):hover, .mode-card > a:hover, .mode-card > a:active, .daily-entry:active,
+  .home-quick a:hover, .home-quick a:active, .quick-play:hover .quick-play-arrow { transform: none; }
   .site-brand:hover .brand-badge { transform: none; }
 }
