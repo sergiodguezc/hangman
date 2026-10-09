@@ -1,9 +1,9 @@
 import type { PublicPlayer, RoundResultEntry } from '../../shared/protocol'
 import type { MultiplayerTranslations } from '../multiplayer/i18n'
 
-type Props = { results: RoundResultEntry[]; players: PublicPlayer[]; t: MultiplayerTranslations }
+type Props = { results: RoundResultEntry[]; players: PublicPlayer[]; t: MultiplayerTranslations; showTitle?: boolean }
 
-export function RoundResults({ results, players, t }: Props) {
+export function RoundResults({ results, players, t, showTitle = true }: Props) {
   if (!results.length) return null
   const names = new Map(players.map((player) => [player.id, player.name]))
   const timeLabel = (milliseconds: number | null) => {
@@ -11,8 +11,8 @@ export function RoundResults({ results, players, t }: Props) {
     const seconds = milliseconds / 1000
     return `${Number.isInteger(seconds) ? seconds : seconds.toFixed(1)} s`
   }
-  return <section className="round-results" aria-labelledby="round-results-title">
-    <h2 id="round-results-title">{t.roundResults}</h2>
+  return <section className="round-results" {...showTitle ? { 'aria-labelledby': 'round-results-title' } : { 'aria-label': t.roundResults }}>
+    {showTitle && <h2 id="round-results-title">{t.roundResults}</h2>}
     <ol className="round-results-list">{results.map((result) => {
       const outcome = result.status === 'setter'
         ? { label: t.setterRoundResult, kind: 'setter' }

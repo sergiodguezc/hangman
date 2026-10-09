@@ -9,8 +9,14 @@ import { ForgivenessTray } from '../src/components/ForgivenessTray'
 import { ObserverSelector } from '../src/components/ObserverSelector'
 import { PlayerRoundStatusNotice } from '../src/components/PlayerRoundStatusNotice'
 import { RoundResults } from '../src/components/RoundResults'
-import { FinalScores, Scoreboard } from '../src/components/Scoreboard'
+import { Scoreboard } from '../src/components/Scoreboard'
+import { RoomChat } from '../src/components/RoomChat'
+import { liveRanking } from '../src/multiplayer/liveRanking'
+import { FinalStandings } from '../src/components/MatchResults'
+import { matchStandings } from '../src/multiplayer/matchResults'
 import { multiplayerTranslations } from '../src/multiplayer/i18n'
+import { MultiplayerWord } from '../src/components/MultiplayerWord'
+import { groupDisplayWord, splitWord, spokenWord } from '../src/multiplayer/wordRows'
 
 const solvedCa = renderToStaticMarkup(<PlayerRoundStatusNotice phase="guessing" status="solved" t={multiplayerTranslations.ca} />)
 const solvedEs = renderToStaticMarkup(<PlayerRoundStatusNotice phase="guessing" status="solved" t={multiplayerTranslations.es} />)
@@ -77,8 +83,11 @@ const scoreboardPlayers: PublicPlayer[] = [
 ]
 const scoreboardMarkup = renderToStaticMarkup(<Scoreboard players={scoreboardPlayers} setterId="C" currentId="B" t={multiplayerTranslations.es} />)
 const activeClassification = scoreboardMarkup.match(/<ol>.*?<\/ol>/)?.[0] ?? ''
-assert.match(activeClassification, /<span class="rank">1<\/span><span class="player-name">Manolo 2 · tú<\/span>/)
-assert.match(activeClassification, /<span class="rank">2<\/span><span class="player-name">Manolo 3<\/span>/)
+// The self badge is a separate element after the full name, so long names can wrap without hiding it.
+assert.match(activeClassification, /<li class="is-self"><span class="rank">1<\/span><span class="player-identity"><span class="player-name">Manolo 2<\/span><span class="player-self">tú<\/span><\/span>/)
+assert.match(activeClassification, /<li><span class="rank">2<\/span><span class="player-identity"><span class="player-name">Manolo 3<\/span><\/span>/)
+assert.equal(activeClassification.match(/class="player-self"/g)?.length, 1)
+assert.doesNotMatch(activeClassification, /· tú/)
 assert.doesNotMatch(activeClassification, /Manolo 1|>3<\/span>/)
 assert.match(scoreboardMarkup, /Ya no están en la sala/)
 assert.match(scoreboardMarkup, /<section class="departed-players"[^>]*>.*Manolo 1.*<strong>4<\/strong>/)
@@ -88,6 +97,92 @@ const catalanScoreboard = renderToStaticMarkup(<Scoreboard players={scoreboardPl
 assert.match(catalanScoreboard, /Ja no són a la sala/)
 const noDepartedScoreboard = renderToStaticMarkup(<Scoreboard players={players} setterId="A" currentId="B" t={multiplayerTranslations.es} />)
 assert.doesNotMatch(noDepartedScoreboard, /departed-players|Ya no están en la sala/)
+
+// Phase 2C compact live ranking (stacked layouts): leaders + own place while collapsed; the full list stays in the DOM.
+const roster = (scores: number[], extra: Partial<Record<number, Partial<PublicPlayer>>> = {}, names?: string[]): PublicPlayer[] =>
+  scores.map((score, index) => ({ id: `p${index}`, name: names?.[index] ?? `Jugador ${index}`, score, connectionState: 'connected', active: true, roundStatus: 'playing', ...extra[index] }))
+const render = (list: PublicPlayer[], currentId = 'p0', language: 'ca' | 'es' = 'ca', setterId: string | null = null) =>
+  renderToStaticMarkup(<Scoreboard players={list} setterId={setterId} currentId={currentId} t={multiplayerTranslations[language]} />)
+const summaryOf = (markup: string) => markup.match(/<div class="scoreboard-summary">[\s\S]*?<\/div><button/)?.[0] ?? ''
+const fullOf = (markup: string) => markup.match(/<div class="scoreboard-full"[\s\S]*$/)?.[0] ?? ''
+
+// Two and three players: short enough to stay a full list.
+for (const count of [2, 3]) {
+  const markup = render(roster([3, 1, 0].slice(0, count)))
+  assert.doesNotMatch(markup, /scoreboard-summary|scoreboard-toggle|is-collapsible/, `${count} players need no disclosure`)
+  assert.equal(liveRanking(roster([3, 1, 0].slice(0, count)), 'p0').collapsible, false)
+}
+
+// Ten players, current player in the middle: one leader named, own place shown, disclosure collapsed by default.
+const tenScores = [8, 12, 11, 10, 8, 6, 5, 3, 2, 0]
+for (const language of ['ca', 'es'] as const) {
+  const t = multiplayerTranslations[language]
+  const ten = render(roster(tenScores), 'p0', language)
+  assert.match(ten, /class="scoreboard is-collapsible"/)
+  const toggle = ten.match(/<button type="button" class="scoreboard-toggle" aria-expanded="false" aria-controls="([^"]+)">/)
+  assert.ok(toggle, 'native button with aria-expanded/aria-controls')
+  assert.match(ten, new RegExp(`<div class="scoreboard-full" id="${toggle[1]}">`))
+  assert.ok(ten.includes(`>${t.showFullRanking}<`))
+  assert.ok(ten.includes(t.playerCount(10)))
+  const summary = summaryOf(ten)
+  assert.ok(summary.includes('Jugador 1') && summary.includes(t.points(12)), 'unique leader with score')
+  assert.equal(summary.match(/class="player-self"/g)?.length, 1)
+  assert.ok(summary.includes(t.placeLabel(t.ordinal(4))) && summary.includes(`${t.tied}<`), 'shared fourth place is marked as a tie')
+  assert.ok(summary.includes(t.points(8)))
+  assert.equal(fullOf(ten).match(/<li/g)?.length, 10, 'complete classification preserved')
+  assert.match(fullOf(ten), /<span class="rank">4<\/span><span class="player-identity"><span class="player-name">Jugador 0<\/span><span class="player-self">/)
+  assert.match(fullOf(ten), /<span class="rank">4<\/span><span class="player-identity"><span class="player-name">Jugador 4<\/span><\/span>/)
+}
+const t = multiplayerTranslations.ca
+// Current player first (unique leader): named among the leaders with the badge, no separate own line.
+const first = summaryOf(render(roster([20, 12, 11, 10, 8])))
+assert.equal(first.match(/ranking-summary-row/g)?.length, 1)
+assert.match(first, /Jugador 0<\/span><span class="player-self">tu<\/span>/)
+// Current player last.
+const last = summaryOf(render(roster([0, 12, 11, 10, 8])))
+assert.ok(last.includes(t.placeLabel(t.ordinal(5))) && !last.includes(`${t.tied}<`))
+// Tied with one leader: both names in the leader row, one badge, no own line.
+const tiedWithLeader = summaryOf(render(roster([12, 12, 11, 10, 8])))
+assert.equal(tiedWithLeader.match(/ranking-summary-row/g)?.length, 1)
+assert.ok(tiedWithLeader.includes('Jugador 0') && tiedWithLeader.includes('Jugador 1'))
+assert.equal(tiedWithLeader.match(/class="player-self"/g)?.length, 1)
+// Three or more leaders stay compact (count only); own line still states the shared first place.
+const manyLeaders = summaryOf(render(roster([9, 9, 9, 9, 2, 0])))
+assert.ok(manyLeaders.includes(t.tiedPlayers(4)) && !manyLeaders.includes('Jugador 1'))
+assert.ok(manyLeaders.includes(`${t.placeLabel(t.ordinal(1))}<span class="ranking-summary-tie"> · ${t.tied}`))
+const allZero = summaryOf(render(roster(Array(10).fill(0))))
+assert.ok(allZero.includes(t.tiedPlayers(10)))
+// Duplicate and long names: identity follows the ID, never the name.
+const dup = render(roster([5, 7, 5, 1], {}, ['Sergio', 'Sergio', 'Maria Antònia Fernández de Castro i Vilallonga', 'Sergio']), 'p3')
+assert.equal(summaryOf(dup).match(/class="player-self"/g)?.length, 1)
+assert.ok(summaryOf(dup).includes(t.placeLabel(t.ordinal(4))))
+assert.equal(fullOf(dup).match(/class="player-self"/g)?.length, 1)
+assert.match(fullOf(dup), /<span class="rank">4<\/span><span class="player-identity"><span class="player-name">Sergio<\/span><span class="player-self">/)
+assert.ok(fullOf(dup).includes('Maria Antònia Fernández de Castro i Vilallonga'))
+// Departed players: counted apart, excluded from active ranks and from the summary, kept with their score.
+const departed = render(roster([4, 30, 6, 5, 3], { 1: { active: false, connectionState: 'disconnected' } }))
+assert.ok(departed.includes(`${t.playerCount(4)} · ${t.departedCount(1)}`))
+assert.ok(!summaryOf(departed).includes('Jugador 1'), 'a departed high score does not lead the live ranking')
+assert.ok(summaryOf(departed).includes('Jugador 2') && summaryOf(departed).includes(t.points(6)))
+assert.match(fullOf(departed), /<section class="departed-players"[^>]*>.*Jugador 1.*<strong>30<\/strong>/)
+assert.equal(fullOf(departed).match(/<span class="rank">/g)?.length, 4)
+assert.equal(multiplayerTranslations.es.departedCount(2), '2 han salido')
+// Reconnecting players stay ranked but say so instead of a round status.
+const reconnecting = render(roster([4, 6, 5, 3], { 2: { connectionState: 'reconnecting', roundStatus: 'solved' } }), 'p0', 'es', 'p3')
+assert.match(fullOf(reconnecting), /Jugador 2<\/span><\/span><strong>5<\/strong><small class="is-reconnecting">Reconectando…<\/small>/)
+assert.match(fullOf(reconnecting), /Jugador 3<\/span><\/span><strong>3<\/strong><small>elige la palabra<\/small>/)
+// Expanded state is local UI state; a caller-provided default renders the open state with matching aria.
+assert.match(renderToStaticMarkup(<Scoreboard players={roster(tenScores)} setterId={null} currentId="p0" t={t} defaultExpanded />), /class="scoreboard is-collapsible is-expanded"[\s\S]*aria-expanded="true"[\s\S]*Veure menys/)
+// Live updates keep the component mounted (same React type and position in GamePage), so the state survives; see the
+// Phase 2C browser checks for the real expand/collapse, keyboard and live-update interaction.
+// An empty chat is marked so it can stay a compact secondary card; messages restore the normal panel.
+const emptyChat = renderToStaticMarkup(<RoomChat messages={[]} currentPlayerId="p0" typingPlayers={[]} t={t} />)
+assert.match(emptyChat, /<section class="room-chat is-empty" aria-label="Xat">/)
+assert.match(emptyChat, /class="chat-empty">Encara no hi ha missatges\./)
+const fullChat = renderToStaticMarkup(<RoomChat messages={[{ id: 'm1', senderId: 'p1', senderName: 'Júlia', text: 'Hola', timestamp: 1, reactions: { '❤️': [], '😂': [], '💀': [] } }]} currentPlayerId="p0" typingPlayers={[]} t={t} />)
+assert.match(fullChat, /<section class="room-chat" aria-label="Xat">/)
+assert.match(fullChat, /class="reaction-trigger" aria-label="Reacciona al missatge de Júlia" aria-expanded="false"/)
+console.log('Compact live ranking regressions passed')
 
 const request = { id: 'request-1', roundId: 'round-1', playerId: 'C', setterId: 'A', status: 'pending' as const, createdAt: 1, decidedAt: null }
 assert.equal(renderToStaticMarkup(<ForgivenessTray requests={[]} players={players} t={multiplayerTranslations.ca} onDecide={() => {}} />), '')
@@ -137,10 +232,105 @@ for (const scores of [[1, 1], [5, 5, 5, 3, 3, 1], [3, 1, 2, 2]]) {
   const ranked = rankByScore(tiedPlayers)
   for (const { player, rank } of ranked) assert.equal(rank, expected[Number(player.id)])
   const sidebar = renderToStaticMarkup(<Scoreboard players={tiedPlayers} setterId={null} currentId="" t={multiplayerTranslations.ca} />)
-  const final = renderToStaticMarkup(<FinalScores players={tiedPlayers} result={{ ranking: tiedPlayers.map((p) => p.id).reverse(), scores: Object.fromEntries(tiedPlayers.map((p) => [p.id, p.score])) }} />)
+  const standings = matchStandings({ players: tiedPlayers, matchResult: { ranking: tiedPlayers.map((p) => p.id).reverse(), scores: Object.fromEntries(tiedPlayers.map((p) => [p.id, p.score])) } }, '')
+  const final = renderToStaticMarkup(<FinalStandings standings={standings ?? []} t={multiplayerTranslations.ca} />)
   for (const { player, rank } of ranked) {
-    assert.ok(sidebar.includes(`<span class="rank">${rank}</span><span class="player-name">${player.name}</span>`))
-    assert.ok(final.includes(`<span>${rank}. ${player.name}<b>${player.score}</b></span>`))
+    assert.ok(sidebar.includes(`<span class="rank">${rank}</span><span class="player-identity"><span class="player-name">${player.name}</span></span>`))
+    assert.match(final, new RegExp(`<span class="standing-rank" aria-hidden="true">${rank}</span><span class="standing-player">[^]*?<span class="standing-name">${player.name}</span>[^]*?<span aria-hidden="true">${player.score}</span>`))
   }
 }
 console.log('Audit phase transitions and shared score-tie regressions passed')
+
+// P0 presentation follows actual server snapshots, including reconnect grace and departures.
+const { rematchAvailability, hasSelectedWord } = await import('../src/multiplayer/presentation')
+const { GamePage } = await import('../src/pages/GamePage')
+function completedRoom(count: number) {
+  const room = new GameRoom('P0234', 'ca', 1, () => 0)
+  for (let i = 0; i < count; i++) room.addPlayer(String(i), `s${i}`, `t${i}`, `Player ${i}`)
+  room.start('0')
+  for (let i = 0; i < count; i++) {
+    room.setWord(String(i), 'A')
+    for (const player of room.activePlayers.filter((p) => p.id !== String(i))) room.guess(player.id, 'A')
+    if (i + 1 < count) room.continue(String(i + 1))
+  }
+  return room
+}
+function gameMarkup(room: GameRoom, language: 'ca' | 'es' = 'ca', playerId = '0') {
+  return renderToStaticMarkup(<GamePage state={room.viewFor(playerId)} interfaceLanguage={language} messages={[]} playerId={playerId} typingPlayers={[]} onLeave={() => {}} onExitToMenu={() => {}} />)
+}
+const two = completedRoom(2)
+assert.deepEqual(rematchAvailability(two.viewFor('0')), { available: true, total: 2, readyIds: [] })
+assert.match(gameMarkup(two), /Revenja/)
+two.requestRematch('0')
+two.markReconnecting('1', 's1')
+assert.deepEqual(rematchAvailability(two.viewFor('0')), { available: true, total: 2, readyIds: ['0'] })
+assert.match(gameMarkup(two), /1 de 2 jugadors|Esperant que torni/)
+const validResult = two.viewFor('0').matchResult
+two.disconnect('1')
+assert.deepEqual(two.viewFor('0').matchResult, validResult, 'Departure preserves completed-match ranking and scores')
+assert.deepEqual(rematchAvailability(two.viewFor('0')), { available: false, total: 1, readyIds: ['0'] })
+assert.equal(hasSelectedWord(two.viewFor('0')), true)
+for (const language of ['ca', 'es'] as const) {
+  const markup = gameMarkup(two, language)
+  assert.ok(markup.includes(multiplayerTranslations[language].rematchNotEnough))
+  assert.ok(markup.includes(multiplayerTranslations[language].createNewRoom))
+  assert.ok(!markup.includes(`>${multiplayerTranslations[language].rematch}</button>`))
+  assert.ok(!markup.includes(multiplayerTranslations[language].roundInterrupted))
+  assert.match(markup, /standing-name">Player [01]<\/span>[^]*?<span aria-hidden="true">1<\/span>/)
+}
+const three = completedRoom(3)
+three.requestRematch('0'); three.requestRematch('1'); three.disconnect('1')
+assert.deepEqual(rematchAvailability(three.viewFor('0')), { available: true, total: 2, readyIds: ['0'] })
+assert.equal(three.roomStatus, 'match-over', 'Remaining active player still must consent')
+three.requestRematch('2')
+assert.equal(three.roomStatus, 'active')
+const autoRestart = completedRoom(3)
+autoRestart.requestRematch('0'); autoRestart.requestRematch('1'); autoRestart.disconnect('2')
+assert.equal(autoRestart.roomStatus, 'active', 'Existing unanimity rule applies when unready participant departs')
+for (const departing of ['0', '1']) {
+  const room = new GameRoom('P0234', 'ca', 1, () => 0)
+  room.addPlayer('0', 's0', 't0', 'Setter'); room.addPlayer('1', 's1', 't1', 'Guesser')
+  room.start('0'); room.disconnect(departing)
+  const remaining = departing === '0' ? '1' : '0'
+  assert.equal(hasSelectedWord(room.viewFor(remaining)), false)
+  for (const language of ['ca', 'es'] as const) {
+    const markup = gameMarkup(room, language, remaining)
+    assert.ok(markup.includes(multiplayerTranslations[language].roundInterrupted))
+    assert.ok(!markup.includes(multiplayerTranslations[language].wordWas))
+    assert.doesNotMatch(markup, /class="keyboard|class="round-results|class="game-columns|class="word-form|class="round-result"/)
+  }
+}
+console.log('P0 rematch roster, reconnection, readiness and wordless-round regressions passed')
+
+// Phase 2D: long words wrap onto the fewest balanced rows instead of scrolling; the mark-carrying rows respect `perRow`.
+const lengths = (rows: unknown[][]) => rows.map((row) => row.length)
+const long = [...'ELECTROENCEFALOGRAFISTA']
+assert.deepEqual(lengths(splitWord(long, 23)), [23], 'a word that fits stays whole')
+assert.deepEqual(lengths(splitWord(long, null)), [23], 'unmeasured (server render) stays whole')
+assert.deepEqual(lengths(splitWord(long, 12, 11)), [11, 12], '320px board: two rows, spare letter on the last row')
+assert.deepEqual(lengths(splitWord(long, 15, 14)), [11, 12])
+assert.deepEqual(lengths(splitWord(long, 8, 7)), [5, 6, 6, 6], 'narrow board: rows with the mark stay within perRow')
+assert.deepEqual(splitWord(long, 12, 11).flat().join(''), long.join(''), 'no letter lost or reordered')
+assert.deepEqual(lengths(splitWord([...'INTERNACIONALITZACIÓ'], 12, 11)), [10, 10])
+assert.deepEqual(lengths(splitWord([...'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWX'], 12, 11)), [10, 10, 10, 10, 10], 'a 50-letter word')
+assert.deepEqual(groupDisplayWord([...'DE TANT']).map(({ start, characters }) => [start, characters.join('')]), [[0, 'DE'], [3, 'TANT']])
+assert.equal(spokenWord(groupDisplayWord(['C', '_', 'L', '·', '_', ' ', 'A']), 'buit'), 'C buit L · buit, A')
+const wordMarkup = (language: 'ca' | 'es') => renderToStaticMarkup(<MultiplayerWord displayWord={['C', '_', 'L', '·', 'L', '_', ' ', '_']} language="ca" label={multiplayerTranslations[language].wordProgress} blank={multiplayerTranslations[language].hiddenLetter} />)
+assert.match(wordMarkup('ca'), /role="group" aria-label="Progrés de la paraula, 6 lletres"/, 'named group counts letters, not punctuation or spaces')
+assert.match(wordMarkup('es'), /aria-label="Progreso de la palabra, 6 letras"/)
+assert.match(wordMarkup('ca'), /<p class="sr-only">C buit L · L buit, buit<\/p>/, 'blanks are spoken, words separated')
+assert.match(wordMarkup('ca'), /<div class="multiplayer-word" aria-hidden="true">/, 'visual tiles are not read letter by letter')
+assert.doesNotMatch(wordMarkup('ca'), /tabindex/, 'a board that does not scroll is not a tab stop')
+
+// Match header: the game language is named in the interface language.
+const header = (language: 'ca' | 'es', game: 'ca' | 'es') => {
+  const room = new GameRoom('K7QF2', game, 1, () => 0)
+  room.addPlayer('0', 's0', 't0', 'Marc'); room.addPlayer('1', 's1', 't1', 'Júlia')
+  room.start('0')
+  return gameMarkup(room, language).match(/<div class="match-meta">.*?<\/div>/)![0]
+}
+assert.match(header('ca', 'ca'), /<span>Codi de sala <b>K7QF2<\/b><\/span>.*<span>Català<\/span>/)
+assert.match(header('es', 'ca'), /<span>Código de sala <b>K7QF2<\/b><\/span>.*<span>Catalán<\/span>/)
+assert.match(header('ca', 'es'), /<span>Castellà<\/span>/)
+assert.match(header('es', 'es'), /<span>Español<\/span>/)
+console.log('Phase 2D long-word rows, word text alternative and match header regressions passed')

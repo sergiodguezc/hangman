@@ -3,6 +3,7 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { displayWord } from '../shared/game.ts'
 import { LearningSummary } from '../src/pages/LearningPage.tsx'
+import { HangmanWord } from '../src/components/HangmanWord.tsx'
 import { learningTranslations } from '../src/learning/i18n.ts'
 import { LearningResultCard } from '../src/components/LearningResultCard.tsx'
 import { allowedCefrLevelsForGroup, applyLearningGuess, createLearningRound, entriesForCefr, entriesForDifficulty, levelGroupFromStoredSelection, selectNextEntry, summarizeLearningHistory, practicedLearningLevels } from '../src/learning/game.ts'
@@ -64,7 +65,7 @@ assert.equal(losing.result, 'loss')
 assert.equal(losing.entry.hintEs, 'traducción-loss')
 assert.match(losing.entry.exampleCa, /casa/)
 const resultMarkup = renderToStaticMarkup(createElement(LearningResultCard, {
-  entry: losing.entry, result: 'loss', language: 'es', onNext: () => {}, onChangeDifficulty: () => {},
+  entry: losing.entry, result: 'loss', language: 'es', errors: losing.errors, incorrect: [...losing.incorrect], onNext: () => {}, onChangeDifficulty: () => {},
 }))
 assert.match(resultMarkup, />casa</)
 assert.match(resultMarkup, /traducción-loss/)
@@ -76,7 +77,7 @@ for (const letter of ['u', 'n', 'a', 'm', 'i', 'c']) phraseRound = applyLearning
 assert.equal(phraseRound.result, 'win')
 assert.equal(displayWord(phrase.answerCa, new Set(), 'ca').join(''), '___ ____')
 const phraseMarkup = renderToStaticMarkup(createElement(LearningResultCard, {
-  entry: phrase, result: 'win', language: 'es', onNext: () => {}, onChangeDifficulty: () => {},
+  entry: phrase, result: 'win', language: 'es', errors: 0, incorrect: [], onNext: () => {}, onChangeDifficulty: () => {},
 }))
 assert.match(phraseMarkup, />una mica</)
 assert.match(phraseMarkup, /<strong>una mica<\/strong>/)
@@ -126,3 +127,45 @@ assert.equal(wordStats.correct, 1)
 assert.equal(wordStats.failed, 1)
 assert.equal(wordStats.accuracy, 50)
 console.log('Learning empty selection, mixed levels and word/letter statistics regressions passed')
+
+// Phase 2C completed-word card: the Catalan word appears once as the heading; vocabulary is the main content.
+const render = (props: Partial<Parameters<typeof LearningResultCard>[0]> & Pick<Parameters<typeof LearningResultCard>[0], 'entry' | 'result' | 'language'>) =>
+  renderToStaticMarkup(createElement(LearningResultCard, { errors: 0, incorrect: [], onNext: () => {}, onChangeDifficulty: () => {}, ...props }))
+const longEntry = { ...entry('long', 'col·leccionista'), translationEs: 'coleccionista de objetos antiguos y documentos históricos muy valiosos', definitionCa: 'Persona que reuneix, ordena i conserva objectes d’un mateix tipus pel seu valor artístic, històric o sentimental.', exampleCa: 'La col·leccionista va donar les seves monedes al museu.', linguistics: { cefr: 'B2' as const } }
+for (const language of ['ca', 'es'] as const) {
+  const t = learningTranslations[language]
+  const win = render({ entry: longEntry, result: 'win', language, errors: 2, incorrect: ['K', 'W'] })
+  const loss = render({ entry: longEntry, result: 'loss', language, errors: 6, incorrect: ['K', 'W', 'Y', 'Z', 'J', 'Q'] })
+  for (const markup of [win, loss]) {
+    // One dominant presentation: a single heading with the word, no solved tiles or uppercase duplicate.
+    assert.equal(markup.match(/<h2/g)?.length, 1)
+    assert.match(markup, /<h2 lang="ca" id="[^"]+" tabindex="-1" aria-describedby="[^"]+">col·leccionista<\/h2>/)
+    assert.doesNotMatch(markup, /class="word"|class="letter"|COL·LECCIONISTA/)
+    assert.equal(markup.split('>col·leccionista<').length - 1, 2, 'the answer appears only as the heading and inside the example')
+    assert.ok(markup.includes(longEntry.definitionCa))
+    assert.ok(markup.includes(longEntry.translationEs))
+    assert.ok(markup.includes('<strong>col·leccionista</strong>'), 'the example highlights the word')
+    assert.ok(markup.includes(`>${t.definition}<`) && markup.includes(`>${t.example}<`) && markup.includes(`>${t.spanish}<`))
+    assert.match(markup, /class="hangman hangman--compact"[^>]*aria-hidden="true"/)
+    assert.ok(markup.includes(`>${t.next}</button>`))
+    assert.ok(markup.indexOf(t.next) > markup.indexOf(longEntry.definitionCa), 'next word follows the vocabulary in reading order')
+    assert.ok(markup.includes('B2'))
+  }
+  assert.ok(win.includes(t.won) && !win.includes(t.reviewLater))
+  assert.ok(win.includes(t.mistakesSummary(2)) && win.includes('K W'))
+  assert.ok(loss.includes(t.lost) && loss.includes(t.reviewLater))
+  assert.ok(loss.includes(t.mistakesSummary(6)))
+  assert.match(win, /class="learning-result win"/)
+  assert.match(loss, /class="learning-result loss"/)
+  const perfect = render({ entry: entry('perfect', 'pingüí'), result: 'win', language })
+  assert.ok(perfect.includes(t.mistakesSummary(0)) && !perfect.includes('learning-result-letters'))
+  assert.ok(perfect.includes('>pingüí</h2>'))
+  assert.ok(!t.mistakesSummary(1).includes(language === 'ca' ? 'lletres' : 'letras'))
+  assert.ok(t.statsLine(1, 1, 0, 100, 1).includes(language === 'ca' ? '1 encertada' : '1 acertada'))
+  assert.ok(t.statsLine(1, 1, 0, 100, 1).includes(language === 'ca' ? '1 única' : '1 única'))
+}
+// Phase 2D: learning/daily tiles fit the board from the character count instead of scrolling; the label names a group.
+const wordMarkup = renderToStaticMarkup(createElement(HangmanWord, { word: "d'altra banda", guesses: new Set(['A']), language: 'ca', reveal: false, label: 'Progrés de la paraula catalana' }))
+assert.match(wordMarkup, /^<div class="word" role="group" aria-label="Progrés de la paraula catalana" style="--letters:13">/)
+assert.equal((wordMarkup.match(/class="sr-only">_</g) ?? []).length, 7, 'unrevealed letters keep their text alternative')
+console.log('Learning completed-word card regressions passed')

@@ -40,7 +40,7 @@ export function LobbyPage({ state, interfaceLanguage, messages, playerId, typing
       <span className="eyebrow">{t.share}</span><div className="room-code">{state.code}</div>
       <button className="copy-button" onClick={copy}>{copied ? t.copied : t.copy}</button>
       {canInvite && <div className="lobby-invite">
-        <button className="primary-action lobby-invite-button" type="button" onClick={invite}>{t.challengeFriend}</button>
+        <button className="secondary-action lobby-invite-button" type="button" onClick={invite}>{t.challengeFriend}</button>
         {inviteStatus !== 'idle' && <p role="status">{inviteStatus === 'copied' ? t.inviteCopied : t.inviteFailed}</p>}
       </div>}
       <div className="waiting-pulse"><i /><span>{activePlayers.length < 2 ? t.waiting : t.waitingToStart}</span></div>

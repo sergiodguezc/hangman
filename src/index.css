@@ -1,14 +1,151 @@
+/* Fraunces, OFL: local Latin subset with optical sizing and soft, wonky forms. */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('./assets/fonts/fraunces-latin-variable.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* Penjat UI is Source Sans 3 subset and renamed under the OFL; see src/assets/fonts/README.md. */
+@font-face {
+  font-family: 'Penjat UI';
+  src: url('./assets/fonts/penjat-ui-variable.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0131, U+013F-0140, U+0152-0153, U+02C6, U+02DA, U+02DC, U+0300-0304, U+0306-0308, U+030A, U+030C, U+0327-0328, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+2039-203A, U+20AC, U+2190-2193, U+2212;
+}
+/* Arial/Helvetica scaled to Source Sans 3 widths and line metrics, so swapping in the web font barely reflows.
+   A bold face too: with font-synthesis off, semibold/bold text would otherwise fall back to the regular face. */
+@font-face {
+  font-family: 'Penjat UI Fallback';
+  src: local('Arial'), local('ArialMT'), local('Helvetica'), local('Liberation Sans');
+  font-weight: 400;
+  size-adjust: 93.3%;
+  ascent-override: 109.8%;
+  descent-override: 42.9%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Penjat UI Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Helvetica Bold'), local('Helvetica-Bold'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  font-weight: 700;
+  size-adjust: 93.3%;
+  ascent-override: 109.8%;
+  descent-override: 42.9%;
+  line-gap-override: 0%;
+}
+
 :root {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #202923;
-  background: #f4f1e9;
+  /* Fonts: Fraunces for brand, expressive headings, game words and outcomes; Penjat UI for everything functional. */
+  --font-ui: 'Penjat UI', 'Penjat UI Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', Georgia, ui-serif, serif;
+
+  /* Semantic type scale (rem, so user font settings apply). Phone values here; 661px+ and 1200px+ below.
+     All breakpoints are written in em (px ÷ 16): identical at default text size, and enlarged default text
+     switches to the narrower layouts instead of squeezing larger type into desktop columns. */
+  --text-body: 1rem;
+  --text-control: 1rem;
+  --text-name: 1rem;
+  --text-chat: 1rem;
+  --text-meta: .875rem;
+  --text-label: .8125rem;
+  --text-panel-title: 1.25rem;
+  --text-page-title: 1.5rem;
+  --text-outcome: clamp(1.875rem, 1.6rem + 1.2vw, 2.75rem);
+  --text-score: 1.125rem;
+  --text-lede: 1.0625rem;
+  /* Expressive display sizes (Lovable): hero, page and section headings, mode cards, wordmark and navigation. */
+  --text-hero: clamp(2.375rem, 1.1rem + 4.4vw, 4.75rem);
+  --text-display: clamp(2.125rem, 1.35rem + 2.6vw, 3.75rem);
+  --text-section: clamp(1.875rem, 1.3rem + 2vw, 3.25rem);
+  --text-card-title: clamp(1.5rem, 1.15rem + 1vw, 2.25rem);
+  --text-step: clamp(2.5rem, 2rem + 1.5vw, 3.5rem);
+  --text-brand: 1.375rem;
+  --text-nav: .9375rem;
+  --text-menu: 1.25rem;
+  --leading-tight: 1.12;
+  --leading-heading: 1.2;
+  --leading-ui: 1.3;
+  --leading-body: 1.5;
+  --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --tracking-label: .06em;
+  --measure: 62ch;
+
+  /* Lovable's exact Paper & Magrana source palette. */
+  --paper: oklch(0.955 0.018 82);
+  --paper-deep: oklch(0.915 0.028 80);
+  --ink: oklch(0.2 0.015 60);
+  --magrana: oklch(0.56 0.19 27);
+  --safra: oklch(0.83 0.15 82);
+  --mar: oklch(0.5 0.08 205);
+  --oliva: oklch(0.6 0.08 125);
+  /* Semantic roles: saturated olive/saffron are accents, never small text on paper. */
+  --surface: oklch(0.982 0.01 85);
+  --surface-muted: var(--paper-deep);
+  --text: var(--ink);
+  --text-muted: oklch(0.45 0.02 60);
+  --primary: var(--magrana);
+  --primary-hover: oklch(0.48 0.17 27);
+  --on-primary: var(--surface);
+  --success: var(--mar);
+  --success-surface: oklch(0.94 0.025 155);
+  --mar-surface: oklch(0.95 0.03 205);
+  --oliva-surface: oklch(0.94 0.045 125);
+  --error: oklch(0.48 0.17 27);
+  --error-surface: oklch(0.95 0.025 27);
+  --warning: oklch(0.4 0.07 82);
+  --warning-surface: oklch(0.95 0.065 82);
+  --border: oklch(0.77 0.025 80);
+  --border-control: oklch(0.52 0.02 60);
+  --border-dashed: oklch(0.2 0.015 60 / 25%);
+  --focus-ring: var(--ink);
+  --focus-gap: var(--surface);
+  --shadow-ink: 3px 3px 0 var(--ink);
+  --shadow-ink-sm: 2px 2px 0 var(--ink);
+  --shadow-ink-hover: 5px 5px 0 var(--ink);
+  --shadow-ink-pressed: 1px 1px 0 var(--ink);
+  --shadow-menu: 0 18px 30px -18px oklch(0.2 0.015 60 / 45%);
+  /* Compatibility aliases for existing component rules. */
+  --green: var(--mar); --green-dark: var(--ink); --cream: var(--surface);
+  --red: var(--error); --muted: var(--text-muted); --muted-strong: var(--text-muted); --line: var(--border);
+
+  /* Spacing, radii and surfaces. */
+  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem;
+  --radius-control: .625rem;
+  --radius-inner: .75rem;
+  --radius-card: 1.375rem;
+  --radius-dialog: 1.125rem;
+  --radius-pill: 999px;
+  --shadow-card: var(--shadow-ink);
+  --shadow-dialog: 0 24px 70px rgba(31,42,35,.25);
+  --control-height: 2.75rem;
+  --header-height: 3.5rem;
+  --page-max: 80rem;
+
+  font-family: var(--font-ui);
+  font-size: 100%;
+  line-height: var(--leading-body);
+  color: var(--text);
+  background: var(--paper);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+@media (min-width: 41.3125em) {
+  :root { --text-body: 1.0625rem; --text-control: 1.0625rem; --text-name: 1.0625rem; --text-meta: .875rem; --text-label: .8125rem; --text-panel-title: 1.375rem; --text-page-title: 1.75rem; --text-score: 1.25rem; --text-lede: 1.125rem; --text-brand: 1.5rem; --shadow-ink: 4px 4px 0 var(--ink); --header-height: 4rem; }
+}
+@media (min-width: 75em) {
+  :root { --text-body: 1.125rem; --text-control: 1.125rem; --text-name: 1.125rem; --text-chat: 1.0625rem; --text-meta: .9375rem; --text-label: .875rem; --text-panel-title: 1.5rem; --text-page-title: 1.875rem; --text-score: 1.375rem; --text-lede: 1.1875rem; --text-nav: 1rem; }
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; min-height: 100vh; }
-button { font: inherit; }
-button:focus-visible { outline: 3px solid #e5a33c; outline-offset: 3px; }
+/* No min-width: below 320 CSS px (zoomed phones) the layout keeps reflowing instead of scrolling sideways. */
+body { margin: 0; min-height: 100vh; font-size: var(--text-body); }
+/* Lovable's italic accent word in display headings. Fraunces ships one upright face, so the slant is synthesised here only. */
+h1 em, h2 em, .accent { font-style: italic; font-synthesis: style; color: var(--magrana); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

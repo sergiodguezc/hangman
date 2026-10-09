@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { REACTION_TYPES, type ChatMessage, type ReactionType } from '../../shared/protocol'
 import type { MultiplayerTranslations } from '../multiplayer/i18n'
 import { errorMessage } from '../multiplayer/i18n'
@@ -40,18 +40,16 @@ export function RoomChat({ messages, currentPlayerId, typingPlayers, t }: Props)
     if (!response.ok) setError(errorMessage(response.error, t))
   })
 
-  return <section className="room-chat" aria-label={t.chatTitle}>
+  return <section className={`room-chat${messages.length ? '' : ' is-empty'}`} aria-label={t.chatTitle}>
     <h2>{t.chatTitle}</h2>
     <div className="chat-messages" ref={listRef} aria-live="polite">
       {!messages.length && <p className="chat-empty">{t.chatEmpty}</p>}
       {messages.map((message) => <article key={message.id} className={`${message.senderId === currentPlayerId ? 'own ' : ''}${openMessageId === message.id ? 'reactions-open' : ''}`.trim()}>
         <strong>{message.senderName}</strong>
-        <div className="chat-message-body" onClick={() => setOpenMessageId((current) => current === message.id ? null : message.id)}>
-          <div className="reaction-picker" role="group">{REACTION_TYPES.map((reaction) => <button type="button" key={reaction} aria-label={reactionLabels[reaction]}
-            aria-pressed={message.reactions[reaction].includes(currentPlayerId)} onClick={(event) => { event.stopPropagation(); react(message.id, reaction) }}>{reaction}</button>)}</div>
+        <div className="chat-message-body">
           <p>{message.text}</p>
-          <div className="active-reactions">{REACTION_TYPES.filter((reaction) => message.reactions[reaction].length > 0).map((reaction) => <button type="button" key={reaction}
-            aria-label={reactionLabels[reaction]} aria-pressed={message.reactions[reaction].includes(currentPlayerId)} onClick={(event) => { event.stopPropagation(); react(message.id, reaction) }}>{reaction}</button>)}</div>
+          <MessageReactions message={message} currentPlayerId={currentPlayerId} t={t} labels={reactionLabels}
+            open={openMessageId === message.id} onOpen={(open) => setOpenMessageId(open ? message.id : null)} onReact={react} />
         </div>
       </article>)}
     </div>
@@ -63,4 +61,35 @@ export function RoomChat({ messages, currentPlayerId, typingPlayers, t }: Props)
     </form>
     {error && <p className="chat-error" role="alert">{error}</p>}
   </section>
+}
+
+function MessageReactions({ message, currentPlayerId, t, labels, open, onOpen, onReact }: {
+  message: ChatMessage; currentPlayerId: string; t: MultiplayerTranslations; labels: Record<ReactionType, string>
+  open: boolean; onOpen: (open: boolean) => void; onReact: (messageId: string, reaction: ReactionType) => void
+}) {
+  const id = useId()
+  const trigger = useRef<HTMLButtonElement>(null)
+  const picker = useRef<HTMLDivElement>(null)
+  useEffect(() => { if (open) picker.current?.querySelector('button')?.focus() }, [open])
+  const close = () => { onOpen(false); trigger.current?.focus() }
+  return <div className="message-reactions" onBlur={(event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) onOpen(false)
+  }} onKeyDown={(event) => {
+    if (open && event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close() }
+  }}>
+    <div className="reaction-actions">
+      <button ref={trigger} type="button" className="reaction-trigger" aria-label={t.addReaction.replace('{player}', message.senderName)}
+        aria-expanded={open} aria-controls={id} onClick={() => onOpen(!open)}><span aria-hidden="true">☺+</span></button>
+      <div className="active-reactions">{REACTION_TYPES.filter((reaction) => message.reactions[reaction].length > 0).map((reaction) => <button type="button" key={reaction}
+        aria-label={`${labels[reaction]} · ${message.reactions[reaction].length}`} aria-pressed={message.reactions[reaction].includes(currentPlayerId)}
+        onClick={() => {
+          onReact(message.id, reaction)
+          if (message.reactions[reaction].length === 1 && message.reactions[reaction].includes(currentPlayerId)) trigger.current?.focus()
+        }}>{reaction}<span>{message.reactions[reaction].length}</span></button>)}</div>
+    </div>
+    <div ref={picker} id={id} className="reaction-picker" role="group" aria-label={t.reactions} hidden={!open}>
+      {REACTION_TYPES.map((reaction) => <button type="button" key={reaction} aria-label={labels[reaction]}
+        aria-pressed={message.reactions[reaction].includes(currentPlayerId)} onClick={() => { onReact(message.id, reaction); close() }}>{reaction}</button>)}
+    </div>
+  </div>
 }

@@ -1,12 +1,18 @@
 import type { Language } from '../../shared/game'
+import { routeClick } from '../navigation/links'
+import type { Route } from '../routing'
 
 type Props = {
   language: Language
+  onNavigate?: (route: Route) => void
 }
 
 const copy = {
   ca: {
     title: 'Com es juga al Penjat?',
+    titleParts: ['Com es ', 'juga', ' al Penjat?'],
+    eyebrow: 'Guia ràpida',
+    tryIt: 'Prova-ho',
     intro: 'Endevina la paraula lletra a lletra abans d’arribar als sis errors.',
     rules: {
       title: 'Regles',
@@ -22,7 +28,7 @@ const copy = {
     },
     scoring: {
       title: 'Puntuació',
-      items: ['Només puntuen els jugadors que resolen la paraula; qui l’ha triada rep +0.', 'Els resolts van davant dels no resolts. Entre els resolts, menys errors és millor i el temps resol els empats.', 'Els punts depenen del nombre de jugadors que endevinen: amb 3, el millor rep +3, el segon +2 i el tercer +1. Els no resolts reben +0.', 'Un jugador perdonat que resol la paraula encara pot puntuar; si queda eliminat, rep +0. La classificació mostra els punts acumulats de la partida.'],
+      items: ['Només puntuen els jugadors que resolen la paraula; qui l’ha triada rep +0.', 'Els resolts van davant dels no resolts. Entre els resolts, menys errors és millor i el temps resol els empats.', 'Els punts depenen del nombre de jugadors que endevinen: amb 3, el millor rep +3, el segon +2 i el tercer +1. Els no resolts reben +0.', 'Un jugador perdonat que resol la paraula encara pot puntuar; si queda eliminat, rep +0. La classificació mostra els punts acumulats de la partida.', 'Els jugadors amb els mateixos punts comparteixen lloc a la classificació.'],
     },
     forgiveness: {
       title: 'Perdó',
@@ -30,15 +36,26 @@ const copy = {
     },
     leaving: {
       title: 'Si marxes de la sala',
-      items: ['No participes en els torns futurs.', 'Els punts acumulats es conserven i apareixen a «Ja no són a la sala».', 'No formes part de la classificació activa.'],
+      items: ['Si perds la connexió, tens 25 segons per tornar-hi i continuar amb els teus punts.', 'Si marxes, no participes en els torns futurs ni en la classificació activa.', 'Els punts acumulats es conserven i apareixen a «Ja no són a la sala».'],
+    },
+    matchEnd: {
+      title: 'Final de la partida',
+      items: ['La classificació final mostra els punts de tots els participants, també dels qui han marxat.', 'Qui té més punts guanya; si diversos jugadors empaten, comparteixen el primer lloc.', 'La revenja comença quan tots els jugadors que continuen a la sala la demanen.'],
     },
     learn: {
       title: 'Aprèn català',
-      items: ['Es juga en solitari.', 'Ajuda a practicar vocabulari català.', 'Et proposem paraules reals i n’has d’endevinar la forma correcta.', 'Quan acabes, veus la paraula, el significat i la traducció en castellà.'],
+      items: ['Es juga en solitari.', 'Ajuda a practicar vocabulari català.', 'Et proposem paraules reals i n’has d’endevinar la forma correcta.', 'Quan acabes, veus la paraula, el significat i la traducció en castellà.', 'Les paraules que falles tornen a sortir més endavant en la mateixa sessió.'],
+    },
+    daily: {
+      title: 'Paraula del dia',
+      items: ['Cada dia hi ha una paraula catalana nova, la mateixa per a tothom.', 'Tens sis errors i un sol intent per dia; el progrés es desa en aquest navegador.', 'Quan acabes, veus el significat i pots compartir el resultat sense revelar la paraula.'],
     },
   },
   es: {
     title: '¿Cómo se juega a Penjat?',
+    titleParts: ['¿Cómo se ', 'juega', ' a Penjat?'],
+    eyebrow: 'Guía rápida',
+    tryIt: 'Pruébalo',
     intro: 'Adivina la palabra letra a letra antes de llegar a seis errores.',
     rules: {
       title: 'Reglas',
@@ -54,7 +71,7 @@ const copy = {
     },
     scoring: {
       title: 'Puntuación',
-      items: ['Solo puntúan quienes resuelven la palabra; quien la ha elegido recibe +0.', 'Los jugadores que la resuelven van delante de quienes no lo hacen. Entre los primeros, menos errores es mejor y el tiempo resuelve los empates.', 'Los puntos dependen del número de jugadores que adivinan: con 3, el mejor recibe +3, el segundo +2 y el tercero +1. Quienes no la resuelven reciben +0.', 'Un jugador perdonado que resuelve la palabra aún puede puntuar; si queda eliminado, recibe +0. La clasificación muestra los puntos acumulados de la partida.'],
+      items: ['Solo puntúan quienes resuelven la palabra; quien la ha elegido recibe +0.', 'Los jugadores que la resuelven van delante de quienes no lo hacen. Entre los primeros, menos errores es mejor y el tiempo resuelve los empates.', 'Los puntos dependen del número de jugadores que adivinan: con 3, el mejor recibe +3, el segundo +2 y el tercero +1. Quienes no la resuelven reciben +0.', 'Un jugador perdonado que resuelve la palabra aún puede puntuar; si queda eliminado, recibe +0. La clasificación muestra los puntos acumulados de la partida.', 'Los jugadores con los mismos puntos comparten puesto en la clasificación.'],
     },
     forgiveness: {
       title: 'Perdón',
@@ -62,15 +79,26 @@ const copy = {
     },
     leaving: {
       title: 'Si sales de la sala',
-      items: ['No participas en los turnos futuros.', 'Conservas los puntos acumulados, que aparecen en «Ya no están en la sala».', 'No formas parte de la clasificación activa.'],
+      items: ['Si pierdes la conexión, tienes 25 segundos para volver y seguir con tus puntos.', 'Si te vas, no participas en los turnos futuros ni en la clasificación activa.', 'Conservas los puntos acumulados, que aparecen en «Ya no están en la sala».'],
+    },
+    matchEnd: {
+      title: 'Final de la partida',
+      items: ['La clasificación final muestra los puntos de todos los participantes, también de quienes se han ido.', 'Gana quien tiene más puntos; si varios jugadores empatan, comparten el primer puesto.', 'La revancha empieza cuando todos los jugadores que siguen en la sala la piden.'],
     },
     learn: {
       title: 'Aprender catalán',
-      items: ['Se juega en solitario.', 'Sirve para practicar vocabulario catalán.', 'Te proponemos palabras reales y debes adivinar su forma correcta.', 'Al terminar, ves la palabra, el significado y la traducción al castellano.'],
+      items: ['Se juega en solitario.', 'Sirve para practicar vocabulario catalán.', 'Te proponemos palabras reales y debes adivinar su forma correcta.', 'Al terminar, ves la palabra, el significado y la traducción al castellano.', 'Las palabras que fallas vuelven a salir más adelante en la misma sesión.'],
+    },
+    daily: {
+      title: 'Palabra del día',
+      items: ['Cada día hay una palabra catalana nueva, la misma para todos.', 'Tienes seis errores y un solo intento al día; el progreso se guarda en este navegador.', 'Al terminar, ves el significado y puedes compartir el resultado sin revelar la palabra.'],
     },
   },
 } satisfies Record<Language, {
   title: string
+  titleParts: [string, string, string]
+  eyebrow: string
+  tryIt: string
   intro: string
   rules: { title: string; items: string[] }
   multiplayer: { title: string; items: string[] }
@@ -78,51 +106,45 @@ const copy = {
   scoring: { title: string; items: string[] }
   forgiveness: { title: string; items: string[] }
   leaving: { title: string; items: string[] }
+  matchEnd: { title: string; items: string[] }
+  daily: { title: string; items: string[] }
   learn: { title: string; items: string[] }
 }>
 
-export function HowToPlayPage({ language }: Props) {
+type HelpSection = { title: string; items: string[] }
+
+export function HowToPlayPage({ language, onNavigate }: Props) {
   const t = copy[language]
+  const section = (item: HelpSection, tone = '', link?: { href: string; route: Route }) => <section className={`howto-section${tone ? ` howto-section--${tone}` : ''}`} key={item.title}>
+    <h2>{item.title}</h2>
+    <ul>{item.items.map((text) => <li key={text}>{text}</li>)}</ul>
+    {link && <a className="howto-link" href={link.href} onClick={routeClick(onNavigate && (() => onNavigate(link.route)))}>{t.tryIt}<span aria-hidden="true"> →</span></a>}
+  </section>
 
   return <main className="howto-page" lang={language}>
-    <section className="howto-shell">
-      <header className="howto-header">
-        <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
+    <div className="howto-shell">
+      <header className="page-head howto-header">
+        <p className="page-eyebrow page-eyebrow--magrana">{t.eyebrow}</p>
+        <h1>{t.titleParts[0]}<em>{t.titleParts[1]}</em>{t.titleParts[2]}</h1>
+        <p className="page-lede">{t.intro}</p>
       </header>
 
       <article className="howto-card">
-        <p className="howto-intro">{t.intro}</p>
+        <section className="howto-steps" aria-labelledby="howto-rules-title">
+          <h2 id="howto-rules-title">{t.rules.title}</h2>
+          <ol>{t.rules.items.map((item, index) => <li key={item}><span className="howto-step-number" aria-hidden="true">{index + 1}</span><p>{item}</p></li>)}</ol>
+        </section>
         <div className="howto-grid">
-          <section className="howto-section howto-section--full">
-            <h2>{t.rules.title}</h2>
-            <ul>{t.rules.items.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
-          <section className="howto-section">
-            <h2>{t.multiplayer.title}</h2>
-            <ul>{t.multiplayer.items.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
-          <section className="howto-section">
-            <h2>{t.rotation.title}</h2>
-            <ul>{t.rotation.items.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
-          <section className="howto-section">
-            <h2>{t.scoring.title}</h2>
-            <ul>{t.scoring.items.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
-          <section className="howto-section">
-            <h2>{t.forgiveness.title}</h2>
-            <ul>{t.forgiveness.items.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
-          <section className="howto-section">
-            <h2>{t.leaving.title}</h2>
-            <ul>{t.leaving.items.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
-          <section className="howto-section">
-            <h2>{t.learn.title}</h2>
-            <ul>{t.learn.items.map((item) => <li key={item}>{item}</li>)}</ul>
-          </section>
+          {section(t.multiplayer, 'mar', { href: '/multijugador', route: '/multijugador/' })}
+          {section(t.rotation)}
+          {section(t.scoring, 'ink')}
+          {section(t.forgiveness)}
+          {section(t.leaving)}
+          {section(t.matchEnd)}
+          {section(t.learn, 'oliva', { href: '/aprendre', route: '/aprendre/' })}
+          {section(t.daily, 'safra', { href: '/paraula-del-dia', route: '/paraula-del-dia/' })}
         </div>
       </article>
-    </section>
+    </div>
   </main>
 }

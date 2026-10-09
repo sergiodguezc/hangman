@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import type { Language } from '../shared/game'
 import type { ChatMessage, PlayerGameView } from '../shared/protocol'
+import { Modal } from './components/Modal'
 import { GamePage } from './pages/GamePage'
 import { HomePage } from './pages/HomePage'
 import { LobbyPage } from './pages/LobbyPage'
 import { LearningPage } from './pages/LearningPage'
 import { DailyChallengePage } from './pages/DailyChallengePage'
 import { HowToPlayPage } from './pages/HowToPlayPage'
-import { InterfaceLanguageSelector } from './components/InterfaceLanguageSelector'
-import { GlobalNavigation } from './components/GlobalNavigation'
+import { SiteHeader } from './components/SiteHeader'
+import { SiteFooter } from './components/SiteFooter'
 import { INTERFACE_LANGUAGE_STORAGE_KEY, readInterfaceLanguage } from './localization'
 import { normalizeInvitationCode, shouldResumeRoomSession } from './multiplayer/invitations'
 import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
@@ -18,6 +19,7 @@ import './App.css'
 type Mode = 'home' | 'multiplayer' | 'learning' | 'daily' | 'help'
 type PageCopy = { title: string; description: string; socialTitle?: string; socialDescription?: string }
 type InvitationCode = string | null
+type ExitKind = 'game' | 'room'
 const PUBLIC_SITE_ORIGIN = 'https://penjat.cat'
 
 function readInvitationCode(): InvitationCode {
@@ -95,7 +97,7 @@ function App() {
   const [learningGameActive, setLearningGameActive] = useState(false)
   const [dailyGameActive, setDailyGameActive] = useState(false)
   const [invitedRoomCode, setInvitedRoomCode] = useState<InvitationCode>(() => readInvitationCode())
-  const [pendingExit, setPendingExit] = useState<(() => void) | null>(null)
+  const [pendingExit, setPendingExit] = useState<{ kind: ExitKind; exit: () => void } | null>(null)
   const page = routeDescriptions[route]
 
   useEffect(() => {
@@ -197,7 +199,7 @@ function App() {
     setGameLanguage(next)
     localStorage.setItem('hangman-game-language', next)
   }
-  const leave = () => {
+  const leave = (destination: Route = '/multijugador/') => {
     socket.emit('chat:typing', { isTyping: false })
     socket.emit('room:leave')
     clearRoomSession()
@@ -205,7 +207,7 @@ function App() {
     setRoom(null)
     setMessages([])
     setTypingPlayers({})
-    goTo('/multijugador/', { replace: true })
+    goTo(destination, { replace: true })
   }
   const enterRoom = (view: PlayerGameView, id: string) => {
     setMessages([])
@@ -234,29 +236,44 @@ function App() {
     setLearningSummaryVisible(true)
   }
 
-  const interfaceSelector = <InterfaceLanguageSelector language={interfaceLanguage} onChange={changeInterfaceLanguage} />
-  const showBack = !room && view !== 'home'
-  const backLabel = room ? (interfaceLanguage === 'ca' ? 'Tornar' : 'Volver') : (interfaceLanguage === 'ca' ? 'Tornar enrere' : 'Volver')
-  const multiplayerGameActive = room?.roomStatus === 'active'
-  const requestConfirmedExit = (exit: () => void, requiresConfirmation: boolean) => {
-    if (!requiresConfirmation) { exit(); return }
-    setPendingExit(() => exit)
+  // Visible exit labels say what the button ends rather than a generic "back"; ordinary navigation lives in the header.
+  const navigationCopy = interfaceLanguage === 'ca'
+    ? { endSession: 'Acaba la sessió', leaveRoom: 'Surt de la sala', leaveMatch: 'Surt de la partida' }
+    : { endSession: 'Terminar sesión', leaveRoom: 'Salir de la sala', leaveMatch: 'Salir de la partida' }
+  const requestConfirmedExit = (exit: () => void, confirmation: ExitKind | null) => {
+    if (!confirmation) { exit(); return }
+    setPendingExit({ kind: confirmation, exit })
   }
   const cancelExit = () => setPendingExit(null)
   const confirmExit = () => {
-    const exit = pendingExit
+    const exit = pendingExit?.exit
     setPendingExit(null)
     exit?.()
   }
-  const exitDialog = pendingExit ? <ExitConfirmationDialog language={interfaceLanguage} onCancel={cancelExit} onConfirm={confirmExit} /> : null
+  // Header links never drop a room or an unfinished game silently: leaving asks first, then goes to the chosen page.
+  const navigate = (next: Route) => {
+    if (room) {
+      const kind = room.roomStatus === 'waiting' ? 'room' : room.roomStatus === 'active' ? 'game' : null
+      requestConfirmedExit(() => leave(next), kind)
+      return
+    }
+    if (next === route) { goTo(next); return }
+    const activeGame = (view === 'learning' && learningGameActive) || (view === 'daily' && dailyGameActive)
+    requestConfirmedExit(() => goTo(next), activeGame ? 'game' : null)
+  }
+  const exitDialog = pendingExit ? <ExitConfirmationDialog language={interfaceLanguage} kind={pendingExit.kind} onCancel={cancelExit} onConfirm={confirmExit} /> : null
+  const section = room ? 'multiplayer' : view
+  const header = (exit?: { label: string; onExit: () => void }) => <SiteHeader language={interfaceLanguage} current={section} onLanguage={changeInterfaceLanguage}
+    onNavigate={navigate} exit={exit} sticky={!room && (view === 'home' || view === 'help' || view === 'multiplayer')} />
+  const footer = <SiteFooter language={interfaceLanguage} onNavigate={navigate} />
 
-  if (!room && view === 'learning') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={() => requestConfirmedExit(learningBack, learningGameActive)} /><LearningPage language={interfaceLanguage} summaryRequested={learningSummaryRequested} onActiveGameChange={setLearningGameActive} onSummaryShown={markLearningSummaryShown} onExitSummary={returnHome} />{interfaceSelector}{exitDialog}</>
-  if (!room && view === 'daily') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={() => requestConfirmedExit(returnHome, dailyGameActive)} /><DailyChallengePage language={interfaceLanguage} onActiveGameChange={setDailyGameActive} />{interfaceSelector}{exitDialog}</>
-  if (!room && view === 'multiplayer') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} invitedRoomCode={invitedRoomCode} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{interfaceSelector}{exitDialog}</>
-  if (!room && view === 'help') return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HowToPlayPage language={interfaceLanguage} />{interfaceSelector}{exitDialog}</>
-  if (!room) return <><GlobalNavigation showBack={showBack} backLabel={backLabel} onBack={returnHome} /><HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onDaily={startDaily} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{interfaceSelector}{exitDialog}</>
-  if (room.roomStatus === 'waiting') return <><GlobalNavigation showBack backLabel={backLabel} onBack={leave} /><LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayers={Object.values(typingPlayers)} />{interfaceSelector}{exitDialog}</>
-  return <><GlobalNavigation showBack backLabel={backLabel} onBack={() => requestConfirmedExit(leave, multiplayerGameActive)} /><GamePage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayers={Object.values(typingPlayers)} />{interfaceSelector}{exitDialog}</>
+  if (!room && view === 'learning') return <>{header(learningGameActive ? { label: navigationCopy.endSession, onExit: () => requestConfirmedExit(learningBack, 'game') } : undefined)}<LearningPage language={interfaceLanguage} summaryRequested={learningSummaryRequested} onActiveGameChange={setLearningGameActive} onSummaryShown={markLearningSummaryShown} onExitSummary={returnHome} />{exitDialog}</>
+  if (!room && view === 'daily') return <>{header()}<DailyChallengePage language={interfaceLanguage} onActiveGameChange={setDailyGameActive} onHome={returnHome} />{exitDialog}</>
+  if (!room && view === 'multiplayer') return <>{header()}<HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} invitedRoomCode={invitedRoomCode} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{footer}{exitDialog}</>
+  if (!room && view === 'help') return <>{header()}<HowToPlayPage language={interfaceLanguage} onNavigate={navigate} />{footer}{exitDialog}</>
+  if (!room) return <>{header()}<HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onDaily={startDaily} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="home" />{footer}{exitDialog}</>
+  if (room.roomStatus === 'waiting') return <>{header({ label: navigationCopy.leaveRoom, onExit: () => leave() })}<LobbyPage state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayers={Object.values(typingPlayers)} />{exitDialog}</>
+  return <>{header({ label: room.roomStatus === 'active' ? navigationCopy.leaveMatch : navigationCopy.leaveRoom, onExit: () => requestConfirmedExit(() => leave(), room.roomStatus === 'active' ? 'game' : null) })}<GamePage onLeave={() => leave()} onExitToMenu={() => leave('/')} state={room} interfaceLanguage={interfaceLanguage} messages={messages} playerId={playerId} typingPlayers={Object.values(typingPlayers)} />{exitDialog}</>
 }
 
 export default App
@@ -265,35 +282,26 @@ function canonicalPath(route: Route): string {
   return route === '/' ? '/' : route.replace(/\/$/, '')
 }
 
-function ExitConfirmationDialog({ language, onCancel, onConfirm }: { language: Language; onCancel: () => void; onConfirm: () => void }) {
-  const copy = language === 'ca' ? {
-    title: 'Vols acabar la partida?',
-    body: "Si surts ara, la partida actual s'acabarà.",
-    cancel: 'Cancel·la',
-    confirm: 'Acaba la partida',
-  } : {
-    title: '¿Quieres terminar la partida?',
-    body: 'Si sales ahora, la partida actual terminará.',
-    cancel: 'Cancelar',
-    confirm: 'Terminar partida',
-  }
+function ExitConfirmationDialog({ language, kind, onCancel, onConfirm }: { language: Language; kind: ExitKind; onCancel: () => void; onConfirm: () => void }) {
+  const copy = {
+    ca: {
+      game: { title: 'Vols acabar la partida?', body: "Si surts ara, la partida actual s'acabarà.", confirm: 'Acaba la partida' },
+      room: { title: 'Vols sortir de la sala?', body: 'Si surts, hauràs de tornar a entrar amb el codi de la sala.', confirm: 'Surt de la sala' },
+      cancel: 'Cancel·la',
+    },
+    es: {
+      game: { title: '¿Quieres terminar la partida?', body: 'Si sales ahora, la partida actual terminará.', confirm: 'Terminar partida' },
+      room: { title: '¿Quieres salir de la sala?', body: 'Si sales, tendrás que volver a entrar con el código de la sala.', confirm: 'Salir de la sala' },
+      cancel: 'Cancelar',
+    },
+  }[language]
 
-  useEffect(() => {
-    const keydown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onCancel()
-    }
-    window.addEventListener('keydown', keydown)
-    return () => window.removeEventListener('keydown', keydown)
-  }, [onCancel])
-
-  return <div className="exit-confirmation-backdrop" role="presentation">
-    <section className="exit-confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="exit-confirmation-title" aria-describedby="exit-confirmation-copy">
-      <h2 id="exit-confirmation-title">{copy.title}</h2>
-      <p id="exit-confirmation-copy">{copy.body}</p>
+  return <Modal className="exit-confirmation-dialog" labelledBy="exit-confirmation-title" describedBy="exit-confirmation-copy" onCancel={onCancel}>
+      <h2 id="exit-confirmation-title">{copy[kind].title}</h2>
+      <p id="exit-confirmation-copy">{copy[kind].body}</p>
       <div className="exit-confirmation-actions">
-        <button type="button" className="secondary-action" autoFocus onClick={onCancel}>{copy.cancel}</button>
-        <button type="button" className="primary-action danger-action" onClick={onConfirm}>{copy.confirm}</button>
+        <button type="button" className="secondary-action" data-modal-initial-focus onClick={onCancel}>{copy.cancel}</button>
+        <button type="button" className="primary-action danger-action" onClick={onConfirm}>{copy[kind].confirm}</button>
       </div>
-    </section>
-  </div>
+  </Modal>
 }

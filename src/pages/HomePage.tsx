@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type FormEvent, type MouseEvent } from 'react'
+import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import type { Language } from '../../shared/game'
 import { SUPPORTED_VOLTES, type PlayerGameView, type RoomPreview, type Voltes } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
@@ -11,6 +11,7 @@ import { DAILY_CHALLENGE_PUBLIC_PATH, getDailyChallenge } from '../daily/challen
 import { getHomeDailyStatus } from '../daily/homeSummary'
 import { dailyTranslations } from '../daily/i18n'
 import { homeTranslations } from '../home/i18n'
+import { routeClick as route } from '../navigation/links'
 
 type Props = {
   interfaceLanguage: Language
@@ -33,14 +34,6 @@ function isIosDevice() {
 
 function isStandalonePwa() {
   return window.matchMedia('(display-mode: standalone)').matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone)
-}
-
-function route(action?: () => void) {
-  return (event: MouseEvent<HTMLAnchorElement>) => {
-    if (!action || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-    event.preventDefault()
-    action()
-  }
 }
 
 function readHomeDaily() {
@@ -181,9 +174,8 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
       return <main className="home-page home-page--multiplayer">
         <section className="home-card home-card--join invitation-card">
           <div className="home-intro home-intro--compact">
-            <span className="brand-mark">P</span>
-            <h1>{t.title}</h1>
-            <p>{t.subtitle}</p>
+            <p className="page-eyebrow page-eyebrow--mar">{t.multiplayerMode}</p>
+            <h1>{t.subtitle}</h1>
           </div>
           {invitationOverridesSession && <p role="status">{t.invitationTakesPriority}</p>}
           {invitationStatus === 'loading' && <p className="invitation-loading">{t.invitationLoading}</p>}
@@ -200,7 +192,7 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
             <section className="invitation-rules" aria-labelledby="invitation-rules-title">
               <h3 id="invitation-rules-title">{t.invitationRules}</h3>
               <dl>
-                <div><dt>{t.gameLanguage}</dt><dd>{getLanguageConfig(invitation.gameLanguage).name}</dd></div>
+                <div><dt>{t.gameLanguage}</dt><dd>{t.gameLanguageNames[invitation.gameLanguage]}</dd></div>
                 <div><dt>{t.voltes}</dt><dd>{invitation.voltes}</dd></div>
               </dl>
             </section>
@@ -217,27 +209,35 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
     }
 
     return <main className="home-page home-page--multiplayer">
+      <header className="page-head">
+        <p className="page-eyebrow page-eyebrow--mar">{t.multiplayerMode}</p>
+        <h1>{t.setupTitle} <em>{t.setupAccent}</em></h1>
+        <p className="page-lede">{t.subtitle}</p>
+      </header>
       <section className="home-card home-card--join">
-        <div className="home-intro home-intro--compact">
-          <span className="brand-mark">P</span>
-          <h1>{t.title}</h1>
-          <p>{t.subtitle}</p>
-        </div>
         <form onSubmit={create}>
-          <label>{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
-          <label className="language-field">
-            <span>{t.gameLanguage}</span>
-            <LanguageSelector language={gameLanguage} label={t.gameLanguage} onChange={onGameLanguage} />
-          </label>
-          <p className="target-help">{t.gameLanguageHint}</p>
-          <fieldset className="target-selector"><legend>{t.voltes}</legend><div>
-            {SUPPORTED_VOLTES.map((value) => <button type="button" key={value} className={voltes === value ? 'active' : ''} onClick={() => setVoltes(value)}>{value}</button>)}
-          </div><p className="target-help">{t.voltesExplanation}</p></fieldset>
-          <button className="primary-action" disabled={busy}>{t.create}</button>
-          <div className="join-divider"><span>o</span></div>
-          <label>{t.roomCode}<input value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"
-            onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, ''))} /></label>
-          <button type="button" className="secondary-action" disabled={busy || !name.trim() || code.length !== 5} onClick={join}>{t.join}</button>
+          <label className="setup-name">{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
+          <div className="setup-panel setup-panel--create">
+            <h2>{t.createTitle}</h2>
+            <p className="setup-hint">{t.createHint}</p>
+            <label className="language-field">
+              <span>{t.gameLanguage}</span>
+              <LanguageSelector language={gameLanguage} label={t.gameLanguage} onChange={onGameLanguage} />
+            </label>
+            <p className="target-help">{t.gameLanguageHint}</p>
+            <fieldset className="target-selector"><legend>{t.voltes}</legend><div>
+              {SUPPORTED_VOLTES.map((value) => <button type="button" key={value} className={voltes === value ? 'active' : ''} onClick={() => setVoltes(value)}>{value}</button>)}
+            </div><p className="target-help">{t.voltesExplanation}</p></fieldset>
+            <button className="primary-action" disabled={busy}>{t.create}</button>
+          </div>
+          <div className="join-divider"><span>{t.or}</span></div>
+          <div className="setup-panel setup-panel--join">
+            <h2>{t.joinTitle}</h2>
+            <p className="setup-hint">{t.joinHint}</p>
+            <label>{t.roomCode}<input className="room-code-input" value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"
+              onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, ''))} /></label>
+            <button type="button" className="secondary-action" disabled={busy || !name.trim() || code.length !== 5} onClick={join}>{t.join}</button>
+          </div>
           {(error || notice) && <p className="form-error" role="alert">{error || errorMessage(notice!, t)}</p>}
         </form>
       </section>
@@ -246,25 +246,19 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
 
   return <main className="home-page">
     <section className="home-shell">
-      <header className="home-topbar">
-        <div className="brand home-brand"><span className="brand-mark">P</span><span className="brand-word">PENJAT</span></div>
-        <div className="home-topbar-actions">
-          <a className="text-button home-help-link" href="/com-es-juga" onClick={route(onHelp)}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</a>
-        </div>
-      </header>
-
       <div className="home-hero">
         <section className="home-copy">
-          <span className="eyebrow">{isCatalan ? 'EL JOC DEL PENJAT' : 'EL JUEGO DEL AHORCADO'}</span>
-          <h1>{isCatalan ? 'Juga al penjat online en català.' : 'Juega a Penjat online.'}</h1>
+          <p className="page-eyebrow page-eyebrow--safra">{homeCopy.eyebrow}</p>
+          <h1>{isCatalan ? <>Juga al penjat online <em>en català.</em></> : <>Juega a Penjat <em>online.</em></>}</h1>
           <p className="home-lede">{homeCopy.lede}</p>
           <nav className="home-modes" aria-label={homeCopy.modes}>
             <ul className="mode-pair">
-              <li><a className="primary-action" href="/multijugador" aria-describedby="home-mp" onClick={route(onMultiplayer)}>{homeCopy.multiplayer}</a>
+              <li><a className="primary-action" href="/multijugador" aria-describedby="home-mp" onClick={route(onMultiplayer)}><ModeIcon mode="multiplayer" />{homeCopy.multiplayer}</a>
                 <p className="mode-caption" id="home-mp">{homeCopy.multiplayerCaption}</p></li>
-              <li><a className="secondary-action" href="/aprendre" aria-describedby="home-learn" onClick={route(onLearn)}>{homeCopy.learning}</a>
+              <li><a className="secondary-action" href="/aprendre" aria-describedby="home-learn" onClick={route(onLearn)}><ModeIcon mode="learning" />{homeCopy.learning}</a>
                 <p className="mode-caption" id="home-learn">{homeCopy.learningCaption}</p></li>
               <li className="mode-daily"><a className="daily-entry" href={DAILY_CHALLENGE_PUBLIC_PATH} onClick={route(onDaily)}>
+                <ModeIcon mode="daily" />
                 <span>
                   <span className="daily-head"><span className="daily-title">{d.title}</span><span className="daily-number">#{daily.number}</span></span>
                   <span className="daily-caption">{daily.status === 'new' ? d.sameForEveryone : <>{daily.status === 'won' ? d.wonWith(daily.mistakes) : d.lost}<span className="daily-sep" aria-hidden="true"> · </span><span className="daily-tomorrow">{d.comeBackTomorrow}</span></>}</span>
@@ -275,11 +269,12 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
           </nav>
         </section>
         <aside className="home-preview" aria-hidden="true">
+          <span className="preview-tag">{homeCopy.previewTag}</span>
           <div className="preview-board">
             <div className="preview-drawing">
-              <HangmanDrawing errors={6} label={isCatalan ? 'Penjat' : 'Ahorcado'} />
+              <HangmanDrawing errors={4} />
             </div>
-            <div className="preview-word" aria-label={isCatalan ? 'Progrés de la paraula' : 'Progreso de la palabra'}>
+            <div className="preview-word">
               {previewSlots.map((letter, index) => <span key={`${letter || 'blank'}-${index}`} className="preview-letter">{letter}</span>)}
             </div>
           </div>
@@ -306,13 +301,47 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
           </div>
         </div>
       </section>}
-
-      <footer className="home-footer">
-        <a className="text-button home-help-link home-help-link--footer" href="/com-es-juga" onClick={route(onHelp)}>{isCatalan ? 'Com es juga?' : '¿Cómo se juega?'}</a>
-        <span className="home-domain">penjat.cat</span>
-      </footer>
       {notice && <p className="form-error home-notice" role="alert">{errorMessage(notice, t)}</p>}
+
+      <section className="home-cards" aria-labelledby="home-cards-title">
+        <div className="section-head">
+          <h2 id="home-cards-title">{homeCopy.cardsTitle}</h2>
+        </div>
+        <ul className="mode-cards">
+          <ModeCard tone="mar" href="/multijugador" onClick={route(onMultiplayer)} icon={<ModeIcon mode="multiplayer" />} title={homeCopy.multiplayer} body={homeCopy.multiplayerCard} action={homeCopy.multiplayerCardAction}
+            art={<span className="mode-art-code">{'K7QF2'.split('').map((letter) => <span key={letter}>{letter}</span>)}</span>} />
+          <ModeCard tone="safra" href={DAILY_CHALLENGE_PUBLIC_PATH} onClick={route(onDaily)} icon={<ModeIcon mode="daily" />} title={d.title} body={homeCopy.dailyCard} action={homeCopy.dailyCardAction}
+            art={<span className="mode-art-grid">{['hit', 'hit', 'miss', 'hit', 'hit', 'hit', 'miss', 'hit', 'hit', 'hit'].map((cell, index) => <i key={index} className={cell} />)}</span>} />
+          <ModeCard tone="oliva" href="/aprendre" onClick={route(onLearn)} icon={<ModeIcon mode="learning" />} title={homeCopy.learning} body={homeCopy.learningCard} action={homeCopy.learningCardAction}
+            art={<span className="mode-art-hint"><span lang="es">caracol</span><strong lang="ca">cargol</strong></span>} />
+          <ModeCard tone="paper" href="/com-es-juga" onClick={route(onHelp)} icon={<ModeIcon mode="help" />} title={isCatalan ? 'Com es juga' : 'Cómo se juega'} body={homeCopy.helpCard} action={homeCopy.helpCardAction}
+            art={<span className="mode-art-drawing"><HangmanDrawing errors={3} /></span>} />
+        </ul>
+      </section>
       <small className="sr-only">{getLanguageConfig(interfaceLanguage).name}</small>
     </section>
   </main>
+}
+
+function ModeCard({ tone, href, onClick, icon, title, body, action, art }: { tone: 'mar' | 'safra' | 'oliva' | 'paper'; href: string; onClick: ReturnType<typeof route>; icon: ReactNode; title: string; body: string; action: string; art: ReactNode }) {
+  return <li className={`mode-card mode-card--${tone}`}>
+    <a href={href} onClick={onClick}>
+      <span className="mode-card-icon">{icon}</span>
+      <div className="mode-card-text">
+        <h3>{title}</h3>
+        <p className="mode-card-body">{body}</p>
+        <span className="mode-card-action">{action}<span aria-hidden="true"> →</span></span>
+      </div>
+      <span className="mode-card-art" aria-hidden="true">{art}</span>
+    </a>
+  </li>
+}
+
+function ModeIcon({ mode }: { mode: 'multiplayer' | 'learning' | 'daily' | 'help' }) {
+  return <svg className="mode-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    {mode === 'multiplayer' ? <><circle cx="9" cy="8" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3 M16 5a3 3 0 0 1 0 6 M18 15a5 5 0 0 1 3 5" /></>
+      : mode === 'learning' ? <><path d="M12 5v16 M3 3c4 0 6 0 9 2 3-2 5-2 9-2v16c-4 0-6 0-9 2-3-2-5-2-9-2z" /><path d="M6 8h3 M15 8h3" /></>
+      : mode === 'daily' ? <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18 M8 3v4 M16 3v4" /><path d="M8 14h2 M12 14h2 M8 17h2" /></>
+      : <><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7 M12 17h.01" /></>}
+  </svg>
 }

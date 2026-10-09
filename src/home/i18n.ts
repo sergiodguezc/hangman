@@ -1,19 +1,41 @@
 const ca = {
+  eyebrow: 'El joc del penjat',
   lede: 'Tria una paraula i repta els amics a endevinar-la. Sense registre.',
   modes: 'Modes de joc',
   multiplayer: 'Juga amb amics',
   multiplayerCaption: 'Crea una sala · de 2 a 10',
   learning: 'Aprendre català',
   learningCaption: 'En solitari, amb pistes',
+  cardsTitle: 'Tria com vols jugar',
+  multiplayerCard: 'Sales privades de 2 a 10 persones. A cada torn, algú tria la paraula i la resta l’endevina.',
+  multiplayerCardAction: 'Crea una sala',
+  dailyCard: 'Una paraula nova cada dia, la mateixa per a tothom. Comparteix el resultat sense revelar-la.',
+  dailyCardAction: 'Juga la d’avui',
+  learningCard: 'Vocabulari català real amb una pista en castellà. En acabar, veus el significat i un exemple.',
+  learningCardAction: 'Comença a practicar',
+  helpCard: 'Regles, torns, puntuació i perdó, explicats pas a pas.',
+  helpCardAction: 'Llegeix les regles',
+  previewTag: '6 lletres',
 }
 
 const es: typeof ca = {
+  eyebrow: 'El juego del ahorcado',
   lede: 'Elige una palabra y reta a tus amigos a adivinarla. Sin registro.',
   modes: 'Modos de juego',
   multiplayer: 'Juega con amigos',
   multiplayerCaption: 'Crea una sala · de 2 a 10',
   learning: 'Aprender catalán',
   learningCaption: 'En solitario, con pistas',
+  cardsTitle: 'Elige cómo quieres jugar',
+  multiplayerCard: 'Salas privadas de 2 a 10 personas. En cada turno, alguien elige la palabra y el resto la adivina.',
+  multiplayerCardAction: 'Crea una sala',
+  dailyCard: 'Una palabra nueva cada día, la misma para todos. Comparte el resultado sin revelarla.',
+  dailyCardAction: 'Juega la de hoy',
+  learningCard: 'Vocabulario catalán real con una pista en español. Al terminar, ves el significado y un ejemplo.',
+  learningCardAction: 'Empieza a practicar',
+  helpCard: 'Reglas, turnos, puntuación y perdón, explicados paso a paso.',
+  helpCardAction: 'Lee las reglas',
+  previewTag: '6 letras',
 }
 
 export const homeTranslations = { ca, es }

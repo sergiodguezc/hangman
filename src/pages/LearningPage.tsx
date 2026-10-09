@@ -2,7 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { ALPHABETS, displayWord, normalizeGuess } from '../../shared/game'
 import type { Language } from '../../shared/game'
 import { HangmanDrawing } from '../components/HangmanDrawing'
+import { ErrorMeter } from '../components/ErrorMeter'
 import { HangmanWord } from '../components/HangmanWord'
+import { AccentTitle } from '../components/AccentTitle'
+import { Modal } from '../components/Modal'
 import { Keyboard } from '../components/Keyboard'
 import { LearningResultCard } from '../components/LearningResultCard'
 import { applyLearningGuess, createLearningRound, learningResultToAttemptResult, levelGroupFromStoredSelection, practicedLearningLevels, selectNextEntry, summarizeLearningHistory } from '../learning/game'
@@ -96,14 +99,14 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
   const levelLabel = round ? t.levelGroups[levelGroupFromStoredSelection(round.entry.linguistics?.cefr)] : t.levelGroups[level]
 
   return <main className="learning-page" lang={language}>
-    <header className="learning-header">
-      <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
+    <header className={`page-head learning-header${phase === 'setup' ? '' : ' page-head--compact'}`}>
+      {phase === 'setup' && <p className="page-eyebrow page-eyebrow--oliva">{t.audience}</p>}
+      <h1><AccentTitle text={t.title} /></h1>
     </header>
 
     {selectionEmpty && <p className="form-error" role="alert">{t.emptySelection}</p>}
 
     {phase === 'setup' && <section className="learning-setup">
-      <span className="eyebrow">Català per a castellanoparlants</span>
       <h2>{t.setupTitle}</h2>
       <fieldset className="difficulty-selector">
         <legend>{t.cefr}</legend>
@@ -116,25 +119,25 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
     {phase === 'summary' && <LearningSummary history={history} expanded={historyExpanded} language={language} onToggleExpanded={() => setHistoryExpanded((expanded) => !expanded)} onExit={() => { setSessionStarted(false); onExitSummary?.() }} />}
 
     {round && phase !== 'setup' && phase !== 'summary' && <section className="learning-game">
-      <div className="learning-round-meta"><span>{t.cefr}: <strong>{levelLabel}</strong></span><button className="text-button" onClick={openDifficultySelector}>{t.cefr}</button></div>
+      <div className="learning-round-meta"><span>{t.cefr}: <strong>{levelLabel}</strong></span>{phase === 'playing' && <button className="text-button" onClick={openDifficultySelector}>{t.cefr}</button>}</div>
       {t.levelGroups[level] !== levelLabel && <p className="learning-next-level">{t.nextLevel}: {t.levelGroups[level]}</p>}
-      <div className="learning-hint"><span>{t.hint}</span><strong lang="es">{round.entry.translationEs}</strong></div>
-      <div className="learning-columns">
-        <div className="drawing-panel"><HangmanDrawing errors={round.errors} label={t.errors} />
-          <div className="error-copy"><span>{t.errors}</span><strong>{round.errors} / 6</strong></div></div>
-        <div className="guess-area">
-          <div className="learning-word-scroll" tabIndex={0}>
-            <HangmanWord word={round.entry.answerCa} guesses={round.guesses} language="ca" reveal={phase === 'round-over'} label={t.progress} />
-          </div>
-          {phase === 'playing' && <>
+      {phase === 'playing' ? <>
+        <div className="learning-hint"><span>{t.hint}</span><strong lang="es">{round.entry.translationEs}</strong></div>
+        <div className="learning-columns">
+          <div className="drawing-panel"><HangmanDrawing errors={round.errors} />
+            <div className="error-copy"><span>{t.errors}</span><strong>{round.errors} / 6</strong><ErrorMeter errors={round.errors} /></div></div>
+          <div className="guess-area">
+            <div className="learning-word-scroll" tabIndex={0}>
+              <HangmanWord word={round.entry.answerCa} guesses={round.guesses} language="ca" reveal={false} label={t.progress} />
+            </div>
             <div className="incorrect-list"><span>{t.incorrect}</span><strong>{round.incorrect.size ? [...round.incorrect].join(' · ') : t.none}</strong></div>
             <Keyboard alphabet={ALPHABETS.ca} guesses={round.guesses} incorrect={round.incorrect} disabled={false} label={t.keyboard} onGuess={guess} />
-          </>}
-          {phase === 'round-over' && round.result && <LearningResultCard entry={round.entry} result={round.result} language={language}
-            onNext={() => startRound(level)} onChangeDifficulty={openDifficultySelector} />}
-          <span className="sr-only" aria-live="polite">{displayWord(round.entry.answerCa, round.guesses, 'ca', phase === 'round-over').join(' ')}</span>
+          </div>
         </div>
-      </div>
+      </> : round.result && <LearningResultCard entry={round.entry} result={round.result} language={language} errors={round.errors} incorrect={[...round.incorrect]}
+        onNext={() => startRound(level)} onChangeDifficulty={openDifficultySelector} />}
+      {/* Letter progress while playing; the completed card announces itself through its focused heading. */}
+      <span className="sr-only" aria-live="polite">{phase === 'playing' ? displayWord(round.entry.answerCa, round.guesses, 'ca').join(' ') : ''}</span>
       <LearningSessionPanel history={history} stats={stats} expanded={historyExpanded} language={language} onToggleExpanded={() => setHistoryExpanded((expanded) => !expanded)} />
     </section>}
     {difficultySelectorOpen && <DifficultyDialog language={language} difficulty={level} onChoose={chooseDifficulty} onCancel={closeDifficultySelector} />}
@@ -144,30 +147,20 @@ export function LearningPage({ language, summaryRequested = false, onActiveGameC
 function DifficultyDialog({ language, difficulty, onChoose, onCancel }: { language: Language; difficulty: LearningLevelGroup; onChoose: (difficulty: LearningLevelGroup) => void; onCancel: () => void }) {
   const t = learningTranslations[language]
 
-  useEffect(() => {
-    const keydown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onCancel()
-    }
-    window.addEventListener('keydown', keydown)
-    return () => window.removeEventListener('keydown', keydown)
-  }, [onCancel])
-
-  return <div className="learning-difficulty-backdrop" role="presentation">
-    <section className="learning-difficulty-dialog" role="dialog" aria-modal="true" aria-labelledby="learning-difficulty-title">
+  return <Modal className="learning-difficulty-dialog" labelledBy="learning-difficulty-title" onCancel={onCancel}>
       <h2 id="learning-difficulty-title">{t.changeDifficulty}</h2>
       <fieldset className="difficulty-selector">
         <legend>{t.cefr}</legend>
         <div className="cefr-selector">{(['basic', 'intermediate', 'advanced', 'all'] as const).map((value) => <button type="button" key={value} className={difficulty === value ? 'active' : ''} aria-pressed={difficulty === value} onClick={() => onChoose(value)}>{t.levelGroups[value]}</button>)}</div>
       </fieldset>
-      <button className="secondary-action" type="button" autoFocus onClick={onCancel}>{t.cancel}</button>
-    </section>
-  </div>
+      <button className="secondary-action" type="button" data-modal-initial-focus onClick={onCancel}>{t.cancel}</button>
+  </Modal>
 }
 
 function LearningSessionPanel({ history, stats, expanded, language, onToggleExpanded }: { history: SessionHistoryEntry[]; stats: ReturnType<typeof summarizeLearningHistory>; expanded: boolean; language: Language; onToggleExpanded: () => void }) {
   const t = learningTranslations[language]
   return <aside className="learning-session-panel" aria-label={t.sessionProgress}>
-    <p className="learning-stats">{t.statsLine(stats.total, stats.correct, stats.failed, stats.accuracy, stats.uniqueWords)}{stats.recoveredWords > 0 && ` · ${stats.recoveredWords} ${language === 'ca' ? 'recuperades' : 'recuperadas'}`}</p>
+    <p className="learning-stats">{t.statsLine(stats.total, stats.correct, stats.failed, stats.accuracy, stats.uniqueWords)}{stats.recoveredWords > 0 && ` · ${stats.recoveredWords} ${stats.recoveredWords === 1 ? 'recuperada' : language === 'ca' ? 'recuperades' : 'recuperadas'}`}</p>
     <HistoryList history={history} expanded={expanded} language={language} onToggleExpanded={onToggleExpanded} />
   </aside>
 }

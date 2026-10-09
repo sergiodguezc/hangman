@@ -1,44 +1,32 @@
-import { useCallback, useEffect, useState, type CSSProperties, type FormEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { ALPHABETS, MAX_ERRORS, normalizeGuess } from '../../shared/game'
 import type { Ack, ChatMessage, PlayerGameView } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
+import { ErrorMeter } from '../components/ErrorMeter'
 import { Keyboard } from '../components/Keyboard'
-import { FinalScores, Scoreboard } from '../components/Scoreboard'
+import { Scoreboard } from '../components/Scoreboard'
+import { MatchResults } from '../components/MatchResults'
 import { RoomChat } from '../components/RoomChat'
 import { ForgivenessTray } from '../components/ForgivenessTray'
+import { MultiplayerWord } from '../components/MultiplayerWord'
 import { PlayerRoundStatusNotice } from '../components/PlayerRoundStatusNotice'
 import { RoundResults } from '../components/RoundResults'
 import { ObserverSelector } from '../components/ObserverSelector'
-import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
 import { socket } from '../multiplayer/socket'
-import { multiplayerPhase } from '../multiplayer/presentation'
+import { hasSelectedWord, multiplayerPhase } from '../multiplayer/presentation'
 
-type Props = { state: PlayerGameView; interfaceLanguage: 'ca' | 'es'; messages: ChatMessage[]; playerId: string; typingPlayers: { playerId: string; playerName: string }[] }
+type Props = { onLeave: () => void; onExitToMenu: () => void; state: PlayerGameView; interfaceLanguage: 'ca' | 'es'; messages: ChatMessage[]; playerId: string; typingPlayers: { playerId: string; playerName: string }[] }
 
-function groupDisplayWord(characters: string[]) {
-  const words: { start: number; characters: string[] }[] = []
-  let start = 0
-  let current: string[] = []
-  characters.forEach((character, index) => {
-    if (character === ' ') {
-      if (current.length) words.push({ start, characters: current })
-      current = []; start = index + 1
-    } else {
-      if (!current.length) start = index
-      current.push(character)
-    }
-  })
-  if (current.length) words.push({ start, characters: current })
-  return words
-}
-
-export function GamePage({ state, interfaceLanguage, messages, playerId, typingPlayers }: Props) {
+export function GamePage({ state, interfaceLanguage, messages, playerId, typingPlayers, onLeave, onExitToMenu }: Props) {
   const [word, setWord] = useState('')
   const [error, setError] = useState('')
   const t = multiplayerTranslations[interfaceLanguage]
-  const config = getLanguageConfig(state.gameLanguage)
   const phase = multiplayerPhase(state)
+  const matchOver = phase === 'match-over'
+  const gameRef = useRef<HTMLElement>(null)
+  const previousPhase = useRef(phase)
+  const wordSelected = hasSelectedWord(state)
   const round = state.round
   const roundResults = round?.results ?? []
   const isSetter = round?.setterId === playerId
@@ -49,8 +37,6 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
   const observed = isSetter ? state.observedPlayer : self
   const guessed = new Set(observed?.guessedLetters ?? [])
   const wrong = new Set(observed?.wrongLetters ?? [])
-  const displayWords = groupDisplayWord(observed?.displayWord ?? [])
-  const wordSizing = { '--longest-word': Math.max(1, ...displayWords.map(({ characters }) => characters.length)) } as CSSProperties
   const pendingRequests = isSetter && phase === 'guessing' ? state.forgivenessRequests.filter((request) => request.status === 'pending') : []
 
   const handleAck = useCallback((response: Parameters<Ack>[0]) => {
@@ -73,6 +59,12 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
     return () => window.removeEventListener('keydown', keydown)
   }, [guess, state.gameLanguage])
 
+  // A started rematch replaces the results surface; keep keyboard focus inside the new game rather than on <body>.
+  useEffect(() => {
+    if (previousPhase.current === 'match-over' && phase !== 'match-over' && (!document.activeElement || document.activeElement === document.body)) gameRef.current?.focus({ preventScroll: true })
+    previousPhase.current = phase
+  }, [phase])
+
   const submitWord = (event: FormEvent) => {
     event.preventDefault(); setError('')
     socket.emit('round:set-word', { word }, (response) => { handleAck(response); if (response.ok) setWord('') })
@@ -93,16 +85,17 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
   const reconnectingPlayers = state.players.filter((player) => player.active && player.connectionState === 'reconnecting')
   const roundStatus = round?.status
 
-  return <main className="match-page" lang={interfaceLanguage}>
+  return <main className={`match-page${matchOver ? ' match-over-page' : ''}`} lang={interfaceLanguage}>
     <header className="match-header">
-      <div className="brand compact"><span className="brand-mark">P</span><h1>{t.title}</h1></div>
-      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span><span>{t.round} <b>{state.match.completedTurns}/{state.match.totalTurns}</b></span><span>{t.voltes} <b>{round?.voltaNumber ?? state.match.voltaNumber}/{state.voltes}</b></span><span>{config.name}</span></div>
+      <h1 className="match-title">{t.matchTitle}</h1>
+      <div className="match-meta"><span>{t.roomCode} <b>{state.code}</b></span>{!matchOver && <><span>{t.round} <b>{state.match.completedTurns}/{state.match.totalTurns}</b></span><span>{t.voltes} <b>{round?.voltaNumber ?? state.match.voltaNumber}/{state.voltes}</b></span></>}<span>{t.gameLanguageNames[state.gameLanguage]}</span></div>
     </header>
-    <div className="match-layout">
-      <Scoreboard players={state.players} setterId={round?.setterId ?? null} currentId={playerId} t={t} />
-      <ForgivenessTray requests={pendingRequests} players={state.players} t={t} onDecide={decideForgiveness} />
-      <section className="multiplayer-game">
-        {state.roomStatus === 'active' && reconnectingPlayers.length > 0 && <div className="form-error" role="status">{t.opponentReconnecting}</div>}
+    {/* Match-over is a mutually exclusive branch; RoomChat keeps its slot so a draft survives the transition. */}
+    <div className={`match-layout${matchOver ? ' match-over-layout' : ''}`}>
+      {!matchOver && <ForgivenessTray requests={pendingRequests} players={state.players} t={t} onDecide={decideForgiveness} />}
+      {matchOver ? <MatchResults state={state} playerId={playerId} t={t} language={interfaceLanguage} onRematch={(ack) => socket.emit('match:rematch', ack)} onNewRoom={onLeave} onExitToMenu={onExitToMenu} />
+      : <section className="multiplayer-game" ref={gameRef} tabIndex={-1}>
+        {state.roomStatus === 'active' && reconnectingPlayers.length > 0 && <div className="connection-notice" role="status">{t.opponentReconnecting}</div>}
         {state.roomStatus === 'active' && state.reconnectedPlayerName && <div className="role-line" role="status">{t.opponentReconnected}</div>}
         {phase === 'choosing-word' && <>{round?.number === 1 && <div className="role-line" role="status">{isSetter ? t.youStart : t.playerStarts.replace('{player}', setter?.name ?? '')}</div>}{isSetter ? <form className="word-form" onSubmit={submitWord}>
           <span className="role-badge setter">✎ {t.chooseWord}</span>
@@ -111,16 +104,16 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
           <button className="primary-action">{t.startRound}</button>
         </form> : <div className="phase-message"><div className="thinking">•••</div><h2>{setter?.name} {t.rivalChoosing}</h2></div>}</>}
 
-        {phase === 'guessing' || roundStatus === 'round-over' ? <>
+        {phase === 'guessing' || (phase === 'round-over' && wordSelected) ? <>
           <div className="role-line">{roundStatus === 'round-over' ? t.roundComplete : isSetter ? t.youChose : self?.status === 'awaiting-forgiveness' ? t.finalErrorGuesser : self?.status === 'solved' ? t.youSolved : self?.status === 'failed' || self?.status === 'eliminated' ? t.youAreOut : t.yourGuess}</div>
           {isSetter && state.roomStatus === 'active' && <ObserverSelector players={state.players.filter((player) => player.id !== playerId)} selectedPlayerId={state.observedPlayerId} t={t} onSelect={observePlayer} />}
-          {observed ? <div className="game-columns"><div className="drawing-panel"><HangmanDrawing errors={observed.errors} label={t.errors} />
-            <div className="error-copy"><span>{t.errors}</span><strong>{observed.errors} / {MAX_ERRORS}{observed.forgiven ? ' · ♥' : ''}</strong></div></div><div className="guess-area">
-              <div className="multiplayer-word-scroll" tabIndex={0} style={wordSizing} aria-label={config.translations.progressLabel}><div className="multiplayer-word">{displayWords.map(({ start, characters }) => <span className="multiplayer-word-group" key={start}>{characters.map((character, offset) => <span key={start + offset} className={character === '_' ? 'blank' : normalizeGuess(character, state.gameLanguage) ? 'letter' : 'punctuation'}>{character === '_' ? '\u00a0' : character}</span>)}</span>)}</div></div>
+          {observed ? <div className="game-columns"><div className="drawing-panel"><HangmanDrawing errors={observed.errors} mood={observed.status === 'solved' ? 'win' : observed.errors >= MAX_ERRORS ? 'loss' : 'neutral'} />
+            <div className="error-copy"><span>{t.errors}</span><strong>{observed.errors} / {MAX_ERRORS}{observed.forgiven ? ' · ♥' : ''}</strong><ErrorMeter errors={observed.errors} /></div></div><div className="guess-area">
+              <MultiplayerWord displayWord={observed.displayWord} language={state.gameLanguage} label={t.wordProgress} blank={t.hiddenLetter} />
               {isSetter && state.privateWord && <p className="setter-secret">{t.youChose}: <strong>{state.privateWord}</strong></p>}
               {phase === 'guessing' && !isSetter && self?.status === 'awaiting-forgiveness' && <div className="forgiveness-wait" role="status"><strong>{t.finalErrorGuesser}</strong><span>{t.waitingForgiveness}</span></div>}
               {!isSetter && self && <PlayerRoundStatusNotice phase={phase} status={self.status} t={t} />}
-              {roundStatus === 'round-over' && <div className="round-result"><strong>{t.roundComplete}</strong><span>{t.wordWas}: {state.privateWord}</span></div>}
+              {roundStatus === 'round-over' && <div className="round-result"><span>{t.wordWas}</span><strong lang={state.gameLanguage}>{state.privateWord}</strong></div>}
               <div className="incorrect-list"><span>{t.incorrect}</span><strong>{observed.wrongLetters.length ? observed.wrongLetters.join(' · ') : t.none}</strong></div>
               {!isSetter && <Keyboard alphabet={ALPHABETS[state.gameLanguage]} guesses={guessed} incorrect={wrong} disabled={self?.status !== 'playing' || phase !== 'guessing'} label={t.keyboard} onGuess={guess} />}
               {roundStatus === 'round-over' && round?.nextSetterId === playerId && state.roomStatus === 'active' && <button className="primary-action" onClick={() => socket.emit('round:continue', handleAck)}>{t.next}</button>}
@@ -129,12 +122,15 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
           {roundStatus === 'round-over' && roundResults.length > 0 && <RoundResults results={roundResults} players={state.players} t={t} />}
         </> : null}
 
-        {state.roomStatus === 'match-over' && <div className="match-result"><span className="role-badge">{t.matchComplete}</span><h2>{t.finalScore}</h2><FinalScores players={state.players} result={state.matchResult} />
-          {!state.match.rematchReadyPlayerIds.includes(playerId) ? <button className="primary-action" onClick={() => socket.emit('match:rematch', handleAck)}>{t.rematch}</button> : <p>{t.waitingRematch}</p>}
-          {state.match.rematchReadyPlayerIds.some((id) => id !== playerId) && !state.match.rematchReadyPlayerIds.includes(playerId) && <p>{t.opponentWantsRematch}</p>}
+        {phase === 'round-over' && !wordSelected && <div className="phase-message">
+          <p role="status">{t.roundInterrupted}</p>
+          {round?.nextSetterId === playerId ? <button className="primary-action" onClick={() => socket.emit('round:continue', handleAck)}>{t.next}</button>
+            : <p className="continue-note">{playersById.get(round?.nextSetterId ?? '')?.name} · {t.next}</p>}
         </div>}
         {error && <p className="form-error" role="alert">{error}</p>}
-      </section>
+      </section>}
+      {/* After the board in reading order: on stacked layouts the game comes first; beside it (≥1000px) the grid places the ranking in its own column. */}
+      {!matchOver && <Scoreboard players={state.players} setterId={round?.setterId ?? null} currentId={playerId} t={t} />}
       <RoomChat messages={messages} currentPlayerId={playerId} typingPlayers={typingPlayers} t={t} />
     </div>
   </main>
