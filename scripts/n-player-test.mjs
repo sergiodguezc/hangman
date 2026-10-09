@@ -120,4 +120,53 @@ leaving.disconnect('p3')
 assert.equal(leaving.viewFor('p2').roomStatus, 'match-over')
 assert.equal(leaving.players.find((player) => player.id === 'p2').score, 0)
 
+// A guesser who leaves while the word is being chosen stays eliminated once guessing starts, so the round still
+// completes when everyone else resolves (it used to wait forever for the departed player).
+const leaveWhileChoosing = new GameRoom('CHOOSE', 'es', 1, () => 0)
+addPlayers(leaveWhileChoosing, 4)
+leaveWhileChoosing.start('p1')
+leaveWhileChoosing.disconnect('p3')
+leaveWhileChoosing.setWord('p1', 'A')
+assert.equal(leaveWhileChoosing.viewFor('p1').players.find((player) => player.id === 'p3').roundStatus, 'eliminated')
+leaveWhileChoosing.guess('p2', 'A')
+leaveWhileChoosing.guess('p4', 'A')
+const afterChoosingDeparture = leaveWhileChoosing.viewFor('p2')
+assert.equal(afterChoosingDeparture.round.status, 'round-over')
+assert.deepEqual(afterChoosingDeparture.round.ranking, ['p2', 'p4', 'p3'])
+assert.deepEqual(afterChoosingDeparture.players.map((player) => player.score), [0, 3, 0, 2])
+assert.equal(afterChoosingDeparture.round.results.find((result) => result.playerId === 'p3').resolutionTimeMs, null)
+leaveWhileChoosing.continue('p2')
+assert.equal(leaveWhileChoosing.viewFor('p2').round.setterId, 'p2')
+
+// When every remaining turn belongs to departed players, the last playable round ends the match instead of waiting
+// at round-over for a setter who can never continue (nextSetterId would be null).
+const skippedFinal = new GameRoom('SKIP', 'es', 1, () => 0)
+addPlayers(skippedFinal, 4)
+skippedFinal.start('p1')
+skippedFinal.disconnect('p4')
+for (const setter of ['p1', 'p2']) {
+  skippedFinal.setWord(setter, 'A')
+  for (const guesser of ['p1', 'p2', 'p3'].filter((id) => id !== setter)) skippedFinal.guess(guesser, 'A')
+  skippedFinal.continue(setter === 'p1' ? 'p2' : 'p3')
+}
+skippedFinal.setWord('p3', 'A')
+skippedFinal.guess('p1', 'A')
+assert.equal(skippedFinal.viewFor('p1').roomStatus, 'active', 'one guesser still playing')
+skippedFinal.guess('p2', 'A')
+assert.equal(skippedFinal.viewFor('p1').roomStatus, 'match-over', 'p4 (departed) owned the only remaining turn')
+assert.ok(skippedFinal.viewFor('p1').matchResult)
+
+// Same when the only remaining setter leaves while the completed round is on screen.
+const leaveAtRoundOver = new GameRoom('ROUNDOVER', 'es', 1, () => 0)
+addPlayers(leaveAtRoundOver, 3)
+leaveAtRoundOver.start('p1')
+for (const setter of ['p1', 'p2']) {
+  leaveAtRoundOver.setWord(setter, 'A')
+  for (const guesser of ['p1', 'p2', 'p3'].filter((id) => id !== setter)) leaveAtRoundOver.guess(guesser, 'A')
+  if (setter === 'p1') leaveAtRoundOver.continue('p2')
+}
+assert.equal(leaveAtRoundOver.viewFor('p1').round.nextSetterId, 'p3')
+leaveAtRoundOver.disconnect('p3')
+assert.equal(leaveAtRoundOver.viewFor('p1').roomStatus, 'match-over')
+
 console.log('N-player architecture checks passed')

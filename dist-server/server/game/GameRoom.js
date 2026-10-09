@@ -87,6 +87,9 @@ export class GameRoom {
         round.status = 'guessing';
         const startedAt = Date.now();
         for (const state of round.playerStates.values()) {
+            // A guesser who left during word selection is already eliminated; reopening them would stall the round.
+            if (this.isTerminal(state.status))
+                continue;
             state.status = 'playing';
             state.startedAt = startedAt;
         }
@@ -209,7 +212,7 @@ export class GameRoom {
                     this.maybeFinishRound();
                 }
             }
-            if (this.activePlayers.length < 2)
+            if (this.activePlayers.length < 2 || (this.currentRound?.status === 'round-over' && this.nextActiveSetterId() === null))
                 this.finishMatch();
         }
         if (this.roomStatus === 'match-over') {
@@ -354,7 +357,8 @@ export class GameRoom {
             };
         });
         round.results.push({ playerId: round.setterId, position: null, status: 'setter', forgiven: false, errors: null, resolutionTimeMs: null, pointsAwarded: 0 });
-        if (this.activePlayers.length < 2 || this.turnIndex + 1 >= this.totalTurns)
+        // No remaining turn has an active setter (including the last turn): nobody could continue, so the match ends.
+        if (this.activePlayers.length < 2 || this.nextActiveSetterId() === null)
             this.finishMatch();
     }
     compareRoundStates(a, b) {
