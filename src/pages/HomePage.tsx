@@ -68,6 +68,11 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
   const d = dailyTranslations[interfaceLanguage]
   const previewSlots = ['', 'E', '', 'J', '', 'T']
 
+  const compactSetup = useCompactSetup()
+  // Phones show "create" and "join" as one-at-a-time disclosures below the name; wider screens show both panels.
+  const [setupOpen, setSetupOpen] = useState<'create' | 'join' | null>(null)
+  const toggleSetup = (target: 'create' | 'join') => setSetupOpen((current) => current === target ? null : target)
+
   useEffect(() => { setPanel(mode === 'multiplayer' ? 'multiplayer' : 'menu') }, [mode])
 
   // Re-read on return from another tab and after the Madrid date changes while open.
@@ -216,10 +221,18 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
       </header>
       <section className="home-card home-card--join">
         <form onSubmit={create}>
-          <label className="setup-name">{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
-          <div className="setup-panel setup-panel--create">
-            <h2>{t.createTitle}</h2>
+          {/* The name is the first step for both paths, so it leads the page; creating and joining follow as step 2. */}
+          <div className="setup-name-card">
+            <span className="setup-step" aria-hidden="true">1</span>
+            <label className="setup-name"><span className="setup-name-title">{t.name}</span>
+              <input value={name} maxLength={24} required placeholder={t.namePlaceholder} autoComplete="nickname" aria-describedby="setup-name-hint" onChange={(e) => setName(e.target.value)} /></label>
+            <p className="setup-name-hint" id="setup-name-hint">{t.nameHint}</p>
+          </div>
+          <p className="setup-next"><span className="setup-step" aria-hidden="true">2</span>{t.nextStep}</p>
+          <div className={`setup-panel setup-panel--create${compactSetup ? ' is-collapsible' : ''}${setupOpen === 'create' ? ' is-open' : ''}`}>
+            <SetupHeading compact={compactSetup} open={setupOpen === 'create'} controls="setup-create-body" onToggle={() => toggleSetup('create')}>{t.createTitle}</SetupHeading>
             <p className="setup-hint">{t.createHint}</p>
+            <div className="setup-panel-body" id="setup-create-body" hidden={compactSetup && setupOpen !== 'create'}>
             <label className="language-field">
               <span>{t.gameLanguage}</span>
               <LanguageSelector language={gameLanguage} label={t.gameLanguage} onChange={onGameLanguage} />
@@ -229,14 +242,17 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
               {SUPPORTED_VOLTES.map((value) => <button type="button" key={value} className={voltes === value ? 'active' : ''} onClick={() => setVoltes(value)}>{value}</button>)}
             </div><p className="target-help">{t.voltesExplanation}</p></fieldset>
             <button className="primary-action" disabled={busy}>{t.create}</button>
+            </div>
           </div>
           <div className="join-divider"><span>{t.or}</span></div>
-          <div className="setup-panel setup-panel--join">
-            <h2>{t.joinTitle}</h2>
+          <div className={`setup-panel setup-panel--join${compactSetup ? ' is-collapsible' : ''}${setupOpen === 'join' ? ' is-open' : ''}`}>
+            <SetupHeading compact={compactSetup} open={setupOpen === 'join'} controls="setup-join-body" onToggle={() => toggleSetup('join')}>{t.joinTitle}</SetupHeading>
             <p className="setup-hint">{t.joinHint}</p>
+            <div className="setup-panel-body" id="setup-join-body" hidden={compactSetup && setupOpen !== 'join'}>
             <label>{t.roomCode}<input className="room-code-input" value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"
               onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, ''))} /></label>
             <button type="button" className="secondary-action" disabled={busy || !name.trim() || code.length !== 5} onClick={join}>{t.join}</button>
+            </div>
           </div>
           {(error || notice) && <p className="form-error" role="alert">{error || errorMessage(notice!, t)}</p>}
         </form>
@@ -340,6 +356,29 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
       <small className="sr-only">{getLanguageConfig(interfaceLanguage).name}</small>
     </section>
   </main>
+}
+
+// Same breakpoint as the phone layout in App.css (37.4375em), so enlarged text also gets the disclosures.
+const COMPACT_SETUP_QUERY = '(max-width: 37.4375em)'
+
+function useCompactSetup() {
+  const [compact, setCompact] = useState(() => typeof window !== 'undefined' && window.matchMedia(COMPACT_SETUP_QUERY).matches)
+  useEffect(() => {
+    const query = window.matchMedia(COMPACT_SETUP_QUERY)
+    const update = () => setCompact(query.matches)
+    update()
+    query.addEventListener('change', update)
+    return () => query.removeEventListener('change', update)
+  }, [])
+  return compact
+}
+
+function SetupHeading({ compact, open, controls, onToggle, children }: { compact: boolean; open: boolean; controls: string; onToggle: () => void; children: ReactNode }) {
+  if (!compact) return <h2>{children}</h2>
+  return <h2><button type="button" className="setup-toggle" aria-expanded={open} aria-controls={controls} onClick={onToggle}>
+    <span>{children}</span>
+    <svg className="setup-toggle-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" /></svg>
+  </button></h2>
 }
 
 function ModeCard({ tone, href, onClick, icon, title, body, action, art }: { tone: 'mar' | 'safra' | 'oliva' | 'paper'; href: string; onClick: ReturnType<typeof route>; icon: ReactNode; title: string; body: string; action: string; art: ReactNode }) {

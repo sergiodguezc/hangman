@@ -208,12 +208,11 @@ button { cursor: pointer; }
 .home-page--multiplayer { display: block; }
 .home-page--multiplayer .page-head, .home-page--multiplayer .home-card--join { width: min(100%, 64rem); margin-inline: auto; }
 .home-card--join { padding: 0; border: 0; background: transparent; box-shadow: none; }
-.home-card--join form { display: grid; grid-template: "name name" auto "create join" auto "error error" auto / minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--space-6); align-items: start; }
-.home-card--join .setup-name { grid-area: name; max-width: 26rem; font-size: var(--text-body); }
-.setup-panel { display: grid; gap: var(--space-4); padding: var(--space-6); border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-ink); }
+.home-card--join form { display: grid; grid-template: "name name" auto "next next" auto "create join" auto "error error" auto / minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--space-6); align-items: start; }
+.setup-panel { display: grid; gap: var(--space-4); padding: var(--space-6); border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-ink-sm); }
 .setup-panel--create { grid-area: create; border-top-width: .625rem; border-top-color: var(--mar); }
 .setup-panel--join { grid-area: join; border-top-width: .625rem; border-top-color: var(--safra); }
-.setup-panel h2 { margin: 0; color: var(--ink); font: 800 var(--text-card-title)/1.05 var(--font-display); letter-spacing: -.02em; }
+.setup-panel h2 { margin: 0; color: var(--ink); font: 800 var(--text-panel-title)/1.1 var(--font-display); letter-spacing: -.02em; }
 .setup-hint { margin: calc(var(--space-3) * -1) 0 0; color: var(--text-muted); font-size: var(--text-body); line-height: var(--leading-ui); }
 .home-card--join .form-error { grid-area: error; }
 .home-card--join .join-divider { display: none; }
@@ -222,6 +221,27 @@ button { cursor: pointer; }
 .home-card input, .word-form input { width: 100%; margin-top: var(--space-2); padding: .75em .875em; border: 2px solid var(--ink); border-radius: var(--radius-control); color: var(--ink); background: var(--surface); font-size: var(--text-control); line-height: var(--leading-ui); outline: none; }
 .home-card input:focus, .word-form input:focus { border-color: var(--ink); box-shadow: var(--shadow-ink-sm); }
 .home-card > small { display: block; margin-top: 18px; color: var(--muted); font-size: var(--text-meta); text-align: center; }
+/* Multiplayer setup: the name is step 1 and the page's main element (saffron card, display title, large field);
+   creating or joining is step 2. Phones turn the two panels into disclosures (see the phone block). */
+.setup-name-card { grid-area: name; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); align-items: center; padding: var(--space-6) var(--space-8); border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--warning-surface); box-shadow: var(--shadow-ink); }
+.setup-step { display: inline-grid; flex: none; place-items: center; width: 2.5rem; height: 2.5rem; border: 2px solid var(--ink); border-radius: 50%; color: var(--surface); background: var(--ink); font: 800 1.25rem/1 var(--font-display); }
+/* The label wraps the field (implicit association) but its parts are laid out by the card grid: number · title, then field and hint. */
+.home-card--join .setup-name { display: contents; color: var(--ink); font-size: var(--text-body); }
+.setup-name-title { font: 800 var(--text-card-title)/1.05 var(--font-display); letter-spacing: -.02em; }
+.home-card--join .setup-name input { grid-column: 1 / -1; min-height: 3.5rem; margin-top: 0; padding: .5em .75em; font: 700 var(--text-panel-title)/1.2 var(--font-display); box-shadow: var(--shadow-ink-sm); }
+.home-card--join .setup-name input::placeholder { color: var(--text-muted); font-weight: var(--weight-regular); }
+.home-card--join .setup-name input:focus { box-shadow: var(--shadow-ink); }
+.setup-name-hint { grid-column: 1 / -1; margin: calc(var(--space-2) * -1) 0 0; color: var(--text-muted); font-size: var(--text-meta); line-height: var(--leading-ui); }
+.setup-next { grid-area: next; display: flex; align-items: center; gap: var(--space-3); margin: var(--space-2) 0 calc(var(--space-2) * -1); color: var(--ink); font: 700 var(--text-panel-title)/1.2 var(--font-display); }
+.setup-next .setup-step { width: 2rem; height: 2rem; color: var(--ink); background: var(--surface); font-size: 1rem; }
+.setup-panel-body { display: grid; gap: var(--space-4); }
+.setup-panel-body[hidden] { display: none; }
+/* Desktop: the title sits beside the wide field instead of above it. */
+@media (min-width: 62.5em) {
+  .setup-name-card { grid-template-columns: auto auto minmax(0, 1fr); column-gap: var(--space-5); padding-block: var(--space-6) var(--space-5); }
+  .home-card--join .setup-name input { grid-column: 3; margin-left: var(--space-4); }
+  .setup-name-hint { grid-column: 3; margin-left: var(--space-4); }
+}
 .invitation-card { text-align: center; }
 .invitation-form { display: grid; gap: 18px; }
 .invitation-form h2, .invitation-invalid h2 { margin: 0; color: var(--green-dark); font: 700 var(--text-page-title)/var(--leading-tight) var(--font-display); overflow-wrap: anywhere; }
@@ -253,7 +273,7 @@ button { cursor: pointer; }
 .language-separator { color: var(--text-muted); font-size: var(--text-label); line-height: 1; }
 .target-selector { margin: 0; padding: 0; border: 0; }
 .target-selector legend { margin-bottom: var(--space-2); color: var(--ink); font-size: var(--text-meta); font-weight: var(--weight-semibold); }
-.target-selector div { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 4.75rem), 1fr)); gap: 6px; padding: 4px; border: 2px solid var(--ink); border-radius: var(--radius-control); background: var(--surface); }
+.target-selector div { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 3.5rem), 1fr)); gap: 6px; padding: 4px; border: 2px solid var(--ink); border-radius: var(--radius-control); background: var(--surface); }
 .target-selector button { min-height: 2.5rem; border: 0; border-radius: 7px; padding: 8px 6px; color: var(--ink); background: transparent; font-size: var(--text-control); font-weight: var(--weight-semibold); line-height: var(--leading-ui); white-space: nowrap; }
 .target-selector button:hover { background: var(--paper-deep); }
 .target-selector button.active { color: var(--paper); background: var(--ink); font-family: var(--font-display); font-weight: var(--weight-bold); }
@@ -705,7 +725,7 @@ button { cursor: pointer; }
   .mode-card, .mode-card--mar, .mode-card--safra { grid-column: span 1; }
   .mode-card > a { min-height: 0; padding: var(--space-6); }
   .mode-card-art { display: none; }
-  .home-card--join form { grid-template: "name" auto "create" auto "divider" auto "join" auto "error" auto / minmax(0, 1fr); gap: var(--space-5); }
+  .home-card--join form { grid-template: "name" auto "next" auto "create" auto "divider" auto "join" auto "error" auto / minmax(0, 1fr); gap: var(--space-5); }
   .home-card--join .join-divider { grid-area: divider; display: block; }
 }
 /* Phones: a compact hero (actions first, small preview), single-column cards without illustrations. */
@@ -731,6 +751,18 @@ button { cursor: pointer; }
   .mode-card-icon { width: 2.5rem; height: 2.5rem; }
   .mode-card-action { margin-top: var(--space-2); }
   .setup-panel { padding: var(--space-5) var(--space-4); }
+  .setup-name-card { gap: var(--space-3); padding: var(--space-5) var(--space-4); }
+  .setup-name-card .setup-step { width: 2.25rem; height: 2.25rem; font-size: 1.125rem; }
+  .setup-name-hint { margin-top: 0; }
+  /* Create/join disclosures: the whole collapsed card is the toggle's hit area; open cards keep only the header. */
+  .setup-panel.is-collapsible { position: relative; gap: 0; padding: 0; }
+  .setup-toggle { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); width: 100%; min-height: 3rem; padding: var(--space-4) var(--space-4) var(--space-1); border: 0; border-radius: var(--radius-card) var(--radius-card) 0 0; color: inherit; background: none; font: inherit; letter-spacing: inherit; text-align: left; cursor: pointer; }
+  .setup-panel.is-collapsible:not(.is-open) .setup-toggle::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-card); }
+  .setup-toggle-chevron { flex: none; width: 2rem; height: 2rem; padding: 5px; border: 2px solid var(--ink); border-radius: 50%; background: var(--surface); fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 160ms ease; }
+  .setup-panel.is-open .setup-toggle-chevron { transform: rotate(180deg); }
+  .setup-panel.is-collapsible:hover:not(.is-open) { background: var(--paper-deep); }
+  .setup-panel.is-collapsible .setup-hint { margin: 0; padding: 0 calc(var(--space-4) + 2.75rem) var(--space-4) var(--space-4); font-size: var(--text-meta); }
+  .setup-panel.is-collapsible .setup-panel-body { padding: 0 var(--space-4) var(--space-5); }
   .ios-install-card { width: 100%; border-radius: 12px; }
   .ios-install-toggle { padding-inline: 12px; }
 }

@@ -3,7 +3,7 @@ import type { Language } from '../../shared/game'
 const es = {
   invitationTakesPriority: 'Has abierto una invitación a otra sala. La sala anterior no se retomará automáticamente.',
   title: 'Penjat', subtitle: 'El clásico juego de palabras, ahora para todos',
-  matchTitle: 'Partida multijugador', multiplayerMode: 'Multijugador', setupTitle: 'Juega con tu grupo.', setupAccent: 'Gana quien acierta.', createTitle: 'Crea una sala', createHint: 'De 2 a 10 jugadores. Tú eliges las reglas.', joinTitle: 'Únete', joinHint: 'Escribe el código que te han pasado.', or: 'o', name: 'Tu nombre',
+  matchTitle: 'Partida multijugador', multiplayerMode: 'Multijugador', setupTitle: 'Juega con tu grupo.', setupAccent: 'Gana quien acierta.', createTitle: 'Crea una sala', createHint: 'De 2 a 10 jugadores. Tú eliges las reglas.', joinTitle: 'Únete', joinHint: 'Escribe el código que te han pasado.', or: 'o', name: 'Tu nombre', nameHint: 'Así te verá el resto de la sala.', nextStep: 'Después, elige cómo jugar',
   namePlaceholder: 'Escribe tu nombre', language: 'Idioma', gameLanguage: 'Idioma de la partida', gameLanguageHint: 'Elige el idioma de la palabra.', create: 'Crear partida', join: 'Unirse a partida',
   roomCode: 'Código de sala', codePlaceholder: 'ABCDE', waiting: 'Esperando jugadores…', waitingToStart: 'La sala está lista para empezar.', copy: 'Copiar código', copied: 'Copiado',
   challengeFriend: 'Retar a un amigo', inviteTitle: 'Juega a Penjat', inviteText: 'Únete a mi sala de Penjat: {code}',
@@ -94,7 +94,7 @@ const es = {
 const ca: typeof es = {
   invitationTakesPriority: 'Has obert una invitació a una altra sala. La sala anterior no es reprendrà automàticament.',
   title: 'Penjat', subtitle: 'El joc de paraules de sempre, ara per a tothom',
-  matchTitle: 'Partida multijugador', multiplayerMode: 'Multijugador', setupTitle: 'Juga amb la colla.', setupAccent: 'Guanya qui encerta.', createTitle: 'Crea una sala', createHint: 'De 2 a 10 jugadors. Tu tries les regles.', joinTitle: 'Uneix-te', joinHint: 'Escriu el codi que t’han passat.', or: 'o', name: 'El teu nom',
+  matchTitle: 'Partida multijugador', multiplayerMode: 'Multijugador', setupTitle: 'Juga amb la colla.', setupAccent: 'Guanya qui encerta.', createTitle: 'Crea una sala', createHint: 'De 2 a 10 jugadors. Tu tries les regles.', joinTitle: 'Uneix-te', joinHint: 'Escriu el codi que t’han passat.', or: 'o', name: 'El teu nom', nameHint: 'Així et veurà la resta de la sala.', nextStep: 'Després, tria com jugar',
   namePlaceholder: 'Escriu el teu nom', language: 'Llengua', gameLanguage: 'Idioma de la partida', gameLanguageHint: 'Tria l’idioma de la paraula.', create: 'Crea una partida', join: "Uneix-te a una partida",
   roomCode: 'Codi de sala', codePlaceholder: 'ABCDE', waiting: 'Esperant jugadors…', waitingToStart: 'La sala està preparada per començar.', copy: 'Copia el codi', copied: 'Codi copiat!',
   challengeFriend: 'Repta un amic', inviteTitle: 'Juga a Penjat', inviteText: 'Uneix-te a la meva sala de Penjat: {code}',
