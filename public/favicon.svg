@@ -1,15 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>Penjat</title>
-  <rect width="64" height="64" fill="#244f3a"/>
-  <text
-    x="32"
-    y="35"
-    fill="#fffdf8"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    font-family="Georgia, serif"
-    font-size="42"
-    font-weight="700"
-    transform="rotate(-4 32 35)"
-  >P</text>
+  <!-- The header brand badge (SiteHeader BrandBadge): magrana disc, ink outline, cream gallows glyph. -->
+  <circle cx="32" cy="32" r="29.5" fill="#cc3430" stroke="#1b150f" stroke-width="4"/>
+  <g transform="translate(14 14) scale(1.5)" fill="none" stroke="#fcf9f2" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 21V4h10v3"/><circle cx="16" cy="10" r="2.5"/>
+  </g>
 </svg>
