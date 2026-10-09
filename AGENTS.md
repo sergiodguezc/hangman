@@ -18,7 +18,7 @@ Use Node 22 (>=22.12), npm and Python 3 for offline vocabulary checks.
 - Full-stack dev: `npm run dev`; separate: `npm run dev:vite-only` and `npm run dev:server`. `dev:client` also starts both.
 - Build: `npm run build`; production locally: `npm start`. `npm run preview` previews only the frontend.
 - Lint: `npm run lint`. Type check: `npx tsc -b --pretty false` and `npx tsc -p server/tsconfig.json --noEmit` (also checked by build).
-- Client/domain: `npm run test:learning`, `test:vocabulary`, `test:daily`, `test:invitation`, `test:localization`, `test:multiplayer-ui`.
+- Client/domain: `npm run test:learning`, `test:vocabulary`, `test:daily`, `test:invitation`, `test:localization`, `test:multiplayer-ui`, `test:match-results`.
 - Backend: build server first, then `npm run test:game`, `test:chat`, `test:lifecycle`, `test:match`, `test:n-player`.
 - Integration: `TEST_SERVER_URL=http://127.0.0.1:3002 npm run test:e2e` with a dedicated local server. `npm run test:seo` starts its own server after a full build.
 - Browser navigation/storage regressions: `npm run test:browser` with dedicated Firefox BiDi and a local built server; setup is in development docs. No additional npm dependency.
@@ -28,6 +28,7 @@ Use Node 22 (>=22.12), npm and Python 3 for offline vocabulary checks.
 
 - TypeScript ES modules, function components/hooks, PascalCase component files, camelCase functions. Follow surrounding compact formatting; no broad formatting changes. Server imports use `.js` for compiled Node execution; frontend imports use bundler resolution. Use type-only imports for types.
 - Keep domain calculations in pure helpers where practical; multiplayer score/phase mutations belong on the server. Use `PlayerGameView`, not private server state, in UI.
+- Styling: use the semantic type/space/radius tokens in `src/index.css` (Georgia `--font-display` for brand/outcomes/words, self-hosted `--font-ui` for functional UI) and em-based breakpoints; avoid literal font sizes and a global `min-width`. See [architecture](docs/architecture.md#styling-and-typography).
 - Server rejects invalid actions with error codes via typed acknowledgements; UI translates them. Keep Catalan and Spanish copy in sync in subsystem translation modules. Game language and interface language are independent.
 - Tests use Node assertions, TSX/static React markup, and Python unittest. Most server tests import **generated `dist-server`**, so rebuild before running them. Generated server files are tracked: review source and generated diffs together.
 - Preserve recipient-specific word/forgiveness privacy; scoring once per completed round; setter rotation through the original roster while skipping departed players; the reconnect grace period and token identity. See contracts for precise scoring and departure rules.
