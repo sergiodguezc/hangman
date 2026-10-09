@@ -8,53 +8,80 @@ export const homeMetrics = `JSON.stringify((() => {
   return {
     viewport: [innerWidth, innerHeight], clientWidth: document.documentElement.clientWidth, overflow: document.documentElement.scrollWidth > innerWidth,
     h1: box('h1'), primary: box('.home-modes .primary-action'), secondary: box('.home-modes .secondary-action'),
-    daily: box('.daily-entry'), separator: box('.mode-daily'), shell: box('.home-shell'), footer: box('.home-footer'),
+    // Row alignment uses the untransformed list items: Phase 3B's hover lift moves a hovered action by up to 1px.
+    primaryItem: box('.home-modes li:has(> .primary-action)'), secondaryItem: box('.home-modes li:has(> .secondary-action)'),
+    daily: box('.daily-entry'), separator: box('.mode-daily'), shell: box('.home-shell'), header: box('.site-header'),
     card: box('.home-preview'), slots: box('.preview-word'), drawing: box('.preview-drawing'), caption: box('.mode-caption'), dailyTitle: box('.daily-title'),
     reminder: document.querySelector('.daily-entry .daily-tomorrow') ? box('.daily-entry .daily-tomorrow') : null,
     ios: !!document.querySelector('.ios-install-card'),
     headings: [...document.querySelectorAll('h1')].map(el => el.textContent),
     canonical: document.querySelector('link[rel=canonical]').href, title: document.title,
     description: document.querySelector('meta[name=description]').content,
-    links: [...document.querySelectorAll('.home-modes a')].map(el => ({ href: el.getAttribute('href'), height: el.getBoundingClientRect().height }))
+    // Phones (≤599px) swap .home-modes for the Phase 3C hero actions; exactly one of the two navigations is rendered.
+    modesShown: getComputedStyle(document.querySelector('.home-modes')).display !== 'none', quickShown: getComputedStyle(document.querySelector('.home-quick')).display !== 'none',
+    lede: box('.home-lede'), play: box('.quick-play'), playLabel: box('.quick-play-label'), learn: box('.quick-card--learn'), dailyCard: box('.quick-card--daily'), cardLabel: box('.quick-card-label'),
+    links: [...document.querySelectorAll('.home-modes a, .home-quick a')].filter(el => el.getClientRects().length).map(el => ({ href: el.getAttribute('href'), height: el.getBoundingClientRect().height }))
   }
 })())`
 
 export function checkHomeLayout(m, size = 's0') {
-  const [width, height] = m.viewport
-  const tablet = width >= 600 && width <= 860
+  const [width] = m.viewport
   assert.equal(m.overflow, false, `Overflow at ${width}`)
   assert.equal(m.headings.length, 1)
   assert.equal(m.canonical, 'https://penjat.cat/')
   assert.deepEqual(m.links.map(link => link.href), ['/multijugador', '/aprendre', '/paraula-del-dia'])
   assert.ok(m.links.every(link => link.height >= 48))
-  assert.equal(m.caption.fontSize, 14)
-  if (m.reminder) assert.equal(m.reminder.fontSize, 14)
-  assert.equal(m.dailyTitle.fontSize, 18)
-  assert.ok(m.h1.fontSize <= 56)
-  assert.equal(m.primary.height, size === 's1' && width >= 600 ? 52 : 48)
+  // Phase 3B adopts Lovable's display headline, capped at 4.75rem (76px).
+  assert.ok(m.h1.fontSize <= 76)
+  // The compact phone header and the full desktop header both stay well under a tenth of a tall viewport.
+  assert.ok(m.header.height <= (width >= 661 ? 66 : 58), `Header height ${m.header.height}`)
+  if (width <= 599) checkPhoneHero(m)
+  else checkWideHero(m, size)
+  // Phones keep a compact two-line maximum; wider layouts allow Lovable's three-line display headline.
+  if (width >= 390) assert.ok(Math.round(m.h1.height / m.h1.lineHeight) <= (width < 600 ? 2 : 3), `Headline at ${width}`)
+}
+
+// Phase 3C phone hero: headline → centred character → one dominant full-width "Jugar" → two equal, smaller cards.
+function checkPhoneHero(m) {
+  const [width, height] = m.viewport
+  assert.deepEqual([m.modesShown, m.quickShown], [false, true], `Phone hero navigation at ${width}`)
+  const near = (a, b, tolerance = 1) => Math.abs(a - b) <= tolerance
+  assert.ok(m.h1.bottom <= m.lede.y && m.lede.bottom <= m.card.y && m.slots.bottom <= m.play.y && m.play.bottom < m.learn.y, 'Title → description → illustration → Jugar → cards')
+  assert.ok(near(m.drawing.x + m.drawing.width / 2, m.shell.x + m.shell.width / 2, 2), 'Illustration centred')
+  assert.ok(near(m.play.x, m.shell.x) && near(m.play.width, m.shell.width), `Jugar spans the content width at ${width}`)
+  assert.ok(m.play.height >= 100 && m.play.height <= 112, `Jugar height ${m.play.height}`)
+  assert.ok(near(m.learn.width, m.dailyCard.width, .5) && near(m.learn.height, m.dailyCard.height, .5), 'Secondary cards share one size')
+  if (width >= 320) {
+    assert.ok(near(m.learn.y, m.dailyCard.y, .5) && m.dailyCard.x > m.learn.x + m.learn.width, `Secondary cards side by side at ${width}`)
+    assert.ok(m.learn.height >= 64 && m.learn.height <= 76, `Secondary card height ${m.learn.height}`)
+  }
+  assert.ok(m.play.height >= 1.35 * m.learn.height && m.playLabel.fontSize >= 1.5 * m.cardLabel.fontSize, 'Jugar dominates the secondary cards')
+  // From 375×812 the whole hero, both secondary cards included, is in the first viewport; 320×568 scrolls naturally.
+  if (width >= 375 && height >= 812) assert.ok(m.dailyCard.bottom <= height, `Secondary actions below the fold at ${width}×${height}`)
+}
+
+function checkWideHero(m, size) {
+  const [width, height] = m.viewport
+  assert.deepEqual([m.modesShown, m.quickShown], [true, false])
+  // Semantic scale: metadata is 14px below 1200px and 15px on spacious desktops; the daily title and CTAs step up there too.
+  const spacious = width >= 1200
+  assert.equal(m.caption.fontSize, spacious ? 15 : 14)
+  if (m.reminder) assert.equal(m.reminder.fontSize, spacious ? 15 : 14)
+  assert.equal(m.dailyTitle.fontSize, spacious ? 20 : 18)
+  // A 2px outline: 17px × 1.2 line-height + padding + borders = 48.4px.
+  const expectedHeight = spacious || (size === 's1' && width >= 600) ? 52 : 48
+  assert.ok(m.primary.height >= expectedHeight && m.primary.height <= expectedHeight + 1, `Primary height ${m.primary.height}`)
   if (height >= 568) assert.ok(m.primary.bottom <= height, `Primary below fold at ${width}×${height}`)
-  if (width <= 599) {
-    assert.ok(m.secondary.y > m.primary.bottom)
-    assert.equal(m.drawing.width, 100)
-  } else {
-    assert.equal(m.primary.y, m.secondary.y)
-    assert.ok(m.secondary.x > m.primary.x)
-  }
-  if (width >= 600) {
-    assert.ok(m.drawing.y >= m.card.y + 24, 'Drawing remains inside the card padding')
-    assert.ok(m.slots.bottom <= m.card.bottom - 24, 'Letter slots remain inside the card padding')
-  }
-  if (tablet) {
-    assert.equal(m.shell.width, Math.min(m.clientWidth - 48, size === 's1' ? 600 : 560))
-    assert.equal(m.shell.x, (m.clientWidth - m.shell.width) / 2)
-    assert.equal(m.card.x, m.shell.x)
-    assert.equal(m.card.width, m.shell.width)
-    assert.equal(m.separator.width, m.shell.width)
-    assert.equal(m.footer.x, m.shell.x)
-    assert.equal(m.drawing.width, size === 's1' ? 220 : 196)
+  assert.equal(m.primaryItem.y, m.secondaryItem.y)
+  assert.ok(m.secondaryItem.x > m.primaryItem.x)
+  assert.ok(m.drawing.y >= m.card.y + 16, 'Drawing remains inside the card padding')
+  assert.ok(m.slots.bottom <= m.card.bottom - 16, 'Letter slots remain inside the card padding')
+  if (width < 1000) {
+    // Stacked hero: the preview follows the actions and the daily entry, centred in the content column.
     assert.ok(m.card.y > m.daily.bottom)
-  } else if (width >= 861) assert.ok(m.card.x > m.primary.x + m.primary.width)
-  if (width >= 390) assert.equal(Math.round(m.h1.height / m.h1.lineHeight), 2, `Headline at ${width}`)
+    assert.ok(Math.abs((m.card.x + m.card.width / 2) - (m.shell.x + m.shell.width / 2)) <= 2, 'Preview centred')
+    assert.ok(m.separator.width <= m.shell.width)
+  } else assert.ok(m.card.x > m.primary.x + m.primary.width)
 }
 
 export async function checkHomeNavigation({ context, command, evaluate, waitFor, navigate }) {
@@ -87,17 +114,33 @@ export async function checkHomeNavigation({ context, command, evaluate, waitFor,
     assert.equal(await evaluate(context, 'window.homeNavigationSentinel'), 42)
   }
   assert.equal(await evaluate(context, "JSON.stringify([document.title, document.querySelector('meta[name=description]').content, document.querySelector('link[rel=canonical]').href])"), head, 'Homepage metadata restored after history navigation')
-  // Real keyboard navigation: help, multiplayer, learning, daily, then language buttons.
+  // Real keyboard navigation: skip link, brand, the four header sections, both interface languages, then the page's mode links.
   await command('browsingContext.setViewport', { context, viewport: { width: 1024, height: 768 } })
   await navigate(context, '/')
   await waitFor(context, "document.querySelector('.home-modes') !== null")
-  for (const href of ['/com-es-juga', '/multijugador', '/aprendre', '/paraula-del-dia']) {
-    await command('input.performActions', { context, actions: [{ type: 'key', id: 'keyboard', actions: [{ type: 'keyDown', value: '\uE004' }, { type: 'keyUp', value: '\uE004' }] }] })
+  const tab = () => command('input.performActions', { context, actions: [{ type: 'key', id: 'keyboard', actions: [{ type: 'keyDown', value: '\uE004' }, { type: 'keyUp', value: '\uE004' }] }] })
+  for (const href of ['#contingut', '/', '/multijugador', '/aprendre', '/paraula-del-dia', '/com-es-juga']) {
+    await tab()
     assert.equal(await evaluate(context, 'document.activeElement.getAttribute("href")'), href)
+    assert.equal(await evaluate(context, 'document.activeElement.matches(":focus-visible")'), true)
+  }
+  for (const code of ['CA', 'ES']) {
+    await tab()
+    assert.equal(await evaluate(context, 'document.activeElement.closest(".interface-language-toggle") !== null && document.activeElement.textContent'), code)
+  }
+  for (const href of ['/multijugador', '/aprendre', '/paraula-del-dia']) {
+    await tab()
+    assert.equal(await evaluate(context, 'document.activeElement.closest(".home-modes") !== null && document.activeElement.getAttribute("href")'), href)
     assert.equal(await evaluate(context, 'document.activeElement.matches(":focus-visible")'), true)
   }
   await command('input.performActions', { context, actions: [{ type: 'key', id: 'keyboard', actions: [{ type: 'keyDown', value: '\uE007' }, { type: 'keyUp', value: '\uE007' }] }] })
   await waitFor(context, "location.pathname === '/paraula-del-dia/'")
+  // The skip link moves focus to the page content without changing the URL.
+  await navigate(context, '/')
+  await waitFor(context, "document.querySelector('.home-modes') !== null")
+  await tab()
+  await command('input.performActions', { context, actions: [{ type: 'key', id: 'keyboard', actions: [{ type: 'keyDown', value: '\uE007' }, { type: 'keyUp', value: '\uE007' }] }] })
+  assert.equal(await evaluate(context, "document.activeElement === document.querySelector('main') && location.pathname + location.hash"), '/')
   for (const button of [0, 1]) {
     await navigate(context, '/')
     await waitFor(context, "document.querySelector('.home-modes') !== null")
@@ -117,5 +160,86 @@ export async function checkHomeNavigation({ context, command, evaluate, waitFor,
       assert.equal(await evaluate(context, 'location.pathname'), '/')
     } finally { await command('browsingContext.close', { context: opened.context }) }
   }
+  // Phase 3C phone hero: after the header's menu button, Tab reaches Jugar and the two cards in order with a visible ring,
+  // Enter follows a card, and a click anywhere on the Jugar surface (here near its right edge) opens multiplayer.
+  await command('browsingContext.setViewport', { context, viewport: { width: 390, height: 844 } })
+  for (const target of ['keyboard', 'pointer']) {
+    await navigate(context, '/')
+    await waitFor(context, "document.querySelector('.home-quick a') !== null")
+    if (target === 'keyboard') {
+      await evaluate(context, "document.querySelector('.site-menu-toggle').focus()")
+      for (const href of ['/multijugador', '/aprendre', '/paraula-del-dia']) {
+        await tab()
+        assert.equal(await evaluate(context, 'document.activeElement.closest(".home-quick") !== null && document.activeElement.getAttribute("href")'), href)
+        assert.equal(await evaluate(context, 'document.activeElement.matches(":focus-visible") && getComputedStyle(document.activeElement).outlineStyle'), 'solid')
+      }
+      await command('input.performActions', { context, actions: [{ type: 'key', id: 'keyboard', actions: [{ type: 'keyDown', value: '' }, { type: 'keyUp', value: '' }] }] })
+      await waitFor(context, "location.pathname === '/paraula-del-dia/'")
+    } else {
+      await evaluate(context, 'window.homeNavigationSentinel = 42')
+      const point = JSON.parse(await evaluate(context, "JSON.stringify((r => ({ x: Math.round(r.right - 12), y: Math.round(r.y + r.height / 2) }))(document.querySelector('.quick-play').getBoundingClientRect()))"))
+      await command('input.performActions', { context, actions: [{ type: 'pointer', id: 'mouse', parameters: { pointerType: 'mouse' }, actions: [{ type: 'pointerMove', ...point }, { type: 'pointerDown', button: 0 }, { type: 'pointerUp', button: 0 }] }] })
+      await command('input.releaseActions', { context })
+      await waitFor(context, "location.pathname === '/multijugador/' && document.querySelector('.home-card') !== null")
+      assert.equal(await evaluate(context, 'window.homeNavigationSentinel'), 42, 'Jugar routes inside the app')
+    }
+  }
+  await command('browsingContext.setViewport', { context, viewport: { width: 1024, height: 768 } })
   console.log('Homepage navigation passed: semantic links, modifiers, Ctrl/middle new tabs, keyboard, SPA routing and back/forward metadata.')
+}
+
+// Multiplayer setup: the name card leads (largest title, full form width, before step 2). Phones (≤599px) turn "create"
+// and "join" into one-at-a-time disclosures operable by pointer (the whole collapsed card) and keyboard; wider screens
+// show both panels open with plain headings.
+export async function checkSetupEmphasis({ context, command, evaluate, waitFor, navigate }) {
+  const key = (value) => command('input.performActions', { context, actions: [{ type: 'key', id: 'keyboard', actions: [{ type: 'keyDown', value }, { type: 'keyUp', value }] }] })
+  const state = () => evaluate(context, `JSON.stringify((() => {
+    const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, bottom: r.bottom } }
+    const size = (sel) => parseFloat(getComputedStyle(document.querySelector(sel)).fontSize)
+    const panel = (name) => ({ toggle: document.querySelector('.setup-panel--' + name + ' .setup-toggle')?.getAttribute('aria-expanded') ?? null, open: !!document.querySelector('.setup-panel--' + name + ' .setup-panel-body').getClientRects().length })
+    return { overflow: document.documentElement.scrollWidth > innerWidth, name: box('.setup-name-card'), input: box('.setup-name input'), form: box('.home-card--join form'), next: box('.setup-next'), create: box('.setup-panel--create'),
+      nameSize: size('.setup-name-title'), panelSize: size('.setup-panel--create h2'), inputSize: size('.setup-name input'), panels: { create: panel('create'), join: panel('join') } }
+  })())`).then(JSON.parse)
+  for (const language of ['ca', 'es']) {
+    await navigate(context, '/')
+    await evaluate(context, `localStorage.setItem('hangman-interface-language', '${language}')`)
+    for (const [width, height] of [[1440, 900], [768, 1024], [390, 844], [320, 568]]) {
+      await command('browsingContext.setViewport', { context, viewport: { width, height } })
+      await navigate(context, '/multijugador/')
+      await waitFor(context, "document.querySelector('.setup-name-card') !== null")
+      const m = await state()
+      assert.equal(m.overflow, false, `Setup overflow at ${width}`)
+      assert.ok(Math.abs(m.name.width - m.form.width) <= 1 && m.name.bottom < m.next.y && m.next.bottom < m.create.y, `Name card leads at ${width}`)
+      assert.ok(m.nameSize > m.panelSize && m.inputSize >= 20, `Name emphasis at ${width}: ${m.nameSize} vs ${m.panelSize}`)
+      assert.ok(m.input.width >= (width >= 1000 ? 400 : m.name.width - 80), `Name field width ${m.input.width} at ${width}`)
+      if (width >= 600) {
+        assert.deepEqual(m.panels, { create: { toggle: null, open: true }, join: { toggle: null, open: true } })
+        continue
+      }
+      assert.deepEqual(m.panels, { create: { toggle: 'false', open: false }, join: { toggle: 'false', open: false } }, `Collapsed at ${width}`)
+      // Pointer on the collapsed card's hint (not the title) opens it; opening "join" closes "create".
+      for (const name of ['create', 'join']) {
+        await evaluate(context, `document.querySelector('.setup-panel--${name}').scrollIntoView({ block: 'center' })`)
+        const point = JSON.parse(await evaluate(context, `JSON.stringify((r => ({ x: Math.round(r.x + 12), y: Math.round(r.y + r.height / 2) }))(document.querySelector('.setup-panel--${name} .setup-hint').getBoundingClientRect()))`))
+        await command('input.performActions', { context, actions: [{ type: 'pointer', id: 'mouse', parameters: { pointerType: 'mouse' }, actions: [{ type: 'pointerMove', ...point }, { type: 'pointerDown', button: 0 }, { type: 'pointerUp', button: 0 }] }] })
+        await command('input.releaseActions', { context })
+        const panels = (await state()).panels
+        assert.deepEqual([panels.create.open, panels.join.open, panels[name].toggle], [name === 'create', name === 'join', 'true'], `Pointer opens ${name} at ${width}`)
+        assert.equal((await state()).overflow, false)
+      }
+      // Keyboard: Tab from the name field passes step 2 to the create toggle; Enter opens it and Tab enters its controls.
+      await evaluate(context, "document.querySelector('.setup-name input').focus()")
+      await key('')
+      assert.equal(await evaluate(context, "document.activeElement.matches('.setup-panel--create .setup-toggle:focus-visible')"), true)
+      await key('')
+      assert.deepEqual((await state()).panels, { create: { toggle: 'true', open: true }, join: { toggle: 'false', open: false } })
+      await key('')
+      assert.equal(await evaluate(context, "document.activeElement.closest('#setup-create-body') !== null"), true, 'Tab continues into the open panel')
+      await evaluate(context, "document.querySelector('.setup-panel--create .setup-toggle').focus()")
+      await key(' ')
+      assert.deepEqual((await state()).panels.create, { toggle: 'false', open: false }, 'Space closes it again')
+    }
+  }
+  await evaluate(context, "localStorage.setItem('hangman-interface-language', 'ca')")
+  console.log('Multiplayer setup passed in CA/ES: name card leads at every width; phone create/join disclosures by pointer and keyboard; desktop panels open.')
 }

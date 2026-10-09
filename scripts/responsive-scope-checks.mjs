@@ -17,7 +17,8 @@ export async function checkResponsiveScope({ context, command, evaluate, page, r
     })())`
     const current = await evaluate(context, measure)
     assert.equal(await evaluate(context, 'document.documentElement.scrollWidth > innerWidth'), false, `${page} overflow at ${width}`)
-    if (page === 'help') assert.equal(await evaluate(context, "getComputedStyle(document.querySelector('.howto-header')).flexDirection"), width <= 660 ? 'column' : 'row')
+    // Phase 3B: the help header is a stacked page head; the numbered rule cards go from one column on phones to two.
+    if (page === 'help') assert.equal(await evaluate(context, "getComputedStyle(document.querySelector('.howto-steps ol')).gridTemplateColumns.split(' ').length"), width <= 599 ? 1 : 2)
     if (page === 'lobby') assert.equal(await evaluate(context, "getComputedStyle(document.querySelector('.lobby-layout .room-chat')).minHeight"), width <= 660 ? '380px' : '500px')
     if (page === 'match') assert.equal(await evaluate(context, "getComputedStyle(document.querySelector('.match-header')).flexWrap"), width <= 660 ? 'wrap' : 'nowrap')
     if (baseline) {

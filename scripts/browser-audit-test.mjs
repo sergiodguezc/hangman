@@ -2,8 +2,11 @@
 // Start a dedicated headless Firefox with --remote-debugging-port 9222 and a built local server.
 import assert from 'node:assert/strict'
 import { io } from 'socket.io-client'
+import { checkP0Dialogs, checkP0Chat, checkP0Terminal, checkP0EmptyChat } from './p0-browser-checks.mjs'
+import { checkMatchResultsFlow } from './match-results-browser-checks.mjs'
 import { checkResponsiveScope } from './responsive-scope-checks.mjs'
-import { checkHomeNavigation, checkHomeLayout, homeMetrics } from './homepage-browser-checks.mjs'
+import { checkHomeNavigation, checkHomeLayout, checkSetupEmphasis, homeMetrics } from './homepage-browser-checks.mjs'
+import { checkSiteHeader } from './header-browser-checks.mjs'
 
 const origin = process.env.TEST_SERVER_URL || 'http://127.0.0.1:3002'
 assert.ok(['localhost', '127.0.0.1', '[::1]'].includes(new URL(origin).hostname), 'Browser tests must target a local server')
@@ -68,7 +71,9 @@ try {
   const profile = (await command('browser.createUserContext')).userContext
   const isolatedProfile = (await command('browser.createUserContext')).userContext
   const home = await newTab(isolatedProfile)
+  await checkP0Dialogs({context:home, command, evaluate, waitFor, navigate})
   await checkHomeNavigation({ context: home, command, evaluate, waitFor, navigate })
+  await checkSiteHeader({ context: home, command, evaluate, waitFor, navigate })
   for (const language of ['ca', 'es']) {
     await navigate(home, '/')
     await evaluate(home, `localStorage.setItem('hangman-interface-language', '${language}')`)
@@ -88,18 +93,24 @@ try {
   await waitFor(home, "document.querySelector('.daily-result') !== null")
   await command('browsingContext.setViewport', { context:home, viewport:{ width:320, height:568 } })
   assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-result .daily-tomorrow')).whiteSpace"), 'normal')
-  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-result .daily-tomorrow')).fontSize"), '13px')
+  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-result .daily-tomorrow')).fontSize"), '14px')
   const wonDaily = await evaluate(home, "document.querySelector('.daily-result').classList.contains('win')")
-  const secretDaily = await evaluate(home, "document.querySelector('.daily-result dd').textContent")
-  await evaluate(home, "document.querySelector('.global-back-button').click()")
+  const secretDaily = await evaluate(home, "document.querySelector('.daily-result h2').textContent")
+  // Phase 3B: home is reached through the header brand link (the finished daily game needs no exit confirmation).
+  await evaluate(home, "document.querySelector('.site-brand').click()")
   await waitFor(home, "document.querySelector('.daily-tomorrow') !== null")
   assert.equal(await evaluate(home, "document.querySelector('.daily-caption').textContent.includes('Encertada')"), wonDaily)
   assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-entry .daily-tomorrow')).fontSize"), '14px')
-  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-entry .daily-tomorrow')).color"), 'rgb(95, 106, 98)')
+  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.daily-entry .daily-tomorrow')).color"), await evaluate(home, "getComputedStyle(document.querySelector('.daily-caption')).color"))
   assert.equal(await evaluate(home, `document.querySelector('.home-modes').textContent.replace('Paraula del dia', '').includes(${JSON.stringify(secretDaily)})`), false)
+  // Phase 3C phone hero (320px here): the daily card tags a played day without revealing the word.
+  assert.equal(await evaluate(home, "getComputedStyle(document.querySelector('.home-quick')).display"), 'block')
+  assert.match(await evaluate(home, "document.querySelector('.quick-card--daily').textContent"), /^Paraula del dia#\d+ ✓ · Jugada$/)
+  assert.equal(await evaluate(home, `document.querySelector('.home-quick').textContent.replace('Paraula del dia', '').includes(${JSON.stringify(secretDaily)})`), false)
   for (const attempt of ['{', JSON.stringify({ challengeId:'2000-01-01', guesses:['A'], completed:true, won:true })]) {
     await evaluate(home, `localStorage.setItem('penjat-daily-challenge', ${JSON.stringify(attempt)}); window.dispatchEvent(new Event('focus'))`)
     await waitFor(home, "document.querySelector('.daily-caption').textContent === 'La mateixa per a tothom'")
+    assert.match(await evaluate(home, "document.querySelector('.quick-card--daily').textContent"), /^Paraula del dia#\d+$/)
   }
   assert.equal(await evaluate(home, "document.querySelector('.home-modes .primary-action').textContent"), 'Juga amb amics')
   console.log('Homepage daily status passed: completed game return, corrupt/outdated storage refresh, stable primary action.')
@@ -107,6 +118,7 @@ try {
   await navigate(home, '/multijugador/')
   await waitFor(home, "document.querySelector('.home-card form') !== null")
   await checkResponsiveScope({ context:home, command, evaluate, page:'setup', root:'.home-card', selectors:'.home-card, .home-card *' })
+  await checkSetupEmphasis({ context:home, command, evaluate, waitFor, navigate })
   await navigate(home, '/com-es-juga/')
   await waitFor(home, "document.querySelector('.howto-header') !== null")
   await checkResponsiveScope({ context:home, command, evaluate, page:'help', root:'.howto-page', selectors:'.howto-page, .howto-page *' })
@@ -242,10 +254,16 @@ try {
     await navigate(terminal, '/multijugador/')
     await waitFor(terminal, "document.querySelector('.word-form') !== null")
     await checkResponsiveScope({ context:terminal, command, evaluate, page:'match', root:'.match-page', selectors:'.match-page, .match-page *' })
+    await checkP0EmptyChat({context:terminal,evaluate})
+    assert.equal((await emit(leavingSocket, 'chat:send', {text:'Prova de reaccions · Mensaje sin reacciones'})).ok, true)
+    await waitFor(terminal, "document.querySelector('.reaction-trigger') !== null")
+    await checkP0Chat({context:terminal,command,evaluate,waitFor})
     leavingSocket.emit('room:leave')
-    await waitFor(terminal, "document.querySelector('.match-result') !== null")
+    await waitFor(terminal, "document.querySelector('.match-results') !== null")
     assert.equal(await evaluate(terminal, "document.querySelector('.word-form, .forgiveness-wait, .player-terminal-state, .keyboard button:not(:disabled)') !== null"), false)
     console.log('Browser terminal-match test passed: departure during word choice shows results without active-round controls.')
+    await checkP0Terminal({context:terminal,command,evaluate,waitFor})
+    await checkMatchResultsFlow({ origin, io, sockets, command, evaluate, waitFor, navigate, context: await newTab(isolatedProfile) })
     assert.deepEqual(browserErrors, [], 'No browser console errors should occur')
 
 
