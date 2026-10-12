@@ -7,6 +7,7 @@ import { checkMatchResultsFlow } from './match-results-browser-checks.mjs'
 import { checkResponsiveScope } from './responsive-scope-checks.mjs'
 import { checkHomeNavigation, checkHomeLayout, checkSetupEmphasis, homeMetrics } from './homepage-browser-checks.mjs'
 import { checkSiteHeader } from './header-browser-checks.mjs'
+import { checkHistoryGuard } from './history-guard-browser-checks.mjs'
 
 const origin = process.env.TEST_SERVER_URL || 'http://127.0.0.1:3002'
 assert.ok(['localhost', '127.0.0.1', '[::1]'].includes(new URL(origin).hostname), 'Browser tests must target a local server')
@@ -74,6 +75,11 @@ try {
   await checkP0Dialogs({context:home, command, evaluate, waitFor, navigate})
   await checkHomeNavigation({ context: home, command, evaluate, waitFor, navigate })
   await checkSiteHeader({ context: home, command, evaluate, waitFor, navigate })
+  // Its own profile (it plays a daily guess) and tab; closing it brings the main tab back to the foreground for keyboard checks.
+  const historyTab = await newTab((await command('browser.createUserContext')).userContext)
+  await checkHistoryGuard({ context: historyTab, command, evaluate, waitFor, navigate })
+  await command('browsingContext.close', { context: historyTab })
+  await command('browsingContext.activate', { context: home })
   for (const language of ['ca', 'es']) {
     await navigate(home, '/')
     await evaluate(home, `localStorage.setItem('hangman-interface-language', '${language}')`)

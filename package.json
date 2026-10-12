@@ -30,6 +30,7 @@
     "test:seo": "node tests/seo-test.mjs",
     "test:invitation": "tsx --tsconfig tsconfig.app.json tests/invitation-test.ts",
     "test:localization": "tsx --tsconfig tsconfig.app.json tests/localization-test.ts",
+    "test:navigation": "tsx --tsconfig tsconfig.app.json tests/navigation-test.ts",
     "vocab:fetch": "python3 scripts/fetch-catalan-corpus.py",
     "vocab:extract": "python3 scripts/extract-catalan-vocabulary.py",
     "vocab:enrich": "python3 scripts/enrich-translations.py",

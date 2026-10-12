@@ -334,3 +334,18 @@ assert.match(header('es', 'ca'), /<span>Código de sala <b>K7QF2<\/b><\/span>.*<
 assert.match(header('ca', 'es'), /<span>Castellà<\/span>/)
 assert.match(header('es', 'es'), /<span>Español<\/span>/)
 console.log('Phase 2D long-word rows, word text alternative and match header regressions passed')
+
+// QA-A1: the setter's secret-word field is named by an associated, localized label (not just its placeholder).
+const choosing = new GameRoom('L4BEL', 'ca', 1, () => 0)
+choosing.addPlayer('0', 's0', 't0', 'Setter')
+choosing.addPlayer('1', 's1', 't1', 'Guesser')
+choosing.start('0')
+for (const language of ['ca', 'es'] as const) {
+  const markup = gameMarkup(choosing, language)
+  const label = markup.match(/<label class="role-badge setter" for="secret-word-input">(.*?)<\/label>/)
+  assert.ok(label, 'Secret-word label is associated with its input')
+  assert.equal(label[1].replace(/<span aria-hidden="true">.*?<\/span>/, ''), multiplayerTranslations[language].chooseWord, 'Accessible name excludes the decorative pencil')
+  assert.match(markup, /<input id="secret-word-input" type="text"/)
+  assert.ok(!gameMarkup(choosing, language, '1').includes('secret-word-input'), 'Guessers get no secret field')
+}
+console.log('Secret-word label regressions passed in CA/ES')

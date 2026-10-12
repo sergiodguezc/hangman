@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Language } from '../shared/game'
 import type { ChatMessage, PlayerGameView } from '../shared/protocol'
 import { Modal } from './components/Modal'
@@ -14,6 +14,7 @@ import { INTERFACE_LANGUAGE_STORAGE_KEY, readInterfaceLanguage } from './localiz
 import { normalizeInvitationCode, shouldResumeRoomSession } from './multiplayer/invitations'
 import { clearRoomSession, loadRoomSession, socket } from './multiplayer/socket'
 import { normalizeRoute, type Route } from './routing'
+import { historyIndex, resolveHistoryMove } from './navigation/history'
 import './App.css'
 
 type Mode = 'home' | 'multiplayer' | 'learning' | 'daily' | 'help'
@@ -78,9 +79,14 @@ const routeDescriptions: Record<Route, { mode: Mode; copy: Record<Language, Page
 function App() {
   const [route, setRoute] = useState<Route>(() => {
     const current = normalizeRoute(window.location.pathname)
-    if (current !== window.location.pathname) window.history.replaceState({}, '', `${current}${window.location.search}`)
+    window.history.replaceState({ penjatIndex: historyIndex(window.history.state) ?? 0 }, '', `${current}${window.location.search}${window.location.hash}`)
     return current
   })
+  // The shown history entry: popstate compares against it to undo a guarded Back/Forward until the player decides.
+  const historyPosition = useRef(historyIndex(window.history.state) ?? 0)
+  const shownUrl = useRef(`${window.location.pathname}${window.location.search}`)
+  const allowHistoryMove = useRef(false)
+  const popStateHandler = useRef(() => {})
   const [interfaceLanguage, setInterfaceLanguage] = useState<Language>(() => readInterfaceLanguage(localStorage))
   const [gameLanguage, setGameLanguage] = useState<Language>(() => {
     const stored = localStorage.getItem('hangman-game-language')
@@ -101,18 +107,7 @@ function App() {
   const page = routeDescriptions[route]
 
   useEffect(() => {
-    const onPopState = () => {
-      const next = normalizeRoute(window.location.pathname)
-      if (next !== window.location.pathname) window.history.replaceState({}, '', `${next}${window.location.search}`)
-      setRoute(next)
-      setView(routeDescriptions[next].mode)
-      setInvitedRoomCode(next === '/multijugador/' ? readInvitationCode() : null)
-      const session = loadRoomSession()
-      if (session && !shouldResumeRoomSession(session.roomCode, readInvitationCode())) {
-        setRoom(null); setMessages([]); setTypingPlayers({}); setPlayerId(''); setNotice('')
-        socket.disconnect().connect()
-      }
-    }
+    const onPopState = () => popStateHandler.current()
     window.addEventListener('popstate', onPopState)
     const update = (state: PlayerGameView) => {
       if (!shouldResumeRoomSession(state.code, readInvitationCode())) return
@@ -180,8 +175,10 @@ function App() {
   const goTo = (next: Route, options: { replace?: boolean } = {}) => {
     if (next !== route || window.location.search) {
       const method = options.replace ? 'replaceState' : 'pushState'
-      window.history[method]({}, '', next)
+      window.history[method]({ penjatIndex: options.replace ? historyPosition.current : ++historyPosition.current }, '', next)
     }
+    shownUrl.current = next
+    allowHistoryMove.current = false
     setRoute(next)
     setView(routeDescriptions[next].mode)
     setInvitedRoomCode(null)
@@ -199,7 +196,7 @@ function App() {
     setGameLanguage(next)
     localStorage.setItem('hangman-game-language', next)
   }
-  const leave = (destination: Route = '/multijugador/') => {
+  const leaveRoom = () => {
     socket.emit('chat:typing', { isTyping: false })
     socket.emit('room:leave')
     clearRoomSession()
@@ -207,6 +204,9 @@ function App() {
     setRoom(null)
     setMessages([])
     setTypingPlayers({})
+  }
+  const leave = (destination: Route = '/multijugador/') => {
+    leaveRoom()
     goTo(destination, { replace: true })
   }
   const enterRoom = (view: PlayerGameView, id: string) => {
@@ -240,6 +240,10 @@ function App() {
   const navigationCopy = interfaceLanguage === 'ca'
     ? { endSession: 'Acaba la sessió', leaveRoom: 'Surt de la sala', leaveMatch: 'Surt de la partida' }
     : { endSession: 'Terminar sesión', leaveRoom: 'Salir de la sala', leaveMatch: 'Salir de la partida' }
+  // What leaving the current page would end: a waiting room, an active match, or an unfinished learning/daily game.
+  const exitGuard = (): ExitKind | null => room
+    ? room.roomStatus === 'waiting' ? 'room' : room.roomStatus === 'active' ? 'game' : null
+    : (view === 'learning' && learningGameActive) || (view === 'daily' && dailyGameActive) ? 'game' : null
   const requestConfirmedExit = (exit: () => void, confirmation: ExitKind | null) => {
     if (!confirmation) { exit(); return }
     setPendingExit({ kind: confirmation, exit })
@@ -252,15 +256,45 @@ function App() {
   }
   // Header links never drop a room or an unfinished game silently: leaving asks first, then goes to the chosen page.
   const navigate = (next: Route) => {
-    if (room) {
-      const kind = room.roomStatus === 'waiting' ? 'room' : room.roomStatus === 'active' ? 'game' : null
-      requestConfirmedExit(() => leave(next), kind)
+    if (room) { requestConfirmedExit(() => leave(next), exitGuard()); return }
+    if (next === route) { goTo(next); return }
+    requestConfirmedExit(() => goTo(next), exitGuard())
+  }
+  // Browser Back/Forward follow the same guard as header links. A guarded move is undone first, so the dialog stays on
+  // the page (and game) it belongs to: Cancel keeps playing, Confirm replays the move. Dialogs never outlive a page change.
+  const handlePopState = () => {
+    const targetIndex = historyIndex(window.history.state)
+    const next = normalizeRoute(window.location.pathname)
+    const move = resolveHistoryMove({ currentIndex: historyPosition.current, targetIndex, currentUrl: shownUrl.current,
+      targetUrl: `${window.location.pathname}${window.location.search}`, guarded: exitGuard() !== null, allowed: allowHistoryMove.current })
+    allowHistoryMove.current = false
+    if (move.action === 'ignore') return
+    if (move.action === 'confirm') {
+      const { delta } = move
+      if (delta) window.history.go(-delta)
+      else window.history.pushState({ penjatIndex: ++historyPosition.current }, '', shownUrl.current)
+      setPendingExit({ kind: exitGuard() ?? 'game', exit: delta ? () => { allowHistoryMove.current = true; window.history.go(delta) } : () => room ? leave(next) : goTo(next) })
       return
     }
-    if (next === route) { goTo(next); return }
-    const activeGame = (view === 'learning' && learningGameActive) || (view === 'daily' && dailyGameActive)
-    requestConfirmedExit(() => goTo(next), activeGame ? 'game' : null)
+    setPendingExit(null)
+    historyPosition.current = targetIndex ?? historyPosition.current + 1
+    window.history.replaceState({ penjatIndex: historyPosition.current }, '', `${next}${window.location.search}${window.location.hash}`)
+    shownUrl.current = `${next}${window.location.search}`
+    if (room) leaveRoom()
+    setRoute(next)
+    setView(routeDescriptions[next].mode)
+    setInvitedRoomCode(next === '/multijugador/' ? readInvitationCode() : null)
+    if (next !== '/aprendre/') {
+      setLearningSummaryRequested(false)
+      setLearningSummaryVisible(false)
+    }
+    const session = loadRoomSession()
+    if (session && !shouldResumeRoomSession(session.roomCode, readInvitationCode())) {
+      setRoom(null); setMessages([]); setTypingPlayers({}); setPlayerId(''); setNotice('')
+      socket.disconnect().connect()
+    }
   }
+  useEffect(() => { popStateHandler.current = handlePopState })
   const exitDialog = pendingExit ? <ExitConfirmationDialog language={interfaceLanguage} kind={pendingExit.kind} onCancel={cancelExit} onConfirm={confirmExit} /> : null
   const section = room ? 'multiplayer' : view
   const header = (exit?: { label: string; onExit: () => void }) => <SiteHeader language={interfaceLanguage} current={section} onLanguage={changeInterfaceLanguage}

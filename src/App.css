@@ -217,7 +217,7 @@ button { cursor: pointer; }
 .home-card--join .form-error { grid-area: error; }
 .home-card--join .join-divider { display: none; }
 .room-code-input { text-transform: uppercase; letter-spacing: .3em; font-family: var(--font-display) !important; font-weight: 700; }
-.home-card label, .word-form label { color: var(--ink); font-size: var(--text-meta); font-weight: var(--weight-semibold); }
+.home-card label { color: var(--ink); font-size: var(--text-meta); font-weight: var(--weight-semibold); }
 .home-card input, .word-form input { width: 100%; margin-top: var(--space-2); padding: .75em .875em; border: 2px solid var(--ink); border-radius: var(--radius-control); color: var(--ink); background: var(--surface); font-size: var(--text-control); line-height: var(--leading-ui); outline: none; }
 .home-card input:focus, .word-form input:focus { border-color: var(--ink); box-shadow: var(--shadow-ink-sm); }
 .home-card > small { display: block; margin-top: 18px; color: var(--muted); font-size: var(--text-meta); text-align: center; }

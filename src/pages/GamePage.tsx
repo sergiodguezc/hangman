@@ -98,8 +98,8 @@ export function GamePage({ state, interfaceLanguage, messages, playerId, typingP
         {state.roomStatus === 'active' && reconnectingPlayers.length > 0 && <div className="connection-notice" role="status">{t.opponentReconnecting}</div>}
         {state.roomStatus === 'active' && state.reconnectedPlayerName && <div className="role-line" role="status">{t.opponentReconnected}</div>}
         {phase === 'choosing-word' && <>{round?.number === 1 && <div className="role-line" role="status">{isSetter ? t.youStart : t.playerStarts.replace('{player}', setter?.name ?? '')}</div>}{isSetter ? <form className="word-form" onSubmit={submitWord}>
-          <span className="role-badge setter">✎ {t.chooseWord}</span>
-          <input type="text" autoFocus maxLength={50} value={word} placeholder={t.secretPlaceholder} autoComplete="off" spellCheck={false} onChange={(e) => setWord(e.target.value)} />
+          <label className="role-badge setter" htmlFor="secret-word-input"><span aria-hidden="true">✎ </span>{t.chooseWord}</label>
+          <input id="secret-word-input" type="text" autoFocus maxLength={50} value={word} placeholder={t.secretPlaceholder} autoComplete="off" spellCheck={false} onChange={(e) => setWord(e.target.value)} />
           <p className="word-privacy">{t.wordPrivacy}</p>
           <button className="primary-action">{t.startRound}</button>
         </form> : <div className="phase-message"><div className="thinking">•••</div><h2>{setter?.name} {t.rivalChoosing}</h2></div>}</>}
