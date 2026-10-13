@@ -1,12 +1,16 @@
 # Penjat
 
-N-player real-time Penjat in Spanish and Catalan. Players create private rooms, take turns choosing words, guess simultaneously, chat, keep score across turns, and can use the playful “Perdonar la vida” mechanic.
+Catalan hangman ([penjat.cat](https://penjat.cat)) with Catalan and Spanish interfaces:
+
+- **Multiplayer:** private 2–10-player rooms in real time. Players take turns choosing words, guess simultaneously, chat, keep score across turns, and can use the playful “Perdonar la vida” mechanic.
+- **Aprèn català:** vocabulary practice by CEFR level, with definitions and translations.
+- **Paraula del dia:** the same daily word for everyone, saved in the browser.
 
 The production application is a single Node.js service: it serves the built React application and hosts Socket.IO on the same HTTP server and public origin.
 
 ## Contributor documentation
 
-Start with [AGENTS.md](AGENTS.md), [architecture](docs/architecture.md), [development](docs/development.md), and [gameplay contracts](docs/gameplay-contracts.md). The [October audit report](docs/audit-2026-10-08.md) records baseline checks and functional fixes.
+Start with [AGENTS.md](AGENTS.md), [architecture](docs/architecture.md), [development](docs/development.md) (setup, tests, troubleshooting) and [gameplay contracts](docs/gameplay-contracts.md). Vocabulary work: [Vocabulary v1](docs/vocabulary-v1.md) and [data workflow](data/README.md).
 
 ## Requirements
 
@@ -52,29 +56,9 @@ No environment variables are required for a normal same-origin deployment.
 
 See [.env.example](.env.example). Do not set the split-origin variables for the recommended single-service deployment.
 
-## Vocabulary pipeline
+## Vocabulary
 
-The Catalan vocabulary dataset is generated offline. The normal build does not call any LLM or external API at runtime.
-
-Pipeline commands:
-
-```bash
-npm run vocab:fetch
-npm run vocab:extract
-npm run vocab:enrich
-npm run vocab:clean
-npm run vocab:enrich-llm
-npm run vocab:build
-npm run vocab:validate
-```
-
-The new `npm run vocab:enrich-llm` step is optional unless you want LLM-assisted enrichment for unresolved meanings. It requires:
-
-- `OPENAI_API_KEY`
-- optionally `VOCAB_LLM_MODEL` if you want to override the default `gpt-5.4-mini`
-- optionally `VOCAB_LLM_REQUEST_INTERVAL` to override the default 6.5 seconds between requests
-
-The enrichment command retries request-rate limits, saves each completed result, and resumes matching cached results after an interruption. `npm run vocab:build` consumes cached enrichment output when it exists. It does not make API calls itself.
+The Catalan vocabulary (`data/vocabulary.json`) is generated offline and bundled; the app never calls an LLM or external API at runtime. The `vocab:*` pipeline commands, sources, licences and optional LLM enrichment (`OPENAI_API_KEY`, `VOCAB_LLM_MODEL`, `VOCAB_LLM_REQUEST_INTERVAL` for the delay between requests, default 6.5 s) are documented in [data/README.md](data/README.md).
 
 ## Deploy to Render
 
@@ -109,20 +93,7 @@ Railway supplies `PORT`; do not override it. Use one replica.
 
 ## Verification
 
-```bash
-npm run build
-npm run lint
-npm run test:game
-npm run test:chat
-```
-
-With a server running, the Socket.IO end-to-end suite can be run with:
-
-```bash
-npm run test:e2e
-```
-
-It checks room capacity, room isolation, authorization, chat, secret-word privacy, normalization, forgiveness, N-player scoring, and setter rotation.
+`npm run build` and `npm run lint`, then the suites for the area you changed; the full matrix, E2E and browser suites are in [development](docs/development.md#checks-by-subsystem).
 
 ## Important limitations
 

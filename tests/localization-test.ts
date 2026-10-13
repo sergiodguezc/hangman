@@ -43,7 +43,7 @@ assert.doesNotMatch(howToEs, /Socket\.IO|RoundResult|servidor|cliente/)
 
 const F1_KEYS = ['lede', 'modes', 'multiplayer', 'multiplayerCaption', 'learning', 'learningCaption']
 const PHASE_3C_KEYS = ['play', 'playCaption', 'quickLearning', 'dailyPlayed']
-// Approved F1 strings (docs/design/phase-2-1-final.md §6.2), pinned literally.
+// Approved homepage strings, pinned literally.
 assert.deepEqual(Object.fromEntries(Object.entries(homeTranslations).map(([language, copy]) => [language, Object.fromEntries(Object.entries(copy).filter(([key]) => F1_KEYS.includes(key)))])), {
   ca: { lede: 'Tria una paraula i repta els amics a endevinar-la. Sense registre.', modes: 'Modes de joc', multiplayer: 'Juga amb amics', multiplayerCaption: 'Crea una sala · de 2 a 10', learning: 'Aprendre català', learningCaption: 'En solitari, amb pistes' },
   es: { lede: 'Elige una palabra y reta a tus amigos a adivinarla. Sin registro.', modes: 'Modos de juego', multiplayer: 'Juega con amigos', multiplayerCaption: 'Crea una sala · de 2 a 10', learning: 'Aprender catalán', learningCaption: 'En solitario, con pistas' },

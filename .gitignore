@@ -28,3 +28,9 @@ __pycache__/
 *.njsproj
 *.sln
 *.sw?
+
+# Local-only design/QA material (screenshots, harnesses, prototype copies); never built
+design-explorations/
+/lovable/
+/lovable.zip
+.venv/

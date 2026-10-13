@@ -1,6 +1,6 @@
 # Catalan vocabulary data
 
-This directory contains the dataset loaded by the Catalan-learning Hangman mode. The approved lexical baseline is [Vocabulary v1](../docs/vocabulary-v1.md). Current production has 544 entries with complete CEFR metadata; gameplay groups are A1/A2 (basic), B1/B2 (intermediate), C1/C2 (advanced). The October metadata repair is documented in [the audit report](../docs/audit-2026-10-08.md).
+This directory contains the dataset loaded by the Catalan-learning Hangman mode. The approved lexical baseline is [Vocabulary v1](../docs/vocabulary-v1.md). Current production has 544 entries with complete CEFR metadata; gameplay groups are A1/A2 (basic), B1/B2 (intermediate), C1/C2 (advanced). The October metadata repair is documented in [Vocabulary v1](../docs/vocabulary-v1.md#cefr-metadata-completeness-october-8-audit).
 
 The experiment sections below describe the historical review pipeline. Its ignored outputs are not runtime dependencies. Validate current data with `npm run vocab:validate` and `npm run test:vocabulary`; do not blindly regenerate approved v1 lexical fields from older intermediate files.
 

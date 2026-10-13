@@ -1,5 +1,5 @@
 // One tiny page API over three real engines, with no npm dependency (Node's built-in WebSocket/fetch). Used by
-// test:browser:multiplayer and the Phase 2D visual matrix (design-explorations/phase-2d/).
+// test:browser:multiplayer.
 //   firefox  — WebDriver BiDi:   firefox --headless --no-remote --profile DIR --remote-debugging-port 9222
 //   chromium — Chrome DevTools:  chrome --headless=new --user-data-dir=DIR --remote-debugging-port=9223 '--remote-allow-origins=*'
 //              (any Chromium build; e.g. the one `npx playwright install chromium` downloads — Playwright itself is not used)

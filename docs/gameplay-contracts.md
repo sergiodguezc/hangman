@@ -1,6 +1,6 @@
 # Gameplay contracts
 
-These describe inspected implementation and regression suites. Audit discrepancies belong in [the October report](audit-2026-10-08.md), rather than being treated as guaranteed rules.
+These describe inspected implementation and regression suites. Known gaps are listed in [architecture](architecture.md#known-limitations) rather than treated as guaranteed rules.
 
 ## Local play and learning
 
@@ -20,7 +20,7 @@ At error six a guesser awaits setter forgiveness. Granting forgiveness resumes p
 
 ## Departure and reconnect
 
-Socket loss marks a player reconnecting for 25 seconds. Their token can resume membership with existing guesses and scores. Replacement socket identity supersedes the old mapping. Explicit leave or timeout removes the player; host transfers to the first remaining active player. A departing guesser is eliminated and their pending requests cancelled; a departing setter cancels an unfinished turn without points and advances. Fewer than two active players finishes the match. Departed players retain historical scores and are separated in the sidebar. Last departure deletes the room. A server restart cannot restore membership.
+Socket loss marks a player reconnecting for 25 seconds. Their token can resume membership with existing guesses and scores. Replacement socket identity supersedes the old mapping. Explicit leave or timeout removes the player; host transfers to the first remaining active player. A departing guesser is eliminated and their pending requests cancelled; a departing setter cancels an unfinished turn without points and advances. A guesser who leaves during word selection stays eliminated when the word is set. Fewer than two active players, or no eligible setter for the remaining turns, finishes the match. Departed players retain historical scores and are separated in the sidebar. Last departure deletes the room. A server restart cannot restore membership.
 
 Completed rooms remain for rematches rather than clearing credentials automatically. Invitation previews expose only code, language, voltes, count and availability. Invalid tokens must not resume. Incoming invitations take precedence over unrelated stored sessions, including opener/duplicated-tab copies. Invalid invitations show their error rather than restoring another room. Stored credentials remain until successful entry replaces them, explicit leave clears them, or a genuine resume rejection invalidates them. Same-room invitations still resume. Late resume acknowledgements/snapshots cannot override a different invitation. Match status takes precedence over retained round state; completed matches expose no word-entry/forgiveness actions or waiting-for-other-guessers notices. A solved player's waiting notice appears only while the round is guessing. See `test:lifecycle`, live `test:e2e`, `test:multiplayer-ui` and optional `test:browser`.
 
