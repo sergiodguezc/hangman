@@ -63,10 +63,10 @@ function checkPhoneHero(m) {
 function checkWideHero(m, size) {
   const [width, height] = m.viewport
   assert.deepEqual([m.modesShown, m.quickShown], [true, false])
-  // Semantic scale: metadata is 14px below 1200px and 15px on spacious desktops; the daily title and CTAs step up there too.
+  // Semantic scale: metadata is 14px below 1200px and 16px on spacious desktops; the daily title and CTAs step up there too.
   const spacious = width >= 1200
-  assert.equal(m.caption.fontSize, spacious ? 15 : 14)
-  if (m.reminder) assert.equal(m.reminder.fontSize, spacious ? 15 : 14)
+  assert.equal(m.caption.fontSize, spacious ? 16 : 14)
+  if (m.reminder) assert.equal(m.reminder.fontSize, spacious ? 16 : 14)
   assert.equal(m.dailyTitle.fontSize, spacious ? 20 : 18)
   // A 2px outline: 17px × 1.2 line-height + padding + borders = 48.4px.
   const expectedHeight = spacious || (size === 's1' && width >= 600) ? 52 : 48
@@ -156,7 +156,7 @@ export async function checkHomeNavigation({ context, command, evaluate, waitFor,
     }
     assert.ok(opened, `${button === 0 ? 'Ctrl' : 'Middle'} click opens a tab`)
     try {
-      await waitFor(opened.context, "location.pathname === '/multijugador/' && document.querySelector('.home-card') !== null")
+      await waitFor(opened.context, "location.pathname === '/multijugador/' && document.querySelector('.setup') !== null")
       assert.equal(await evaluate(context, 'location.pathname'), '/')
     } finally { await command('browsingContext.close', { context: opened.context }) }
   }
@@ -180,7 +180,7 @@ export async function checkHomeNavigation({ context, command, evaluate, waitFor,
       const point = JSON.parse(await evaluate(context, "JSON.stringify((r => ({ x: Math.round(r.right - 12), y: Math.round(r.y + r.height / 2) }))(document.querySelector('.quick-play').getBoundingClientRect()))"))
       await command('input.performActions', { context, actions: [{ type: 'pointer', id: 'mouse', parameters: { pointerType: 'mouse' }, actions: [{ type: 'pointerMove', ...point }, { type: 'pointerDown', button: 0 }, { type: 'pointerUp', button: 0 }] }] })
       await command('input.releaseActions', { context })
-      await waitFor(context, "location.pathname === '/multijugador/' && document.querySelector('.home-card') !== null")
+      await waitFor(context, "location.pathname === '/multijugador/' && document.querySelector('.setup') !== null")
       assert.equal(await evaluate(context, 'window.homeNavigationSentinel'), 42, 'Jugar routes inside the app')
     }
   }
@@ -188,58 +188,85 @@ export async function checkHomeNavigation({ context, command, evaluate, waitFor,
   console.log('Homepage navigation passed: semantic links, modifiers, Ctrl/middle new tabs, keyboard, SPA routing and back/forward metadata.')
 }
 
-// Multiplayer setup: the name card leads (largest title, full form width, before step 2). Phones (≤599px) turn "create"
-// and "join" into one-at-a-time disclosures operable by pointer (the whole collapsed card) and keyboard; wider screens
-// show both panels open with plain headings.
+// Multiplayer setup: two self-contained cards, "create" and "join", each with its name first. From 600px they sit side by
+// side, fully open, buttons aligned; phones show them as an accordion (both collapsed at first, one open at a time).
 export async function checkSetupEmphasis({ context, command, evaluate, waitFor, navigate }) {
   const key = (value) => command('input.performActions', { context, actions: [{ type: 'key', id: 'keyboard', actions: [{ type: 'keyDown', value }, { type: 'keyUp', value }] }] })
   const state = () => evaluate(context, `JSON.stringify((() => {
-    const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, bottom: r.bottom } }
-    const size = (sel) => parseFloat(getComputedStyle(document.querySelector(sel)).fontSize)
-    const panel = (name) => ({ toggle: document.querySelector('.setup-panel--' + name + ' .setup-toggle')?.getAttribute('aria-expanded') ?? null, open: !!document.querySelector('.setup-panel--' + name + ' .setup-panel-body').getClientRects().length })
-    return { overflow: document.documentElement.scrollWidth > innerWidth, name: box('.setup-name-card'), input: box('.setup-name input'), form: box('.home-card--join form'), next: box('.setup-next'), create: box('.setup-panel--create'),
-      nameSize: size('.setup-name-title'), panelSize: size('.setup-panel--create h2'), inputSize: size('.setup-name input'), panels: { create: panel('create'), join: panel('join') } }
+    const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, height: r.height, bottom: r.bottom } }
+    const toggle = (kind) => document.querySelector('.setup-panel--' + kind + ' .setup-toggle')?.getAttribute('aria-expanded') ?? null
+    return { overflow: document.documentElement.scrollWidth > innerWidth, create: box('.setup-panel--create'), join: box('.setup-panel--join'),
+      createName: box('.setup-panel--create .setup-name input'), joinName: box('.setup-panel--join .setup-name input'), code: box('.room-code-input'),
+      createButton: box('.setup-panel--create .primary-action'), joinButton: box('.setup-panel--join .secondary-action'), toggles: [toggle('create'), toggle('join')],
+      reachable: [...document.querySelectorAll('.setup button, .setup input')].filter((e) => !e.closest('[inert]')).length }
   })())`).then(JSON.parse)
+  const type = (selector, value) => evaluate(context, `(() => { const i = document.querySelector('${selector}'); Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(i, ${JSON.stringify(value)}); i.dispatchEvent(new Event('input', { bubbles: true })); return true })()`)
+  const inside = (inner, outer) => inner.y >= outer.y && inner.bottom <= outer.bottom
+  const checkCard = (m, card, width) => {
+    const name = m[card + 'Name'], button = m[card + 'Button']
+    assert.ok(inside(name, m[card]) && inside(button, m[card]) && name.height >= 44, `${card}: own name and button inside the card at ${width}`)
+    assert.ok(name.bottom < (card === 'join' ? m.code.y : button.y), `${card}: name first at ${width}`)
+  }
   for (const language of ['ca', 'es']) {
     await navigate(context, '/')
-    await evaluate(context, `localStorage.setItem('hangman-interface-language', '${language}')`)
+    await evaluate(context, `localStorage.setItem('hangman-interface-language', '${language}'); localStorage.removeItem('hangman-name')`)
     for (const [width, height] of [[1440, 900], [768, 1024], [390, 844], [320, 568]]) {
       await command('browsingContext.setViewport', { context, viewport: { width, height } })
       await navigate(context, '/multijugador/')
-      await waitFor(context, "document.querySelector('.setup-name-card') !== null")
-      const m = await state()
+      await waitFor(context, "document.querySelector('.setup-panel--join') !== null")
+      let m = await state()
       assert.equal(m.overflow, false, `Setup overflow at ${width}`)
-      assert.ok(Math.abs(m.name.width - m.form.width) <= 1 && m.name.bottom < m.next.y && m.next.bottom < m.create.y, `Name card leads at ${width}`)
-      assert.ok(m.nameSize > m.panelSize && m.inputSize >= 20, `Name emphasis at ${width}: ${m.nameSize} vs ${m.panelSize}`)
-      assert.ok(m.input.width >= (width >= 1000 ? 400 : m.name.width - 80), `Name field width ${m.input.width} at ${width}`)
       if (width >= 600) {
-        assert.deepEqual(m.panels, { create: { toggle: null, open: true }, join: { toggle: null, open: true } })
+        assert.deepEqual(m.toggles, [null, null], 'No accordion from 600px')
+        assert.ok(Math.abs(m.create.y - m.join.y) <= 1 && m.join.x > m.create.x + m.create.width && Math.abs(m.createButton.y - m.joinButton.y) <= 1, `Cards side by side, buttons aligned at ${width}`)
+        checkCard(m, 'create', width); checkCard(m, 'join', width)
         continue
       }
-      assert.deepEqual(m.panels, { create: { toggle: 'false', open: false }, join: { toggle: 'false', open: false } }, `Collapsed at ${width}`)
-      // Pointer on the collapsed card's hint (not the title) opens it; opening "join" closes "create".
-      for (const name of ['create', 'join']) {
-        await evaluate(context, `document.querySelector('.setup-panel--${name}').scrollIntoView({ block: 'center' })`)
-        const point = JSON.parse(await evaluate(context, `JSON.stringify((r => ({ x: Math.round(r.x + 12), y: Math.round(r.y + r.height / 2) }))(document.querySelector('.setup-panel--${name} .setup-hint').getBoundingClientRect()))`))
-        await command('input.performActions', { context, actions: [{ type: 'pointer', id: 'mouse', parameters: { pointerType: 'mouse' }, actions: [{ type: 'pointerMove', ...point }, { type: 'pointerDown', button: 0 }, { type: 'pointerUp', button: 0 }] }] })
-        await command('input.releaseActions', { context })
-        const panels = (await state()).panels
-        assert.deepEqual([panels.create.open, panels.join.open, panels[name].toggle], [name === 'create', name === 'join', 'true'], `Pointer opens ${name} at ${width}`)
-        assert.equal((await state()).overflow, false)
+      assert.deepEqual(m.toggles, ['false', 'false'], `Both collapsed at first at ${width}`)
+      assert.ok(m.join.y > m.create.bottom && m.join.bottom <= height, `Both choices in the first screen at ${width}`)
+      assert.equal(m.reachable, 2, 'Collapsed: only the two toggles are reachable')
+      for (const card of ['create', 'join']) {
+        await evaluate(context, `document.querySelector('.setup-panel--${card} .setup-toggle').click()`)
+        await waitFor(context, `document.querySelector('.setup-panel--${card} .setup-toggle').getAttribute('aria-expanded') === 'true'`)
+        await new Promise((resolve) => setTimeout(resolve, 300))
+        m = await state()
+        assert.deepEqual(m.toggles, card === 'create' ? ['true', 'false'] : ['false', 'true'], `Opening ${card} closes the other at ${width}`)
+        assert.equal(m.overflow, false)
+        checkCard(m, card, width)
       }
-      // Keyboard: Tab from the name field passes step 2 to the create toggle; Enter opens it and Tab enters its controls.
-      await evaluate(context, "document.querySelector('.setup-name input').focus()")
-      await key('')
-      assert.equal(await evaluate(context, "document.activeElement.matches('.setup-panel--create .setup-toggle:focus-visible')"), true)
-      await key('')
-      assert.deepEqual((await state()).panels, { create: { toggle: 'true', open: true }, join: { toggle: 'false', open: false } })
-      await key('')
-      assert.equal(await evaluate(context, "document.activeElement.closest('#setup-create-body') !== null"), true, 'Tab continues into the open panel')
-      await evaluate(context, "document.querySelector('.setup-panel--create .setup-toggle').focus()")
-      await key(' ')
-      assert.deepEqual((await state()).panels.create, { toggle: 'false', open: false }, 'Space closes it again')
     }
+    // Keyboard (desktop): Tab from the create name continues to its settings.
+    await command('browsingContext.setViewport', { context, viewport: { width: 1440, height: 900 } })
+    await navigate(context, '/multijugador/')
+    await waitFor(context, "document.querySelector('.setup-panel--join') !== null")
+    await evaluate(context, "document.querySelector('.setup-panel--create .setup-name input').focus()")
+    await key('\uE004')
+    assert.equal(await evaluate(context, "document.activeElement.closest('.setup-panel--create .setup-options') !== null && document.activeElement.matches(':focus-visible')"), true, 'Tab continues into the create settings')
+    // The two names are independent; joining needs its own name and a complete code.
+    await type('.setup-panel--create .setup-name input', 'Creadora')
+    await type('.room-code-input', 'ABCDE')
+    assert.equal(await evaluate(context, "document.querySelector('.setup-panel--join .setup-name input').value"), '', 'Names are edited independently')
+    assert.equal(await evaluate(context, "document.querySelector('.setup-panel--join .secondary-action').disabled"), true, 'Join needs its own name')
+    await type('.setup-panel--join .setup-name input', 'Tester')
+    assert.equal(await evaluate(context, "document.querySelector('.setup-panel--join .secondary-action').disabled"), false, 'Join enabled with name and code')
+    await type('.room-code-input', 'ABC')
+    assert.equal(await evaluate(context, "document.querySelector('.setup-panel--join .secondary-action').disabled"), true, 'Join needs five characters')
   }
-  await evaluate(context, "localStorage.setItem('hangman-interface-language', 'ca')")
-  console.log('Multiplayer setup passed in CA/ES: name card leads at every width; phone create/join disclosures by pointer and keyboard; desktop panels open.')
+  // Submitting right after load, while App's connection handshake is still pending, must still reach the lobby
+  // (a second connect() used to make the server drop the connection and the button stayed busy forever).
+  await evaluate(context, "localStorage.setItem('hangman-interface-language', 'ca'); localStorage.setItem('hangman-name', 'Ràpida'); sessionStorage.removeItem('hangman-room-session')")
+  await navigate(context, '/multijugador/')
+  await evaluate(context, "document.querySelector('.setup-panel--create .primary-action').click()")
+  await waitFor(context, "document.querySelector('.lobby-page') !== null")
+  const code = await evaluate(context, "document.querySelector('.room-code').textContent")
+  await evaluate(context, "sessionStorage.removeItem('hangman-room-session')")
+  await navigate(context, '/multijugador/')
+  await type('.setup-panel--join .setup-name input', 'Ràpid')
+  await type('.room-code-input', code)
+  await evaluate(context, "document.querySelector('.setup-panel--join .secondary-action').click()")
+  await waitFor(context, "document.querySelector('.lobby-page') !== null && document.querySelectorAll('.player-list li').length === 2")
+  await evaluate(context, "sessionStorage.removeItem('hangman-room-session')")
+  await navigate(context, '/')
+  await evaluate(context, "localStorage.setItem('hangman-interface-language', 'ca'); localStorage.removeItem('hangman-name')")
+  console.log('Multiplayer setup passed in CA/ES: name-first self-contained cards; side by side with aligned buttons from 600px; phone accordion (collapsed start, exclusive, inert while closed); keyboard order and join validation; create and join submitted right after load.')
 }

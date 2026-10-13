@@ -28,12 +28,12 @@ assert.equal(normalizeRoute('/es/como-jugar/'), '/com-es-juga/')
 
 const howToCa = renderToStaticMarkup(React.createElement(HowToPlayPage, { language: 'ca' }))
 const howToEs = renderToStaticMarkup(React.createElement(HowToPlayPage, { language: 'es' }))
-assert.match(howToCa, /Voltes i torns/)
+assert.match(howToCa, /Rondes i torns/)
 assert.match(howToCa, /Puntuació/)
 assert.match(howToCa, /Qui l’ha triada pot observar el progrés de cada jugador/)
 assert.match(howToCa, /millor rep \+3, el segon \+2 i el tercer \+1/)
 assert.match(howToCa, /Ja no són a la sala/)
-assert.match(howToEs, /Vueltas y turnos/)
+assert.match(howToEs, /Rondas y turnos/)
 assert.match(howToEs, /Puntuación/)
 assert.match(howToEs, /Quien la ha elegido puede observar el progreso de cada jugador/)
 assert.match(howToEs, /el mejor recibe \+3, el segundo \+2 y el tercero \+1/)
@@ -43,15 +43,21 @@ assert.doesNotMatch(howToEs, /Socket\.IO|RoundResult|servidor|cliente/)
 
 const F1_KEYS = ['lede', 'modes', 'multiplayer', 'multiplayerCaption', 'learning', 'learningCaption']
 const PHASE_3C_KEYS = ['play', 'playCaption', 'quickLearning', 'dailyPlayed']
+const BAND_KEYS = ['bandPause', 'bandPlay']
 // Approved homepage strings, pinned literally.
 assert.deepEqual(Object.fromEntries(Object.entries(homeTranslations).map(([language, copy]) => [language, Object.fromEntries(Object.entries(copy).filter(([key]) => F1_KEYS.includes(key)))])), {
   ca: { lede: 'Tria una paraula i repta els amics a endevinar-la. Sense registre.', modes: 'Modes de joc', multiplayer: 'Juga amb amics', multiplayerCaption: 'Crea una sala · de 2 a 10', learning: 'Aprendre català', learningCaption: 'En solitari, amb pistes' },
   es: { lede: 'Elige una palabra y reta a tus amigos a adivinarla. Sin registro.', modes: 'Modos de juego', multiplayer: 'Juega con amigos', multiplayerCaption: 'Crea una sala · de 2 a 10', learning: 'Aprender catalán', learningCaption: 'En solitario, con pistas' },
 })
 // Phase 3B homepage additions (eyebrow, mode cards and preview), pinned literally.
-assert.deepEqual(Object.fromEntries(Object.entries(homeTranslations).map(([language, copy]) => [language, Object.fromEntries(Object.entries(copy).filter(([key]) => !F1_KEYS.includes(key) && !PHASE_3C_KEYS.includes(key)))])), {
+assert.deepEqual(Object.fromEntries(Object.entries(homeTranslations).map(([language, copy]) => [language, Object.fromEntries(Object.entries(copy).filter(([key]) => !F1_KEYS.includes(key) && !PHASE_3C_KEYS.includes(key) && !BAND_KEYS.includes(key)))])), {
   ca: { eyebrow: 'El joc del penjat', cardsTitle: 'Tria com vols jugar', multiplayerCard: 'Sales privades de 2 a 10 persones. A cada torn, algú tria la paraula i la resta l’endevina.', multiplayerCardAction: 'Crea una sala', dailyCard: 'Una paraula nova cada dia, la mateixa per a tothom. Comparteix el resultat sense revelar-la.', dailyCardAction: 'Juga la d’avui', learningCard: 'Vocabulari català real amb una pista en castellà. En acabar, veus el significat i un exemple.', learningCardAction: 'Comença a practicar', helpCard: 'Regles, torns, puntuació i perdó, explicats pas a pas.', helpCardAction: 'Llegeix les regles', previewTag: '6 lletres' },
   es: { eyebrow: 'El juego del ahorcado', cardsTitle: 'Elige cómo quieres jugar', multiplayerCard: 'Salas privadas de 2 a 10 personas. En cada turno, alguien elige la palabra y el resto la adivina.', multiplayerCardAction: 'Crea una sala', dailyCard: 'Una palabra nueva cada día, la misma para todos. Comparte el resultado sin revelarla.', dailyCardAction: 'Juega la de hoy', learningCard: 'Vocabulario catalán real con una pista en español. Al terminar, ves el significado y un ejemplo.', learningCardAction: 'Empieza a practicar', helpCard: 'Reglas, turnos, puntuación y perdón, explicados paso a paso.', helpCardAction: 'Lee las reglas', previewTag: '6 letras' },
+})
+// Word band pause/resume control (the band's words drift slowly), pinned literally.
+assert.deepEqual(Object.fromEntries(Object.entries(homeTranslations).map(([language, copy]) => [language, Object.fromEntries(Object.entries(copy).filter(([key]) => BAND_KEYS.includes(key)))])), {
+  ca: { bandPause: 'Atura el moviment de les paraules', bandPlay: 'Reprèn el moviment de les paraules' },
+  es: { bandPause: 'Detén el movimiento de las palabras', bandPlay: 'Reanuda el movimiento de las palabras' },
 })
 // Phase 3C phone hero actions, pinned literally.
 assert.deepEqual(Object.fromEntries(Object.entries(homeTranslations).map(([language, copy]) => [language, Object.fromEntries(Object.entries(copy).filter(([key]) => PHASE_3C_KEYS.includes(key)))])), {
@@ -87,7 +93,8 @@ try {
       assert.ok(html.includes(`<nav class="home-modes" aria-label="${copy.modes}">`))
       const nav = html.match(/<nav class="home-modes".*?<\/nav>/)![0]
       assert.deepEqual([...nav.matchAll(/href="([^"]+)"/g)].map((match) => match[1]), ['/multijugador', '/aprendre', '/paraula-del-dia'])
-      for (const [key, text] of Object.entries(copy)) if (key !== 'dailyPlayed') assert.ok(html.includes(text), text)
+      // State-dependent labels: the daily tag after playing, the band's resume label while paused.
+      for (const [key, text] of Object.entries(copy)) if (key !== 'dailyPlayed' && key !== 'bandPlay') assert.ok(html.includes(text), text)
       for (const [, id] of nav.matchAll(/aria-describedby="([^"]+)"/g)) assert.ok(html.includes(`id="${id}"`))
       assert.ok(nav.includes(`#${challenge.number}`))
       assert.ok(nav.includes(state === 'new' ? d.sameForEveryone : state === 'won' ? d.wonWith(0) : d.lost))
@@ -107,26 +114,26 @@ try {
     assert.equal(d.wonWith(1), language === 'ca' ? 'Encertada amb 1 error' : 'Acertada con 1 error')
     assert.equal(d.wonWith(2), language === 'ca' ? 'Encertada amb 2 errors' : 'Acertada con 2 errores')
   }
-  // Multiplayer setup: the name is step 1 and leads the form; creating and joining follow as step 2. Without a window
-  // (static render, as on desktop first paint) both panels render open with plain headings and no disclosure buttons.
+  // Multiplayer setup: two self-contained forms, each with its own name field first (create: name, then settings; join:
+  // name, then code). Without a window (static render, as on desktop first paint) no accordion toggles render. No step markers, page subtitle, disclosures or explanatory hints beyond one line per card.
   for (const language of ['ca', 'es'] as const) {
     const t = multiplayerTranslations[language]
     const html = renderToStaticMarkup(React.createElement(HomePage, {
       interfaceLanguage: language, gameLanguage: 'ca', mode: 'multiplayer',
       onGameLanguage() {}, onEnter() {}, onLearn() {}, onMultiplayer() {}, onHelp() {},
     }))
-    const form = html.match(/<form>.*<\/form>/)![0]
-    const order = ['setup-name-card', 'setup-next', 'setup-panel--create', 'setup-panel--join'].map((name) => form.indexOf(name))
-    assert.ok(order.every((index, i) => index >= 0 && (i === 0 || index > order[i - 1])), `setup order ${order}`)
-    assert.ok(form.includes(`<label class="setup-name"><span class="setup-name-title">${t.name}</span><input`))
-    assert.match(form, /<input[^>]*aria-describedby="setup-name-hint"/)
-    assert.ok(form.includes(`<p class="setup-name-hint" id="setup-name-hint">${t.nameHint}</p>`))
-    assert.ok(form.includes(t.nextStep))
-    assert.ok(form.includes(`<h2>${t.createTitle}</h2>`) && form.includes(`<h2>${t.joinTitle}</h2>`))
-    assert.ok(!form.includes('setup-toggle') && !form.includes(' hidden'))
+    const setup = html.match(/<section class="setup">.*<\/section>/)![0]
+    const [create, join] = setup.split('<form class="setup-panel setup-panel--join"')
+    assert.ok(create.includes('<form class="setup-panel setup-panel--create" aria-labelledby="setup-create-title">'))
+    assert.ok(create.indexOf(`<label class="setup-name">${t.name}<input`) < create.indexOf('setup-options'), 'create: name, then settings')
+    assert.ok(join.indexOf(`<label class="setup-name setup-name--join">${t.name}<input`) < join.indexOf('room-code-input'), 'join: name, then code')
+    assert.ok(setup.includes(`<legend>${t.voltes}</legend>`) && t.voltes === (language === 'ca' ? 'Rondes' : 'Rondas'))
+    assert.equal((setup.match(/autoComplete="nickname"|autocomplete="nickname"/g) ?? []).length, 2, 'one name field per card')
+    assert.ok(join.startsWith(' aria-labelledby="setup-join-title">'))
+    assert.ok(setup.includes(`<h2 id="setup-create-title">${t.createTitle}</h2>`) && setup.includes(`<h2 id="setup-join-title">${t.joinTitle}</h2>`))
+    assert.ok(setup.includes(t.createHint) && setup.includes(t.joinHint))
+    assert.ok(!html.includes(t.subtitle) && !setup.includes('setup-toggle') && !setup.includes(' hidden') && !setup.includes('setup-step'))
   }
-  assert.deepEqual([multiplayerTranslations.ca.nameHint, multiplayerTranslations.ca.nextStep, multiplayerTranslations.es.nameHint, multiplayerTranslations.es.nextStep],
-    ['Així et veurà la resta de la sala.', 'Després, tria com jugar', 'Así te verá el resto de la sala.', 'Después, elige cómo jugar'])
 } finally {
   if (restoreStorage) Object.defineProperty(globalThis, 'localStorage', restoreStorage)
   else Reflect.deleteProperty(globalThis, 'localStorage')

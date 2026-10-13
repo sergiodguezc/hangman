@@ -20,6 +20,8 @@ const ca = {
   helpCard: 'Regles, torns, puntuació i perdó, explicats pas a pas.',
   helpCardAction: 'Llegeix les regles',
   previewTag: '6 lletres',
+  bandPause: 'Atura el moviment de les paraules',
+  bandPlay: 'Reprèn el moviment de les paraules',
 }
 
 const es: typeof ca = {
@@ -44,6 +46,8 @@ const es: typeof ca = {
   helpCard: 'Reglas, turnos, puntuación y perdón, explicados paso a paso.',
   helpCardAction: 'Lee las reglas',
   previewTag: '6 letras',
+  bandPause: 'Detén el movimiento de las palabras',
+  bandPlay: 'Reanuda el movimiento de las palabras',
 }
 
 export const homeTranslations = { ca, es }

@@ -19,7 +19,7 @@ Offline enrichment commands use `OPENAI_API_KEY` and optional model/rate setting
 | Character drawing | `npm run test:character` |
 | Multiplayer UI (static markup) | `npm run test:multiplayer-ui` |
 | Match results (outcome, standings, rematch states) | `npm run test:match-results` |
-| Server domain | `npm run build:server`, then `npm run test:game`, `npm run test:chat`, `npm run test:lifecycle`, `npm run test:match`, `npm run test:n-player` |
+| Server domain | `npm run build:server`, then `npm run test:game`, `npm run test:chat`, `npm run test:lifecycle`, `npm run test:match`, `npm run test:n-player`, `npm run test:connection` (create/join while the client connection is still being established) |
 | Offline corpus pipeline | `npm run test:vocab`; `npm run vocab:validate` |
 | Types / lint | `npx tsc -b --pretty false`; `npx tsc -p server/tsconfig.json --noEmit`; `npm run lint` |
 | Production / SEO | `npm run build`; `npm run test:seo` (starts its own server on 3205) |

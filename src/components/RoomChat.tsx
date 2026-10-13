@@ -1,8 +1,12 @@
-import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useId, useLayoutEffect, useRef, useState, type FormEvent } from 'react'
 import { REACTION_TYPES, type ChatMessage, type ReactionType } from '../../shared/protocol'
 import type { MultiplayerTranslations } from '../multiplayer/i18n'
 import { errorMessage } from '../multiplayer/i18n'
+import { chatSticksToBottom } from '../multiplayer/presentation'
 import { socket } from '../multiplayer/socket'
+
+// Within this distance of the end the reader counts as following the conversation.
+const PINNED_DISTANCE = 48
 
 type Props = { messages: ChatMessage[]; currentPlayerId: string; typingPlayers: { playerId: string; playerName: string }[]; t: MultiplayerTranslations }
 
@@ -18,10 +22,23 @@ export function RoomChat({ messages, currentPlayerId, typingPlayers, t }: Props)
   const stopTyping = () => { window.clearTimeout(typingTimer.current); typingTimer.current = undefined; if (isTyping.current) { isTyping.current = false; socket.emit('chat:typing', { isTyping: false }) } }
   useEffect(() => () => stopTyping(), [])
 
+  // Updated from scroll events, so it always describes the position before the next content update.
+  const pinned = useRef(true)
+  const lastMessageId = useRef<string | undefined>(undefined)
+  useLayoutEffect(() => {
+    const list = listRef.current
+    const last = messages.at(-1)
+    if (list && chatSticksToBottom(lastMessageId.current, last, currentPlayerId, pinned.current)) { list.scrollTop = list.scrollHeight; pinned.current = true }
+    lastMessageId.current = last?.id
+  }, [messages, currentPlayerId])
+  // The typing indicator and layout changes resize the list: a reader at the end stays there, anyone else keeps their place.
   useEffect(() => {
     const list = listRef.current
-    if (list) list.scrollTop = list.scrollHeight
-  }, [messages])
+    if (!list || typeof ResizeObserver === 'undefined') return
+    const observer = new ResizeObserver(() => { if (pinned.current) list.scrollTop = list.scrollHeight })
+    observer.observe(list)
+    return () => observer.disconnect()
+  }, [])
 
   const send = (event: FormEvent) => {
     event.preventDefault()
@@ -42,7 +59,10 @@ export function RoomChat({ messages, currentPlayerId, typingPlayers, t }: Props)
 
   return <section className={`room-chat${messages.length ? '' : ' is-empty'}`} aria-label={t.chatTitle}>
     <h2>{t.chatTitle}</h2>
-    <div className="chat-messages" ref={listRef} aria-live="polite">
+    <div className="chat-messages" ref={listRef} aria-live="polite" onScroll={(event) => {
+      const list = event.currentTarget
+      pinned.current = list.scrollHeight - list.scrollTop - list.clientHeight <= PINNED_DISTANCE
+    }}>
       {!messages.length && <p className="chat-empty">{t.chatEmpty}</p>}
       {messages.map((message) => <article key={message.id} className={`${message.senderId === currentPlayerId ? 'own ' : ''}${openMessageId === message.id ? 'reactions-open' : ''}`.trim()}>
         <strong>{message.senderName}</strong>

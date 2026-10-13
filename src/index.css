@@ -62,7 +62,7 @@
   --text-card-title: clamp(1.5rem, 1.15rem + 1vw, 2.25rem);
   --text-step: clamp(2.5rem, 2rem + 1.5vw, 3.5rem);
   --text-brand: 1.375rem;
-  --text-nav: .9375rem;
+  --text-nav: .875rem;
   --text-menu: 1.25rem;
   --leading-tight: 1.12;
   --leading-heading: 1.2;
@@ -137,10 +137,10 @@
   text-size-adjust: 100%;
 }
 @media (min-width: 41.3125em) {
-  :root { --text-body: 1.0625rem; --text-control: 1.0625rem; --text-name: 1.0625rem; --text-meta: .875rem; --text-label: .8125rem; --text-panel-title: 1.375rem; --text-page-title: 1.75rem; --text-score: 1.25rem; --text-lede: 1.125rem; --text-brand: 1.5rem; --shadow-ink: 4px 4px 0 var(--ink); --header-height: 4rem; }
+  :root { --text-body: 1.0625rem; --text-control: 1.0625rem; --text-name: 1.0625rem; --text-meta: .875rem; --text-label: .875rem; --text-panel-title: 1.375rem; --text-page-title: 1.75rem; --text-score: 1.25rem; --text-lede: 1.125rem; --shadow-ink: 4px 4px 0 var(--ink); }
 }
 @media (min-width: 75em) {
-  :root { --text-body: 1.125rem; --text-control: 1.125rem; --text-name: 1.125rem; --text-chat: 1.0625rem; --text-meta: .9375rem; --text-label: .875rem; --text-panel-title: 1.5rem; --text-page-title: 1.875rem; --text-score: 1.375rem; --text-lede: 1.1875rem; --text-nav: 1rem; }
+  :root { --text-body: 1.125rem; --text-control: 1.125rem; --text-name: 1.125rem; --text-chat: 1.0625rem; --text-meta: 1rem; --text-label: .9375rem; --text-panel-title: 1.625rem; --text-page-title: 2.125rem; --text-score: 1.375rem; --text-lede: 1.1875rem; }
 }
 
 * { box-sizing: border-box; }

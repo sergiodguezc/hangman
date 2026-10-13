@@ -103,7 +103,8 @@ for (const language of ['ca', 'es'] as const) {
   for (const name of Object.keys(scenarios)) {
     const markup = pageMarkup(name, language)
     assert.doesNotMatch(markup, /class="(scoreboard|keyboard|game-columns|drawing-panel|word-form|round-result"|forgiveness-tray|multiplayer-game)/, `${name}: gameplay surface is not rendered`)
-    assert.doesNotMatch(markup, /class="hangman/)
+    // The only drawing is the decorative outcome art, never the gameplay board's.
+    assert.doesNotMatch(markup.replace(/<div class="match-outcome-art">[^]*?<\/svg><\/div>/, ''), /class="hangman/)
     assert.equal(count(markup, /class="match-results /), 1)
     assert.ok(count(markup, /class="match-standings"/) <= 1, 'one authoritative classification')
     assert.equal(count(markup, /class="room-chat( is-empty)?"/), 1, 'chat stays available')
@@ -137,11 +138,11 @@ assert.doesNotMatch(unavailableResult, /match-standings|standing-row|ha ganado/)
 
 // Last round: collapsed native disclosure with word and results; nothing word-related for an interrupted turn.
 const details = resultsMarkup('two-win').match(/<details[^]*<\/details>/)?.[0] ?? ''
-assert.match(details, /^<details class="match-round-details"><summary>Detalls de l&#x27;última ronda<\/summary>/)
+assert.match(details, /^<details class="match-round-details"><summary>Detalls de l&#x27;últim torn<\/summary>/)
 assert.doesNotMatch(details, /<details[^>]* open/)
 assert.match(details, /La paraula era: <strong lang="ca">PLATJA<\/strong>/)
 assert.match(details, /Paraula de Júlia/)
-assert.match(details, /class="round-results" aria-label="Resultat de la ronda"/)
+assert.match(details, /class="round-results" aria-label="Resultat del torn"/)
 assert.doesNotMatch(details, /<h2 id="round-results-title"/)
 for (const language of ['ca', 'es'] as const) {
   const interrupted = resultsMarkup('interrupted', language)

@@ -21,8 +21,8 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 // Compact ranking below the three-column layout since Phase 2D; PHASE_2C_BASELINE=1 expects the older stacked-only rule.
 const STACKED_MAX = 999, COMPACT_MAX = process.env.PHASE_2C_BASELINE === '1' ? 999 : 1299
 const copy = {
-  ca: { reconnecting: 'Reconnectant…', more: 'Veure tot', less: 'Veure menys', count: (n, d) => `${n} jugadors${d ? ` · ${d} ${d === 1 ? 'ha sortit' : 'han sortit'}` : ''}`, tied: (n) => `${n} jugadors empatats`, next: 'Ronda següent', rematch: 'Revenja', notice: 'Un jugador ha perdut la connexió. Esperant que torni…' },
-  es: { reconnecting: 'Reconectando…', more: 'Ver todo', less: 'Ver menos', count: (n, d) => `${n} ${n === 1 ? 'jugador' : 'jugadores'}${d ? ` · ${d} ${d === 1 ? 'ha salido' : 'han salido'}` : ''}`, tied: (n) => `${n} jugadores empatados`, next: 'Siguiente ronda', rematch: 'Revancha', notice: 'Un jugador ha perdido la conexión. Esperando a que vuelva…' },
+  ca: { reconnecting: 'Reconnectant…', more: 'Veure tot', less: 'Veure menys', count: (n, d) => `${n} jugadors${d ? ` · ${d} ${d === 1 ? 'ha sortit' : 'han sortit'}` : ''}`, tied: (n) => `${n} jugadors empatats`, next: 'Torn següent', rematch: 'Revenja', notice: 'Un jugador ha perdut la connexió. Esperant que torni…' },
+  es: { reconnecting: 'Reconectando…', more: 'Ver todo', less: 'Ver menos', count: (n, d) => `${n} ${n === 1 ? 'jugador' : 'jugadores'}${d ? ` · ${d} ${d === 1 ? 'ha salido' : 'han salido'}` : ''}`, tied: (n) => `${n} jugadores empatados`, next: 'Siguiente turno', rematch: 'Revancha', notice: 'Un jugador ha perdido la conexión. Esperando a que vuelva…' },
 }
 
 const sockets = []

@@ -69,8 +69,8 @@ export async function checkMatchResultsFlow({ origin, io, sockets, command, eval
     if (finished.roomStatus === 'match-over') break
     const next = finished.round.nextSetterId
     if (next === C) {
-      await waitFor(context, "[...document.querySelectorAll('.multiplayer-game .primary-action')].some((b) => b.textContent === 'Ronda següent')")
-      await evaluate(context, "[...document.querySelectorAll('.multiplayer-game .primary-action')].find((b) => b.textContent === 'Ronda següent').click()")
+      await waitFor(context, "[...document.querySelectorAll('.multiplayer-game .primary-action')].some((b) => b.textContent === 'Torn següent')")
+      await evaluate(context, "[...document.querySelectorAll('.multiplayer-game .primary-action')].find((b) => b.textContent === 'Torn següent').click()")
     } else assert.equal((await emit(socketFor[next], 'round:continue')).ok, true)
   }
   assert.equal(latest.matchResult.scores[C], 4)
@@ -79,7 +79,7 @@ export async function checkMatchResultsFlow({ origin, io, sockets, command, eval
   await waitFor(context, "document.querySelector('.match-results') !== null")
   const transition = JSON.parse(await evaluate(context, `JSON.stringify({
     heading: document.querySelector('#match-outcome-title').lastChild.textContent, focused: document.activeElement?.id,
-    gameplay: !!document.querySelector('.keyboard, .scoreboard, .game-columns, .word-form, .hangman, .forgiveness-tray'),
+    gameplay: !!document.querySelector('.keyboard, .scoreboard, .game-columns, .word-form, .drawing-panel, .forgiveness-tray'),
     rows: [...document.querySelectorAll('.standing-row')].map((row) => [row.querySelector('.standing-rank').textContent, row.querySelector('.standing-name').textContent, row.querySelector('.standing-score [aria-hidden]').textContent, !!row.querySelector('.standing-self')]),
     readiness: document.querySelector('.rematch-readiness [aria-live]').textContent, announcement: document.querySelector('.match-results > [role=status]').textContent,
     actionBeforeStandings: document.querySelector('.match-actions').getBoundingClientRect().bottom < document.querySelector('.match-standings').getBoundingClientRect().top })`))

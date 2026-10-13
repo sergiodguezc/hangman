@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { GameRoom } from '../server/game/GameRoom'
-import { multiplayerPhase } from '../src/multiplayer/presentation'
+import { chatSticksToBottom, multiplayerPhase } from '../src/multiplayer/presentation'
 import { rankByScore } from '../shared/ranking'
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -349,3 +349,17 @@ for (const language of ['ca', 'es'] as const) {
   assert.ok(!gameMarkup(choosing, language, '1').includes('secret-word-input'), 'Guessers get no secret field')
 }
 console.log('Secret-word label regressions passed in CA/ES')
+
+// --- Chat scroll: follow the conversation only when the reader is at the end, or sent the message ---
+{
+  const other = { id: 'm2', senderId: 'p1' }, own = { id: 'm2', senderId: 'p0' }
+  assert.equal(chatSticksToBottom(undefined, undefined, 'p0', false), false, 'empty chat: nothing to scroll')
+  assert.equal(chatSticksToBottom(undefined, other, 'p0', false), true, 'initial history shows the latest messages')
+  assert.equal(chatSticksToBottom('m1', other, 'p0', true), true, 'new message at the bottom follows')
+  assert.equal(chatSticksToBottom('m1', other, 'p0', false), false, 'new message while reading older ones keeps the position')
+  assert.equal(chatSticksToBottom('m1', own, 'p0', false), true, 'your own message always scrolls to the end')
+  assert.equal(chatSticksToBottom('m2', own, 'p0', false), false, 'a reaction on your own last message while reading does not move the list')
+  assert.equal(chatSticksToBottom('m2', other, 'p0', false), false, 'reactions while reading keep the position')
+  assert.equal(chatSticksToBottom('m2', other, 'p0', true), true, 'reactions at the bottom keep the end visible')
+  console.log('Chat scroll decisions passed')
+}

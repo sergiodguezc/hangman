@@ -1,8 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { MAX_ERRORS } from '../../shared/game'
 import type { Ack, PlayerGameView } from '../../shared/protocol'
 import { errorMessage, type MultiplayerTranslations } from '../multiplayer/i18n'
 import { listNames, matchOutcome, matchStandings, outcomeCopy, type Standing } from '../multiplayer/matchResults'
 import { hasSelectedWord, rematchAvailability } from '../multiplayer/presentation'
+import { HangmanDrawing } from './HangmanDrawing'
 import { RoundResults } from './RoundResults'
 
 type Props = {
@@ -23,6 +25,8 @@ export function MatchResults({ state, playerId, t, language, onRematch, onNewRoo
   const headingRef = useRef<HTMLHeadingElement>(null)
   const [announcement, setAnnouncement] = useState('')
   const transitionCopy = useRef(copy)
+  // Decorative verdict: the character is rescued for a win or a shared first place, defeated otherwise.
+  const mood = outcome.kind === 'unavailable' ? null : outcome.kind === 'self-won' || outcome.kind === 'self-tied' ? 'win' : 'loss'
 
   // One transition per mount: focus the outcome, unless the player is typing (then announce it politely instead).
   useEffect(() => {
@@ -42,6 +46,7 @@ export function MatchResults({ state, playerId, t, language, onRematch, onNewRoo
         {outcome.kind === 'self-won' && <span className="match-outcome-mark" aria-hidden="true">★</span>}{copy.heading}
       </h2>
       <p id="match-outcome-lede" className="match-outcome-lede">{copy.lede}</p>
+      {mood && <div className="match-outcome-art"><HangmanDrawing errors={MAX_ERRORS} mood={mood} /></div>}
     </div>
     <RematchActions state={state} playerId={playerId} t={t} language={language} onRematch={onRematch} onNewRoom={onNewRoom} onExitToMenu={onExitToMenu} />
     {standings && <FinalStandings standings={standings} t={t} />}

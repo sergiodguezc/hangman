@@ -122,8 +122,8 @@ try {
   console.log('Homepage daily status passed: completed game return, corrupt/outdated storage refresh, stable primary action.')
   console.log('Homepage responsive checks passed in CA/ES, including all six boundaries.')
   await navigate(home, '/multijugador/')
-  await waitFor(home, "document.querySelector('.home-card form') !== null")
-  await checkResponsiveScope({ context:home, command, evaluate, page:'setup', root:'.home-card', selectors:'.home-card, .home-card *' })
+  await waitFor(home, "document.querySelector('.setup form') !== null")
+  await checkResponsiveScope({ context:home, command, evaluate, page:'setup', root:'.setup', selectors:'.setup, .setup *' })
   await checkSetupEmphasis({ context:home, command, evaluate, waitFor, navigate })
   await navigate(home, '/com-es-juga/')
   await waitFor(home, "document.querySelector('.howto-header') !== null")
@@ -182,7 +182,46 @@ try {
     await waitFor(copied, "document.querySelector('.lobby-page') !== null")
     await evaluate(copied, "document.querySelector('.global-back-button').click()")
     await waitFor(copied, "sessionStorage.getItem('hangman-room-session') === null")
-    console.log('Browser invitation tests passed: shared tabs, opener copy, isolated contexts, reload, same-room restoration, join, invalid invitation and explicit leave.')
+    // Join errors on the invitation page keep their own message: a room that filled up after the preview says so,
+    // and only a real connection failure shows the connection error.
+    const roomFull = { ca: 'La sala és plena.', es: 'La sala está llena.' }
+    const connectionError = { ca: "No s'ha pogut connectar al servidor. Torna-ho a provar d'aquí a uns instants.", es: 'No se ha podido conectar con el servidor. Inténtalo de nuevo en unos instantes.' }
+    const inviteError = () => evaluate(isolated, "document.querySelector('.invitation-form .form-error')?.textContent ?? ''")
+    const joinInvitation = async (language, roomCode) => {
+      await navigate(isolated, '/')
+      await evaluate(isolated, `localStorage.setItem('hangman-interface-language', '${language}'); localStorage.setItem('hangman-name', 'Convidada'); sessionStorage.clear(); true`)
+      await navigate(isolated, `/multijugador/?sala=${roomCode}`)
+      await waitFor(isolated, "document.querySelector('.invitation-form button.primary-action:not(:disabled)') !== null")
+    }
+    for (const language of ['ca', 'es']) {
+      const fullRoom = await createRoom('Plena')
+      await joinInvitation(language, fullRoom.roomCode)
+      for (let index = 2; index <= 10; index++) {
+        const guest = io(origin, { transports: ['websocket'], forceNew: true }); sockets.push(guest)
+        const reply = await new Promise((resolve) => guest.emit('room:join', { name: `Jugador ${index}`, code: fullRoom.roomCode }, resolve))
+        assert.equal(reply.ok, true)
+      }
+      await evaluate(isolated, "document.querySelector('.invitation-form button.primary-action').click()")
+      await waitFor(isolated, "document.querySelector('.invitation-form .form-error') !== null")
+      assert.equal(await inviteError(), roomFull[language], `Room full on the invitation page (${language})`)
+      // Block the Socket.IO transports for this tab only; the preview (fetch) still loads.
+      const { script } = await command('script.addPreloadScript', { contexts: [isolated], functionDeclaration: `() => {
+        const blocked = (url) => String(url).includes('/socket.io/')
+        const NativeSocket = window.WebSocket
+        window.WebSocket = function (url, protocols) { if (blocked(url)) throw new Error('blocked'); return new NativeSocket(url, protocols) }
+        const open = XMLHttpRequest.prototype.open
+        XMLHttpRequest.prototype.open = function (method, url, ...rest) { return open.call(this, method, blocked(url) ? 'http://127.0.0.1:9/' : url, ...rest) }
+      }` })
+      const openRoom = await createRoom('Oberta')
+      await joinInvitation(language, openRoom.roomCode)
+      await evaluate(isolated, "document.querySelector('.invitation-form button.primary-action').click()")
+      await waitFor(isolated, "document.querySelector('.invitation-form .form-error') !== null && !document.querySelector('.invitation-form button.primary-action').disabled")
+      assert.equal(await inviteError(), connectionError[language], `Connection failure on the invitation page (${language})`)
+      await command('script.removePreloadScript', { script })
+    }
+    await navigate(isolated, '/')
+    await evaluate(isolated, "localStorage.removeItem('hangman-interface-language'); localStorage.removeItem('hangman-name'); sessionStorage.clear(); true")
+    console.log('Browser invitation tests passed: shared tabs, opener copy, isolated contexts, reload, same-room restoration, join, invalid invitation and explicit leave; join errors in CA/ES (room full, connection failure).')
 
     const learning = await newTab(isolatedProfile)
     const clickText = async (context, text, selector = 'button') => {

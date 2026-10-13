@@ -11,7 +11,8 @@ export function SiteFooter({ language, onNavigate }: Props) {
   return <footer className="site-footer">
     <div className="site-footer-inner">
       <div>
-        <p className="site-footer-brand">penjat<span>.cat</span></p>
+        {/* Same guarded navigation as the header brand (a room or an unfinished game asks first). */}
+        <a className="site-footer-brand" href="/" aria-label={t.brand} onClick={routeClick(() => onNavigate('/'))}>penjat<span>.cat</span></a>
         <p className="site-footer-tagline">{t.tagline}</p>
       </div>
       <nav aria-label={t.footerNav}>

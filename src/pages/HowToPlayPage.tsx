@@ -20,11 +20,11 @@ const copy = {
     },
     multiplayer: {
       title: 'Multijugador',
-      items: ['Crea una sala o uneix-t’hi amb un codi.', 'A cada torn, un jugador tria la paraula secreta i la resta intenten endevinar-la.', 'Qui l’ha triada pot observar el progrés de cada jugador, però no juga aquella paraula.', 'La ronda acaba quan tots els qui endevinen han resolt la paraula o han quedat fora.'],
+      items: ['Crea una sala o uneix-t’hi amb un codi.', 'A cada torn, un jugador tria la paraula secreta i la resta intenten endevinar-la.', 'Qui l’ha triada pot observar el progrés de cada jugador, però no juga aquella paraula.', 'El torn acaba quan tots els qui endevinen han resolt la paraula o han quedat fora.'],
     },
     rotation: {
-      title: 'Voltes i torns',
-      items: ['Una volta inclou el torn de triar de cada jugador que continua a la sala.', 'El torn passa al jugador següent segons l’ordre de la partida; si algú marxa, s’omet.', 'Amb 1, 3 o 5 voltes, la partida acaba quan s’han completat els torns previstos.'],
+      title: 'Rondes i torns',
+      items: ['Una ronda completa és quan cada jugador ha triat una paraula una vegada.', 'El torn passa al jugador següent segons l’ordre de la partida; si algú marxa, s’omet.', 'Amb 1, 3 o 5 rondes, la partida acaba quan s’han completat els torns previstos.'],
     },
     scoring: {
       title: 'Puntuació',
@@ -63,11 +63,11 @@ const copy = {
     },
     multiplayer: {
       title: 'Multijugador',
-      items: ['Crea una sala o únete con un código.', 'En cada turno, un jugador elige la palabra secreta y los demás intentan adivinarla.', 'Quien la ha elegido puede observar el progreso de cada jugador, pero no juega esa palabra.', 'La ronda termina cuando todos los que adivinan han resuelto la palabra o han quedado fuera.'],
+      items: ['Crea una sala o únete con un código.', 'En cada turno, un jugador elige la palabra secreta y los demás intentan adivinarla.', 'Quien la ha elegido puede observar el progreso de cada jugador, pero no juega esa palabra.', 'El turno termina cuando todos los que adivinan han resuelto la palabra o han quedado fuera.'],
     },
     rotation: {
-      title: 'Vueltas y turnos',
-      items: ['Una vuelta incluye el turno de elegir de cada jugador que continúa en la sala.', 'El turno pasa al siguiente jugador según el orden de la partida; si alguien se va, se omite.', 'Con 1, 3 o 5 vueltas, la partida termina al completar los turnos previstos.'],
+      title: 'Rondas y turnos',
+      items: ['Una ronda completa es cuando cada jugador ha elegido una palabra una vez.', 'El turno pasa al siguiente jugador según el orden de la partida; si alguien se va, se omite.', 'Con 1, 3 o 5 rondas, la partida termina al completar los turnos previstos.'],
     },
     scoring: {
       title: 'Puntuación',

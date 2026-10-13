@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react'
 import type { Language } from '../../shared/game'
 import { SUPPORTED_VOLTES, type PlayerGameView, type RoomPreview, type Voltes } from '../../shared/protocol'
 import { HangmanDrawing } from '../components/HangmanDrawing'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { getLanguageConfig } from '../game/languages'
 import { errorMessage, multiplayerTranslations } from '../multiplayer/i18n'
-import { loadRoomSession, saveRoomSession, socket } from '../multiplayer/socket'
+import { loadRoomSession, REQUEST_TIMEOUT_MS, saveRoomSession, socket, whenConnected } from '../multiplayer/socket'
 import { shouldResumeRoomSession } from '../multiplayer/invitations'
 import { DAILY_CHALLENGE_PUBLIC_PATH, getDailyChallenge } from '../daily/challenge'
 import { getHomeDailyStatus } from '../daily/homeSummary'
@@ -47,9 +47,14 @@ function readHomeDaily() {
 
 export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomCode = null, mode, onGameLanguage, onEnter, onLearn, onDaily, onMultiplayer, onHelp }: Props) {
   const [panel, setPanel] = useState<'menu' | 'multiplayer'>(mode === 'multiplayer' ? 'multiplayer' : 'menu')
-  const [name, setName] = useState(() => {
-    try { return localStorage.getItem('hangman-name') ?? '' } catch { return '' }
-  })
+  const [name, setName] = useState(readStoredName)
+  // The join card has its own name field (pre-filled with the same remembered name, edited independently).
+  const [joinName, setJoinName] = useState(readStoredName)
+  const compactSetup = useCompactSetup()
+  // Phones: an accordion of the two choices, both collapsed at first; opening one closes the other.
+  const [setupOpen, setSetupOpen] = useState<'create' | 'join' | null>(null)
+  const toggleSetup = (target: 'create' | 'join') => setSetupOpen((current) => current === target ? null : target)
+  const setupClass = (kind: 'create' | 'join') => `setup-panel setup-panel--${kind}${compactSetup ? ' is-collapsible' : ''}${setupOpen === kind ? ' is-open' : ''}`
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
@@ -67,11 +72,6 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
   const homeCopy = homeTranslations[interfaceLanguage]
   const d = dailyTranslations[interfaceLanguage]
   const previewSlots = ['', 'E', '', 'J', '', 'T']
-
-  const compactSetup = useCompactSetup()
-  // Phones show "create" and "join" as one-at-a-time disclosures below the name; wider screens show both panels.
-  const [setupOpen, setSetupOpen] = useState<'create' | 'join' | null>(null)
-  const toggleSetup = (target: 'create' | 'join') => setSetupOpen((current) => current === target ? null : target)
 
   useEffect(() => { setPanel(mode === 'multiplayer' ? 'multiplayer' : 'menu') }, [mode])
 
@@ -98,23 +98,12 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
     return () => displayMode.removeEventListener('change', updateInstallHint)
   }, [])
 
-  const connect = useCallback((done: () => void, onError?: (error: string) => void) => {
+  // A failed attempt or a lost reply resets the busy state with a recoverable error (the user can try again).
+  const connectionFailed = useCallback(() => { setBusy(false); setError(errorMessage('connect_error', t)) }, [t])
+  const connect = useCallback((done: () => void) => {
     setBusy(true); setError('')
-    if (socket.connected) return done()
-    const handleConnect = () => {
-      socket.off('connect_error', handleError)
-      done()
-    }
-    const handleError = () => {
-      socket.off('connect', handleConnect)
-      setBusy(false)
-      setError('connect_error')
-      onError?.('connect_error')
-    }
-    socket.connect()
-    socket.once('connect', handleConnect)
-    socket.once('connect_error', handleError)
-  }, [])
+    whenConnected(socket, done, connectionFailed)
+  }, [connectionFailed])
 
   useEffect(() => {
     if (mode !== 'multiplayer' || invitedRoomCode === null) {
@@ -159,18 +148,20 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
 
   const create = (event: FormEvent) => {
     event.preventDefault()
-    connect(() => socket.emit('room:create', { name, gameLanguage, voltes }, (response) => {
+    connect(() => socket.timeout(REQUEST_TIMEOUT_MS).emit('room:create', { name, gameLanguage, voltes }, (timedOut, response) => {
+      if (timedOut) return connectionFailed()
       setBusy(false)
       if (!response.ok) return setError(errorMessage(response.error, t))
       localStorage.setItem('hangman-name', name.trim()); saveRoomSession(response.data.session); onEnter(response.data.view, response.data.session.playerId)
     }))
   }
 
-  const join = () => {
-    connect(() => socket.emit('room:join', { name, code }, (response) => {
+  const join = (playerName: string) => {
+    connect(() => socket.timeout(REQUEST_TIMEOUT_MS).emit('room:join', { name: playerName, code }, (timedOut, response) => {
+      if (timedOut) return connectionFailed()
       setBusy(false)
       if (!response.ok) return setError(errorMessage(response.error, t))
-      localStorage.setItem('hangman-name', name.trim()); saveRoomSession(response.data.session); onEnter(response.data.view, response.data.session.playerId)
+      localStorage.setItem('hangman-name', playerName.trim()); saveRoomSession(response.data.session); onEnter(response.data.view, response.data.session.playerId)
     }))
   }
 
@@ -202,8 +193,9 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
               </dl>
             </section>
             <label>{t.name}<input value={name} maxLength={24} required placeholder={t.namePlaceholder} onChange={(e) => setName(e.target.value)} /></label>
-            <button type="button" className="primary-action" disabled={busy || !name.trim()} onClick={join}>{t.joinInvitation}</button>
-            {(error || notice) && <p className="form-error" role="alert">{errorMessage(error || notice!, t)}</p>}
+            <button type="button" className="primary-action" disabled={busy || !name.trim()} onClick={() => join(name)}>{t.joinInvitation}</button>
+            {/* `error` is already translated by join (room errors) or connectionFailed; only the notice is still a code. */}
+            {(error || notice) && <p className="form-error" role="alert">{error || errorMessage(notice!, t)}</p>}
             <div className="invitation-alternative">
               <span>{t.preferDifferentRules}</span>
               <button type="button" className="text-button" onClick={onMultiplayer}>{t.createYourGame}</button>
@@ -217,45 +209,40 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
       <header className="page-head">
         <p className="page-eyebrow page-eyebrow--mar">{t.multiplayerMode}</p>
         <h1>{t.setupTitle} <em>{t.setupAccent}</em></h1>
-        <p className="page-lede">{t.subtitle}</p>
       </header>
-      <section className="home-card home-card--join">
-        <form onSubmit={create}>
-          {/* The name is the first step for both paths, so it leads the page; creating and joining follow as step 2. */}
-          <div className="setup-name-card">
-            <span className="setup-step" aria-hidden="true">1</span>
-            <label className="setup-name"><span className="setup-name-title">{t.name}</span>
-              <input value={name} maxLength={24} required placeholder={t.namePlaceholder} autoComplete="nickname" aria-describedby="setup-name-hint" onChange={(e) => setName(e.target.value)} /></label>
-            <p className="setup-name-hint" id="setup-name-hint">{t.nameHint}</p>
-          </div>
-          <p className="setup-next"><span className="setup-step" aria-hidden="true">2</span>{t.nextStep}</p>
-          <div className={`setup-panel setup-panel--create${compactSetup ? ' is-collapsible' : ''}${setupOpen === 'create' ? ' is-open' : ''}`}>
-            <SetupHeading compact={compactSetup} open={setupOpen === 'create'} controls="setup-create-body" onToggle={() => toggleSetup('create')}>{t.createTitle}</SetupHeading>
+      {/* Two self-contained choices; each submits only its own name (both start from the remembered one). On phones
+          they are an accordion: both start collapsed, opening one closes the other, values survive switching. */}
+      <section className="setup">
+        <div className="setup-actions">
+          <form className={setupClass('create')} aria-labelledby="setup-create-title" onSubmit={create}>
+            <SetupHeading kind="create" compact={compactSetup} open={setupOpen === 'create'} onToggle={() => toggleSetup('create')}>{t.createTitle}</SetupHeading>
             <p className="setup-hint">{t.createHint}</p>
-            <div className="setup-panel-body" id="setup-create-body" hidden={compactSetup && setupOpen !== 'create'}>
-            <label className="language-field">
-              <span>{t.gameLanguage}</span>
-              <LanguageSelector language={gameLanguage} label={t.gameLanguage} onChange={onGameLanguage} />
-            </label>
-            <p className="target-help">{t.gameLanguageHint}</p>
-            <fieldset className="target-selector"><legend>{t.voltes}</legend><div>
-              {SUPPORTED_VOLTES.map((value) => <button type="button" key={value} className={voltes === value ? 'active' : ''} onClick={() => setVoltes(value)}>{value}</button>)}
-            </div><p className="target-help">{t.voltesExplanation}</p></fieldset>
-            <button className="primary-action" disabled={busy}>{t.create}</button>
-            </div>
-          </div>
-          <div className="join-divider"><span>{t.or}</span></div>
-          <div className={`setup-panel setup-panel--join${compactSetup ? ' is-collapsible' : ''}${setupOpen === 'join' ? ' is-open' : ''}`}>
-            <SetupHeading compact={compactSetup} open={setupOpen === 'join'} controls="setup-join-body" onToggle={() => toggleSetup('join')}>{t.joinTitle}</SetupHeading>
+            <div className="setup-body" id="setup-create-body" inert={compactSetup && setupOpen !== 'create'}><div className="setup-body-inner">
+              <label className="setup-name">{t.name}<input value={name} maxLength={24} required autoComplete="nickname" onChange={(e) => setName(e.target.value)} /></label>
+              <div className="setup-options">
+                <label className="language-field">
+                  <span>{t.gameLanguage}</span>
+                  <LanguageSelector language={gameLanguage} label={t.gameLanguage} onChange={onGameLanguage} />
+                </label>
+                <fieldset className="target-selector"><legend>{t.voltes}</legend><div>
+                  {SUPPORTED_VOLTES.map((value) => <button type="button" key={value} className={voltes === value ? 'active' : ''} onClick={() => setVoltes(value)}>{value}</button>)}
+                </div></fieldset>
+              </div>
+              <button className="primary-action" disabled={busy}>{t.create}</button>
+            </div></div>
+          </form>
+          <form className={setupClass('join')} aria-labelledby="setup-join-title" onSubmit={(event) => { event.preventDefault(); join(joinName) }}>
+            <SetupHeading kind="join" compact={compactSetup} open={setupOpen === 'join'} onToggle={() => toggleSetup('join')}>{t.joinTitle}</SetupHeading>
             <p className="setup-hint">{t.joinHint}</p>
-            <div className="setup-panel-body" id="setup-join-body" hidden={compactSetup && setupOpen !== 'join'}>
-            <label>{t.roomCode}<input className="room-code-input" value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"
-              onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, ''))} /></label>
-            <button type="button" className="secondary-action" disabled={busy || !name.trim() || code.length !== 5} onClick={join}>{t.join}</button>
-            </div>
-          </div>
-          {(error || notice) && <p className="form-error" role="alert">{error || errorMessage(notice!, t)}</p>}
-        </form>
+            <div className="setup-body" id="setup-join-body" inert={compactSetup && setupOpen !== 'join'}><div className="setup-body-inner">
+              <label className="setup-name setup-name--join">{t.name}<input value={joinName} maxLength={24} required autoComplete="nickname" onChange={(e) => setJoinName(e.target.value)} /></label>
+              <label>{t.roomCode}<input className="room-code-input" value={code} maxLength={5} placeholder={t.codePlaceholder} autoCapitalize="characters"
+                onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, ''))} /></label>
+              <button className="secondary-action" disabled={busy || !joinName.trim() || code.length !== 5}>{t.join}</button>
+            </div></div>
+          </form>
+        </div>
+        {(error || notice) && <p className="form-error" role="alert">{error || errorMessage(notice!, t)}</p>}
       </section>
     </main>
   }
@@ -337,28 +324,86 @@ export function HomePage({ interfaceLanguage, gameLanguage, notice, invitedRoomC
         </div>
       </section>}
       {notice && <p className="form-error home-notice" role="alert">{errorMessage(notice, t)}</p>}
+    </section>
 
+    {/* Decorative divider between the hero and the modes: Catalan words drifting slowly on an ink band. */}
+    <WordBand pauseLabel={homeCopy.bandPause} playLabel={homeCopy.bandPlay} />
+
+    <div className="home-shell">
       <section className="home-cards" aria-labelledby="home-cards-title">
         <div className="section-head">
           <h2 id="home-cards-title">{homeCopy.cardsTitle}</h2>
         </div>
         <ul className="mode-cards">
-          <ModeCard tone="mar" href="/multijugador" onClick={route(onMultiplayer)} icon={<ModeIcon mode="multiplayer" />} title={homeCopy.multiplayer} body={homeCopy.multiplayerCard} action={homeCopy.multiplayerCardAction}
+          <ModeCard tone="mar" href="/multijugador" onClick={route(onMultiplayer)} title={homeCopy.multiplayer} body={homeCopy.multiplayerCard} action={homeCopy.multiplayerCardAction}
             art={<span className="mode-art-code">{'K7QF2'.split('').map((letter) => <span key={letter}>{letter}</span>)}</span>} />
-          <ModeCard tone="safra" href={DAILY_CHALLENGE_PUBLIC_PATH} onClick={route(onDaily)} icon={<ModeIcon mode="daily" />} title={d.title} body={homeCopy.dailyCard} action={homeCopy.dailyCardAction}
+          <ModeCard tone="safra" href={DAILY_CHALLENGE_PUBLIC_PATH} onClick={route(onDaily)} title={d.title} body={homeCopy.dailyCard} action={homeCopy.dailyCardAction}
             art={<span className="mode-art-grid">{['hit', 'hit', 'miss', 'hit', 'hit', 'hit', 'miss', 'hit', 'hit', 'hit'].map((cell, index) => <i key={index} className={cell} />)}</span>} />
-          <ModeCard tone="oliva" href="/aprendre" onClick={route(onLearn)} icon={<ModeIcon mode="learning" />} title={homeCopy.learning} body={homeCopy.learningCard} action={homeCopy.learningCardAction}
+          <ModeCard tone="oliva" href="/aprendre" onClick={route(onLearn)} title={homeCopy.learning} body={homeCopy.learningCard} action={homeCopy.learningCardAction}
             art={<span className="mode-art-hint"><span lang="es">caracol</span><strong lang="ca">cargol</strong></span>} />
-          <ModeCard tone="paper" href="/com-es-juga" onClick={route(onHelp)} icon={<ModeIcon mode="help" />} title={isCatalan ? 'Com es juga' : 'Cómo se juega'} body={homeCopy.helpCard} action={homeCopy.helpCardAction}
+          <ModeCard tone="paper" href="/com-es-juga" onClick={route(onHelp)} title={isCatalan ? 'Com es juga' : 'Cómo se juega'} body={homeCopy.helpCard} action={homeCopy.helpCardAction}
             art={<span className="mode-art-drawing"><HangmanDrawing errors={3} /></span>} />
         </ul>
       </section>
       <small className="sr-only">{getLanguageConfig(interfaceLanguage).name}</small>
-    </section>
+    </div>
   </main>
 }
 
-// Same breakpoint as the phone layout in App.css (37.4375em), so enlarged text also gets the disclosures.
+const BAND_WORDS = ['rebombori', 'xiruca', 'endreçar', 'cargol', 'magrana', 'aixopluc', 'esbufegar', 'papallona', 'caliu', 'fogueró', 'barretina', 'endevinalla', 'llamp', 'xerrameca']
+
+// Ambient drift in CSS px per second: slow enough to read as texture beside the hero, never as a moving target.
+const BAND_SPEED = 6
+
+/** The word band: identical copies of the word list drift left by exactly one copy per cycle (seamless). It renders as
+ many copies as the band needs to stay covered while moving, measured from the real widths, so any viewport or zoom works.
+ The band itself is the pause control (moving content needs one): click, tap, Enter or Space. With reduced motion it is
+ static and not interactive. */
+function WordBand({ pauseLabel, playLabel }: { pauseLabel: string; playLabel: string }) {
+  const copyRef = useRef<HTMLSpanElement>(null)
+  const [layout, setLayout] = useState({ copies: 2, width: 0 })
+  const [paused, setPaused] = useState(false)
+  const [still, setStill] = useState(() => typeof window !== 'undefined' && window.matchMedia(REDUCED_MOTION_QUERY).matches)
+  useEffect(() => {
+    const query = window.matchMedia(REDUCED_MOTION_QUERY)
+    const update = () => setStill(query.matches)
+    update()
+    query.addEventListener('change', update)
+    return () => query.removeEventListener('change', update)
+  }, [])
+  useLayoutEffect(() => {
+    const copy = copyRef.current, band = copy?.closest<HTMLElement>('.home-band')
+    if (!copy || !band || typeof ResizeObserver === 'undefined') return
+    const words = [...copy.children]
+    const measure = () => {
+      // Natural width of one copy, rounded up to whole pixels: every copy gets exactly that width and the track shifts by
+      // it, so the frame that ends a cycle lands on the same pixels as the frame that starts it (no subpixel step).
+      const width = Math.ceil(words[words.length - 1].getBoundingClientRect().right - words[0].getBoundingClientRect().left)
+      if (!width) return
+      // The track spans the band plus the copy that scrolls out during one cycle.
+      const copies = Math.ceil(band.clientWidth / width) + 1
+      setLayout((current) => current.copies === copies && current.width === width ? current : { copies, width })
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(band); words.forEach((word) => observer.observe(word))
+    return () => observer.disconnect()
+  }, [still])
+  const track = (layout.width ? { '--band-shift': `${layout.width}px`, '--band-duration': `${layout.width / BAND_SPEED}s` } : {}) as CSSProperties
+  const className = `home-band${layout.width && !still ? ' is-moving' : ''}${paused ? ' is-paused' : ''}`
+  const words = <span className="home-band-track" lang="ca" aria-hidden="true" style={track}>
+    {Array.from({ length: layout.copies }, (_, copy) => <span className="home-band-copy" key={copy} ref={copy === 0 ? copyRef : undefined}>
+      {BAND_WORDS.map((word) => <span key={word}>{word}</span>)}
+    </span>)}
+  </span>
+  if (still) return <div className={className}>{words}</div>
+  const label = paused ? playLabel : pauseLabel
+  return <button type="button" className={className} aria-label={label} title={label} onClick={() => setPaused((current) => !current)}>{words}</button>
+}
+
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+
+// Same breakpoint as the phone layout in App.css (37.4375em), so enlarged text also gets the accordion.
 const COMPACT_SETUP_QUERY = '(max-width: 37.4375em)'
 
 function useCompactSetup() {
@@ -373,18 +418,31 @@ function useCompactSetup() {
   return compact
 }
 
-function SetupHeading({ compact, open, controls, onToggle, children }: { compact: boolean; open: boolean; controls: string; onToggle: () => void; children: ReactNode }) {
-  if (!compact) return <h2>{children}</h2>
-  return <h2><button type="button" className="setup-toggle" aria-expanded={open} aria-controls={controls} onClick={onToggle}>
-    <span>{children}</span>
+/** Card title. On phones it is the accordion's toggle: a real button (never submits the form) that also covers the whole
+ collapsed card; on wider screens a plain heading. */
+function SetupHeading({ kind, compact, open, onToggle, children }: { kind: 'create' | 'join'; compact: boolean; open: boolean; onToggle: () => void; children: ReactNode }) {
+  if (!compact) return <><SetupIcon kind={kind} /><h2 id={`setup-${kind}-title`}>{children}</h2></>
+  return <h2 id={`setup-${kind}-title`}><button type="button" className="setup-toggle" aria-expanded={open} aria-controls={`setup-${kind}-body`}
+    // Focus the toggle itself (Safari does not on tap), so focus never stays in a panel that just collapsed.
+    onClick={(event) => { event.currentTarget.focus(); onToggle() }}>
+    <SetupIcon kind={kind} /><span>{children}</span>
     <svg className="setup-toggle-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" /></svg>
   </button></h2>
 }
 
-function ModeCard({ tone, href, onClick, icon, title, body, action, art }: { tone: 'mar' | 'safra' | 'oliva' | 'paper'; href: string; onClick: ReturnType<typeof route>; icon: ReactNode; title: string; body: string; action: string; art: ReactNode }) {
+function readStoredName() {
+  try { return localStorage.getItem('hangman-name') ?? '' } catch { return '' }
+}
+
+function SetupIcon({ kind }: { kind: 'create' | 'join' }) {
+  return <svg className="setup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    {kind === 'create' ? <path d="M12 4v16 M4 12h16" /> : <path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4 M3 12h11 M10 8l4 4-4 4" />}
+  </svg>
+}
+
+function ModeCard({ tone, href, onClick, title, body, action, art }: { tone: 'mar' | 'safra' | 'oliva' | 'paper'; href: string; onClick: ReturnType<typeof route>; title: string; body: string; action: string; art: ReactNode }) {
   return <li className={`mode-card mode-card--${tone}`}>
     <a href={href} onClick={onClick}>
-      <span className="mode-card-icon">{icon}</span>
       <div className="mode-card-text">
         <h3>{title}</h3>
         <p className="mode-card-body">{body}</p>
@@ -395,11 +453,10 @@ function ModeCard({ tone, href, onClick, icon, title, body, action, art }: { ton
   </li>
 }
 
-function ModeIcon({ mode }: { mode: 'multiplayer' | 'learning' | 'daily' | 'help' }) {
+function ModeIcon({ mode }: { mode: 'multiplayer' | 'learning' | 'daily' }) {
   return <svg className="mode-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
     {mode === 'multiplayer' ? <><circle cx="9" cy="8" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3 M16 5a3 3 0 0 1 0 6 M18 15a5 5 0 0 1 3 5" /></>
       : mode === 'learning' ? <><path d="M12 5v16 M3 3c4 0 6 0 9 2 3-2 5-2 9-2v16c-4 0-6 0-9 2-3-2-5-2-9-2z" /><path d="M6 8h3 M15 8h3" /></>
-      : mode === 'daily' ? <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18 M8 3v4 M16 3v4" /><path d="M8 14h2 M12 14h2 M8 17h2" /></>
-      : <><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7 M12 17h.01" /></>}
+      : <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18 M8 3v4 M16 3v4" /><path d="M8 14h2 M12 14h2 M8 17h2" /></>}
   </svg>
 }

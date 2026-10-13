@@ -16,6 +16,14 @@ export function rematchAvailability(state: Pick<PlayerGameView, 'players' | 'mat
   }
 }
 
+/** Whether the chat list should end at the bottom after a messages update: on the first messages, for your own new
+ message, and otherwise only if the reader was already at the bottom (new messages from others, reactions). */
+export function chatSticksToBottom(previousLastId: string | undefined, last: { id: string; senderId: string } | undefined, selfId: string, pinned: boolean) {
+  if (!last) return false
+  if (previousLastId === undefined || (last.id !== previousLastId && last.senderId === selfId)) return true
+  return pinned
+}
+
 export function hasSelectedWord(state: Pick<PlayerGameView, 'privateWord' | 'self' | 'observedPlayer'>) {
   return Boolean(state.privateWord || state.self?.displayWord.length || state.observedPlayer?.displayWord.length)
 }

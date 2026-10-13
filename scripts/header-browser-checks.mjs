@@ -55,14 +55,17 @@ export async function checkSiteHeader({ context, command, evaluate, waitFor, nav
     assert.deepEqual(await state(), { expanded: 'false', hidden: true, focus: '' })
     assert.equal(await evaluate(context, "document.querySelector('.site-menu-list a[aria-current=page]').getAttribute('href')"), '/paraula-del-dia')
 
-    // The menu also offers the interface language; switching it keeps the menu open and relabels it.
+    // The CA/ES pill stays in the header, so the open menu does not repeat it; switching from the header keeps the menu
+    // open and relabels it.
     await click(toggle.x, toggle.y)
+    assert.equal(await evaluate(context, "getComputedStyle(document.querySelector('.site-menu-language')).display"), 'none', 'Language offered once on phones')
     const other = language === 'ca' ? 'es' : 'ca'
-    await evaluate(context, `document.querySelector('.site-menu-language button[lang="${other}"]').click()`)
+    const pill = (code) => `[...document.querySelectorAll('.site-actions > .interface-language-toggle button')].find((button) => button.textContent.trim() === '${code}').click()`
+    await evaluate(context, pill(other.toUpperCase()))
     await waitFor(context, `document.documentElement.lang === '${other}'`)
     assert.equal((await state()).expanded, 'true')
     assert.equal(await evaluate(context, "document.querySelector('.interface-language-toggle button.active').textContent"), other.toUpperCase())
-    await evaluate(context, `document.querySelector('.site-menu-language button[lang="${language}"]').click()`)
+    await evaluate(context, pill(language.toUpperCase()))
 
     // Growing into the desktop layout closes the menu; the inline navigation marks the current page.
     await viewport(1440, 900)
@@ -81,9 +84,8 @@ export async function checkSiteHeader({ context, command, evaluate, waitFor, nav
   await evaluate(context, "localStorage.setItem('hangman-interface-language', 'ca'); localStorage.setItem('hangman-name', 'Capçalera')")
   await navigate(context, '/multijugador')
   await waitFor(context, "document.querySelector('.setup-name input')?.value === 'Capçalera'")
-  // Phones show "Crea una sala" as a disclosure: open it, then create.
-  await evaluate(context, "document.querySelector('.setup-panel--create .setup-toggle').click()")
-  await waitFor(context, "!document.querySelector('#setup-create-body').hidden")
+  // Phones show the two choices as an accordion: open "create", then create.
+  await evaluate(context, "document.querySelector('.setup-panel--create .setup-toggle')?.click()")
   await evaluate(context, "document.querySelector('.setup-panel--create .primary-action').click()")
   await waitFor(context, "document.querySelector('.lobby-page') !== null")
   const room = await evaluate(context, "sessionStorage.getItem('hangman-room-session')")
@@ -96,6 +98,7 @@ export async function checkSiteHeader({ context, command, evaluate, waitFor, nav
   // At 320px the exit takes the language switch's place; the language remains in the menu.
   assert.equal(await evaluate(context, "getComputedStyle(document.querySelector('.site-actions > .interface-language-toggle')).display"), 'none')
   await evaluate(context, "document.querySelector('.site-menu-toggle').click()")
+  assert.equal(await evaluate(context, "getComputedStyle(document.querySelector('.site-menu-language')).display"), 'flex', 'The menu offers the language when the header cannot')
   await evaluate(context, "document.querySelector('.site-menu-list a[href=\"/com-es-juga\"]').click()")
   await waitFor(context, "document.querySelector('.exit-confirmation-dialog[open]') !== null")
   assert.equal(await evaluate(context, "document.querySelector('#exit-confirmation-title').textContent"), 'Vols sortir de la sala?')
