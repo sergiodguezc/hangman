@@ -1,66 +1,13 @@
 import { isCorrectGuess, isWordComplete, normalizeGuess } from '../../shared/game'
-import type { CefrLevel, LearningAttemptResult, LearningCefrSelection, LearningLevelGroup, LearningRound, LearningSessionStats, SessionHistoryEntry, VocabularyDifficulty, VocabularyEntry, WordSessionStats } from './types'
+import type { LearningRound } from './types'
 
 export const MAX_LEARNING_ERRORS = 6
-export const RECENT_WORD_LIMIT = 8
 
-export function entriesForDifficulty(entries: readonly VocabularyEntry[], difficulty: VocabularyDifficulty) {
-  return entries.filter((entry) => entry.difficulty === difficulty)
-}
-
-const LEVEL_GROUP_CEFR: Record<LearningLevelGroup, readonly CefrLevel[]> = {
-  basic: ['A1', 'A2'], intermediate: ['B1', 'B2'], advanced: ['C1', 'C2'], all: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
-}
-
-export function levelGroupFromStoredSelection(selection: string | null | undefined): LearningLevelGroup {
-  if (selection === 'A1' || selection === 'A2') return 'basic'
-  if (selection === 'B1' || selection === 'B2') return 'intermediate'
-  if (selection === 'C1' || selection === 'C2') return 'advanced'
-  return selection === 'basic' || selection === 'intermediate' || selection === 'advanced' ? selection : 'all'
-}
-
-export function allowedCefrLevelsForGroup(selection: LearningCefrSelection): readonly CefrLevel[] {
-  return LEVEL_GROUP_CEFR[levelGroupFromStoredSelection(selection)]
-}
-
-export function entriesForCefr(entries: readonly VocabularyEntry[], level: LearningCefrSelection) {
-  if (level !== 'all' && level !== 'basic' && level !== 'intermediate' && level !== 'advanced') {
-    return entries.filter((entry) => entry.linguistics?.cefr === level)
-  }
-  const allowed = allowedCefrLevelsForGroup(level)
-  return entries.filter((entry) => entry.linguistics?.cefr && allowed.includes(entry.linguistics.cefr))
-}
-
-export function selectNextEntry(
-  entries: readonly VocabularyEntry[],
-  level: LearningCefrSelection,
-  history: readonly SessionHistoryEntry[] = [],
-  random: () => number = Math.random,
-): VocabularyEntry | null {
-  const matching = entriesForCefr(entries, level)
-  if (!matching.length) return null
-  const stats = summarizeLearningHistory(history).byWord
-  const unseen = matching.filter((entry) => !stats.has(entry.id))
-  const reviewable = matching.filter((entry) => {
-    const word = stats.get(entry.id)
-    return word && word.failed > 0 && history.length - word.lastSeenAt >= 4
-  })
-  const cooledDown = matching.filter((entry) => !stats.get(entry.id) || history.length - (stats.get(entry.id)?.lastSeenAt ?? 0) >= 4)
-  const pool = unseen.length
-    ? [...unseen, ...reviewable.filter((entry) => !unseen.includes(entry))]
-    : (reviewable.length ? reviewable : (cooledDown.length ? cooledDown : matching))
-  const weighted = pool.map((entry) => ({ entry, weight: learningEntryWeight(stats.get(entry.id), history.length, unseen.length > 0) }))
-  const totalWeight = weighted.reduce((sum, item) => sum + item.weight, 0)
-  let threshold = random() * totalWeight
-  for (const item of weighted) {
-    threshold -= item.weight
-    if (threshold <= 0) return item.entry
-  }
-  return weighted.at(-1)?.entry ?? matching[0]
-}
-
-export function createLearningRound(entry: VocabularyEntry): LearningRound {
-  return { entry, guesses: new Set(), incorrect: new Set(), errors: 0, result: null }
+/** A round of `answer`, optionally rebuilt from stored guesses (same replay as the daily challenge). */
+export function createLearningRound(answer: string, guesses: Iterable<string> = []): LearningRound {
+  let round: LearningRound = { answer, guesses: new Set(), incorrect: new Set(), errors: 0, result: null }
+  for (const guess of guesses) round = applyLearningGuess(round, guess)
+  return round
 }
 
 export function applyLearningGuess(round: LearningRound, input: string): LearningRound {
@@ -68,56 +15,10 @@ export function applyLearningGuess(round: LearningRound, input: string): Learnin
   const guess = normalizeGuess(input, 'ca')
   if (!guess || round.guesses.has(guess)) return round
   const guesses = new Set(round.guesses).add(guess)
-  if (isCorrectGuess(round.entry.answerCa, guess, 'ca')) {
-    return { ...round, guesses, result: isWordComplete(round.entry.answerCa, guesses, 'ca') ? 'win' : null }
+  if (isCorrectGuess(round.answer, guess, 'ca')) {
+    return { ...round, guesses, result: isWordComplete(round.answer, guesses, 'ca') ? 'win' : null }
   }
   const incorrect = new Set(round.incorrect).add(guess)
   const errors = round.errors + 1
   return { ...round, guesses, incorrect, errors, result: errors >= MAX_LEARNING_ERRORS ? 'loss' : null }
-}
-
-export function appendRecentId(recentIds: readonly string[], id: string): string[] {
-  return [...recentIds.filter((recentId) => recentId !== id), id].slice(-RECENT_WORD_LIMIT)
-}
-
-export function learningResultToAttemptResult(result: LearningRound['result']): LearningAttemptResult {
-  return result === 'win' ? 'correct' : 'failed'
-}
-
-export function summarizeLearningHistory(history: readonly SessionHistoryEntry[]): LearningSessionStats {
-  const byWord = new Map<string, WordSessionStats>()
-  let correct = 0
-  let failed = 0
-  for (const entry of history) {
-    const current = byWord.get(entry.wordId) ?? { appearances: 0, correct: 0, failed: 0, lastSeenAt: 0 }
-    current.appearances += 1
-    current.lastSeenAt = entry.position
-    if (entry.result === 'correct') { current.correct += 1; correct += 1 }
-    else { current.failed += 1; failed += 1 }
-    byWord.set(entry.wordId, current)
-  }
-  const total = history.length
-  const recoveredWords = [...byWord.values()].filter((word) => word.failed > 0 && word.correct > 0).length
-  return { total, correct, failed, accuracy: total ? Math.round((correct / total) * 100) : 0, uniqueWords: byWord.size, recoveredWords, byWord }
-}
-
-export function practicedLearningLevels(history: readonly SessionHistoryEntry[]): LearningLevelGroup[] {
-  const practiced = new Set(history.filter((entry) => entry.cefr).map((entry) => levelGroupFromStoredSelection(entry.cefr)))
-  return (['basic', 'intermediate', 'advanced'] as const).filter((level) => practiced.has(level))
-}
-function learningEntryWeight(stats: WordSessionStats | undefined, completedAttempts: number, unseenRemain: boolean): number {
-  if (!stats) return 10
-  if (unseenRemain && stats.correct > 0 && stats.failed === 0) return 0.05
-  const age = completedAttempts - stats.lastSeenAt + 1
-  const failureBonus = stats.failed > 0 ? Math.min(7, 2 + stats.failed * 1.5) : 1
-  const successPenalty = stats.correct > 0 ? 0.35 : 1
-  const appearancesPenalty = 1 / Math.sqrt(stats.appearances)
-  return Math.max(0.01, failureBonus * successPenalty * appearancesPenalty * recencyWeight(age))
-}
-
-function recencyWeight(age: number): number {
-  if (age <= 2) return 0.05
-  if (age <= 4) return 0.2
-  if (age <= 7) return 0.6
-  return 1
 }

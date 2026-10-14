@@ -1,7 +1,5 @@
 export type VocabularyDifficulty = 'easy' | 'medium' | 'hard'
 export type CefrLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
-export type LearningLevelGroup = 'basic' | 'intermediate' | 'advanced' | 'all'
-export type LearningCefrSelection = LearningLevelGroup | CefrLevel
 export type VocabularyPartOfSpeech = 'noun' | 'verb' | 'adjective' | 'adverb' | 'other'
 
 export type LinguisticMetadata = {
@@ -43,34 +41,29 @@ export type VocabularyEntry = {
 }
 
 export type LearningResult = 'win' | 'loss'
-export type LearningAttemptResult = 'correct' | 'failed'
 
-export type SessionHistoryEntry = {
-  position: number
-  wordId: string
-  result: LearningAttemptResult
-  cefr?: CefrLevel
+/** A curated word of a thematic learning unit (data/learning-units.json). Optional fields are hidden when absent. */
+export type UnitWord = {
+  id: string
+  word: string
+  translationEs: string
+  grammar?: { pos: VocabularyPartOfSpeech; gender?: 'm' | 'f' }
+  ipa?: string
+  definitionCa: string
+  exampleCa: string
+  /** The inflected form used in the example, when it is not the word itself. */
+  exampleForm?: string
+  exampleEs?: string
+  expression?: { ca: string; meaningCa: string }
+  note?: string
+  /** File stem in public/learning/words/. */
+  illustration?: string
 }
 
-export type WordSessionStats = {
-  appearances: number
-  correct: number
-  failed: number
-  lastSeenAt: number
-}
-
-export type LearningSessionStats = {
-  total: number
-  correct: number
-  failed: number
-  accuracy: number
-  uniqueWords: number
-  recoveredWords: number
-  byWord: Map<string, WordSessionStats>
-}
+export type LearningUnit = { id: string; titleCa: string; titleEs: string; status: 'draft' | 'ready'; words: UnitWord[] }
 
 export type LearningRound = {
-  entry: VocabularyEntry
+  answer: string
   guesses: Set<string>
   incorrect: Set<string>
   errors: number

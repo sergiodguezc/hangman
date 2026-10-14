@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import reviewedMetadata from '../data/review/linguistic-metadata.json'
-import { entriesForCefr, selectNextEntry } from '../src/learning/game'
 import { createHash } from 'node:crypto'
 import { DAILY_CHALLENGE_WORD_IDS, dailyWordPool } from '../src/daily/words.ts'
 import { isLinguisticMetadata, isVocabularyEntry, vocabulary } from '../src/learning/vocabulary.ts'
@@ -45,8 +44,7 @@ for (const entry of vocabulary) {
   assert.ok(entry.linguistics?.cefr, `${entry.id} must have CEFR metadata`)
   assert.deepEqual(entry.linguistics, reviewedMetadata[entry.id as keyof typeof reviewedMetadata])
 }
-for (const level of ['basic', 'intermediate', 'advanced', 'all'] as const) {
-  assert.ok(entriesForCefr(vocabulary, level).length > 0, `${level} must be playable in the real dataset`)
-  assert.ok(selectNextEntry(vocabulary, level))
+for (const levels of [['A1', 'A2'], ['B1', 'B2'], ['C1', 'C2']]) {
+  assert.ok(vocabulary.some((entry) => levels.includes(entry.linguistics?.cefr ?? '')), `${levels.join('/')} must be covered by the real dataset`)
 }
 console.log('Production CEFR coverage and reviewed metadata parity passed')

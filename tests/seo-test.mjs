@@ -33,6 +33,31 @@ try {
   assert.match(daily, /<meta property="og:url" content="https:\/\/penjat\.cat\/paraula-del-dia" \/>/)
   assert.match(daily, /<meta name="twitter:title" content="Paraula del dia \| Penjat" \/>/)
   assert.doesNotMatch(daily, /Juga al Penjat online en català\. Endevina paraules/)
+
+  // Vocabulary learning: thematic units, one canonical URL with or without the trailing slash, no CEFR wording.
+  const learningTitle = 'Aprèn vocabulari català jugant al penjat | Penjat'
+  const learningDescription = 'Aprèn vocabulari català jugant al penjat. Paraules per temes (natura, animals, menjar, casa, ciutat, emocions) amb definicions, exemples i traducció al castellà.'
+  for (const path of ['/aprendre/', '/aprendre']) {
+    const learning = await fetchText(`http://127.0.0.1:${port}${path}`)
+    assert.ok(learning.includes(`<title>${learningTitle}</title>`), path)
+    assert.equal([...learning.matchAll(/<meta name="description"/g)].length, 1)
+    assert.ok(learning.includes(`<meta name="description" content="${learningDescription}" />`))
+    assert.ok(learning.includes('<link rel="canonical" href="https://penjat.cat/aprendre" />'))
+    assert.ok(learning.includes(`<meta property="og:title" content="${learningTitle}" />`) && learning.includes(`<meta property="og:description" content="${learningDescription}" />`))
+    assert.ok(learning.includes('<meta property="og:url" content="https://penjat.cat/aprendre" />') && learning.includes(`<meta name="twitter:title" content="${learningTitle}" />`))
+    assert.doesNotMatch(learning, /CEFR|A1|B1|C1|noindex|hreflang/)
+  }
+  assert.equal((await fetch(`http://127.0.0.1:${port}/aprendre/`, { method: 'HEAD' })).status, 200)
+  // The sitemap lists exactly the canonical URL of each page, and robots.txt allows crawling and points to it.
+  for (const path of ['/', '/multijugador/', '/aprendre/', '/paraula-del-dia/', '/com-es-juga/']) {
+    const canonical = (await fetchText(`http://127.0.0.1:${port}${path}`)).match(/<link rel="canonical" href="([^"]+)" \/>/)[1]
+    assert.ok(sitemap.includes(`<loc>${canonical}</loc>`), `sitemap lists ${canonical}`)
+  }
+  assert.equal([...sitemap.matchAll(/<loc>/g)].length, 5)
+  const robots = await fetchText(`http://127.0.0.1:${port}/robots.txt`)
+  assert.match(robots, /User-agent: \*\nAllow: \//)
+  assert.doesNotMatch(robots, /Disallow/)
+  assert.match(robots, /Sitemap: https:\/\/penjat\.cat\/sitemap\.xml/)
 } finally {
   server.kill('SIGTERM')
 }

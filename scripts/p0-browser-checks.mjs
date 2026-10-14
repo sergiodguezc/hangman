@@ -38,61 +38,76 @@ async function checkContrast(evaluate, context, selector, backgroundSelector, mi
 
 export async function checkP0Dialogs(api) {
   const { context, command, evaluate, waitFor, navigate } = api
+  // A learning word card (its word chips open the read-only card) and an unfinished daily game (header links ask first).
+  const pages = {
+    '.vocab-dialog': async () => {
+      await navigate(context, '/aprendre/')
+      await waitFor(context, "document.querySelector('.unit-card .primary-action') !== null")
+      await pointer(api, '.unit-card .primary-action')
+      await waitFor(context, "document.querySelector('.learning-game .keyboard') !== null")
+      for (let i = 0; i < 26 && await evaluate(context, "document.querySelector('.vocab-card') === null"); i++) await evaluate(context, "document.querySelector('.keyboard button:not(:disabled)')?.click()")
+      await waitFor(context, "document.querySelector('.word-chips button') !== null")
+    },
+    '.exit-confirmation-dialog': async () => {
+      await navigate(context, '/paraula-del-dia/')
+      await waitFor(context, "document.querySelector('.daily-game .keyboard') !== null")
+      await evaluate(context, "document.querySelector('.keyboard button:not(:disabled)').click()")
+      await waitFor(context, "document.querySelectorAll('.keyboard button:disabled').length === 1")
+    },
+  }
   for (const language of ['ca','es']) {
     await navigate(context, '/')
-    await evaluate(context, `localStorage.setItem('hangman-interface-language','${language}')`)
-    await navigate(context, '/aprendre/')
-    await waitFor(context, "document.querySelector('.learning-setup .primary-action') !== null")
-    await pointer(api, '.learning-setup .primary-action')
-    for (const [width,height] of viewports) {
-      await command('browsingContext.setViewport', {context, viewport:{width,height}})
-      for (const [opener, dialog] of [['.learning-round-meta .text-button','.learning-difficulty-dialog'], ['.global-back-button','.exit-confirmation-dialog']]) {
-        await evaluate(context, `document.querySelector('${opener}').focus()`)
-        await key(command, context, '\uE007')
-        await waitFor(context, `document.querySelector('${dialog}:modal') !== null`)
-        assert.equal(await evaluate(context, "document.activeElement.hasAttribute('data-modal-initial-focus')"), true)
-        assert.equal(await evaluate(context, `!!document.getElementById(document.querySelector('${dialog}').getAttribute('aria-labelledby'))`), true)
-        if (dialog.includes('exit')) assert.equal(await evaluate(context, "!!document.getElementById(document.querySelector('dialog').getAttribute('aria-describedby'))"), true)
-        for (const shift of [false,true]) {
-          for (let i=0; i<7; i++) {
-            await key(command, context, '\uE004', shift)
-            assert.equal(await evaluate(context, "document.querySelector('dialog').contains(document.activeElement)"), true, 'Tab stays in the modal')
+    await evaluate(context, `localStorage.setItem('hangman-interface-language','${language}'); localStorage.removeItem('penjat-learning'); localStorage.removeItem('penjat-daily-challenge')`)
+    for (const [opener, dialog] of [['.word-chips button','.vocab-dialog'], ['.site-brand','.exit-confirmation-dialog']]) {
+      await pages[dialog]()
+      for (const [width,height] of viewports) {
+        await command('browsingContext.setViewport', {context, viewport:{width,height}})
+          await evaluate(context, `document.querySelector('${opener}').focus()`)
+          await key(command, context, '\uE007')
+          await waitFor(context, `document.querySelector('${dialog}:modal') !== null`)
+          assert.equal(await evaluate(context, "document.activeElement.hasAttribute('data-modal-initial-focus')"), true)
+          assert.equal(await evaluate(context, `!!document.getElementById(document.querySelector('${dialog}').getAttribute('aria-labelledby'))`), true)
+          if (dialog.includes('exit')) assert.equal(await evaluate(context, "!!document.getElementById(document.querySelector('dialog').getAttribute('aria-describedby'))"), true)
+          for (const shift of [false,true]) {
+            for (let i=0; i<7; i++) {
+              await key(command, context, '\uE004', shift)
+              assert.equal(await evaluate(context, "document.querySelector('dialog').contains(document.activeElement)"), true, 'Tab stays in the modal')
+            }
           }
-        }
-        // Both programmatic focus and real pointer activation must be blocked by native inertness.
-        await evaluate(context, "document.querySelector('.interface-language-toggle button:not(.active)').focus()")
-        assert.equal(await evaluate(context, "document.querySelector('dialog').contains(document.activeElement)"), true)
-        const storedLanguage = await evaluate(context, "localStorage.getItem('hangman-interface-language')")
-        await pointer(api, '.interface-language-toggle button:not(.active)')
-        assert.equal(await evaluate(context, "localStorage.getItem('hangman-interface-language')"), storedLanguage)
-        const guesses = await evaluate(context, "document.querySelectorAll('.keyboard button:disabled').length")
-        await key(command, context, 'a')
-        assert.equal(await evaluate(context, "document.querySelectorAll('.keyboard button:disabled').length"), guesses, 'Dialog keystrokes cannot guess in the background')
-        await key(command, context, '\uE004')
-        await evaluate(context, "document.querySelector('[data-modal-initial-focus]').focus()")
-        assert.equal(await evaluate(context, "document.activeElement.matches(':focus-visible')"), true)
-        const bounds = JSON.parse(await evaluate(context, "JSON.stringify((() => { const r=document.querySelector('dialog').getBoundingClientRect(); return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,overflow:document.documentElement.scrollWidth>innerWidth} })())"))
-        assert.ok(bounds.left>=0 && bounds.right<=width && bounds.top>=0 && bounds.bottom<=height && !bounds.overflow)
-        assert.equal(await evaluate(context, "document.querySelector('dialog').scrollWidth <= document.querySelector('dialog').clientWidth"), true, 'Dialog content cannot clip horizontally')
-        assert.equal(await evaluate(context, "[...document.querySelectorAll('dialog button')].every(b => { const r=b.getBoundingClientRect(), d=document.querySelector('dialog').getBoundingClientRect(); return r.left>=d.left && r.right<=d.right })"), true)
-        await checkContrast(evaluate,context,'[data-modal-initial-focus]','dialog',3,'outlineColor')
-        await screenshot(command,context,`${language}-${width}-${dialog.slice(1)}`)
-        await key(command, context, '\uE00C')
-        await waitFor(context, "document.querySelector('dialog') === null")
-        assert.equal(await evaluate(context, `document.activeElement.matches('${opener}')`), true, 'Escape restores opener')
-        await key(command, context, '\uE007')
-        await waitFor(context, "document.querySelector('dialog:modal') !== null")
-        await pointer(api, '[data-modal-initial-focus]')
-        await waitFor(context, "document.querySelector('dialog') === null")
-        assert.equal(await evaluate(context, `document.activeElement.matches('${opener}')`), true, 'Cancel restores opener')
+          // Both programmatic focus and real pointer activation must be blocked by native inertness.
+          await evaluate(context, "document.querySelector('.interface-language-toggle button:not(.active)').focus()")
+          assert.equal(await evaluate(context, "document.querySelector('dialog').contains(document.activeElement)"), true)
+          const storedLanguage = await evaluate(context, "localStorage.getItem('hangman-interface-language')")
+          await pointer(api, '.interface-language-toggle button:not(.active)')
+          assert.equal(await evaluate(context, "localStorage.getItem('hangman-interface-language')"), storedLanguage)
+          const guesses = await evaluate(context, "document.querySelectorAll('.keyboard button:disabled').length")
+          await key(command, context, 'a')
+          assert.equal(await evaluate(context, "document.querySelectorAll('.keyboard button:disabled').length"), guesses, 'Dialog keystrokes cannot guess in the background')
+          await key(command, context, '\uE004')
+          await evaluate(context, "document.querySelector('[data-modal-initial-focus]').focus()")
+          assert.equal(await evaluate(context, "document.activeElement.matches(':focus-visible')"), true)
+          const bounds = JSON.parse(await evaluate(context, "JSON.stringify((() => { const r=document.querySelector('dialog').getBoundingClientRect(); return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,overflow:document.documentElement.scrollWidth>innerWidth} })())"))
+          assert.ok(bounds.left>=0 && bounds.right<=width && bounds.top>=0 && bounds.bottom<=height && !bounds.overflow)
+          assert.equal(await evaluate(context, "document.querySelector('dialog').scrollWidth <= document.querySelector('dialog').clientWidth"), true, 'Dialog content cannot clip horizontally')
+          assert.equal(await evaluate(context, "[...document.querySelectorAll('dialog button')].every(b => { const r=b.getBoundingClientRect(), d=document.querySelector('dialog').getBoundingClientRect(); return r.left>=d.left && r.right<=d.right })"), true)
+          await checkContrast(evaluate,context,'[data-modal-initial-focus]','dialog',3,'outlineColor')
+          await screenshot(command,context,`${language}-${width}-${dialog.slice(1)}`)
+          await key(command, context, '\uE00C')
+          await waitFor(context, "document.querySelector('dialog') === null")
+          assert.equal(await evaluate(context, `document.activeElement.matches('${opener}')`), true, 'Escape restores opener')
+          await key(command, context, '\uE007')
+          await waitFor(context, "document.querySelector('dialog:modal') !== null")
+          await pointer(api, '[data-modal-initial-focus]')
+          await waitFor(context, "document.querySelector('dialog') === null")
+          assert.equal(await evaluate(context, `document.activeElement.matches('${opener}')`), true, 'Cancel restores opener')
       }
     }
   }
-  // Confirmation semantics still produce the learning summary.
-  await pointer(api, '.global-back-button')
+  // Confirming leaves the unfinished daily game for the chosen page.
+  await pointer(api, '.site-brand')
   await pointer(api, '.exit-confirmation-dialog .primary-action')
-  await waitFor(context, "document.querySelector('.learning-summary') !== null")
-  await evaluate(context, "localStorage.setItem('hangman-interface-language','ca')")
+  await waitFor(context, "location.pathname === '/' && document.querySelector('.exit-confirmation-dialog') === null")
+  await evaluate(context, "localStorage.setItem('hangman-interface-language','ca'); localStorage.removeItem('penjat-learning'); localStorage.removeItem('penjat-daily-challenge')")
   console.log('P0 dialogs: real Tab/Shift+Tab, Escape, cancel, confirm, focus restoration, inert background and game shortcuts passed in CA/ES at all five requested viewports.')
 }
 

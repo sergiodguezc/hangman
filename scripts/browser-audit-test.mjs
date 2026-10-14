@@ -224,52 +224,105 @@ try {
     console.log('Browser invitation tests passed: shared tabs, opener copy, isolated contexts, reload, same-room restoration, join, invalid invitation and explicit leave; join errors in CA/ES (room full, connection failure).')
 
     const learning = await newTab(isolatedProfile)
-    const clickText = async (context, text, selector = 'button') => {
-      await evaluate(context, `Array.from(document.querySelectorAll(${JSON.stringify(selector)})).find(button => button.textContent.trim() === ${JSON.stringify(text)}).click()`)
-    }
+    const stored = async () => JSON.parse(await evaluate(learning, "localStorage.getItem('penjat-learning')"))
+    const click = (selector) => evaluate(learning, `document.querySelector(${JSON.stringify(selector)}).click()`)
+    const text = (selector) => evaluate(learning, `document.querySelector(${JSON.stringify(selector)})?.textContent ?? null`)
+    const guessed = "document.querySelectorAll('.learning-game .keyboard button:disabled').length"
     const finishWord = async () => {
-      // Exercise UI guesses to completion without depending on a random word.
+      // Exercise UI guesses to completion; alphabetical guesses win some words and lose others.
       for (let index = 0; index < 28; index++) {
-        if (await evaluate(learning, "document.querySelector('.learning-result') !== null")) return
+        if (await evaluate(learning, "document.querySelector('.vocab-card') !== null")) return
         await evaluate(learning, "document.querySelector('.keyboard button:not(:disabled)')?.click()")
       }
-      await waitFor(learning, "document.querySelector('.learning-result') !== null")
+      await waitFor(learning, "document.querySelector('.vocab-card') !== null")
     }
-    for (const level of ['Bàsic', 'Intermedi', 'Avançat', 'Tots']) {
-      await navigate(learning, '/aprendre/')
-      await waitFor(learning, "document.querySelector('.learning-setup') !== null")
-      await clickText(learning, level, '.learning-setup button')
-      await clickText(learning, 'Comença')
-      await waitFor(learning, "document.querySelector('.keyboard') !== null")
-      await finishWord()
-      await clickText(learning, 'Paraula següent', '.learning-result-actions button')
-      await waitFor(learning, "document.querySelector('.keyboard') !== null")
-    }
+    const noOverflow = () => evaluate(learning, 'document.documentElement.scrollWidth <= document.documentElement.clientWidth')
+    await navigate(learning, '/')
+    await evaluate(learning, "localStorage.removeItem('penjat-learning'); localStorage.setItem('hangman-interface-language', 'ca')")
     await navigate(learning, '/aprendre/')
-    await waitFor(learning, "document.querySelector('.learning-setup') !== null")
-    await clickText(learning, 'Bàsic', '.learning-setup button')
-    await clickText(learning, 'Comença')
-    await waitFor(learning, "document.querySelector('.keyboard') !== null")
+    await waitFor(learning, "document.querySelector('.unit-card .primary-action')?.textContent === 'Comença'")
+    await click('.unit-card .primary-action')
+    await waitFor(learning, "document.querySelector('.learning-game .keyboard') !== null")
+    assert.equal(await text('.unit-head h1'), 'Paraula 1 de 12')
+    // A refresh mid-word reopens the unit on the same word with its guesses.
+    await click('.keyboard button:not(:disabled)')
+    await waitFor(learning, `${guessed} === 1`)
+    await navigate(learning, '/aprendre/')
+    await waitFor(learning, `${guessed} === 1`)
     await finishWord()
-    await clickText(learning, 'Canviar el nivell')
-    await clickText(learning, 'Intermedi', '.learning-difficulty-dialog button')
-    assert.equal(await evaluate(learning, "document.querySelector('.learning-round-meta strong').textContent"), 'Bàsic')
-    await clickText(learning, 'Paraula següent', '.learning-result-actions button')
-    await waitFor(learning, "document.querySelector('.keyboard') !== null")
-    assert.equal(await evaluate(learning, "document.querySelector('.learning-round-meta strong').textContent"), 'Intermedi')
-    await finishWord()
-    await clickText(learning, 'Canviar el nivell')
-    await clickText(learning, 'Avançat', '.learning-difficulty-dialog button')
-    assert.equal(await evaluate(learning, "document.querySelector('.learning-round-meta strong').textContent"), 'Intermedi')
-    await evaluate(learning, "document.querySelector('.global-back-button').click()")
-    await waitFor(learning, "document.querySelector('.exit-confirmation-dialog') !== null")
-    await evaluate(learning, "document.querySelector('.exit-confirmation-dialog .primary-action').click()")
-    await waitFor(learning, "document.querySelector('.learning-summary') !== null")
-    const summary = await evaluate(learning, "document.querySelector('.learning-summary').innerText")
-    assert.ok(summary.includes('Bàsic · Intermedi'))
-    assert.ok(!summary.includes('Avançat'))
-    assert.ok(summary.includes('Paraules no encertades'))
-    console.log('Browser learning tests passed: every level starts/progresses, level switching preserves the current board, mixed summary excludes an unplayed selection.')
+    const word = await text('.vocab-card h2')
+    const firstResults = (await stored()).words
+    assert.equal(Object.keys(firstResults).length, 1)
+    // A refresh on the card shows the same card and records nothing twice.
+    await navigate(learning, '/aprendre/')
+    await waitFor(learning, "document.querySelector('.vocab-card h2') !== null")
+    assert.equal(await text('.vocab-card h2'), word)
+    assert.deepEqual((await stored()).words, firstResults)
+    // The bookmark is saved; a word chip opens its read-only card.
+    await click('.vocab-bookmark')
+    await waitFor(learning, "document.querySelector('.vocab-bookmark').getAttribute('aria-pressed') === 'true'")
+    await navigate(learning, '/aprendre/')
+    await waitFor(learning, "document.querySelector('.vocab-bookmark')?.getAttribute('aria-pressed') === 'true'")
+    assert.deepEqual((await stored()).bookmarks, Object.keys(firstResults))
+    await click('.word-chips button')
+    await waitFor(learning, "document.querySelector('.vocab-dialog:modal .vocab-card') !== null")
+    await click('.vocab-dialog [data-modal-initial-focus]')
+    await waitFor(learning, "document.querySelector('.vocab-dialog') === null")
+    // "Torna a les unitats" leaves without asking; the unit continues on the same card.
+    await click('.global-back-button')
+    await waitFor(learning, "document.querySelector('.unit-list') !== null")
+    assert.equal(await evaluate(learning, "document.querySelector('.exit-confirmation-dialog') === null"), true)
+    assert.equal(await text('.unit-card .primary-action'), 'Continua')
+    assert.ok((await text('.unit-card p')).startsWith('1 de 12 descobertes'))
+    await click('.unit-card .primary-action')
+    await waitFor(learning, `document.querySelector('.vocab-card h2')?.textContent === ${JSON.stringify(word)}`)
+    // Interface language: CA/ES labels; the Catalan content does not change.
+    await evaluate(learning, "Array.from(document.querySelectorAll('.interface-language-toggle button')).find((b) => b.textContent.trim() === 'ES').click()")
+    await waitFor(learning, "document.querySelector('.vocab-actions .primary-action')?.textContent === 'Siguiente palabra'")
+    assert.equal(await evaluate(learning, "document.querySelector('.global-back-button').getAttribute('aria-label')"), 'Volver a las unidades')
+    assert.equal(await text('.vocab-card h2'), word)
+    await evaluate(learning, "Array.from(document.querySelectorAll('.interface-language-toggle button')).find((b) => b.textContent.trim() === 'CA').click()")
+    await waitFor(learning, "document.querySelector('.vocab-actions .primary-action')?.textContent === 'Següent paraula'")
+    // Layout: no sideways scroll; on a phone the fixed action bar never covers the end of the page.
+    for (const [width, height] of [[1440, 900], [768, 1024], [390, 844]]) {
+      await command('browsingContext.setViewport', { context: learning, viewport: { width, height } })
+      await evaluate(learning, 'scrollTo(0, document.documentElement.scrollHeight)')
+      assert.equal(await noOverflow(), true, `learning card fits ${width}px`)
+      assert.equal(await evaluate(learning, "document.querySelector('.unit-words').getBoundingClientRect().bottom <= document.querySelector('.vocab-actions').getBoundingClientRect().top + 1"), true, `actions leave the words visible at ${width}px`)
+    }
+    await command('browsingContext.setViewport', { context: learning, viewport: { width: 1440, height: 900 } })
+    // Play the unit to the end: the last card leads to the summary.
+    for (let index = 1; index < 12; index++) {
+      await click('.vocab-actions .primary-action')
+      await waitFor(learning, `document.querySelector('.unit-head h1')?.textContent === 'Paraula ${index + 1} de 12' && document.querySelector('.learning-game .keyboard') !== null`)
+      await finishWord()
+    }
+    assert.equal(await text('.vocab-actions .primary-action'), 'Veure el resum')
+    await click('.vocab-actions .primary-action')
+    await waitFor(learning, "document.querySelector('.unit-summary') !== null")
+    const results = (await stored()).words
+    const failed = Object.values(results).filter((result) => result === 'failed').length
+    assert.equal(Object.keys(results).length, 12)
+    assert.equal(await text('.unit-summary h1'), 'Unitat completada')
+    assert.equal(await text('.progress-tiles div:nth-child(3) dd'), String(failed))
+    assert.equal((await stored()).sessions.natura, undefined)
+    // Replay queues all 12 words without touching the results; review queues only the failed words.
+    await evaluate(learning, "Array.from(document.querySelectorAll('.unit-summary-actions button')).find((b) => b.textContent === 'Torna a jugar la unitat').click()")
+    await waitFor(learning, "document.querySelector('.unit-head h1')?.textContent === 'Paraula 1 de 12'")
+    assert.equal((await stored()).sessions.natura.queue.length, 12)
+    assert.deepEqual((await stored()).words, results)
+    await evaluate(learning, "localStorage.setItem('penjat-learning', JSON.stringify({ ...JSON.parse(localStorage.getItem('penjat-learning')), sessions: {} }))")
+    await click('.global-back-button')
+    await navigate(learning, '/aprendre/')
+    await waitFor(learning, "document.querySelector('.unit-card .primary-action')?.textContent === 'Revisa'")
+    await click('.unit-card .primary-action')
+    await waitFor(learning, "document.querySelector('.unit-summary') !== null")
+    if (failed > 0) {
+      await evaluate(learning, "Array.from(document.querySelectorAll('.unit-summary-actions button')).find((b) => b.textContent === 'Repassa les fallades').click()")
+      await waitFor(learning, `document.querySelector('.unit-head h1')?.textContent === 'Repàs: paraula 1 de ${failed}'`)
+    }
+    await evaluate(learning, "localStorage.removeItem('penjat-learning'); sessionStorage.clear()")
+    console.log('Browser learning tests passed: start, mid-word and card refresh without double counting, bookmark, word card, unguarded return to units, CA/ES, layout at 1440/768/390, whole unit to summary, replay and review.')
 
     // Finish a match through departure while its last round is still choosing.
     // The server intentionally retains that round; the UI must prioritize match-over.

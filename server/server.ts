@@ -33,8 +33,8 @@ const routeMetadata: Record<string, RouteMetadata> = {
     canonicalPath: '/multijugador',
   },
   '/aprendre/': {
-    title: 'Aprèn català jugant al Penjat | Penjat',
-    description: 'Aprèn vocabulari català jugant al Penjat. Descobreix paraules, significats i traduccions mentre jugues.',
+    title: 'Aprèn vocabulari català jugant al penjat | Penjat',
+    description: 'Aprèn vocabulari català jugant al penjat. Paraules per temes (natura, animals, menjar, casa, ciutat, emocions) amb definicions, exemples i traducció al castellà.',
     canonicalPath: '/aprendre',
   },
   '/paraula-del-dia/': {
@@ -46,7 +46,7 @@ const routeMetadata: Record<string, RouteMetadata> = {
   },
   '/com-es-juga/': {
     title: 'Com es juga a Penjat? | Penjat',
-    description: 'Descobreix com es juga a Penjat, tant en multijugador com en mode d’aprenentatge de català.',
+    description: 'Descobreix com es juga a Penjat, tant en multijugador com en mode d’aprenentatge de vocabulari.',
     canonicalPath: '/com-es-juga',
   },
 }

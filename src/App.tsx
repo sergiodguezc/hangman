@@ -22,6 +22,7 @@ type PageCopy = { title: string; description: string; socialTitle?: string; soci
 type InvitationCode = string | null
 type ExitKind = 'game' | 'room'
 const PUBLIC_SITE_ORIGIN = 'https://penjat.cat'
+const LEARNING_UNIT_KEY = 'penjat-learning-unit'
 
 function readInvitationCode(): InvitationCode {
   const params = new URLSearchParams(window.location.search)
@@ -46,8 +47,8 @@ const routeDescriptions: Record<Route, { mode: Mode; copy: Record<Language, Page
   '/aprendre/': {
     mode: 'learning',
     copy: {
-      ca: { title: 'Aprèn català jugant al Penjat | Penjat', description: 'Aprèn vocabulari català jugant al Penjat. Descobreix paraules, significats i traduccions mentre jugues.' },
-      es: { title: 'Aprende catalán jugando a Penjat | Penjat', description: 'Aprende vocabulario catalán jugando a Penjat. Descubre palabras, significados y traducciones mientras juegas.' },
+      ca: { title: 'Aprèn vocabulari català jugant al penjat | Penjat', description: 'Aprèn vocabulari català jugant al penjat. Paraules per temes (natura, animals, menjar, casa, ciutat, emocions) amb definicions, exemples i traducció al castellà.' },
+      es: { title: 'Aprende vocabulario en catalán jugando | Penjat', description: 'Aprende catalán jugando al ahorcado: palabras por temas (naturaleza, animales, comida, casa, ciudad, emociones) con definiciones, ejemplos y traducción al español.' },
     },
   },
   '/paraula-del-dia/': {
@@ -70,8 +71,8 @@ const routeDescriptions: Record<Route, { mode: Mode; copy: Record<Language, Page
   '/com-es-juga/': {
     mode: 'help',
     copy: {
-      ca: { title: 'Com es juga a Penjat? | Penjat', description: 'Descobreix com es juga a Penjat, tant en multijugador com en mode d’aprenentatge de català.' },
-      es: { title: '¿Cómo se juega a Penjat? | Penjat', description: 'Descubre cómo jugar a Penjat, tanto en multijugador como en el modo de aprendizaje de catalán.' },
+      ca: { title: 'Com es juga a Penjat? | Penjat', description: 'Descobreix com es juga a Penjat, tant en multijugador com en mode d’aprenentatge de vocabulari.' },
+      es: { title: '¿Cómo se juega a Penjat? | Penjat', description: 'Descubre cómo jugar a Penjat, tanto en multijugador como en el modo de aprendizaje de vocabulario.' },
     },
   },
 }
@@ -98,9 +99,10 @@ function App() {
   const [notice, setNotice] = useState('')
   const [typingPlayers, setTypingPlayers] = useState<Record<string, { playerId: string; playerName: string }>>({})
   const [view, setView] = useState<Mode>(() => routeDescriptions[normalizeRoute(window.location.pathname)].mode)
-  const [learningSummaryRequested, setLearningSummaryRequested] = useState(false)
-  const [learningSummaryVisible, setLearningSummaryVisible] = useState(false)
-  const [learningGameActive, setLearningGameActive] = useState(false)
+  // The open learning unit; null shows the unit list. A refresh reopens it; any page change returns to the list (progress is saved).
+  const [learningUnit, setLearningUnit] = useState<string | null>(() => {
+    try { return normalizeRoute(window.location.pathname) === '/aprendre/' ? sessionStorage.getItem(LEARNING_UNIT_KEY) : null } catch { return null }
+  })
   const [dailyGameActive, setDailyGameActive] = useState(false)
   const [invitedRoomCode, setInvitedRoomCode] = useState<InvitationCode>(() => readInvitationCode())
   const [pendingExit, setPendingExit] = useState<{ kind: ExitKind; exit: () => void } | null>(null)
@@ -145,6 +147,10 @@ function App() {
   }, [])
 
   useEffect(() => {
+    try { if (learningUnit) sessionStorage.setItem(LEARNING_UNIT_KEY, learningUnit); else sessionStorage.removeItem(LEARNING_UNIT_KEY) } catch { /* the list shows after a refresh */ }
+  }, [learningUnit])
+
+  useEffect(() => {
     const copy = page.copy[interfaceLanguage]
     document.documentElement.lang = interfaceLanguage
     document.title = copy.title
@@ -182,10 +188,7 @@ function App() {
     setRoute(next)
     setView(routeDescriptions[next].mode)
     setInvitedRoomCode(null)
-    if (next !== '/aprendre/') {
-      setLearningSummaryRequested(false)
-      setLearningSummaryVisible(false)
-    }
+    setLearningUnit(null)
   }
 
   const changeInterfaceLanguage = (next: Language) => {
@@ -227,23 +230,16 @@ function App() {
   const startDaily = () => goTo('/paraula-del-dia/')
   const startHelp = () => goTo('/com-es-juga/')
   const returnHome = () => goTo('/')
-  const learningBack = () => {
-    if (learningSummaryVisible) { returnHome(); return }
-    setLearningSummaryRequested(true)
-  }
-  const markLearningSummaryShown = () => {
-    setLearningSummaryRequested(false)
-    setLearningSummaryVisible(true)
-  }
 
   // Visible exit labels say what the button ends rather than a generic "back"; ordinary navigation lives in the header.
   const navigationCopy = interfaceLanguage === 'ca'
-    ? { endSession: 'Acaba la sessió', leaveRoom: 'Surt de la sala', leaveMatch: 'Surt de la partida' }
-    : { endSession: 'Terminar sesión', leaveRoom: 'Salir de la sala', leaveMatch: 'Salir de la partida' }
-  // What leaving the current page would end: a waiting room, an active match, or an unfinished learning/daily game.
+    ? { backToUnits: 'Torna a les unitats', leaveRoom: 'Surt de la sala', leaveMatch: 'Surt de la partida' }
+    : { backToUnits: 'Volver a las unidades', leaveRoom: 'Salir de la sala', leaveMatch: 'Salir de la partida' }
+  // What leaving the current page would end: a waiting room, an active match, or an unfinished daily game.
+  // Learning is never guarded: every guess and finished word is already saved.
   const exitGuard = (): ExitKind | null => room
     ? room.roomStatus === 'waiting' ? 'room' : room.roomStatus === 'active' ? 'game' : null
-    : (view === 'learning' && learningGameActive) || (view === 'daily' && dailyGameActive) ? 'game' : null
+    : view === 'daily' && dailyGameActive ? 'game' : null
   const requestConfirmedExit = (exit: () => void, confirmation: ExitKind | null) => {
     if (!confirmation) { exit(); return }
     setPendingExit({ kind: confirmation, exit })
@@ -284,10 +280,7 @@ function App() {
     setRoute(next)
     setView(routeDescriptions[next].mode)
     setInvitedRoomCode(next === '/multijugador/' ? readInvitationCode() : null)
-    if (next !== '/aprendre/') {
-      setLearningSummaryRequested(false)
-      setLearningSummaryVisible(false)
-    }
+    setLearningUnit(null)
     const session = loadRoomSession()
     if (session && !shouldResumeRoomSession(session.roomCode, readInvitationCode())) {
       setRoom(null); setMessages([]); setTypingPlayers({}); setPlayerId(''); setNotice('')
@@ -301,7 +294,7 @@ function App() {
     onNavigate={navigate} exit={exit} sticky={!room && (view === 'home' || view === 'help' || view === 'multiplayer')} />
   const footer = <SiteFooter language={interfaceLanguage} onNavigate={navigate} />
 
-  if (!room && view === 'learning') return <>{header(learningGameActive ? { label: navigationCopy.endSession, onExit: () => requestConfirmedExit(learningBack, 'game') } : undefined)}<LearningPage language={interfaceLanguage} summaryRequested={learningSummaryRequested} onActiveGameChange={setLearningGameActive} onSummaryShown={markLearningSummaryShown} onExitSummary={returnHome} />{exitDialog}</>
+  if (!room && view === 'learning') return <>{header(learningUnit ? { label: navigationCopy.backToUnits, onExit: () => setLearningUnit(null) } : undefined)}<LearningPage language={interfaceLanguage} unitId={learningUnit} onUnit={setLearningUnit} />{exitDialog}</>
   if (!room && view === 'daily') return <>{header()}<DailyChallengePage language={interfaceLanguage} onActiveGameChange={setDailyGameActive} onHome={returnHome} />{exitDialog}</>
   if (!room && view === 'multiplayer') return <>{header()}<HomePage interfaceLanguage={interfaceLanguage} gameLanguage={gameLanguage} notice={notice} invitedRoomCode={invitedRoomCode} onGameLanguage={changeGameLanguage} onEnter={enterRoom} onLearn={startLearning} onMultiplayer={startMultiplayer} onHelp={startHelp} mode="multiplayer" />{footer}{exitDialog}</>
   if (!room && view === 'help') return <>{header()}<HowToPlayPage language={interfaceLanguage} onNavigate={navigate} />{footer}{exitDialog}</>

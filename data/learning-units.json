@@ -1,0 +1,1147 @@
+{
+  "version": 1,
+  "units": [
+    {
+      "id": "natura",
+      "titleCa": "La natura",
+      "titleEs": "La naturaleza",
+      "status": "ready",
+      "words": [
+        {
+          "id": "natura-bolet",
+          "word": "bolet",
+          "translationEs": "seta",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "buˈlɛt",
+          "definitionCa": "Fong amb peu i barret que surt a terra o als troncs, sobretot a la tardor. N'hi ha de comestibles i de verinosos.",
+          "exampleCa": "A la tardor anem al bosc a buscar bolets.",
+          "exampleForm": "bolets",
+          "exampleEs": "En otoño vamos al bosque a buscar setas.",
+          "expression": {
+            "ca": "Sortir com bolets",
+            "meaningCa": "aparèixer en gran quantitat i en poc temps."
+          },
+          "note": "Anar a buscar bolets a la tardor és una afició molt popular a Catalunya.",
+          "illustration": "bolet"
+        },
+        {
+          "id": "natura-rierol",
+          "word": "rierol",
+          "translationEs": "arroyo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "riəˈɾɔl",
+          "definitionCa": "Corrent d'aigua petit i poc profund, més petit que un riu.",
+          "exampleCa": "Vam caminar al costat del rierol.",
+          "exampleEs": "Caminamos junto al arroyo.",
+          "illustration": "rierol"
+        },
+        {
+          "id": "natura-esquirol",
+          "word": "esquirol",
+          "translationEs": "ardilla",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "əskiˈɾɔl",
+          "definitionCa": "Animal rosegador petit, de pèl vermellós i cua llarga i peluda, que viu als arbres i menja pinyons i avellanes.",
+          "exampleCa": "Un esquirol saltava de branca en branca.",
+          "exampleEs": "Una ardilla saltaba de rama en rama.",
+          "note": "Esquirol també vol dir la persona que treballa durant una vaga. Aquest sentit ve del poble de l'Esquirol, a Osona.",
+          "illustration": "esquirol"
+        },
+        {
+          "id": "natura-alzina",
+          "word": "alzina",
+          "translationEs": "encina",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "əlˈzinə",
+          "definitionCa": "Arbre de fulla petita, dura i sempre verda, molt comú al bosc mediterrani. El seu fruit és la gla.",
+          "exampleCa": "Ens vam asseure a l'ombra d'una alzina.",
+          "exampleEs": "Nos sentamos a la sombra de una encina.",
+          "illustration": "alzina"
+        },
+        {
+          "id": "natura-pinya",
+          "word": "pinya",
+          "translationEs": "piña (del pino)",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈpiɲə",
+          "definitionCa": "Fruit del pi, en forma de con, fet d'escates dures que guarden els pinyons.",
+          "exampleCa": "Al bosc, el terra era ple de pinyes.",
+          "exampleForm": "pinyes",
+          "exampleEs": "En el bosque, el suelo estaba lleno de piñas.",
+          "expression": {
+            "ca": "Fer pinya",
+            "meaningCa": "unir-se molt per aconseguir una cosa o fer front a una dificultat."
+          },
+          "note": "En un castell humà, la pinya és la base de gent que aguanta els castellers de dalt.",
+          "illustration": "pinya"
+        },
+        {
+          "id": "natura-molsa",
+          "word": "molsa",
+          "translationEs": "musgo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈmolsə",
+          "definitionCa": "Planta petita i verda, sense flors, que forma una catifa tova sobre les pedres i els troncs humits.",
+          "exampleCa": "Les pedres del camí eren cobertes de molsa.",
+          "exampleEs": "Las piedras del camino estaban cubiertas de musgo.",
+          "note": "Per Nadal, molta gent posa molsa al pessebre.",
+          "illustration": "molsa"
+        },
+        {
+          "id": "natura-cargol",
+          "word": "cargol",
+          "translationEs": "caracol",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "kəɾˈɣɔl",
+          "definitionCa": "Animal de cos tou que porta una closca en espiral a l'esquena. Es mou molt a poc a poc i surt quan plou.",
+          "exampleCa": "Després de la tempesta, el camí era ple de cargols.",
+          "exampleForm": "cargols",
+          "exampleEs": "Después de la tormenta, el camino estaba lleno de caracoles.",
+          "note": "A Lleida, on en diuen caragol, cada maig se celebra l'Aplec del Caragol.",
+          "illustration": "cargol"
+        },
+        {
+          "id": "natura-fulla",
+          "word": "fulla",
+          "translationEs": "hoja",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈfuʎə",
+          "definitionCa": "Part plana i normalment verda de les plantes, que neix de les branques i les tiges.",
+          "exampleCa": "A la tardor, les fulles cauen dels arbres.",
+          "exampleForm": "fulles",
+          "exampleEs": "En otoño, las hojas caen de los árboles.",
+          "note": "No la confonguis amb full, que és un tros de paper.",
+          "illustration": "fulla"
+        },
+        {
+          "id": "natura-gla",
+          "word": "gla",
+          "translationEs": "bellota",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ɡla",
+          "definitionCa": "Fruit de l'alzina i del roure: és petit, dur i ovalat, i té la base dins d'una caputxeta.",
+          "exampleCa": "Al novembre, sota les alzines hi ha moltes glans.",
+          "exampleForm": "glans",
+          "exampleEs": "En noviembre, bajo las encinas hay muchas bellotas.",
+          "note": "És femení: la gla, les glans.",
+          "illustration": "gla"
+        },
+        {
+          "id": "natura-nuvol",
+          "word": "núvol",
+          "translationEs": "nube",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "ˈnuβul",
+          "definitionCa": "Massa de gotetes d'aigua o de glaç que sura al cel.",
+          "exampleCa": "Aquella tarda el cel era ple de núvols negres.",
+          "exampleForm": "núvols",
+          "exampleEs": "Aquella tarde el cielo estaba lleno de nubes negras.",
+          "expression": {
+            "ca": "Estar als núvols",
+            "meaningCa": "estar distret, pensant en altres coses."
+          },
+          "note": "En català és masculí: el núvol. En castellà és femení: la nube.",
+          "illustration": "nuvol"
+        },
+        {
+          "id": "natura-llamp",
+          "word": "llamp",
+          "translationEs": "rayo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "ʎam",
+          "definitionCa": "Descàrrega elèctrica intensa que es produeix a l'atmosfera, sovint durant una tempesta.",
+          "exampleCa": "Un llamp va il·luminar tota la vall.",
+          "exampleEs": "Un rayo iluminó todo el valle.",
+          "note": "El llamp és la descàrrega elèctrica; el llampec és la resplendor que produeix, i el tro és el soroll.",
+          "illustration": "llamp"
+        },
+        {
+          "id": "natura-muntanya",
+          "word": "muntanya",
+          "translationEs": "montaña",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "munˈtaɲə",
+          "definitionCa": "Elevació natural del terreny, molt més alta que un turó.",
+          "exampleCa": "Diumenge vam pujar a la muntanya amb els amics.",
+          "exampleEs": "El domingo subimos a la montaña con los amigos.",
+          "illustration": "muntanya"
+        }
+      ]
+    },
+    {
+      "id": "animals",
+      "titleCa": "Els animals",
+      "titleEs": "Los animales",
+      "status": "ready",
+      "words": [
+        {
+          "id": "animals-gos",
+          "word": "gos",
+          "translationEs": "perro",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "ɡos",
+          "definitionCa": "Animal domèstic de quatre potes que borda i que sovint fa companyia a les persones o vigila la casa.",
+          "exampleCa": "Cada matí trec el gos a passejar.",
+          "exampleEs": "Cada mañana saco al perro a pasear.",
+          "expression": {
+            "ca": "Fer el gos",
+            "meaningCa": "no fer res, gandulejar."
+          },
+          "illustration": "gos"
+        },
+        {
+          "id": "animals-gat",
+          "word": "gat",
+          "translationEs": "gato",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "ɡat",
+          "definitionCa": "Animal domèstic petit, de pèl suau i ungles afilades, que miola i caça ratolins.",
+          "exampleCa": "El gat dorm al sol tota la tarda.",
+          "exampleEs": "El gato duerme al sol toda la tarde.",
+          "expression": {
+            "ca": "Quatre gats",
+            "meaningCa": "molt poca gent."
+          },
+          "illustration": "gat"
+        },
+        {
+          "id": "animals-ocell",
+          "word": "ocell",
+          "translationEs": "pájaro",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "uˈseʎ",
+          "definitionCa": "Animal amb plomes, bec i ales. La majoria d'ocells poden volar.",
+          "exampleCa": "Al matí sentim cantar els ocells.",
+          "exampleForm": "ocells",
+          "exampleEs": "Por la mañana oímos cantar a los pájaros.",
+          "illustration": "ocell"
+        },
+        {
+          "id": "animals-cavall",
+          "word": "cavall",
+          "translationEs": "caballo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "kəˈβaʎ",
+          "definitionCa": "Animal gran de quatre potes, amb crinera i cua llarga, que es munta o s'utilitza per tirar carros.",
+          "exampleCa": "La nena va aprendre a muntar a cavall.",
+          "exampleEs": "La niña aprendió a montar a caballo.",
+          "note": "La femella del cavall és l'euga.",
+          "illustration": "cavall"
+        },
+        {
+          "id": "animals-ovella",
+          "word": "ovella",
+          "translationEs": "oveja",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "uˈβeʎə",
+          "definitionCa": "Animal de granja cobert de llana, que viu en ramat i fa bels.",
+          "exampleCa": "El pastor porta les ovelles a la muntanya.",
+          "exampleForm": "ovelles",
+          "exampleEs": "El pastor lleva las ovejas a la montaña.",
+          "note": "El mascle és el moltó, i la cria, el xai o anyell.",
+          "illustration": "ovella"
+        },
+        {
+          "id": "animals-conill",
+          "word": "conill",
+          "translationEs": "conejo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "kuˈniʎ",
+          "definitionCa": "Animal petit de pèl suau, orelles llargues i cua curta, que salta i menja herba.",
+          "exampleCa": "El conill va sortir corrents del cau.",
+          "exampleEs": "El conejo salió corriendo de la madriguera.",
+          "illustration": "conill"
+        },
+        {
+          "id": "animals-papallona",
+          "word": "papallona",
+          "translationEs": "mariposa",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "pəpəˈʎonə",
+          "definitionCa": "Insecte amb quatre ales grans, sovint de colors vius, que abans de ser adult passa per una fase d'eruga.",
+          "exampleCa": "Una papallona groga es va posar sobre la flor.",
+          "exampleEs": "Una mariposa amarilla se posó sobre la flor.",
+          "illustration": "papallona"
+        },
+        {
+          "id": "animals-abella",
+          "word": "abella",
+          "translationEs": "abeja",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "əˈβeʎə",
+          "definitionCa": "Insecte amb ales i fibló que viu en eixams i fa mel i cera.",
+          "exampleCa": "Les abelles volen de flor en flor.",
+          "exampleForm": "abelles",
+          "exampleEs": "Las abejas vuelan de flor en flor.",
+          "illustration": "abella"
+        },
+        {
+          "id": "animals-granota",
+          "word": "granota",
+          "translationEs": "rana",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ɡɾəˈnɔtə",
+          "definitionCa": "Animal petit de pell llisa i potes del darrere llargues, que salta i viu a prop de l'aigua.",
+          "exampleCa": "A la nit se senten les granotes de la bassa.",
+          "exampleForm": "granotes",
+          "exampleEs": "Por la noche se oyen las ranas de la charca.",
+          "illustration": "granota"
+        },
+        {
+          "id": "animals-mussol",
+          "word": "mussol",
+          "translationEs": "mochuelo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "muˈsɔl",
+          "definitionCa": "Ocell nocturn petit, de cap rodó i ulls grossos, que caça de nit.",
+          "exampleCa": "De nit, el mussol caça ratolins al camp.",
+          "exampleEs": "De noche, el mochuelo caza ratones en el campo.",
+          "note": "Un mussol també és un gra que surt a la parpella (en castellà, orzuelo).",
+          "illustration": "mussol"
+        },
+        {
+          "id": "animals-guineu",
+          "word": "guineu",
+          "translationEs": "zorro",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ɡiˈnɛw",
+          "definitionCa": "Animal salvatge de pèl vermellós, morro punxegut i cua llarga i peluda.",
+          "exampleCa": "La guineu es va acostar al galliner.",
+          "exampleEs": "El zorro se acercó al gallinero.",
+          "note": "En català és femení: la guineu. En castellà és masculí: el zorro.",
+          "illustration": "guineu"
+        },
+        {
+          "id": "animals-dofi",
+          "word": "dofí",
+          "translationEs": "delfín",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "duˈfi",
+          "definitionCa": "Mamífer marí intel·ligent, de morro allargat, que neda en grups i salta fora de l'aigua.",
+          "exampleCa": "Des de la barca vam veure tres dofins.",
+          "exampleForm": "dofins",
+          "exampleEs": "Desde la barca vimos tres delfines.",
+          "illustration": "dofi"
+        }
+      ]
+    },
+    {
+      "id": "menjar",
+      "titleCa": "El menjar",
+      "titleEs": "La comida",
+      "status": "ready",
+      "words": [
+        {
+          "id": "menjar-pa",
+          "word": "pa",
+          "translationEs": "pan",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "pa",
+          "definitionCa": "Aliment fet de farina, aigua, sal i llevat, pastat i cuit al forn.",
+          "exampleCa": "Cada dia comprem pa a la fleca.",
+          "exampleEs": "Cada día compramos pan en la panadería.",
+          "expression": {
+            "ca": "Ser un tros de pa",
+            "meaningCa": "ser molt bona persona."
+          },
+          "note": "El pa amb tomàquet és una menja tradicional catalana que es pot prendre a qualsevol àpat.",
+          "illustration": "pa"
+        },
+        {
+          "id": "menjar-ceba",
+          "word": "ceba",
+          "translationEs": "cebolla",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈsɛβə",
+          "definitionCa": "Bulb de gust fort que fa plorar quan es talla. S'usa molt a la cuina.",
+          "exampleCa": "Per fer el sofregit cal tallar ceba i tomàquet.",
+          "exampleEs": "Para hacer el sofrito hay que cortar cebolla y tomate.",
+          "illustration": "ceba"
+        },
+        {
+          "id": "menjar-formatge",
+          "word": "formatge",
+          "translationEs": "queso",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "fuɾˈmadʒə",
+          "definitionCa": "Aliment fet amb llet quallada de vaca, d'ovella o de cabra.",
+          "exampleCa": "Vam fer un entrepà de pernil i formatge.",
+          "exampleEs": "Hicimos un bocadillo de jamón y queso.",
+          "illustration": "formatge"
+        },
+        {
+          "id": "menjar-mantega",
+          "word": "mantega",
+          "translationEs": "mantequilla",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "mənˈteɣə",
+          "definitionCa": "Greix groguenc que s'obté de la nata de la llet i que s'unta al pa o s'usa per cuinar.",
+          "exampleCa": "Unta el pa amb una mica de mantega.",
+          "exampleEs": "Unta el pan con un poco de mantequilla.",
+          "note": "En castellà es diu mantequilla; manteca sol designar altres greixos, com el de porc.",
+          "illustration": "mantega"
+        },
+        {
+          "id": "menjar-tomaquet",
+          "word": "tomàquet",
+          "translationEs": "tomate",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "tuˈmakət",
+          "definitionCa": "Fruit vermell i sucós d'una planta d'horta, que es menja en amanides i salses.",
+          "exampleCa": "A l'estiu, els tomàquets de l'hort són molt bons.",
+          "exampleForm": "tomàquets",
+          "exampleEs": "En verano, los tomates del huerto están muy buenos.",
+          "note": "Per fer pa amb tomàquet, es frega el tomàquet sobre el pa.",
+          "illustration": "tomaquet"
+        },
+        {
+          "id": "menjar-enciam",
+          "word": "enciam",
+          "translationEs": "lechuga",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "ənsiˈam",
+          "definitionCa": "Planta d'horta de fulles verdes que es menja crua, sobretot en amanida.",
+          "exampleCa": "Renta bé l'enciam abans de fer l'amanida.",
+          "exampleEs": "Lava bien la lechuga antes de hacer la ensalada.",
+          "note": "En català és masculí: l'enciam. En castellà és femení: la lechuga.",
+          "illustration": "enciam"
+        },
+        {
+          "id": "menjar-pastanaga",
+          "word": "pastanaga",
+          "translationEs": "zanahoria",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "pəstəˈnaɣə",
+          "definitionCa": "Arrel llarga i de color taronja que es menja crua o cuita.",
+          "exampleCa": "He ratllat una pastanaga per a l'amanida.",
+          "exampleEs": "He rallado una zanahoria para la ensalada.",
+          "illustration": "pastanaga"
+        },
+        {
+          "id": "menjar-mongeta",
+          "word": "mongeta",
+          "translationEs": "judía, alubia",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "munˈʒɛtə",
+          "definitionCa": "Llavor petita d'una planta lleguminosa, blanca o de color, que es menja cuita. La mongeta tendra es menja amb la beina verda.",
+          "exampleCa": "Per dinar hi ha botifarra amb mongetes.",
+          "exampleForm": "mongetes",
+          "exampleEs": "Para comer hay butifarra con alubias.",
+          "note": "La botifarra amb mongetes és un plat tradicional català.",
+          "illustration": "mongeta"
+        },
+        {
+          "id": "menjar-poma",
+          "word": "poma",
+          "translationEs": "manzana",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈpomə",
+          "definitionCa": "Fruit rodó de la pomera, de pell vermella, verda o groga i polpa cruixent.",
+          "exampleCa": "Cada dia em menjo una poma a mitja tarda.",
+          "exampleEs": "Cada día me como una manzana a media tarde.",
+          "illustration": "poma"
+        },
+        {
+          "id": "menjar-taronja",
+          "word": "taronja",
+          "translationEs": "naranja",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "təˈɾɔɲʒə",
+          "definitionCa": "Fruit rodó i sucós, de pell gruixuda de color taronja, ric en vitamina C.",
+          "exampleCa": "M'agrada esmorzar un suc de taronja.",
+          "exampleEs": "Me gusta desayunar un zumo de naranja.",
+          "note": "Taronja també és el nom del color.",
+          "illustration": "taronja"
+        },
+        {
+          "id": "menjar-pressec",
+          "word": "préssec",
+          "translationEs": "melocotón",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "ˈpɾɛsək",
+          "definitionCa": "Fruit d'estiu de pell vellutada i polpa dolça, amb un pinyol gran al mig.",
+          "exampleCa": "Aquests préssecs són molt sucosos.",
+          "exampleForm": "préssecs",
+          "exampleEs": "Estos melocotones son muy jugosos.",
+          "illustration": "pressec"
+        },
+        {
+          "id": "menjar-maduixa",
+          "word": "maduixa",
+          "translationEs": "fresa",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "məˈðuʃə",
+          "definitionCa": "Fruit petit i vermell, dolç i perfumat, amb llavors petites a la pell.",
+          "exampleCa": "De postres hi ha maduixes amb nata.",
+          "exampleForm": "maduixes",
+          "exampleEs": "De postre hay fresas con nata.",
+          "note": "Les maduixes grosses de cultiu sovint es diuen maduixots.",
+          "illustration": "maduixa"
+        }
+      ]
+    },
+    {
+      "id": "casa",
+      "titleCa": "La casa",
+      "titleEs": "La casa",
+      "status": "ready",
+      "words": [
+        {
+          "id": "casa-finestra",
+          "word": "finestra",
+          "translationEs": "ventana",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "fiˈnestɾə",
+          "definitionCa": "Obertura a la paret, amb vidres, per on entren la llum i l'aire.",
+          "exampleCa": "Obre la finestra, que fa calor.",
+          "exampleEs": "Abre la ventana, que hace calor.",
+          "illustration": "finestra"
+        },
+        {
+          "id": "casa-cuina",
+          "word": "cuina",
+          "translationEs": "cocina",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈkujnə",
+          "definitionCa": "Habitació de la casa on es preparen els menjars.",
+          "exampleCa": "Ens agrada sopar a la cuina.",
+          "exampleEs": "Nos gusta cenar en la cocina.",
+          "note": "Cuina també vol dir la manera de cuinar d'un lloc: la cuina catalana.",
+          "illustration": "cuina"
+        },
+        {
+          "id": "casa-llit",
+          "word": "llit",
+          "translationEs": "cama",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "ʎit",
+          "definitionCa": "Moble per dormir-hi, amb matalàs, llençols i coixí.",
+          "exampleCa": "Els diumenges em quedo al llit fins tard.",
+          "exampleEs": "Los domingos me quedo en la cama hasta tarde.",
+          "note": "En català és masculí: el llit. En castellà és femení: la cama.",
+          "illustration": "llit"
+        },
+        {
+          "id": "casa-cadira",
+          "word": "cadira",
+          "translationEs": "silla",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "kəˈðiɾə",
+          "definitionCa": "Seient amb respatller, per a una sola persona.",
+          "exampleCa": "Porta una cadira més, que som cinc a taula.",
+          "exampleEs": "Trae una silla más, que somos cinco a la mesa.",
+          "illustration": "cadira"
+        },
+        {
+          "id": "casa-taula",
+          "word": "taula",
+          "translationEs": "mesa",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈtawlə",
+          "definitionCa": "Moble format per un tauler pla sostingut per potes, on es menja, s'escriu o es treballa.",
+          "exampleCa": "Para la taula, que ja és l'hora de dinar.",
+          "exampleEs": "Pon la mesa, que ya es la hora de comer.",
+          "expression": {
+            "ca": "Parar taula",
+            "meaningCa": "posar-hi les estovalles, els plats i els coberts per menjar."
+          },
+          "illustration": "taula"
+        },
+        {
+          "id": "casa-coixi",
+          "word": "coixí",
+          "translationEs": "almohada",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "kuˈʃi",
+          "definitionCa": "Peça farcida i tova on es recolza el cap per dormir.",
+          "exampleCa": "M'agrada dormir amb dos coixins.",
+          "exampleForm": "coixins",
+          "exampleEs": "Me gusta dormir con dos almohadas.",
+          "note": "Coixí pot voler dir almohada (per dormir) o cojín (per recolzar-se), segons el context.",
+          "illustration": "coixi"
+        },
+        {
+          "id": "casa-calaix",
+          "word": "calaix",
+          "translationEs": "cajón",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "kəˈlaʃ",
+          "definitionCa": "Caixa que entra i surt d'un moble i serveix per guardar-hi coses.",
+          "exampleCa": "Les claus són al calaix de la cuina.",
+          "exampleEs": "Las llaves están en el cajón de la cocina.",
+          "expression": {
+            "ca": "Calaix de sastre",
+            "meaningCa": "barreja de coses molt diferents."
+          },
+          "illustration": "calaix"
+        },
+        {
+          "id": "casa-aixeta",
+          "word": "aixeta",
+          "translationEs": "grifo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "əˈʃɛtə",
+          "definitionCa": "Peça que obre i tanca el pas de l'aigua d'una canonada.",
+          "exampleCa": "Tanca bé l'aixeta, que degota.",
+          "exampleEs": "Cierra bien el grifo, que gotea.",
+          "illustration": "aixeta"
+        },
+        {
+          "id": "casa-mirall",
+          "word": "mirall",
+          "translationEs": "espejo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "miˈɾaʎ",
+          "definitionCa": "Vidre que reflecteix les imatges, sovint penjat a la paret.",
+          "exampleCa": "Es pentina davant del mirall.",
+          "exampleEs": "Se peina delante del espejo.",
+          "illustration": "mirall"
+        },
+        {
+          "id": "casa-tovallola",
+          "word": "tovallola",
+          "translationEs": "toalla",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "tuβəˈʎɔlə",
+          "definitionCa": "Peça de roba que absorbeix l'aigua i serveix per eixugar-se.",
+          "exampleCa": "Agafa una tovallola neta per a la dutxa.",
+          "exampleEs": "Coge una toalla limpia para la ducha.",
+          "note": "No la confonguis amb el tovalló, que és el de la taula.",
+          "illustration": "tovallola"
+        },
+        {
+          "id": "casa-escombra",
+          "word": "escombra",
+          "translationEs": "escoba",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "əsˈkombɾə",
+          "definitionCa": "Estri amb un pal llarg i un raspall per netejar el terra.",
+          "exampleCa": "Passa l'escombra per la cuina, si us plau.",
+          "exampleEs": "Pasa la escoba por la cocina, por favor.",
+          "illustration": "escombra"
+        },
+        {
+          "id": "casa-terrat",
+          "word": "terrat",
+          "translationEs": "azotea",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "təˈrat",
+          "definitionCa": "Coberta plana d'un edifici, on es pot sortir a estendre la roba o a prendre el sol.",
+          "exampleCa": "A l'estiu sopem al terrat.",
+          "exampleEs": "En verano cenamos en la azotea.",
+          "illustration": "terrat"
+        }
+      ]
+    },
+    {
+      "id": "ciutat",
+      "titleCa": "La ciutat",
+      "titleEs": "La ciudad",
+      "status": "ready",
+      "words": [
+        {
+          "id": "ciutat-carrer",
+          "word": "carrer",
+          "translationEs": "calle",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "kəˈre",
+          "definitionCa": "Via pública d'una població, entre cases o edificis.",
+          "exampleCa": "Visc en un carrer molt tranquil.",
+          "exampleEs": "Vivo en una calle muy tranquila.",
+          "note": "En català és masculí: el carrer. En castellà és femení: la calle.",
+          "illustration": "carrer"
+        },
+        {
+          "id": "ciutat-placa",
+          "word": "plaça",
+          "translationEs": "plaza",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈplasə",
+          "definitionCa": "Espai ample i obert d'una població, on sovint s'ajunten diversos carrers.",
+          "exampleCa": "Els nens juguen a la plaça del poble.",
+          "exampleEs": "Los niños juegan en la plaza del pueblo.",
+          "illustration": "placa"
+        },
+        {
+          "id": "ciutat-vorera",
+          "word": "vorera",
+          "translationEs": "acera",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "buˈɾeɾə",
+          "definitionCa": "Part lateral del carrer, més alta, per on caminen els vianants.",
+          "exampleCa": "Camina per la vorera, que passen cotxes.",
+          "exampleEs": "Camina por la acera, que pasan coches.",
+          "illustration": "vorera"
+        },
+        {
+          "id": "ciutat-cantonada",
+          "word": "cantonada",
+          "translationEs": "esquina",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "kəntuˈnaðə",
+          "definitionCa": "Lloc on es troben dos carrers o dues parets.",
+          "exampleCa": "La fleca és just a la cantonada.",
+          "exampleEs": "La panadería está justo en la esquina.",
+          "illustration": "cantonada"
+        },
+        {
+          "id": "ciutat-ajuntament",
+          "word": "ajuntament",
+          "translationEs": "ayuntamiento",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "əʒuntəˈmen",
+          "definitionCa": "Institució que governa un municipi, i edifici on té la seu.",
+          "exampleCa": "L'alcaldessa va parlar des del balcó de l'ajuntament.",
+          "exampleEs": "La alcaldesa habló desde el balcón del ayuntamiento.",
+          "illustration": "ajuntament"
+        },
+        {
+          "id": "ciutat-fleca",
+          "word": "fleca",
+          "translationEs": "panadería",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈflɛkə",
+          "definitionCa": "Botiga on es fa i es ven pa.",
+          "exampleCa": "Compro el pa a la fleca de la cantonada.",
+          "exampleEs": "Compro el pan en la panadería de la esquina.",
+          "note": "També se'n diu forn o forn de pa.",
+          "illustration": "fleca"
+        },
+        {
+          "id": "ciutat-botiga",
+          "word": "botiga",
+          "translationEs": "tienda",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "buˈtiɣə",
+          "definitionCa": "Establiment on es venen productes al públic.",
+          "exampleCa": "Aquesta botiga obre a les nou.",
+          "exampleEs": "Esta tienda abre a las nueve.",
+          "note": "Fals amic: en castellà, bodega vol dir celler, no botiga.",
+          "illustration": "botiga"
+        },
+        {
+          "id": "ciutat-bustia",
+          "word": "bústia",
+          "translationEs": "buzón",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ˈbustiə",
+          "definitionCa": "Caixa on es deixen o es reben les cartes.",
+          "exampleCa": "Cada matí miro si hi ha cartes a la bústia.",
+          "exampleEs": "Cada mañana miro si hay cartas en el buzón.",
+          "illustration": "bustia"
+        },
+        {
+          "id": "ciutat-fanal",
+          "word": "fanal",
+          "translationEs": "farola",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "fəˈnal",
+          "definitionCa": "Aparell d'enllumenat que il·lumina els carrers de nit.",
+          "exampleCa": "Quan es fa fosc s'encenen els fanals.",
+          "exampleForm": "fanals",
+          "exampleEs": "Cuando oscurece se encienden las farolas.",
+          "illustration": "fanal"
+        },
+        {
+          "id": "ciutat-gratacel",
+          "word": "gratacel",
+          "translationEs": "rascacielos",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "ɡɾətəˈsɛl",
+          "definitionCa": "Edifici molt alt, de moltes plantes.",
+          "exampleCa": "Des del gratacel es veu tota la ciutat.",
+          "exampleEs": "Desde el rascacielos se ve toda la ciudad.",
+          "note": "Literalment, «que grata el cel», com el castellà rascacielos.",
+          "illustration": "gratacel"
+        },
+        {
+          "id": "ciutat-collegi",
+          "word": "col·legi",
+          "translationEs": "colegio",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "kuɫˈɫɛʒi",
+          "definitionCa": "Escola on estudien els nens i les nenes.",
+          "exampleCa": "El col·legi és a prop de casa.",
+          "exampleEs": "El colegio está cerca de casa.",
+          "note": "S'escriu amb ela geminada: l·l. Molts parlants no la geminen: [kuˈɫɛʒi].",
+          "illustration": "collegi"
+        },
+        {
+          "id": "ciutat-veinat",
+          "word": "veïnat",
+          "translationEs": "vecindario",
+          "grammar": {
+            "pos": "noun",
+            "gender": "m"
+          },
+          "ipa": "bə.iˈnat",
+          "definitionCa": "Conjunt de persones que viuen en un mateix barri o edifici.",
+          "exampleCa": "Tot el veïnat va ajudar a netejar el carrer.",
+          "exampleEs": "Todo el vecindario ayudó a limpiar la calle.",
+          "note": "La dièresi indica que la i es pronuncia a part: ve-ï-nat.",
+          "illustration": "veinat"
+        }
+      ]
+    },
+    {
+      "id": "emocions",
+      "titleCa": "Les emocions",
+      "titleEs": "Las emociones",
+      "status": "ready",
+      "words": [
+        {
+          "id": "emocions-alegria",
+          "word": "alegria",
+          "translationEs": "alegría",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "ələˈɣɾiə",
+          "definitionCa": "Sentiment de felicitat i bon humor que es nota a la cara i en la manera de fer.",
+          "exampleCa": "Quan va saber la notícia, va saltar d'alegria.",
+          "exampleEs": "Cuando supo la noticia, saltó de alegría.",
+          "illustration": "alegria"
+        },
+        {
+          "id": "emocions-tristesa",
+          "word": "tristesa",
+          "translationEs": "tristeza",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "tɾisˈtɛzə",
+          "definitionCa": "Sentiment de pena que tenim quan passa una cosa dolenta o perdem algú.",
+          "exampleCa": "Va marxar del poble amb tristesa.",
+          "exampleEs": "Se fue del pueblo con tristeza.",
+          "illustration": "tristesa"
+        },
+        {
+          "id": "emocions-por",
+          "word": "por",
+          "translationEs": "miedo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "po",
+          "definitionCa": "Sentiment d'angoixa davant d'un perill real o imaginat.",
+          "exampleCa": "El meu germà petit té por de la foscor.",
+          "exampleEs": "Mi hermano pequeño tiene miedo de la oscuridad.",
+          "note": "En català és femení: la por. En castellà és masculí: el miedo.",
+          "illustration": "por"
+        },
+        {
+          "id": "emocions-vergonya",
+          "word": "vergonya",
+          "translationEs": "vergüenza",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "bəɾˈɣoɲə",
+          "definitionCa": "Sentiment de malestar quan creiem que hem fet el ridícul o una cosa mal feta.",
+          "exampleCa": "Em fa vergonya parlar en públic.",
+          "exampleEs": "Me da vergüenza hablar en público.",
+          "illustration": "vergonya"
+        },
+        {
+          "id": "emocions-enyoranca",
+          "word": "enyorança",
+          "translationEs": "añoranza, nostalgia",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "əɲuˈɾansə",
+          "definitionCa": "Tristesa per la falta d'algú o d'alguna cosa que és lluny o que ja no tenim.",
+          "exampleCa": "Quan és fora, sent enyorança de casa.",
+          "exampleEs": "Cuando está fuera, siente añoranza de casa.",
+          "note": "El verb és enyorar: «t'enyoro» vol dir «te echo de menos».",
+          "illustration": "enyoranca"
+        },
+        {
+          "id": "emocions-illusio",
+          "word": "il·lusió",
+          "translationEs": "ilusión",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "iɫ.ɫuziˈo",
+          "definitionCa": "Esperança i alegria davant d'una cosa que ha de passar o que desitgem.",
+          "exampleCa": "Els nens esperen el viatge amb molta il·lusió.",
+          "exampleEs": "Los niños esperan el viaje con mucha ilusión.",
+          "expression": {
+            "ca": "Fer il·lusió",
+            "meaningCa": "alegrar algú, fer-lo content."
+          },
+          "illustration": "illusio",
+          "note": "Molts parlants la pronuncien sense geminació: [i.ɫuziˈo]."
+        },
+        {
+          "id": "emocions-abracada",
+          "word": "abraçada",
+          "translationEs": "abrazo",
+          "grammar": {
+            "pos": "noun",
+            "gender": "f"
+          },
+          "ipa": "əβɾəˈsaðə",
+          "definitionCa": "Acció d'envoltar algú amb els braços per mostrar-li afecte.",
+          "exampleCa": "La mare li va fer una abraçada molt forta.",
+          "exampleEs": "La madre le dio un abrazo muy fuerte.",
+          "note": "En català és femení: una abraçada. En castellà és masculí: un abrazo.",
+          "illustration": "abracada"
+        },
+        {
+          "id": "emocions-content",
+          "word": "content",
+          "translationEs": "contento",
+          "grammar": {
+            "pos": "adjective"
+          },
+          "ipa": "kunˈten",
+          "definitionCa": "Que sent alegria o satisfacció.",
+          "exampleCa": "Estic molt content amb la nova feina.",
+          "exampleEs": "Estoy muy contento con el nuevo trabajo.",
+          "note": "Femení: contenta.",
+          "illustration": "content"
+        },
+        {
+          "id": "emocions-enfadat",
+          "word": "enfadat",
+          "translationEs": "enfadado",
+          "grammar": {
+            "pos": "adjective"
+          },
+          "ipa": "əɱfəˈðat",
+          "definitionCa": "Que sent ràbia o molèstia contra algú o alguna cosa.",
+          "exampleCa": "En Pau està enfadat perquè ha perdut el partit.",
+          "exampleEs": "Pau está enfadado porque ha perdido el partido.",
+          "note": "Femení: enfadada.",
+          "illustration": "enfadat"
+        },
+        {
+          "id": "emocions-nervios",
+          "word": "nerviós",
+          "translationEs": "nervioso",
+          "grammar": {
+            "pos": "adjective"
+          },
+          "ipa": "nəɾβiˈos",
+          "definitionCa": "Que està inquiet i no pot estar quiet, sovint per preocupació o per emoció.",
+          "exampleCa": "Abans de l'examen sempre estic nerviós.",
+          "exampleEs": "Antes del examen siempre estoy nervioso.",
+          "note": "Femení: nerviosa, sense accent.",
+          "illustration": "nervios"
+        },
+        {
+          "id": "emocions-plorar",
+          "word": "plorar",
+          "translationEs": "llorar",
+          "grammar": {
+            "pos": "verb"
+          },
+          "ipa": "pluˈɾa",
+          "definitionCa": "Vessar llàgrimes per tristesa, dolor o emoció.",
+          "exampleCa": "El nadó plora quan té gana.",
+          "exampleForm": "plora",
+          "exampleEs": "El bebé llora cuando tiene hambre.",
+          "illustration": "plorar"
+        },
+        {
+          "id": "emocions-riure",
+          "word": "riure",
+          "translationEs": "reír",
+          "grammar": {
+            "pos": "verb"
+          },
+          "ipa": "ˈriwɾə",
+          "definitionCa": "Expressar alegria amb la cara i amb sons quan una cosa fa gràcia.",
+          "exampleCa": "Vam riure molt amb aquella pel·lícula.",
+          "exampleEs": "Nos reímos mucho con aquella película.",
+          "illustration": "riure"
+        }
+      ]
+    }
+  ]
+}

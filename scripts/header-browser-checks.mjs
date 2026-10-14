@@ -27,7 +27,7 @@ export async function checkSiteHeader({ context, command, evaluate, waitFor, nav
     assert.ok(menu.bottom <= 844 * .6, `Menu uses ${menu.bottom}px of the viewport`)
     assert.equal(menu.overflow, false)
     assert.deepEqual(menu.links.map(([href]) => href), ['/', '/multijugador', '/aprendre', '/paraula-del-dia', '/com-es-juga'])
-    assert.deepEqual(menu.links.map(([, text]) => text), language === 'ca' ? ['Inici', 'Multijugador', 'Aprèn català', 'Paraula del dia', 'Com es juga'] : ['Inicio', 'Multijugador', 'Aprende catalán', 'Palabra del día', 'Cómo se juega'])
+    assert.deepEqual(menu.links.map(([, text]) => text), language === 'ca' ? ['Inici', 'Multijugador', 'Aprèn vocabulari', 'Paraula del dia', 'Com es juga'] : ['Inicio', 'Multijugador', 'Aprende vocabulario', 'Palabra del día', 'Cómo se juega'])
     assert.equal(menu.links[0][2], 'page')
     assert.ok(menu.links.every(([, , , height]) => height >= 44))
     await key('')

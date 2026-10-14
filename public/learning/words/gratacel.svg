@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" fill="none" stroke="#1b150f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M10 90 L150 90"/><rect x="30" y="46" width="28" height="44" fill="#ede1cf"/><rect x="102" y="30" width="30" height="60" fill="#cc3430"/>
+<path d="M80 12 L80 2"/><rect x="62" y="12" width="36" height="78" fill="#157079"/>
+<path d="M68 20 L74 20 M78 20 L84 20 M88 20 L94 20 M68 29 L74 29 M78 29 L84 29 M88 29 L94 29 M68 38 L74 38 M78 38 L84 38 M88 38 L94 38 M68 47 L74 47 M78 47 L84 47 M88 47 L94 47 M68 56 L74 56 M78 56 L84 56 M88 56 L94 56 M68 65 L74 65 M78 65 L84 65 M88 65 L94 65 M68 74 L74 74 M78 74 L84 74 M88 74 L94 74 M68 83 L74 83 M78 83 L84 83 M88 83 L94 83" stroke="#fcf9f2" stroke-width="3.5"/>
+<path d="M108 38 L113 38 M120 38 L125 38 M108 48 L113 48 M120 48 L125 48 M108 58 L113 58 M120 58 L125 58 M108 68 L113 68 M120 68 L125 68 M108 78 L113 78 M120 78 L125 78" stroke="#fcf9f2" stroke-width="3"/>
+<path d="M36 54 L41 54 M47 54 L52 54 M36 64 L41 64 M47 64 L52 64 M36 74 L41 74 M47 74 L52 74 M36 84 L41 84 M47 84 L52 84" stroke-width="2.5"/>
+<path d="M112 16 q4 -7 12 -3 q8 -1 8 6 l-22 0 Z" fill="#fcf9f2" stroke-width="2"/>
+</svg>

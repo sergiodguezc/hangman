@@ -1,6 +1,6 @@
 # Catalan vocabulary data
 
-This directory contains the dataset loaded by the Catalan-learning Hangman mode. The approved lexical baseline is [Vocabulary v1](../docs/vocabulary-v1.md). Current production has 544 entries with complete CEFR metadata; gameplay groups are A1/A2 (basic), B1/B2 (intermediate), C1/C2 (advanced). The October metadata repair is documented in [Vocabulary v1](../docs/vocabulary-v1.md#cefr-metadata-completeness-october-8-audit).
+Learning units (`Aprèn vocabulari`) use the separate curated `learning-units.json` (schema in `src/learning/types.ts`, rules in `src/learning/units.ts`; word illustrations in `public/learning/words/`, unit emblems in `public/learning/units/`). The corpus below supplies the daily challenge. This directory contains the corpus dataset. The approved lexical baseline is [Vocabulary v1](../docs/vocabulary-v1.md). Current production has 544 entries with complete CEFR metadata; gameplay groups are A1/A2 (basic), B1/B2 (intermediate), C1/C2 (advanced). The October metadata repair is documented in [Vocabulary v1](../docs/vocabulary-v1.md#cefr-metadata-completeness-october-8-audit).
 
 The experiment sections below describe the historical review pipeline. Its ignored outputs are not runtime dependencies. Validate current data with `npm run vocab:validate` and `npm run test:vocabulary`; do not blindly regenerate approved v1 lexical fields from older intermediate files.
 
@@ -47,7 +47,7 @@ Every result has `accept`, `review`, or `reject` status, a deterministic heurist
 
 Human decisions take precedence. Put accepted corrections (including `translationEs` and `definitionCa`) in `config/translation-overrides.json`, and put one normalized Catalan word per line in `config/rejected-vocabulary.txt`. Review and rejected records are omitted from production. `review/summary.json` and the deterministic 50-record `review/sample.json` support an offline human or future LLM-assisted review step; the runtime has no API dependency.
 
-Difficulty is an approximate, deterministic game label, not CEFR or an official linguistic level. It uses selection rank, total letters, and expression word count; spaces do not inflate the letter count, though expressions of four words are hard. `Aprendre català` filters by `linguistics.cefr`; `difficulty` remains a compatibility/game label and is not a substitute for CEFR.
+Difficulty is an approximate, deterministic game label, not CEFR or an official linguistic level. It uses selection rank, total letters, and expression word count; spaces do not inflate the letter count, though expressions of four words are hard. CEFR metadata is kept and tested but no longer selects learning words; `difficulty` remains a compatibility/game label and is not a substitute for CEFR.
 
 ## Optional linguistic metadata
 

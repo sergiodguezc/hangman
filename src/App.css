@@ -378,7 +378,7 @@ button.home-band { padding-inline: 0; font: inherit; cursor: pointer; }
 .howto-section--ink ul { color: var(--paper); }
 .howto-link { display: inline-flex; align-items: center; gap: .3em; min-height: 2.75rem; margin-top: var(--space-2); color: var(--ink); font-weight: var(--weight-bold); text-decoration: underline var(--magrana) 2px; text-underline-offset: 4px; }
 
-/* Catalan learning mode */
+/* Vocabulary learning (Aprèn vocabulari) */
 .learning-page, .daily-page { padding: var(--space-6) calc(env(safe-area-inset-right, 0px) + 12px) 38px calc(env(safe-area-inset-left, 0px) + 12px); }
 .learning-header, .daily-header { width: min(100%, 64rem); }
 /* Daily: Lovable's ruled masthead, the challenge number and date set against the title. */
@@ -387,23 +387,7 @@ button.home-band { padding-inline: 0; font: inherit; cursor: pointer; }
 .daily-date { display: grid; justify-items: end; gap: 2px; margin: 0; color: var(--text-muted); font-size: var(--text-meta); font-variant-numeric: tabular-nums; }
 .daily-header > div { min-width: 0; }
 .daily-date span:last-child { color: var(--ink); font: 700 var(--text-panel-title)/1.1 var(--font-display); }
-.learning-setup, .learning-game { width: min(100%, 64rem); margin: auto; border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-ink); overflow: hidden; }
-.learning-setup { max-width: 38rem; margin-left: max(0px, calc((100% - 64rem) / 2)); padding: clamp(22px, 6vw, 50px); text-align: center; }
-.learning-setup h2 { margin: 0 0 var(--space-6); color: var(--ink); font: 800 clamp(1.75rem, 1.45rem + 1vw, 2.25rem)/var(--leading-tight) var(--font-display); }
-.learning-setup > p { max-width: 46ch; margin: var(--space-4) auto var(--space-6); color: var(--muted); font-size: var(--text-meta); line-height: var(--leading-body); }
-.difficulty-selector { min-width: 0; margin: 0; padding: 0; border: 0; container-type: inline-size; }
-.difficulty-selector legend { margin: 0 auto var(--space-3); color: var(--ink); font-size: var(--text-body); font-weight: var(--weight-semibold); }
-.difficulty-selector > div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 4px; border: 2px solid var(--ink); border-radius: var(--radius-control); background: var(--surface); }
-.difficulty-selector button { min-width: 0; min-height: var(--control-height); border: 0; border-radius: 7px; padding: 8px 6px; color: var(--ink); background: transparent; font-size: var(--text-control); font-weight: var(--weight-semibold); line-height: var(--leading-ui); overflow-wrap: anywhere; }
-/* Four level buttons only when each can hold "Intermedio" at the current text size. */
-@container (max-width: 28rem) { .difficulty-selector > .cefr-selector { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.difficulty-selector button.active { color: var(--paper); background: var(--ink); }
-.learning-difficulty-dialog { width: min(100%, 30rem); display: grid; gap: var(--space-5); padding: var(--space-6); border: 1px solid var(--line); border-radius: var(--radius-dialog); background: var(--cream); box-shadow: var(--shadow-dialog); }
-.learning-difficulty-dialog h2 { margin: 0; color: var(--green-dark); text-align: center; font: 700 var(--text-page-title)/var(--leading-tight) var(--font-display); }
-.learning-difficulty-dialog .secondary-action { justify-self: center; width: min(100%, 260px); }
-.learning-round-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 15px; padding: 6px 18px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: var(--text-meta); }
-.learning-round-meta .text-button { min-height: var(--control-height); padding-inline: var(--space-2); }
-.learning-next-level { margin: 0; padding: var(--space-2) 18px; border-bottom: 1px solid var(--line); color: var(--muted); background: var(--paper); font-size: var(--text-meta); }
+.learning-game { width: min(100%, 64rem); margin: auto; border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-ink); overflow: hidden; }
 .learning-hint { padding: var(--space-5); border: 0; border-bottom: 2px dashed var(--border-dashed); text-align: center; background: var(--warning-surface); }
 .learning-hint span { display: block; margin-bottom: var(--space-1); color: var(--muted); font-size: var(--text-meta); font-weight: var(--weight-semibold); }
 .learning-hint strong { color: var(--green-dark); font: 700 clamp(1.5rem, 1.3rem + .6vw, 2rem)/var(--leading-heading) var(--font-display); overflow-wrap: anywhere; }
@@ -416,61 +400,136 @@ button.home-band { padding-inline: 0; font: inherit; cursor: pointer; }
 .learning-word-scroll .word > span { --tile: clamp(14px, calc((100cqw - (var(--letters, 1) - 1) * var(--gap)) / var(--letters, 1)), clamp(23px, 4.8vw, 39px)); display: inline-grid; place-items: center; width: var(--tile); height: 49px; color: var(--green-dark); font: 700 min(clamp(21px, 4vw, 34px), calc(var(--tile) * 1.15))/1 var(--font-display); text-transform: uppercase; }
 .learning-word-scroll .word > .letter { border-bottom: 3px solid var(--ink); }
 .learning-word-scroll .word > .punctuation { width: clamp(7px, 2vw, 13px); }
-/* Completed word: one dictionary-style entry. The word appears once (heading), the drawing shrinks to a result mark,
-   and the definition and example are the main content. Two columns from 900px keep "next word" near the top. */
-.learning-result { width: min(100%, 56rem); margin: 0 auto; display: grid; grid-template: "main" auto "details" auto "actions" auto / minmax(0, 1fr); gap: var(--space-5); padding: var(--space-6) clamp(16px, 4vw, 40px) var(--space-6); }
-.learning-result-main { grid-area: main; min-width: 0; padding: var(--space-5); border: 2px solid var(--ink); border-radius: var(--radius-inner); background: var(--oliva-surface); }
 .learning-result-status { display: flex; align-items: center; gap: var(--space-3); }
 .learning-result-drawing { flex: none; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: var(--radius-inner); background: var(--surface); border: 2px solid var(--ink); }
 .learning-result-drawing .hangman { width: 2.75rem; }
-.learning-result.loss .learning-result-drawing { background: var(--error-surface); }
-.learning-result-message { margin: 0; color: var(--green); font-size: var(--text-lede); font-weight: var(--weight-bold); line-height: var(--leading-ui); }
-.learning-result.loss .learning-result-message { color: var(--red); }
-.learning-result-mistakes { margin: 2px 0 0; color: var(--muted); font-size: var(--text-meta); line-height: var(--leading-ui); font-variant-numeric: tabular-nums; }
-.learning-result-letters { color: var(--error); letter-spacing: .06em; }
-.learning-result h2 { margin: var(--space-4) 0 var(--space-2); color: var(--ink); font: 800 clamp(2.5rem, 1.7rem + 2.6vw, 4rem)/1 var(--font-display); overflow-wrap: anywhere; hyphens: none; letter-spacing: -.03em; }
-:root .learning-result h2:focus, :root .learning-result h2:focus-visible { outline: none; box-shadow: none; }
-.learning-result-facts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-4); margin: 0; color: var(--ink); font-size: var(--text-body); line-height: var(--leading-ui); overflow-wrap: anywhere; }
-.learning-result-facts [lang="es"] { color: var(--green-dark); font-weight: var(--weight-semibold); }
-.learning-result-label { margin-right: var(--space-1); color: var(--muted); font-size: var(--text-meta); font-weight: var(--weight-semibold); }
-.learning-result-level { white-space: nowrap; color: var(--muted); font-size: var(--text-meta); font-weight: var(--weight-semibold); }
-.learning-result-details { grid-area: details; min-width: 0; }
-.learning-result-review-note { margin: 0 0 var(--space-3); padding: var(--space-2) var(--space-3); border-left: 3px solid var(--error); color: var(--error); font-size: var(--text-meta); line-height: var(--leading-ui); }
-.learning-result dl { display: grid; gap: var(--space-3); margin: 0; }
-.learning-result dl > div { padding: 0; background: none; }
-/* The example sentence is Lovable's quoted line: a magrana rule and the display face. */
-.learning-result dl > div + div { padding-left: var(--space-4); border-left: 4px solid var(--magrana); }
-.learning-result dl > div + div dd { font: italic 500 var(--text-lede)/1.4 var(--font-display); font-synthesis: style; }
-.learning-result dt { margin-bottom: 2px; color: var(--muted); font-size: var(--text-meta); font-weight: var(--weight-semibold); line-height: var(--leading-ui); }
-.learning-result dd { max-width: var(--measure); margin: 0; font-size: var(--text-body); line-height: var(--leading-body); overflow-wrap: break-word; }
-.learning-result dd strong { color: var(--green); }
-.learning-result-actions { grid-area: actions; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-4); }
-.learning-result-actions .primary-action { width: min(100%, 18rem); }
-@media (min-width: 56.25em) {
-  .learning-result { grid-template: "main details" auto "actions details" 1fr / minmax(0, 1fr) minmax(0, 1.15fr); column-gap: var(--space-8); padding-block: var(--space-8); }
-  .learning-result-actions { align-self: start; flex-direction: column; align-items: flex-start; margin-top: var(--space-2); }
-  .learning-result-actions .text-button { padding-inline: 0; }
+/* Vocabulary units (reference: the vocabulary-card mock-up). One unit header everywhere: sentence-case oliva pill,
+   display heading and a 12-segment strip; the card's oliva band carries the word, the side column the progress. */
+.learning-lede { max-width: 52ch; margin: var(--space-3) 0 0; color: var(--text-muted); font-size: var(--text-lede); line-height: var(--leading-body); }
+.learning-empty { width: min(100%, 64rem); margin: 0 auto; color: var(--text-muted); }
+.unit-list { width: min(100%, 64rem); display: grid; gap: var(--space-5); margin: 0 auto; padding: 0; list-style: none; }
+.unit-card { display: grid; grid-template-columns: 10rem minmax(0, 1fr) auto; align-items: center; gap: var(--space-4) var(--space-6); padding: var(--space-5) var(--space-6); border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-ink); }
+.unit-card-art { width: 100%; height: auto; padding: var(--space-2) var(--space-3); border: 2px solid var(--ink); border-radius: var(--radius-inner); background: var(--oliva); }
+.unit-card h2 { display: flex; align-items: center; gap: var(--space-2) var(--space-3); margin: 0; color: var(--ink); font: 800 var(--text-card-title)/var(--leading-tight) var(--font-display); }
+.unit-card-number { flex: none; display: inline-grid; place-items: center; width: 2rem; height: 2rem; border: 2px solid var(--ink); border-radius: 50%; font: 700 var(--text-meta)/1 var(--font-ui); font-variant-numeric: tabular-nums; }
+.unit-draft { padding: 0 var(--space-2); border: 1.5px dashed var(--ink); border-radius: var(--radius-pill); color: var(--text-muted); font: 600 var(--text-label)/1.6 var(--font-ui); }
+.unit-card p { margin: var(--space-1) 0 var(--space-3); color: var(--text-muted); font-size: var(--text-meta); font-variant-numeric: tabular-nums; }
+.unit-card .primary-action { width: auto; padding-inline: 1.75em; }
+.unit-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: var(--space-2) var(--space-6); }
+.unit-pill { justify-self: start; margin: 0; padding: .125rem .75rem; border: 2px solid var(--ink); border-radius: var(--radius-pill); color: var(--ink); background: var(--oliva); font-size: var(--text-label); font-weight: var(--weight-semibold); line-height: 1.5; }
+.unit-head h1 { margin: 0; color: var(--ink); font: 800 var(--text-page-title)/var(--leading-tight) var(--font-display); letter-spacing: -.01em; }
+.unit-head .unit-strip { grid-column: 2; grid-row: 1 / span 2; align-self: center; width: min(25rem, 38vw); }
+.unit-strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 6px; }
+.unit-strip span { position: relative; height: .75rem; border: 1.5px solid var(--ink); border-radius: var(--radius-pill); background: var(--surface); }
+.unit-strip .is-correct { background: var(--oliva); }
+.unit-strip .is-current { background: var(--safra); }
+.unit-strip .is-failed::after { content: ''; position: absolute; top: 50%; left: 50%; width: .3125rem; height: .3125rem; border-radius: 50%; background: var(--magrana); transform: translate(-50%, -50%); }
+.learning-play { width: min(100%, 64rem); display: grid; gap: var(--space-6); margin: 0 auto; }
+.vocab-layout { width: min(100%, 62rem); display: grid; grid-template: "head head" auto "card side" auto / minmax(0, 34fr) minmax(0, 26fr); align-items: start; gap: var(--space-8); margin: 0 auto; }
+.vocab-layout > .unit-head { grid-area: head; }
+.vocab-layout > .vocab-card { grid-area: card; }
+.vocab-side { grid-area: side; display: grid; gap: var(--space-6); }
+.vocab-card { min-width: 0; overflow: hidden; border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-ink); }
+.vocab-band { display: grid; grid-template-columns: minmax(0, 1fr) clamp(6rem, 34%, 11rem); align-items: center; gap: var(--space-4); padding: var(--space-8) var(--space-8) var(--space-6); border-bottom: 2px solid var(--ink); color: var(--ink); background: var(--oliva); }
+.vocab-card.is-loss .vocab-band { background: var(--paper-deep); }
+.vocab-outcome { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-3); font-size: var(--text-meta); font-weight: var(--weight-semibold); line-height: var(--leading-ui); }
+.vocab-outcome-mark { flex: none; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 2px solid var(--ink); border-radius: var(--radius-control); background: var(--surface); }
+.vocab-outcome-mark .hangman { width: 1.75rem; height: auto; }
+/* The word fills its own column: up to the display size, scaled down by its longest word (--chars, set by the card) so
+   long words stay whole beside the illustration. Fraunces 800 runs up to about .61em per letter at these sizes (optical
+   sizing widens small text). Words of 12+ letters get the full width, with a smaller drawing above. */
+.vocab-band-text { min-width: 0; container-type: inline-size; }
+.vocab-band h2 { --word-max: clamp(2.75rem, 1.9rem + 3vw, 4.5rem); margin: 0; font: 800 max(1.75rem, min(var(--word-max), 100cqi / (var(--chars, 6) * .62)))/.95 var(--font-display); letter-spacing: -.035em; overflow-wrap: break-word; }
+.vocab-band[data-long] { grid-template-columns: minmax(0, 1fr); }
+.vocab-band[data-long] .vocab-art { order: -1; justify-self: end; width: clamp(5.5rem, 22%, 8rem); margin-bottom: calc(-1 * var(--space-2)); }
+:root .vocab-band h2:focus, :root .vocab-band h2:focus-visible { outline: none; box-shadow: none; }
+.vocab-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin: var(--space-4) 0 0; }
+.vocab-ipa { font-size: var(--text-meta); letter-spacing: .02em; }
+.vocab-listen { display: grid; place-items: center; width: var(--control-height); height: var(--control-height); padding: 0; border: 2px solid var(--ink); border-radius: 50%; color: var(--ink); background: var(--surface); }
+.vocab-grammar { padding: .0625rem .75rem; border: 1.5px solid var(--ink); border-radius: var(--radius-pill); background: var(--surface); font-size: var(--text-label); line-height: 1.5; }
+.vocab-art { width: 100%; height: auto; }
+.vocab-art--fallback { position: relative; display: grid; place-items: center; justify-self: center; width: min(100%, 8rem); aspect-ratio: 1; border: 2px solid var(--ink); border-radius: 50%; background: var(--safra); }
+.vocab-art--fallback img { position: absolute; inset: 10%; width: 80%; height: 80%; opacity: .3; }
+.vocab-art--fallback span { position: relative; font: 800 clamp(2.5rem, 2rem + 2vw, 3.5rem)/1 var(--font-display); }
+.vocab-body { display: grid; gap: var(--space-6); padding: var(--space-6) var(--space-8) var(--space-8); }
+.vocab-body h3 { margin: 0 0 var(--space-1); color: var(--text-muted); font-size: var(--text-label); font-weight: var(--weight-semibold); line-height: var(--leading-ui); }
+.vocab-body p { margin: 0; line-height: var(--leading-body); }
+.vocab-example { padding-left: var(--space-4); border-left: 3px solid var(--magrana); }
+.vocab-example p[lang="ca"] { font: italic 500 clamp(1.25rem, 1.1rem + .5vw, 1.5rem)/1.4 var(--font-display); font-synthesis: style; }
+/* The left margin keeps a slanted apostrophe before the word (l'enciam) clear of the highlight. */
+.vocab-example mark { margin-left: .1em; padding: 0 .12em; border-radius: 3px; color: var(--ink); background: var(--safra); }
+.vocab-example .vocab-example-es { margin-top: var(--space-2); color: var(--text-muted); font-size: var(--text-meta); }
+.vocab-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--space-4); }
+.vocab-tiles section { padding: var(--space-4); border-radius: var(--radius-inner); background: var(--paper-deep); }
+.vocab-tiles section:first-child strong { font: 700 var(--text-panel-title)/1.2 var(--font-display); }
+.vocab-tiles section + section p { font-size: var(--text-meta); }
+.vocab-note { color: var(--text-muted); font-size: var(--text-meta); }
+.vocab-note strong { color: var(--ink); }
+.progress-panel { padding: var(--space-6); border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-ink); }
+.progress-panel h2 { margin: 0 0 var(--space-4); color: var(--ink); font: 800 var(--text-panel-title)/1.2 var(--font-display); }
+.progress-donut-row { display: flex; align-items: center; gap: var(--space-5); }
+.progress-donut { flex: none; width: 5.5rem; height: 5.5rem; fill: none; stroke-width: 6; }
+.progress-donut circle:first-child { stroke: var(--paper-deep); }
+.progress-donut circle + circle { stroke: var(--oliva); }
+.progress-donut-row p { display: grid; margin: 0; }
+.progress-donut-row strong { color: var(--ink); font: 800 var(--text-card-title)/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.progress-donut-row span { color: var(--text-muted); font-size: var(--text-meta); }
+.progress-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); margin: var(--space-5) 0 0; }
+.progress-tiles div { display: flex; flex-direction: column-reverse; align-items: center; padding: var(--space-3) var(--space-1); border: 1.5px solid var(--ink); border-radius: var(--radius-inner); text-align: center; }
+.progress-tiles dd { margin: 0; color: var(--ink); font: 800 var(--text-panel-title)/1.1 var(--font-display); font-variant-numeric: tabular-nums; }
+.progress-tiles dt { color: var(--text-muted); font-size: var(--text-label); line-height: var(--leading-ui); }
+.unit-words { padding: var(--space-5); border: 2px dashed var(--border-dashed); border-radius: var(--radius-card); }
+.unit-words h2 { margin: 0 0 var(--space-3); color: var(--text-muted); font-size: var(--text-meta); font-weight: var(--weight-semibold); }
+.word-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.word-chips button { display: inline-flex; align-items: center; gap: .3em; min-height: 2.25rem; padding: 0 .9rem; border: 1.5px solid var(--ink); border-radius: var(--radius-pill); color: var(--ink); background: var(--surface); font: 600 var(--text-body)/1 var(--font-display); }
+@media (pointer: coarse) { .word-chips button { min-height: var(--control-height); } }
+.word-chips button.is-current { background: var(--safra); font-weight: 800; }
+.word-chip-saved { width: .875rem; height: .875rem; color: var(--magrana); }
+.vocab-actions { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-4); }
+.vocab-actions .primary-action { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 3.5rem; }
+.vocab-bookmark { display: grid; place-items: center; width: 3.5rem; min-height: 3.5rem; padding: 0; border-radius: var(--radius-inner); }
+.vocab-bookmark svg { fill: transparent; }
+.vocab-bookmark[aria-pressed="true"] svg { fill: var(--magrana); }
+.vocab-dialog { width: min(100%, 36rem); padding: var(--space-3); border: 0; border-radius: var(--radius-dialog); background: var(--paper); box-shadow: var(--shadow-dialog); }
+.vocab-dialog[open] { display: grid; gap: var(--space-4); }
+.vocab-dialog .vocab-card { box-shadow: none; }
+.vocab-dialog .secondary-action { justify-self: center; width: auto; padding-inline: 2em; }
+.unit-summary { width: min(100%, 48rem); display: grid; gap: var(--space-6); margin: 0 auto; }
+.unit-summary-groups { display: grid; gap: var(--space-4); }
+.unit-summary-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); }
+.unit-summary-actions .primary-action, .unit-summary-actions .secondary-action { width: auto; }
+.unit-summary-actions .text-button { min-height: var(--control-height); }
+/* Tablet: the card takes the full width; progress and the word list share the row below it. */
+@media (max-width: 62.4375em) {
+  .vocab-layout { grid-template: "head" auto "card" auto "side" auto / minmax(0, 1fr); gap: var(--space-6); }
+  .vocab-side { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .vocab-actions { grid-column: 1 / -1; }
 }
-.learning-session-panel { padding: var(--space-4) var(--space-5) var(--space-5); border-top: 1px solid var(--line); background: var(--paper); }
-.learning-stats { margin: 0 0 var(--space-3); color: var(--muted); font-size: var(--text-meta); line-height: 1.45; font-variant-numeric: tabular-nums; }
-.learning-history { color: var(--ink); }
-.learning-history-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: var(--space-2); }
-.learning-history h3 { margin: 0; color: var(--green-dark); font-size: var(--text-body); font-weight: var(--weight-semibold); }
-.learning-history p { margin: 0; color: var(--muted); font-size: var(--text-meta); }
-.learning-history-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); gap: 6px; margin: 0; padding-left: 0; list-style: none; }
-.learning-history-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr); align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; background: var(--surface); font-size: var(--text-body); border: 1px solid var(--border); }
-.learning-history-list li span { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: white; background: var(--green); font-size: .875rem; font-weight: var(--weight-bold); line-height: 1; }
-.learning-history-list li.failed span { background: var(--red); }
-.learning-history-list li strong { min-width: 0; overflow-wrap: anywhere; color: var(--green-dark); }
-.learning-summary { width: min(100%, 48rem); margin: auto; display: grid; justify-items: stretch; padding: clamp(22px, 5vw, 44px); border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); }
-.learning-summary h2 { margin: var(--space-2) 0 var(--space-6); color: var(--ink); font: 800 var(--text-outcome)/1.05 var(--font-display); overflow-wrap: anywhere; }
-.learning-summary-empty { margin: 0 0 var(--space-6); color: var(--muted); font-size: var(--text-body); line-height: var(--leading-body); }
-.learning-summary-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); margin: 0 0 var(--space-6); }
-.learning-summary-stats > div { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: var(--space-3) var(--space-4); border-radius: var(--radius-control); background: var(--paper-deep); }
-.learning-summary-stats dt { color: var(--muted); font-size: var(--text-meta); }
-.learning-summary-stats dd { margin: 0; color: var(--green-dark); font-size: var(--text-score); font-weight: var(--weight-bold); font-variant-numeric: tabular-nums; }
-.learning-summary .learning-history { margin-bottom: var(--space-6); }
-.learning-summary .primary-action { justify-self: center; width: min(100%, 18rem); }
+@media (max-width: 41.25em) {
+  .unit-card { grid-template-columns: 5.5rem minmax(0, 1fr); gap: var(--space-3) var(--space-4); padding: var(--space-4); }
+  .unit-card .primary-action { grid-column: 1 / -1; width: 100%; }
+  .unit-head { grid-template-columns: minmax(0, 1fr); }
+  .unit-head .unit-strip { grid-column: 1; grid-row: auto; width: 100%; margin-top: var(--space-1); }
+  .vocab-side { grid-template-columns: minmax(0, 1fr); }
+  .vocab-band { gap: var(--space-3); padding: var(--space-5); }
+  .vocab-band h2 { --word-max: clamp(2.25rem, 1.5rem + 4vw, 3rem); }
+  .vocab-band { grid-template-columns: minmax(0, 1fr) 5.5rem; }
+  .vocab-body { gap: var(--space-5); padding: var(--space-5); }
+  .progress-panel { padding: var(--space-5); }
+  .unit-summary-actions > * { flex: 1 1 100%; }
+}
+/* Narrow phones: a smaller unit title keeps long names (La naturaleza) whole beside the number. */
+@media (max-width: 24.9375em) {
+  .unit-card h2 { font-size: var(--text-panel-title); }
+}
+/* Phones: "Següent paraula" and the bookmark stay in a bar at the bottom, as on the match results. */
+@media (max-width: 41.25em) and (min-height: 30em) {
+  .vocab-layout { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5.5rem); }
+  html:has(.vocab-layout) { scroll-padding-bottom: 5.5rem; }
+  .vocab-actions { position: fixed; z-index: 20; right: 0; bottom: 0; left: 0; padding: 12px calc(env(safe-area-inset-right, 0px) + 16px) calc(env(safe-area-inset-bottom, 0px) + 12px) calc(env(safe-area-inset-left, 0px) + 16px); border-top: 2px solid var(--ink); background: var(--surface); }
+  .vocab-actions .primary-action, .vocab-bookmark { min-height: 3rem; box-shadow: none; }
+  .vocab-bookmark { width: 3rem; }
+}
 
 /* Daily challenge */
 .daily-game { width: min(100%, 64rem); margin: auto; border: 2px solid var(--ink); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); overflow: hidden; }
@@ -878,10 +937,15 @@ button.home-band { padding-inline: 0; font: inherit; cursor: pointer; }
   .quick-play-badge { width: 3rem; height: 3rem; }
   .quick-play-arrow { display: none; }
 }
-/* Below 375px the card icons lose their circle so "Aprende catalán" / "Paraula del dia" keep whole words on two lines. */
-@media (max-width: 23.375em) {
+/* Phones: the card icons lose their circle and the labels step down so "Aprende vocabulario" / "Paraula del dia"
+   keep whole words on two lines. */
+@media (max-width: 29.9375em) {
   .quick-card { column-gap: var(--space-2); padding-inline: var(--space-2); }
   .quick-card-icon { width: auto; height: auto; border: 0; background: none; }
+  .quick-card-label { font-size: 1rem; }
+}
+@media (max-width: 23.375em) {
+  .quick-card-label { font-size: .9375rem; }
 }
 /* Under 320 CSS px at the default size (or enlarged text): the secondary cards stack instead of clipping. */
 @media (max-width: 19.9375em) {
@@ -934,10 +998,6 @@ button.home-band { padding-inline: 0; font: inherit; cursor: pointer; }
   .learning-hint { padding: 15px; }
   .learning-word-scroll .word, .daily-word-scroll .word { justify-content: safe center; }
   .daily-result dl > div { padding-inline: 12px; }
-  .learning-session-panel { padding: 13px 12px 16px; }
-  .learning-history-heading { align-items: flex-start; }
-  .learning-summary { padding: 26px 16px; }
-  .learning-summary-stats { grid-template-columns: 1fr; }
   .exit-confirmation-dialog { padding: 22px 18px; }
   .exit-confirmation-actions { flex-direction: column-reverse; }
   .exit-confirmation-actions button { width: 100%; }
@@ -966,8 +1026,6 @@ button.home-band { padding-inline: 0; font: inherit; cursor: pointer; }
 :root :is(button, a, input, select, textarea, [tabindex]):focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; box-shadow: 0 0 0 3px var(--focus-gap); }
 
 input::placeholder { color: var(--muted); opacity: 1; }
-.learning-difficulty-dialog { grid-template-columns: minmax(0, 1fr); }
-.learning-difficulty-dialog .difficulty-selector { min-width: 0; }
 
 /* The observer strip clips overflow; keep its ring inside the tab. */
 :root .observer-selector button:focus-visible { outline-offset: -4px; box-shadow: none; }

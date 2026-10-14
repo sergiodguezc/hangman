@@ -3,7 +3,7 @@
 Catalan hangman ([penjat.cat](https://penjat.cat)) with Catalan and Spanish interfaces:
 
 - **Multiplayer:** private 2–10-player rooms in real time. Players take turns choosing words, guess simultaneously, chat, keep score across turns, and can use the playful “Perdonar la vida” mechanic.
-- **Aprèn català:** vocabulary practice by CEFR level, with definitions and translations.
+- **Aprèn vocabulari:** six thematic units of 12 Catalan words, with an illustrated card (definition, example, Spanish translation) after each word, and progress, review and replay saved in the browser.
 - **Paraula del dia:** the same daily word for everyone, saved in the browser.
 
 The production application is a single Node.js service: it serves the built React application and hosts Socket.IO on the same HTTP server and public origin.

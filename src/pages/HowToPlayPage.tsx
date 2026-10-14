@@ -43,8 +43,8 @@ const copy = {
       items: ['La classificació final mostra els punts de tots els participants, també dels qui han marxat.', 'Qui té més punts guanya; si diversos jugadors empaten, comparteixen el primer lloc.', 'La revenja comença quan tots els jugadors que continuen a la sala la demanen.'],
     },
     learn: {
-      title: 'Aprèn català',
-      items: ['Es juga en solitari.', 'Ajuda a practicar vocabulari català.', 'Et proposem paraules reals i n’has d’endevinar la forma correcta.', 'Quan acabes, veus la paraula, el significat i la traducció en castellà.', 'Les paraules que falles tornen a sortir més endavant en la mateixa sessió.'],
+      title: 'Aprèn vocabulari',
+      items: ['Es juga en solitari, per unitats temàtiques de 12 paraules.', 'Cada paraula té una pista en castellà.', 'Quan acabes una paraula, veus el significat, un exemple i la traducció.', 'El progrés es desa en aquest navegador: pots continuar més tard, repassar les paraules fallades o tornar a jugar la unitat.'],
     },
     daily: {
       title: 'Paraula del dia',
@@ -86,8 +86,8 @@ const copy = {
       items: ['La clasificación final muestra los puntos de todos los participantes, también de quienes se han ido.', 'Gana quien tiene más puntos; si varios jugadores empatan, comparten el primer puesto.', 'La revancha empieza cuando todos los jugadores que siguen en la sala la piden.'],
     },
     learn: {
-      title: 'Aprender catalán',
-      items: ['Se juega en solitario.', 'Sirve para practicar vocabulario catalán.', 'Te proponemos palabras reales y debes adivinar su forma correcta.', 'Al terminar, ves la palabra, el significado y la traducción al castellano.', 'Las palabras que fallas vuelven a salir más adelante en la misma sesión.'],
+      title: 'Aprende vocabulario',
+      items: ['Se juega en solitario, por unidades temáticas de 12 palabras.', 'Cada palabra tiene una pista en español.', 'Al terminar una palabra, ves el significado, un ejemplo y la traducción.', 'El progreso se guarda en este navegador: puedes continuar más tarde, repasar las palabras falladas o volver a jugar la unidad.'],
     },
     daily: {
       title: 'Palabra del día',
